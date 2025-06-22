@@ -6,8 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +30,14 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "klient_id")
     private Klient klient;
+
+    @ManyToMany
+    @JoinTable(
+            name = "car_detail",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "detail_id")
+    )
+    private List<Detail> details;
 
     public Car() {
     }
@@ -67,6 +78,14 @@ public class Car {
 
     public void setVin(String vin) {
         this.vin = vin;
+    }
+
+    public List<Detail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<Detail> details) {
+        this.details = details;
     }
 
     @Override

@@ -18,6 +18,9 @@
             <th scope="col">авто #</th>
             <th scope="col">Имя авто</th>
             <th scope="col">вин</th>
+            <th scope="col">Показать запчасти</th>
+            <th scope="col">Изменить</th>
+            <th scope="col">Удалить</th>
         </tr>
         </thead>
         <tbody>
@@ -26,10 +29,36 @@
             <td th:text="${car.name}"></td>
             <td th:text="${car.vin}"></td>
             <td>
+                <a th:href="@{/showDetails(id=${car.id})}">Показать запчасти</a>
+            </td>
+
+            <td>
+                <form th:action="@{changedCar}" method="post">
+                    <input type="hidden" name="id" th:value="${car.id}">
+                    <input type="text" name="name" th:value="${car.name}">
+                    <input type="text" name="vin" th:value="${car.vin}">
+                    <button type="submit">Changed</button>
+                </form>
+            </td>
+
+            <td>
+                <form th:action="@{deleteCar}" method="post">
+                    <input type="hidden" name="id" th:value="${car.id}">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
 
         </tr>
         </tbody>
     </table>
+    <div>
+        <h4>Добавить авто клиенту</h4>
+        <form th:action="@{/addCar}" method="post">
+            <input type="text" name="name">
+            <input type="text" name="vin">
+            <button type="submit">Add</button>
+        </form>
+    </div>
 
 </div>
 </body>

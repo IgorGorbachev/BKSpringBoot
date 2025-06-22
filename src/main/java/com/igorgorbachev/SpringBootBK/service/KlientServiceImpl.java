@@ -52,20 +52,6 @@ public class KlientServiceImpl implements KlientService {
     public void deleteKlient(Klient klient) {
         klientDao.deleteKlient(klient);
     }
-    @Transactional
-    @Override
-    public List<Car> getCarsByKlientId(Long klientId) {
-        logger.info("getCarsByKlientId called with id: " + klientId);
-        Klient klient = klientDao.getKlientById(klientId);
-        if (klient != null) {
-            List<Car> cars = klient.getCar();
-            logger.info("Cars for klient with id " + klientId + ": " + cars);
-            return cars;
-        }
-        logger.info("No klient found with id " + klientId);
-        return new ArrayList<>();
-    }
-
 
 
 

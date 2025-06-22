@@ -15,5 +15,5 @@ public interface CarDao {
 
     void deletCar(Car car);
 
-    Car getCarById(Long id);
+    List<Car> getCarById(Long id);
 }

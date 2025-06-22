@@ -1,8 +1,12 @@
 package com.igorgorbachev.SpringBootBK.controller;
 
 
+import com.igorgorbachev.SpringBootBK.dao.KlientDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
+import com.igorgorbachev.SpringBootBK.entity.Detail;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
+import com.igorgorbachev.SpringBootBK.service.CarService;
+import com.igorgorbachev.SpringBootBK.service.DetailService;
 import com.igorgorbachev.SpringBootBK.service.KlientService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +26,13 @@ public class KlientController {
     @Autowired
     KlientService klientService;
 
+
     @GetMapping("/")
     public String showKlients(Model model) {
         logger.info("showKlients called");
         List<Klient> klientList = klientService.getAllKlients();
         model.addAttribute("klientList", klientList);
         return "klients";
-    }
-
-    @GetMapping("/showCars")
-    public String showCars(@ModelAttribute("klient") Klient klient, Model model) {
-        logger.info("showCars called with id: " + klient);
-        List<Car> carList = klientService.getCarsByKlientId(klient.getId());
-        model.addAttribute("carList", carList);
-        return "cars";
     }
 
 

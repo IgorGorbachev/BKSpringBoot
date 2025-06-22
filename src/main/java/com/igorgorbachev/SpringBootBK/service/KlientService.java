@@ -16,6 +16,5 @@ public interface KlientService {
 
     void deleteKlient(Klient klient);
 
-    List<Car> getCarsByKlientId(Long klientId);
 
 }
