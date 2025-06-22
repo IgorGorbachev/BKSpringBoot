@@ -1,0 +1,17 @@
+package com.igorgorbachev.SpringBootBK.service;
+
+import com.igorgorbachev.SpringBootBK.entity.Car;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+@Repository
+public interface CarService {
+    void addCar(Car car);
+
+    void changeCar(Car car);
+
+    List<Car> getAllCars();
+
+    void deleteCar(Car car);
+
+}

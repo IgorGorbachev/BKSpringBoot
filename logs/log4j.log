@@ -1,0 +1,393 @@
+2025-06-21 13:36:22 INFO  KlientController:34 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 13:36:31 INFO  KlientController:52 - deletetKlient called with id: Klient{id=18, name='null', phone='null'}
+2025-06-21 13:37:03 INFO  KlientController:34 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 13:37:05 INFO  KlientController:52 - deletetKlient called with id: Klient{id=19, name='null', phone='null'}
+2025-06-21 13:47:17 INFO  KlientService:57 - getCarsByKlientId called with id: null
+2025-06-21 13:48:19 INFO  KlientService:57 - getCarsByKlientId called with id: null
+2025-06-21 13:48:32 INFO  KlientService:57 - getCarsByKlientId called with id: null
+2025-06-21 13:50:38 INFO  KlientController:34 - showCars called with id: Klient{id=null, name='null', phone='null'}
+2025-06-21 13:50:38 INFO  KlientService:57 - getCarsByKlientId called with id: null
+2025-06-21 13:54:29 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 13:54:29 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 13:54:29 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 13:54:36 INFO  KlientController:34 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 13:54:36 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 13:54:36 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 13:54:39 INFO  KlientController:34 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 13:54:39 INFO  KlientService:57 - getCarsByKlientId called with id: 3
+2025-06-21 13:54:39 INFO  KlientService:61 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 13:54:45 INFO  KlientController:34 - showCars called with id: Klient{id=4, name='null', phone='null'}
+2025-06-21 13:54:45 INFO  KlientService:57 - getCarsByKlientId called with id: 4
+2025-06-21 13:54:45 INFO  KlientService:61 - Cars for klient with id 4: [Car{id=6, name='Scania', vin='VLUR4X20009049079'}, Car{id=7, name='Renault Premium', vin='VF622GVA000154163'}, Car{id=8, name='Volvo', vin='X9PJH30A96W869016'}, Car{id=9, name='DAF', vin='XLRTE47MS9E857323'}, Car{id=10, name='Mercedes 762 черный', vin='WDB9440321L664433'}, Car{id=11, name='Mercedes 493 красный', vin='WDB9440321L841111'}]
+2025-06-21 13:57:05 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 13:57:05 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 13:57:05 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 13:57:11 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 13:57:11 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 13:57:11 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:00:22 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:00:22 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:00:22 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:00:27 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:00:27 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:00:27 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:00:38 INFO  KlientController:34 - showCars called with id: Klient{id=8, name='null', phone='null'}
+2025-06-21 14:00:38 INFO  KlientService:57 - getCarsByKlientId called with id: 8
+2025-06-21 14:00:38 INFO  KlientService:61 - Cars for klient with id 8: [Car{id=15, name='RENAULT', vin='VF622JVA000100819'}]
+2025-06-21 14:00:43 INFO  KlientController:34 - showCars called with id: Klient{id=7, name='null', phone='null'}
+2025-06-21 14:00:43 INFO  KlientService:57 - getCarsByKlientId called with id: 7
+2025-06-21 14:00:43 INFO  KlientService:61 - Cars for klient with id 7: [Car{id=14, name='Volvo', vin='YV2ASG0A58A659932'}]
+2025-06-21 14:04:18 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:04:18 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:04:18 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:04:21 INFO  KlientController:34 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 14:04:21 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 14:04:21 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 14:04:23 INFO  KlientController:34 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 14:04:23 INFO  KlientService:57 - getCarsByKlientId called with id: 3
+2025-06-21 14:04:23 INFO  KlientService:61 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 14:04:25 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:04:25 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:04:25 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:06:08 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:06:08 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:06:08 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:07:40 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:07:40 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:07:40 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:07:42 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:07:42 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:07:42 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:07:54 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:07:54 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:07:54 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:14:45 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:14:45 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:14:45 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:14:45 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:17:32 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:17:32 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:17:32 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:17:32 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:19:44 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:19:44 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:19:44 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:19:44 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:19:49 INFO  KlientController:34 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 14:19:49 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 14:19:49 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 14:19:49 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:19:51 INFO  KlientController:34 - showCars called with id: Klient{id=5, name='null', phone='null'}
+2025-06-21 14:19:51 INFO  KlientService:57 - getCarsByKlientId called with id: 5
+2025-06-21 14:19:51 INFO  KlientService:61 - Cars for klient with id 5: [Car{id=12, name='Ман ТГА', vin='WMAH05ZZ48w103659'}]
+2025-06-21 14:19:51 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:22:20 INFO  KlientController:34 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:22:20 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:22:20 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:22:20 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:24:28 INFO  KlientController:44 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 14:24:29 INFO  KlientController:34 - showCars called with id: Klient{id=20, name='null', phone='null'}
+2025-06-21 14:24:29 INFO  KlientService:57 - getCarsByKlientId called with id: 20
+2025-06-21 14:24:29 INFO  KlientService:61 - Cars for klient with id 20: []
+2025-06-21 14:24:29 INFO  KlientController:38 - klient added to model: true
+2025-06-21 14:24:31 INFO  KlientController:62 - deletetKlient called with id: Klient{id=20, name='null', phone='null'}
+2025-06-21 14:25:45 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:25:45 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:25:45 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:25:45 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:25:48 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:25:48 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:25:48 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:25:48 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:25:54 INFO  KlientController:58 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 14:25:56 INFO  KlientController:35 - showCars called with id: Klient{id=21, name='null', phone='null'}
+2025-06-21 14:25:56 INFO  KlientService:57 - getCarsByKlientId called with id: 21
+2025-06-21 14:25:56 INFO  KlientService:61 - Cars for klient with id 21: []
+2025-06-21 14:25:56 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:25:58 INFO  KlientController:76 - deletetKlient called with id: Klient{id=21, name='null', phone='null'}
+2025-06-21 14:27:41 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:27:41 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:27:41 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:27:41 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:27:43 INFO  KlientController:35 - showCars called with id: Klient{id=8, name='null', phone='null'}
+2025-06-21 14:27:43 INFO  KlientService:57 - getCarsByKlientId called with id: 8
+2025-06-21 14:27:43 INFO  KlientService:61 - Cars for klient with id 8: [Car{id=15, name='RENAULT', vin='VF622JVA000100819'}]
+2025-06-21 14:27:43 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:27:48 INFO  KlientController:45 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 14:27:48 INFO  KlientController:35 - showCars called with id: Klient{id=22, name='null', phone='null'}
+2025-06-21 14:27:48 INFO  KlientService:57 - getCarsByKlientId called with id: 22
+2025-06-21 14:27:48 INFO  KlientService:61 - Cars for klient with id 22: []
+2025-06-21 14:27:48 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:27:50 INFO  KlientController:65 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-06-21 14:28:29 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:28:29 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:28:29 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:28:29 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:28:32 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 14:28:32 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 14:28:32 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 14:28:32 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:28:36 INFO  KlientController:35 - showCars called with id: Klient{id=8, name='null', phone='null'}
+2025-06-21 14:28:36 INFO  KlientService:57 - getCarsByKlientId called with id: 8
+2025-06-21 14:28:36 INFO  KlientService:61 - Cars for klient with id 8: [Car{id=15, name='RENAULT', vin='VF622JVA000100819'}]
+2025-06-21 14:28:36 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:28:59 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:28:59 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:28:59 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:28:59 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:34:27 INFO  KlientController:45 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 14:34:49 INFO  KlientController:65 - deletetKlient called with id: Klient{id=23, name='null', phone='null'}
+2025-06-21 14:36:23 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:36:23 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:36:23 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:36:23 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:38:35 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:38:35 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:38:35 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:38:35 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:43:39 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:43:39 INFO  KlientService:71 - getCarsByKlientId called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:43:39 INFO  KlientService:74 - Cars for klient with id 1: null
+2025-06-21 14:43:39 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:43:41 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:43:41 INFO  KlientService:71 - getCarsByKlientId called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:43:41 INFO  KlientService:74 - Cars for klient with id 1: null
+2025-06-21 14:43:41 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:43:43 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 14:43:43 INFO  KlientService:71 - getCarsByKlientId called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 14:43:43 INFO  KlientService:74 - Cars for klient with id 2: null
+2025-06-21 14:43:43 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:44:17 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:44:17 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:44:17 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:44:17 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:54:04 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:54:04 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:54:04 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:54:04 INFO  KlientController:39 - klient added to model: true
+2025-06-21 14:55:36 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 14:55:36 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 14:55:36 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 14:55:36 INFO  KlientController:39 - klient added to model: true
+2025-06-21 15:03:42 INFO  KlientController:45 - showCars called with id: null
+2025-06-21 15:04:36 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:04:36 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:04:36 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:04:36 INFO  KlientController:39 - klient added to model: true
+2025-06-21 15:06:13 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:06:14 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:06:14 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:06:14 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:07:50 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:07:50 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:07:50 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:07:50 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:09:17 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:09:17 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:09:17 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:09:17 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:09:52 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:09:52 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:09:52 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:09:52 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:10:40 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:10:40 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:10:40 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:10:40 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:10:42 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:10:42 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 15:10:42 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:10:42 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:13:48 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:13:48 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:13:48 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:13:48 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:13:50 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:13:50 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:13:50 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:13:50 INFO  KlientController:40 - klient added to model: true
+2025-06-21 15:15:51 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:15:51 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:15:51 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:15:51 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:15:59 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:15:59 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 15:15:59 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:15:59 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:16:28 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:16:28 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:16:28 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:16:28 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:16:32 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:16:32 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 15:16:32 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:16:32 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:20:49 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:20:49 INFO  KlientService:57 - getCarsByKlientId called with id: 1
+2025-06-21 15:20:49 INFO  KlientService:61 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:20:49 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:20:53 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:20:53 INFO  KlientService:57 - getCarsByKlientId called with id: 2
+2025-06-21 15:20:53 INFO  KlientService:61 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:20:53 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:20:55 INFO  KlientController:35 - showCars called with id: Klient{id=4, name='null', phone='null'}
+2025-06-21 15:20:56 INFO  KlientService:57 - getCarsByKlientId called with id: 4
+2025-06-21 15:20:56 INFO  KlientService:61 - Cars for klient with id 4: [Car{id=6, name='Scania', vin='VLUR4X20009049079'}, Car{id=7, name='Renault Premium', vin='VF622GVA000154163'}, Car{id=8, name='Volvo', vin='X9PJH30A96W869016'}, Car{id=9, name='DAF', vin='XLRTE47MS9E857323'}, Car{id=10, name='Mercedes 762 черный', vin='WDB9440321L664433'}, Car{id=11, name='Mercedes 493 красный', vin='WDB9440321L841111'}]
+2025-06-21 15:20:56 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:37:50 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:37:50 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:37:50 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:37:50 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:37:53 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:37:53 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:37:53 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:37:53 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:37:55 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:37:55 INFO  KlientService:60 - getCarsByKlientId called with id: 2
+2025-06-21 15:37:55 INFO  KlientService:64 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:37:55 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:37:58 INFO  KlientController:35 - showCars called with id: Klient{id=5, name='null', phone='null'}
+2025-06-21 15:37:58 INFO  KlientService:60 - getCarsByKlientId called with id: 5
+2025-06-21 15:37:59 INFO  KlientService:64 - Cars for klient with id 5: [Car{id=12, name='Ман ТГА', vin='WMAH05ZZ48w103659'}]
+2025-06-21 15:37:59 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:38:01 INFO  KlientController:35 - showCars called with id: Klient{id=6, name='null', phone='null'}
+2025-06-21 15:38:01 INFO  KlientService:60 - getCarsByKlientId called with id: 6
+2025-06-21 15:38:01 INFO  KlientService:64 - Cars for klient with id 6: [Car{id=13, name='Volvo', vin='YV2AN60C96B421429'}]
+2025-06-21 15:38:01 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:38:17 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:38:17 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:38:17 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:38:17 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:41:20 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:41:20 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:41:20 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:41:20 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:41:31 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:41:31 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:41:31 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:41:31 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:41:48 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:41:48 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:41:48 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:41:48 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:42:45 INFO  KlientController:35 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 15:42:45 INFO  KlientService:60 - getCarsByKlientId called with id: 3
+2025-06-21 15:42:45 INFO  KlientService:64 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 15:42:45 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:48:59 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:48:59 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-21 15:48:59 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:48:59 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:49:40 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:49:40 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-21 15:49:40 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:49:40 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:49:42 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 15:49:42 INFO  KlientService:58 - getCarsByKlientId called with id: 2
+2025-06-21 15:49:42 INFO  KlientService:62 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 15:49:42 INFO  KlientController:41 - klient added to model: true
+2025-06-21 15:54:41 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 15:54:41 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-21 15:54:41 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 15:54:41 INFO  KlientController:41 - klient added to model: true
+2025-06-21 16:01:02 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:01:02 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-21 16:01:02 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 16:01:02 INFO  KlientController:41 - klient added to model: true
+2025-06-21 16:04:08 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 16:04:12 INFO  KlientController:69 - deletetKlient called with id: Klient{id=24, name='null', phone='null'}
+2025-06-21 16:04:57 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:05:12 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:07:28 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:07:33 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:10:27 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:11:21 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:13:01 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 16:25:47 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:28:43 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:40:23 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:44:11 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:44:59 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:48:35 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:48:39 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:48:39 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-21 16:48:39 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 16:48:39 INFO  KlientController:41 - klient added to model: true
+2025-06-21 16:50:24 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 16:50:42 INFO  KlientController:68 - deletetKlient called with id: Klient{id=25, name='null', phone='null'}
+2025-06-21 16:50:45 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 16:53:00 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:53:35 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 16:53:36 INFO  KlientController:68 - deletetKlient called with id: Klient{id=26, name='null', phone='null'}
+2025-06-21 16:53:40 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:55:17 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:55:17 ERROR KlientService:60 - Error deleting klient: Cannot invoke "java.util.List.iterator()" because "cars" is null
+2025-06-21 16:55:20 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:55:20 ERROR KlientService:60 - Error deleting klient: Cannot invoke "java.util.List.iterator()" because "cars" is null
+2025-06-21 16:57:31 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 16:58:47 INFO  KlientController:68 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 17:01:40 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 17:01:40 INFO  KlientService:63 - getCarsByKlientId called with id: 1
+2025-06-21 17:01:40 INFO  KlientService:67 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 17:01:40 INFO  KlientController:41 - klient added to model: true
+2025-06-21 17:01:43 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 17:01:43 INFO  KlientService:63 - getCarsByKlientId called with id: 1
+2025-06-21 17:01:43 INFO  KlientService:67 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-21 17:01:43 INFO  KlientController:41 - klient added to model: true
+2025-06-21 17:01:45 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 17:01:45 INFO  KlientService:63 - getCarsByKlientId called with id: 2
+2025-06-21 17:01:45 INFO  KlientService:67 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 17:01:45 INFO  KlientController:41 - klient added to model: true
+2025-06-21 17:02:03 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 17:04:05 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 17:04:08 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 17:04:19 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 22:49:04 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 22:52:31 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 22:53:00 INFO  KlientController:49 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 22:54:14 INFO  KlientController:48 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-21 22:59:43 INFO  KlientController:48 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone=''}
+2025-06-21 22:59:46 INFO  KlientController:48 - addKlient called with id: Klient{id=null, name='Игорь Горбачёв', phone='89106939355'}
+2025-06-21 22:59:49 INFO  KlientController:34 - showCars called with id: Klient{id=27, name='null', phone='null'}
+2025-06-21 22:59:52 INFO  KlientController:34 - showCars called with id: Klient{id=8, name='null', phone='null'}
+2025-06-21 22:59:52 INFO  KlientService:63 - getCarsByKlientId called with id: 8
+2025-06-21 22:59:52 INFO  KlientService:67 - Cars for klient with id 8: [Car{id=15, name='RENAULT', vin='VF622JVA000100819'}]
+2025-06-21 22:59:52 INFO  KlientController:40 - klient added to model: true
+2025-06-21 22:59:57 INFO  KlientController:67 - deletetKlient called with id: Klient{id=27, name='null', phone='null'}
+2025-06-21 23:00:00 INFO  KlientController:48 - addKlient called with id: Klient{id=null, name='', phone='89106939355'}
+2025-06-21 23:00:04 INFO  KlientController:48 - addKlient called with id: Klient{id=null, name='Igor Gorbachev', phone='89106939355'}
+2025-06-21 23:00:20 INFO  KlientController:67 - deletetKlient called with id: Klient{id=28, name='null', phone='null'}
+2025-06-21 23:00:31 INFO  KlientController:67 - deletetKlient called with id: Klient{id=1, name='null', phone='null'}
+2025-06-21 23:00:34 INFO  KlientController:67 - deletetKlient called with id: Klient{id=8, name='null', phone='null'}
+2025-06-21 23:01:56 INFO  KlientController:61 - deletetKlient called with id: Klient{id=29, name='null', phone='null'}
+2025-06-21 23:03:02 INFO  KlientController:61 - deletetKlient called with id: Klient{id=30, name='null', phone='null'}
+2025-06-21 23:04:11 INFO  KlientController:61 - deletetKlient called with id: Klient{id=31, name='null', phone='null'}
+2025-06-21 23:17:18 INFO  KlientController:65 - deletetKlient called with id: Klient{id=32, name='null', phone='null'}
+2025-06-21 23:18:01 INFO  KlientController:61 - deletetKlient called with id: Klient{id=33, name='null', phone='null'}
+2025-06-21 23:18:20 INFO  KlientController:34 - showCars called with id: Klient{id=3, name='null', phone='null'}
+2025-06-21 23:18:20 INFO  KlientService:61 - getCarsByKlientId called with id: 3
+2025-06-21 23:18:20 INFO  KlientService:65 - Cars for klient with id 3: [Car{id=5, name='Volvo', vin='YV2A4DAC7YB240063'}]
+2025-06-21 23:18:20 INFO  KlientController:40 - klient added to model: true
+2025-06-21 23:18:21 INFO  KlientController:34 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 23:18:21 INFO  KlientService:61 - getCarsByKlientId called with id: 2
+2025-06-21 23:18:21 INFO  KlientService:65 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 23:18:21 INFO  KlientController:40 - klient added to model: true
+2025-06-21 23:18:24 INFO  KlientController:34 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-21 23:18:24 INFO  KlientService:61 - getCarsByKlientId called with id: 2
+2025-06-21 23:18:24 INFO  KlientService:65 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-21 23:18:24 INFO  KlientController:40 - klient added to model: true
+2025-06-22 10:36:01 INFO  KlientController:27 - showKlients called
+2025-06-22 10:36:08 INFO  KlientController:35 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-22 10:36:08 INFO  KlientService:58 - getCarsByKlientId called with id: 1
+2025-06-22 10:36:08 INFO  KlientService:62 - Cars for klient with id 1: [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-22 10:36:11 INFO  KlientController:35 - showCars called with id: Klient{id=2, name='null', phone='null'}
+2025-06-22 10:36:11 INFO  KlientService:58 - getCarsByKlientId called with id: 2
+2025-06-22 10:36:11 INFO  KlientService:62 - Cars for klient with id 2: [Car{id=4, name='SCANIA', vin='XLER4x20044508438'}]
+2025-06-22 10:36:16 INFO  KlientController:52 - changeKlient called with id: Klient{id=1, name='Боков Стас', phone='89106939355'}
+2025-06-22 10:36:16 INFO  KlientController:27 - showKlients called
+2025-06-22 10:36:19 INFO  KlientController:52 - changeKlient called with id: Klient{id=1, name='Боков Стас', phone=''}
+2025-06-22 10:36:20 INFO  KlientController:27 - showKlients called
+2025-06-22 10:36:22 INFO  KlientController:44 - addKlient called with id: Klient{id=null, name='', phone=''}
+2025-06-22 10:36:22 INFO  KlientController:27 - showKlients called
+2025-06-22 10:36:23 INFO  KlientController:59 - deletetKlient called with id: Klient{id=34, name='null', phone='null'}
+2025-06-22 10:36:23 INFO  KlientController:27 - showKlients called
