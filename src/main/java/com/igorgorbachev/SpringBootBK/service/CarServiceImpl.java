@@ -1,12 +1,10 @@
 package com.igorgorbachev.SpringBootBK.service;
 
 import com.igorgorbachev.SpringBootBK.dao.CarDao;
-import com.igorgorbachev.SpringBootBK.dao.KlientDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,10 +47,17 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByKlientId(Klient klient) {
         List<Car> carList = new ArrayList<>();
-        logger.info("carDao.getCarById(klient.getId())" + carDao.getCarById(klient.getId()));
-        for (Car car : carDao.getCarById(klient.getId())) carList.add(car);
+        logger.info("carDao.getCarById(klient.getId())" + carDao.getListCarsById(klient.getId()));
+        for (Car car : carDao.getListCarsById(klient.getId())) carList.add(car);
         logger.info("carList = " + carList);
         return carList;
     }
+
+    @Transactional
+    @Override
+    public Car getCarFromBD(Long id) {
+        return carDao.getCarFromBD(id);
+    }
+
 
 }

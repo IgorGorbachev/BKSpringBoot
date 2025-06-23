@@ -18,4 +18,6 @@ public interface CarService {
 
     List<Car> getCarsByKlientId(Klient klient);
 
+    Car getCarFromBD(Long id);
+
 }

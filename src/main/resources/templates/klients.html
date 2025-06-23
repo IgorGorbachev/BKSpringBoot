@@ -27,6 +27,8 @@
             <td>
                 <a th:href="@{/showCars(id=${klient.id})}">Показать авто</a>
             </td>
+
+
             <td>
                 <form th:action="@{/changeKlient}" method="post">
                     <input type="hidden" name="id" th:value="${klient.id}">

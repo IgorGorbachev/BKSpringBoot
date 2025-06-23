@@ -12,12 +12,9 @@
     <table class="table table-dark table-hover">
         <thead>
         <tr>
-
-        </tr>
-        <tr>
-        <tr>
             <td colspan="6" th:text="'Клиент: ' + ${klient.name}"></td>
         </tr>
+        <tr>
             <th scope="col">авто #</th>
             <th scope="col">Имя авто</th>
             <th scope="col">вин</th>
@@ -38,17 +35,19 @@
 
 
             <td>
-                <form th:action="@{changedCar}" method="post">
-                    <input type="hidden" name="id" th:value="${car.id}">
+                <form th:action="@{/changedCar}" method="post">
+                    <input type="hidden" name="klientId" th:value="${klient.id}">
+                   <input type="hidden" name="carId" th:value="${car.id}">-->
                     <input type="text" name="name" th:value="${car.name}">
                     <input type="text" name="vin" th:value="${car.vin}">
-                    <button type="submit">Changed</button>
+                    <button type="submit">Change</button>
                 </form>
             </td>
 
             <td>
-                <form th:action="@{deleteCar}" method="post">
-                    <input type="hidden" name="id" th:value="${car.id}">
+                <form th:action="@{/deleteCar}" method="post">
+                    <input type="hidden" name="klientId" th:value="${klient.id}">
+                    <input type="hidden" name="carId" th:value="${car.id}">
                     <button type="submit">Delete</button>
                 </form>
             </td>

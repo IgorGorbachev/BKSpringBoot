@@ -33,9 +33,16 @@ public class CarDaoImpl implements CarDao{
         entityManager.remove(entityManager.contains(car) ? car : entityManager.merge(car));
     }
     @Override
-    public List<Car> getCarById(Long id) {
+    public List<Car> getListCarsById(Long id) {
         return entityManager.createQuery("SELECT c FROM Car c WHERE c.klient.id = :id", Car.class)
                 .setParameter("id", id)
                 .getResultList();
+    }
+
+    @Override
+    public Car getCarFromBD(Long id) {
+        return entityManager.createQuery("SELECT c FROM Car c WHERE c.id = :id", Car.class)
+                .setParameter("id", id)
+                .getSingleResult();
     }
 }

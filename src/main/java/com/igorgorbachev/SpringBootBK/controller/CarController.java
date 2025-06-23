@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,25 +34,23 @@ public class CarController {
     }
 
     @PostMapping("/addCar")
-    public String addCar(@ModelAttribute("car") Car car, @ModelAttribute("klient") Klient klient,Model model){
-        logger.info("ADDCAR FROM CONTROLLER model = " + model);
-        Car newCar = new Car(car.getName(),car.getVin());
+    public String addCar(@ModelAttribute("car") Car car, @ModelAttribute("klient") Klient klient, Model model) {
+        Car newCar = new Car(car.getName(), car.getVin());
         newCar.setKlient(klient);
         carService.addCar(newCar);
-        return "redirect:/showCars?id="+klient.getId();
+        return "redirect:/showCars?id=" + klient.getId();
     }
 
-    @PostMapping("/changeCar")
-    public String changedCar(@ModelAttribute("car") Car car){
-        logger.info("changedCar called from CarController");
+    @PostMapping("/changedCar")
+    public String changedCar(@ModelAttribute("car") Car car, @RequestParam("klientId") Long klientId, @RequestParam("carId") Long carId) {
         carService.changeCar(car);
-        return "redirect:/showCars";
+        return "redirect:/showCars?id=" + klientId;
     }
 
     @PostMapping("/deleteCar")
-    public String deleteCar(@ModelAttribute("car") Car car){
-        logger.info("deleteCar called from CarController");
-        carService.deleteCar(car);
-        return "redirect:/showCars";
+    public String deleteCar(@ModelAttribute("car") Car car, @RequestParam("klientId") Long klientId, @RequestParam("carId") Long carId) {
+        Car carForDelete = carService.getCarFromBD(carId);
+        carService.deleteCar(carForDelete);
+        return "redirect:/showCars?id=" + klientId;
     }
 }

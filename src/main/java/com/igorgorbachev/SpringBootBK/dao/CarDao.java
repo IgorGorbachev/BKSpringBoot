@@ -1,7 +1,6 @@
 package com.igorgorbachev.SpringBootBK.dao;
 
 import com.igorgorbachev.SpringBootBK.entity.Car;
-import com.igorgorbachev.SpringBootBK.entity.Klient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,5 +14,7 @@ public interface CarDao {
 
     void deletCar(Car car);
 
-    List<Car> getCarById(Long id);
+    List<Car> getListCarsById(Long id);
+
+    Car getCarFromBD(Long id);
 }
