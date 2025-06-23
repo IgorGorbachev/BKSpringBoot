@@ -51,7 +51,9 @@
     <div>
         <h4>Добавить нового клиента</h4>
         <form th:action="@{/addKlient}" method="post">
+            <label>Имя клиента:</label>
             <input type="text" name="name">
+            <label>Номер телефона:</label>
             <input type="tel" name="phone">
             <button type="submit">Add</button>
         </form>

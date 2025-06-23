@@ -41,7 +41,11 @@ public class KlientServiceImpl implements KlientService {
     @Transactional
     @Override
     public List<Klient> getAllKlients() {
-        return klientDao.getAllKlients();
+
+        List<Klient> sortList = klientDao.getAllKlients();
+        Collections.sort(sortList, Comparator.comparing(Klient::getName, String.CASE_INSENSITIVE_ORDER));
+
+        return sortList;
     }
 
     @Transactional

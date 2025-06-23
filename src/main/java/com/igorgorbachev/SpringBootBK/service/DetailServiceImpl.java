@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.awt.dnd.DragGestureEvent;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 @Service
 public class DetailServiceImpl implements DetailService{
@@ -47,6 +50,9 @@ public class DetailServiceImpl implements DetailService{
     @Transactional
     @Override
     public List<Detail> getDetailByCarId(Long id) {
-        return detailsDao.getDetailByCarId(id);
+        List<Detail> sortList = detailsDao.getDetailByCarId(id);
+        Collections.sort(sortList, Comparator.comparing(Detail::getName, String.CASE_INSENSITIVE_ORDER));
+
+        return sortList;
     }
 }

@@ -37,7 +37,7 @@
             <td>
                 <form th:action="@{/changedCar}" method="post">
                     <input type="hidden" name="klientId" th:value="${klient.id}">
-                   <input type="hidden" name="carId" th:value="${car.id}">-->
+                    <input type="hidden" name="carId" th:value="${car.id}">-->
                     <input type="text" name="name" th:value="${car.name}">
                     <input type="text" name="vin" th:value="${car.vin}">
                     <button type="submit">Change</button>
@@ -59,7 +59,9 @@
         <h4>Добавить авто клиенту</h4>
         <form th:action="@{/addCar}" method="post">
             <input type="hidden" name="id" th:value="${klient.id}">
+            <label>Название автомобиля:</label>
             <input type="text" name="name">
+            <label>VIN:</label>
             <input type="text" name="vin">
             <button type="submit">Add</button>
         </form>

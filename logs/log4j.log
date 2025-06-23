@@ -1088,3 +1088,22 @@
 2025-06-23 22:01:26 INFO  KlientController:32 - showKlients called
 2025-06-23 22:01:27 INFO  KlientController:56 - deletetKlient called with id: Klient{id=2, name='null', phone='null'}
 2025-06-23 22:01:28 INFO  KlientController:32 - showKlients called
+2025-06-23 22:03:37 INFO  KlientController:32 - showKlients called
+2025-06-23 22:09:54 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Женя BPW', phone='89206791140'}
+2025-06-23 22:09:54 INFO  KlientController:32 - showKlients called
+2025-06-23 22:10:14 INFO  DetailController:34 - showDetails called
+2025-06-23 22:10:27 INFO  DetailController:44 - ADD DETAIL FROM CONTROLLER carID = 1
+2025-06-23 22:10:27 INFO  DetailController:34 - showDetails called
+2025-06-23 22:10:40 INFO  KlientController:32 - showKlients called
+2025-06-23 22:14:36 INFO  DetailController:34 - showDetails called
+2025-06-23 22:14:58 INFO  KlientController:32 - showKlients called
+2025-06-23 22:15:06 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Igor Gorbachev', phone='89106939355'}
+2025-06-23 22:15:06 INFO  KlientController:32 - showKlients called
+2025-06-23 22:15:18 INFO  DetailController:34 - showDetails called
+2025-06-23 22:15:21 INFO  KlientController:32 - showKlients called
+2025-06-23 22:15:29 INFO  DetailController:34 - showDetails called
+2025-06-23 22:30:58 INFO  KlientController:32 - showKlients called
+2025-06-23 22:36:56 INFO  DetailController:34 - showDetails called
+2025-06-23 22:37:20 INFO  KlientController:32 - showKlients called
+2025-06-23 22:39:39 INFO  KlientController:32 - showKlients called
+2025-06-23 22:40:18 INFO  KlientController:32 - showKlients called
