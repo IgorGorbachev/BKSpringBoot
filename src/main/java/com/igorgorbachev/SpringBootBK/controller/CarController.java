@@ -43,6 +43,9 @@ public class CarController {
 
     @PostMapping("/changedCar")
     public String changedCar(@ModelAttribute("car") Car car, @RequestParam("klientId") Long klientId, @RequestParam("carId") Long carId) {
+        Car carForChange = carService.getCarFromBD(carId);
+        carForChange.setName(car.getName());
+        carForChange.setVin(car.getVin());
         carService.changeCar(car);
         return "redirect:/showCars?id=" + klientId;
     }
