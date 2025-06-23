@@ -28,7 +28,6 @@ public class KlientDaoImpl implements KlientDao{
     public List<Klient> getAllKlients() {
         return entityManager.createQuery("from Klient", Klient.class).getResultList();
     }
-
     @Override
     public void deleteKlient(Klient klient) {
         entityManager.remove(entityManager.contains(klient) ? klient : entityManager.merge(klient));

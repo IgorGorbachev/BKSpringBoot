@@ -59,6 +59,7 @@
     <div>
         <h4>Добавить авто клиенту</h4>
         <form th:action="@{/addCar}" method="post">
+            <input type="hidden" name="id" th:value="${klient.id}">
             <input type="text" name="name">
             <input type="text" name="vin">
             <button type="submit">Add</button>

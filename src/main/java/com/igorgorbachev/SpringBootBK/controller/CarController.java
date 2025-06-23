@@ -33,10 +33,12 @@ public class CarController {
     }
 
     @PostMapping("/addCar")
-    public String addCar(@ModelAttribute("car") Car car, Model model){
+    public String addCar(@ModelAttribute("car") Car car, @ModelAttribute("klient") Klient klient,Model model){
         logger.info("ADDCAR FROM CONTROLLER model = " + model);
-        carService.addCar(car);
-        return "redirect:/showCars";
+        Car newCar = new Car(car.getName(),car.getVin());
+        newCar.setKlient(klient);
+        carService.addCar(newCar);
+        return "redirect:/showCars?id="+klient.getId();
     }
 
     @PostMapping("/changeCar")
