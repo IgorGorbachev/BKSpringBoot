@@ -497,3 +497,101 @@
 2025-06-22 12:48:03 INFO  CarServiceImpl:55 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
 2025-06-22 12:48:03 INFO  KlientController:45 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
 2025-06-22 12:48:04 INFO  DetailController:23 - showDetails calledCar{id=1, name='null', vin='null'}
+2025-06-23 16:11:50 INFO  KlientController:32 - showKlients called
+2025-06-23 16:11:55 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:11:55 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:11:55 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:11:55 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:14:57 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:14:57 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:14:57 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:14:57 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:16 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:16:16 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:16 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:16 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:19 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:16:19 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:19 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:19 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:53 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:16:53 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:53 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:53 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:54 INFO  KlientController:32 - showKlients called
+2025-06-23 16:16:55 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:16:55 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:55 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:16:55 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:17:02 INFO  CarController:34 - ADDCAR FROM CONTROLLER model = {car=Car{id=null, name='Mercedes', vin='2131231'}, org.springframework.validation.BindingResult.car=org.springframework.validation.BeanPropertyBindingResult: 0 errors}
+2025-06-23 16:17:02 INFO  CarController:25 - showCars called with id: Klient{id=null, name='null', phone='null'}
+2025-06-23 16:17:02 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[]
+2025-06-23 16:17:02 INFO  CarServiceImpl:53 - carList = []
+2025-06-23 16:17:02 INFO  CarController:27 - carList[]
+2025-06-23 16:23:10 INFO  KlientController:32 - showKlients called
+2025-06-23 16:23:12 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:23:12 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:23:12 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:23:12 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:23:15 INFO  KlientController:32 - showKlients called
+2025-06-23 16:24:43 INFO  KlientController:32 - showKlients called
+2025-06-23 16:24:44 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:24:44 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:24:44 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:24:44 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:24:46 INFO  KlientController:32 - showKlients called
+2025-06-23 16:29:15 INFO  KlientController:32 - showKlients called
+2025-06-23 16:29:16 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:29:16 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:29:16 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:29:16 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:29:27 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:29:27 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:29:27 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:29:27 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:22 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:31:22 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:22 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:22 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:25 INFO  KlientController:32 - showKlients called
+2025-06-23 16:31:25 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:31:25 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:25 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:31:25 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:34:35 INFO  KlientController:32 - showKlients called
+2025-06-23 16:34:38 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:34:38 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:34:38 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:34:38 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:34:38 INFO  CarController:29 - model.addAttribute("carList" = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:34:38 INFO  CarController:31 - model.addAttribute("klient" = Klient{id=1, name='null', phone='null'}
+2025-06-23 16:35:09 INFO  KlientController:32 - showKlients called
+2025-06-23 16:35:10 INFO  CarController:25 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:35:10 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:35:10 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:35:10 INFO  CarController:27 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:35:10 INFO  CarController:29 - model.addAttribute("carList" = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:35:10 INFO  CarController:31 - model.addAttribute("klient" = 1
+2025-06-23 16:38:22 INFO  KlientController:32 - showKlients called
+2025-06-23 16:38:24 INFO  CarController:28 - showCars called with id: Klient{id=1, name='null', phone='null'}
+2025-06-23 16:38:24 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:38:24 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:38:24 INFO  CarController:30 - carList[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:38:24 INFO  CarController:32 - model.addAttribute("carList" = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:38:24 INFO  CarController:36 - model.addAttribute("klient" = 1
+2025-06-23 16:39:05 INFO  KlientController:32 - showKlients called
+2025-06-23 16:39:08 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:39:08 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:09 INFO  KlientController:32 - showKlients called
+2025-06-23 16:41:12 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:12 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:46 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:46 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:51 INFO  KlientController:32 - showKlients called
+2025-06-23 16:41:52 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:41:52 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:42:07 INFO  KlientController:32 - showKlients called
+2025-06-23 16:42:08 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:42:08 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:42:41 INFO  CarServiceImpl:51 - carDao.getCarById(klient.getId())[Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]
+2025-06-23 16:42:41 INFO  CarServiceImpl:53 - carList = [Car{id=1, name='DAF 416', vin='XLRTE47MS7E766184'}, Car{id=2, name='DAF 079', vin='XLRTE47XS0E604567'}, Car{id=3, name='DAF 100', vin='XLRTE47MS0E952980'}]

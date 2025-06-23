@@ -16,5 +16,5 @@ public interface KlientService {
 
     void deleteKlient(Klient klient);
 
-
+    Klient getKlientById(Long id);
 }

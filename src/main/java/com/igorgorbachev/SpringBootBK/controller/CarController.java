@@ -3,6 +3,7 @@ package com.igorgorbachev.SpringBootBK.controller;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 import com.igorgorbachev.SpringBootBK.service.CarService;
+import com.igorgorbachev.SpringBootBK.service.KlientService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,19 +20,21 @@ public class CarController {
 
     @Autowired
     CarService carService;
+    @Autowired
+    KlientService klientService;
 
     @GetMapping("/showCars")
     public String showCars(@ModelAttribute("klient") Klient klient, Model model) {
-        logger.info("showCars called with id: " + klient);
         List<Car> carList = carService.getCarsByKlientId(klient);
-        logger.info("carList" + carList);
         model.addAttribute("carList", carList);
+        Klient klientFromBD = klientService.getKlientById(klient.getId());
+        model.addAttribute("klient", klientFromBD);
         return "cars";
     }
 
     @PostMapping("/addCar")
-    public String addCar(@ModelAttribute("car") Car car){
-        logger.info("addCar called from CarController");
+    public String addCar(@ModelAttribute("car") Car car, Model model){
+        logger.info("ADDCAR FROM CONTROLLER model = " + model);
         carService.addCar(car);
         return "redirect:/showCars";
     }

@@ -7,6 +7,7 @@ import com.igorgorbachev.SpringBootBK.entity.Klient;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@Component
+@Service
 public class KlientServiceImpl implements KlientService {
 
     private static final Logger logger = Logger.getLogger(KlientService.class);
@@ -24,15 +25,11 @@ public class KlientServiceImpl implements KlientService {
     @Autowired
     KlientDao klientDao;
 
-    @Autowired
-    CarDao carDao;
-
     @Transactional
     @Override
     public void addKlient(Klient klient) {
-            klientDao.addKlient(klient);
+        klientDao.addKlient(klient);
     }
-
 
 
     @Transactional
@@ -53,6 +50,10 @@ public class KlientServiceImpl implements KlientService {
         klientDao.deleteKlient(klient);
     }
 
+    @Override
+    public Klient getKlientById(Long id) {
+        return klientDao.getKlientById(id);
+    }
 
 
 }

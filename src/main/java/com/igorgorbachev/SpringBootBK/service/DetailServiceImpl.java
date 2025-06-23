@@ -4,10 +4,11 @@ import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-@Component
+@Service
 public class DetailServiceImpl implements DetailService{
 
     @Autowired
