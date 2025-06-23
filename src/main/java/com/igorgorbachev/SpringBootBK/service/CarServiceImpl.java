@@ -47,9 +47,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public List<Car> getCarsByKlientId(Klient klient) {
         List<Car> carList = new ArrayList<>();
-        logger.info("carDao.getCarById(klient.getId())" + carDao.getListCarsById(klient.getId()));
         for (Car car : carDao.getListCarsById(klient.getId())) carList.add(car);
-        logger.info("carList = " + carList);
         return carList;
     }
 

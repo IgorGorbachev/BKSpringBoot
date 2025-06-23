@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +28,8 @@ public class Detail {
     @Column(name = "analog_articul")
     private String analogArticul;
 
-    @ManyToMany(mappedBy = "details")
-    private List<Car> cars;
+    @ManyToOne
+    private Car car;
 
     public Detail() {
     }
@@ -71,12 +72,12 @@ public class Detail {
         this.analogArticul = analogArticul;
     }
 
-    public List<Car> getCars() {
-        return cars;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCars(List<Car> cars) {
-        this.cars = cars;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override

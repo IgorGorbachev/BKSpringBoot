@@ -37,4 +37,16 @@ public class DetailServiceImpl implements DetailService{
     public void deleteDetail(Detail detail) {
         detailsDao.deleteDetail(detail);
     }
+
+    @Transactional
+    @Override
+    public Detail getDetailFromBD(Long id) {
+        return detailsDao.getDetailFromBD(id);
+    }
+
+    @Transactional
+    @Override
+    public List<Detail> getDetailByCarId(Long id) {
+        return detailsDao.getDetailByCarId(id);
+    }
 }

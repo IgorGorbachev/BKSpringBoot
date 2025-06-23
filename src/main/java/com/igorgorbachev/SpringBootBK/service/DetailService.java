@@ -13,4 +13,8 @@ public interface DetailService {
     List<Detail> getAllDetail();
 
     void deleteDetail(Detail detail);
+
+    Detail getDetailFromBD(Long id);
+
+    List<Detail> getDetailByCarId(Long id);
 }
