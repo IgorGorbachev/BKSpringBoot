@@ -46,7 +46,7 @@ public class CarController {
         Car carForChange = carService.getCarFromBD(carId);
         carForChange.setName(car.getName());
         carForChange.setVin(car.getVin());
-        carService.changeCar(car);
+        carService.changeCar(carForChange);
         return "redirect:/showCars?id=" + klientId;
     }
 

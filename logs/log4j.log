@@ -1107,3 +1107,75 @@
 2025-06-23 22:37:20 INFO  KlientController:32 - showKlients called
 2025-06-23 22:39:39 INFO  KlientController:32 - showKlients called
 2025-06-23 22:40:18 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:37 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=2, name='null', phone='null'}
+2025-06-23 22:44:39 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:41 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:53 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:55 INFO  KlientController:56 - deletetKlient called with id: Klient{id=8, name='null', phone='null'}
+2025-06-23 22:44:55 INFO  KlientController:32 - showKlients called
+2025-06-23 22:44:59 INFO  DetailController:34 - showDetails called
+2025-06-23 22:46:23 INFO  KlientController:32 - showKlients called
+2025-06-23 22:46:26 INFO  DetailController:34 - showDetails called
+2025-06-23 22:47:50 INFO  DetailController:34 - showDetails called
+2025-06-23 22:48:01 INFO  KlientController:32 - showKlients called
+2025-06-23 22:50:15 INFO  KlientController:32 - showKlients called
+2025-06-23 22:50:50 INFO  KlientController:32 - showKlients called
+2025-06-23 22:51:23 INFO  DetailController:34 - showDetails called
+2025-06-23 22:51:34 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:00 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:20 INFO  KlientController:56 - deletetKlient called with id: Klient{id=9, name='null', phone='null'}
+2025-06-23 22:55:20 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:23 INFO  KlientController:56 - deletetKlient called with id: Klient{id=7, name='null', phone='null'}
+2025-06-23 22:55:23 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:27 INFO  KlientController:56 - deletetKlient called with id: Klient{id=5, name='null', phone='null'}
+2025-06-23 22:55:27 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:32 INFO  KlientController:56 - deletetKlient called with id: Klient{id=14, name='null', phone='null'}
+2025-06-23 22:55:32 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=3, name='null', phone='null'}
+2025-06-23 22:55:38 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:41 INFO  KlientController:56 - deletetKlient called with id: Klient{id=4, name='null', phone='null'}
+2025-06-23 22:55:41 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:47 INFO  KlientController:56 - deletetKlient called with id: Klient{id=17, name='null', phone='null'}
+2025-06-23 22:55:48 INFO  KlientController:32 - showKlients called
+2025-06-23 22:55:52 INFO  KlientController:56 - deletetKlient called with id: Klient{id=24, name='null', phone='null'}
+2025-06-23 22:55:52 INFO  KlientController:32 - showKlients called
+2025-06-23 22:57:04 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Сергей Иванов', phone='89106675939'}
+2025-06-23 22:57:04 INFO  KlientController:32 - showKlients called
+2025-06-23 22:57:17 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Владимир 5055', phone='89632145055'}
+2025-06-23 22:57:17 INFO  KlientController:32 - showKlients called
+2025-06-23 22:57:30 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ИП Богаткова.', phone='89206704321'}
+2025-06-23 22:57:30 INFO  KlientController:32 - showKlients called
+2025-06-23 22:57:39 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Прокофьев Виктор', phone='89109817281'}
+2025-06-23 22:57:39 INFO  KlientController:32 - showKlients called
+2025-06-23 22:57:48 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='от Флиппова(Сейчас - ИП Смирнова)', phone='89158456510'}
+2025-06-23 22:57:48 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:12 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Сергей Горбунов', phone='89051554934'}
+2025-06-23 22:58:12 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:21 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Алексей Васечкин (Саф Бпв)', phone='89206721608'}
+2025-06-23 22:58:21 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:29 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Дима китово(Шуйский АТК)', phone='89109846212'}
+2025-06-23 22:58:30 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:38 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Ромашов Александр', phone='89605087979'}
+2025-06-23 22:58:38 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:47 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф 881 Алексей', phone='89065130971'}
+2025-06-23 22:58:47 INFO  KlientController:32 - showKlients called
+2025-06-23 22:58:55 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Леня прокичев', phone='89051562282'}
+2025-06-23 22:58:55 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:02 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}
+2025-06-23 22:59:02 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:10 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Полтев Иван', phone='89109829719'}
+2025-06-23 22:59:10 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:29 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Женя Ивеко', phone='89106904190'}
+2025-06-23 22:59:29 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:37 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Андрей Максимов', phone='89158167364'}
+2025-06-23 22:59:37 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:47 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}
+2025-06-23 22:59:47 INFO  KlientController:32 - showKlients called
+2025-06-23 22:59:55 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф Южа Максим', phone='89960263369'}
+2025-06-23 22:59:55 INFO  KlientController:32 - showKlients called
+2025-06-23 23:00:03 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ГемоРор(Николай Макушин)', phone='89612450116'}
+2025-06-23 23:00:03 INFO  KlientController:32 - showKlients called
+2025-06-23 23:00:11 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Игорь Щитки Бпв', phone='89612488531'}
+2025-06-23 23:00:11 INFO  KlientController:32 - showKlients called
+2025-06-24 08:57:48 INFO  KlientController:32 - showKlients called
