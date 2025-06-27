@@ -1460,3 +1460,196 @@
 2025-06-26 20:52:57 INFO  KlientController:32 - showKlients called
 2025-06-26 20:54:07 INFO  KlientController:32 - showKlients called
 2025-06-26 20:54:13 INFO  KlientController:32 - showKlients called
+2025-06-27 10:17:31 INFO  KlientController:32 - showKlients called
+2025-06-27 10:17:38 INFO  KlientController:32 - showKlients called
+2025-06-27 10:17:42 INFO  KlientController:32 - showKlients called
+2025-06-27 10:17:44 INFO  KlientController:32 - showKlients called
+2025-06-27 10:17:46 INFO  KlientController:32 - showKlients called
+2025-06-27 10:18:04 INFO  KlientController:32 - showKlients called
+2025-06-27 10:18:06 INFO  KlientController:32 - showKlients called
+2025-06-27 10:18:19 INFO  KlientController:32 - showKlients called
+2025-06-27 10:18:22 INFO  KlientController:32 - showKlients called
+2025-06-27 10:18:30 INFO  KlientController:32 - showKlients called
+2025-06-27 10:19:56 INFO  KlientController:32 - showKlients called
+2025-06-27 10:20:15 INFO  KlientController:32 - showKlients called
+2025-06-27 10:20:17 INFO  KlientController:32 - showKlients called
+2025-06-27 10:20:23 INFO  KlientController:32 - showKlients called
+2025-06-27 10:20:29 INFO  KlientController:32 - showKlients called
+2025-06-27 10:22:56 INFO  KlientController:32 - showKlients called
+2025-06-27 10:23:00 INFO  KlientController:32 - showKlients called
+2025-06-27 10:23:07 INFO  KlientController:32 - showKlients called
+2025-06-27 10:23:09 INFO  DetailController:34 - showDetails called
+2025-06-27 10:23:48 INFO  KlientController:32 - showKlients called
+2025-06-27 10:23:51 INFO  DetailController:34 - showDetails called
+2025-06-27 10:23:55 INFO  KlientController:32 - showKlients called
+2025-06-27 10:24:47 INFO  KlientController:32 - showKlients called
+2025-06-27 10:24:50 INFO  KlientController:32 - showKlients called
+2025-06-27 10:24:54 INFO  KlientController:32 - showKlients called
+2025-06-27 10:25:52 INFO  KlientController:32 - showKlients called
+2025-06-27 10:25:54 INFO  KlientController:32 - showKlients called
+2025-06-27 10:25:57 INFO  DetailController:34 - showDetails called
+2025-06-27 10:25:59 INFO  KlientController:32 - showKlients called
+2025-06-27 10:26:03 INFO  DetailController:34 - showDetails called
+2025-06-27 10:31:58 INFO  KlientController:32 - showKlients called
+2025-06-27 10:32:00 INFO  DetailController:34 - showDetails called
+2025-06-27 10:33:10 INFO  DetailController:34 - showDetails called
+2025-06-27 10:33:20 INFO  KlientController:32 - showKlients called
+2025-06-27 10:33:25 INFO  DetailController:34 - showDetails called
+2025-06-27 10:57:39 INFO  DetailController:34 - showDetails called
+2025-06-27 10:58:12 INFO  KlientController:32 - showKlients called
+2025-06-27 10:58:15 INFO  KlientController:32 - showKlients called
+2025-06-27 10:58:19 INFO  KlientController:32 - showKlients called
+2025-06-27 10:58:23 INFO  DetailController:34 - showDetails called
+2025-06-27 10:58:52 INFO  KlientController:32 - showKlients called
+2025-06-27 11:14:44 INFO  KlientController:32 - showKlients called
+2025-06-27 11:14:45 INFO  KlientController:32 - showKlients called
+2025-06-27 11:14:49 INFO  KlientController:32 - showKlients called
+2025-06-27 11:14:55 INFO  DetailController:34 - showDetails called
+2025-06-27 11:15:00 INFO  DetailController:34 - showDetails called
+2025-06-27 11:15:03 INFO  KlientController:32 - showKlients called
+2025-06-27 11:15:09 INFO  KlientController:32 - showKlients called
+2025-06-27 11:15:18 INFO  DetailController:34 - showDetails called
+2025-06-27 11:15:29 INFO  DetailController:34 - showDetails called
+2025-06-27 11:15:54 INFO  KlientController:32 - showKlients called
+2025-06-27 12:21:03 INFO  KlientController:32 - showKlients called
+2025-06-27 12:22:33 INFO  KlientController:32 - showKlients called
+2025-06-27 12:29:12 INFO  KlientController:32 - showKlients called
+2025-06-27 14:13:28 INFO  KlientController:32 - showKlients called
+2025-06-27 14:13:35 INFO  KlientController:32 - showKlients called
+2025-06-27 14:13:37 INFO  KlientController:32 - showKlients called
+2025-06-27 14:13:38 INFO  KlientController:32 - showKlients called
+2025-06-27 14:23:52 INFO  KlientController:32 - showKlients called
+2025-06-27 14:29:03 INFO  KlientController:32 - showKlients called
+2025-06-27 14:45:54 INFO  KlientController:32 - showKlients called
+2025-06-27 14:46:41 INFO  KlientController:32 - showKlients called
+2025-06-27 14:51:05 INFO  KlientController:32 - showKlients called
+2025-06-27 14:55:05 INFO  KlientController:32 - showKlients called
+2025-06-27 15:04:23 INFO  KlientController:32 - showKlients called
+2025-06-27 15:08:19 INFO  SailServiceImpl:21 - Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='213123', zakupka=1000.0, nacenka=0.2, price=0.0, kolichestvo=1, summa=0.0, nds=0.2, nalog=0.0, pribil=0.0, zarplata=0.0}
+2025-06-27 15:08:19 INFO  SailServiceImpl:26 - getPribil = 160.0
+2025-06-27 15:10:07 INFO  SailServiceImpl:21 - до сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='1231231', zakupka=1000.0, nacenka=0.2, price=0.0, kolichestvo=1, summa=0.0, nds=0.2, nalog=0.0, pribil=0.0, zarplata=0.0}
+2025-06-27 15:10:07 INFO  SailServiceImpl:26 - после Сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='1231231', zakupka=1000.0, nacenka=0.2, price=1200.0, kolichestvo=1, summa=1200.0, nds=0.2, nalog=40.0, pribil=240.0, zarplata=0.0}
+2025-06-27 15:10:07 INFO  SailServiceImpl:27 - getPribil = 160.0
+2025-06-27 15:10:07 INFO  SailServiceImpl:29 - getZarplata = 240.0
+2025-06-27 15:12:18 INFO  SailServiceImpl:21 - до сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.0, nacenka=0.2, price=0.0, kolichestvo=1, summa=0.0, nds=0.2, nalog=0.0, pribil=0.0, zarplata=0.0}
+2025-06-27 15:12:18 INFO  SailServiceImpl:26 - после Сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.0, nacenka=0.2, price=1200.0, kolichestvo=1, summa=1200.0, nds=0.2, nalog=40.0, pribil=240.0, zarplata=0.0}
+2025-06-27 15:12:18 INFO  SailServiceImpl:27 - getPribil = 160.0
+2025-06-27 15:12:18 INFO  SailServiceImpl:29 - getZarplata = 120.0
+2025-06-27 15:19:07 INFO  SailServiceImpl:21 - до сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.0, nacenka=0.2, price=0.0, kolichestvo=1, summa=0.0, nds=0.2, nalog=0.0, pribil=0.0, zarplata=0.0}
+2025-06-27 15:19:07 INFO  SailServiceImpl:26 - после Сеттеров Sail = Sail{id=null, klientName='null', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.0, nacenka=0.2, price=1200.0, kolichestvo=1, summa=1200.0, nds=0.2, nalog=40.0, pribil=160.0, zarplata=0.0}
+2025-06-27 15:19:07 INFO  SailServiceImpl:27 - getPribil = 160.0
+2025-06-27 15:19:07 INFO  SailServiceImpl:29 - getZarplata = 80.0
+2025-06-27 15:20:34 INFO  KlientController:32 - showKlients called
+2025-06-27 15:28:50 INFO  KlientController:32 - showKlients called
+2025-06-27 15:46:18 INFO  KlientController:32 - showKlients called
+2025-06-27 16:28:17 INFO  KlientController:32 - showKlients called
+2025-06-27 16:31:58 INFO  KlientController:32 - showKlients called
+2025-06-27 16:32:29 INFO  KlientController:32 - showKlients called
+2025-06-27 16:33:52 INFO  KlientController:32 - showKlients called
+2025-06-27 17:52:07 INFO  KlientController:32 - showKlients called
+2025-06-27 17:52:11 INFO  KlientController:32 - showKlients called
+2025-06-27 17:52:23 INFO  KlientController:32 - showKlients called
+2025-06-27 17:52:27 INFO  DetailController:34 - showDetails called
+2025-06-27 17:52:32 INFO  KlientController:32 - showKlients called
+2025-06-27 17:53:10 INFO  KlientController:32 - showKlients called
+2025-06-27 17:53:13 INFO  KlientController:32 - showKlients called
+2025-06-27 17:54:51 INFO  KlientController:32 - showKlients called
+2025-06-27 17:59:27 INFO  KlientController:32 - showKlients called
+2025-06-27 18:17:16 INFO  KlientController:32 - showKlients called
+2025-06-27 18:17:39 INFO  KlientController:32 - showKlients called
+2025-06-27 18:20:09 INFO  KlientController:32 - showKlients called
+2025-06-27 18:20:18 INFO  KlientController:32 - showKlients called
+2025-06-27 18:24:45 INFO  KlientController:32 - showKlients called
+2025-06-27 18:28:00 INFO  SailController:40 - Sail в начале в методе changedSailSail{id=4, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=13570.00, nacenka=0.20, price=163000000, kolichestvo=1, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:28:04 INFO  KlientController:32 - showKlients called
+2025-06-27 18:28:11 INFO  SailController:40 - Sail в начале в методе changedSailSail{id=4, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=13570.00, nacenka=0.20, price=16300, kolichestvo=1, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailServiceImpl:54 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:32:38 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=5, klientName='', toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=0.20, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:22 INFO  KlientController:32 - showKlients called
+2025-06-27 18:37:40 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:40 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:40 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:40 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:40 INFO  SailServiceImpl:54 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:37:40 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=6, klientName='', toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=null, nds=1200.0000, nalog=null, pribil=null, zarplata=null}
+2025-06-27 18:42:15 INFO  KlientController:32 - showKlients called
+2025-06-27 18:42:17 INFO  KlientController:32 - showKlients called
+2025-06-27 18:43:08 INFO  KlientController:32 - showKlients called
+2025-06-27 18:43:10 INFO  KlientController:32 - showKlients called
+2025-06-27 18:44:16 INFO  KlientController:32 - showKlients called
+2025-06-27 18:44:56 INFO  KlientController:32 - showKlients called
+2025-06-27 18:45:19 INFO  KlientController:32 - showKlients called
+2025-06-27 18:45:35 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:45:35 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:45:35 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:45:35 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:45:35 INFO  SailServiceImpl:54 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:45:35 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:47:08 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:47:08 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:47:08 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:47:08 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:47:08 INFO  SailServiceImpl:54 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:47:09 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=1, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.00, nds=0.20, nalog=-160.0000, pribil=-840.00, zarplata=80.000}
+2025-06-27 18:53:48 INFO  KlientController:32 - showKlients called
+2025-06-27 18:53:49 INFO  KlientController:32 - showKlients called
+2025-06-27 18:54:26 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:54:26 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:54:26 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.0000, nds=0.20, nalog=80.000000, pribil=320.000000, zarplata=160.0000000}
+2025-06-27 18:54:26 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.0000, nds=0.20, nalog=80.000000, pribil=320.000000, zarplata=160.0000000}
+2025-06-27 18:54:26 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.0000, nds=0.20, nalog=80.000000, pribil=320.000000, zarplata=160.0000000}
+2025-06-27 18:54:26 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=2, summa=2400.0000, nds=0.20, nalog=80.000000, pribil=320.000000, zarplata=160.0000000}
+2025-06-27 18:54:52 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=2400.00, nds=0.20, nalog=80.0000, pribil=320.00, zarplata=160.000}
+2025-06-27 18:54:52 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=2400.00, nds=0.20, nalog=80.0000, pribil=320.00, zarplata=160.000}
+2025-06-27 18:54:52 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:54:52 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:54:52 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:54:52 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:55:14 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1204, kolichestvo=3, summa=3600.00, nds=0.20, nalog=120.0000, pribil=480.00, zarplata=240.000}
+2025-06-27 18:55:14 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1204, kolichestvo=3, summa=3600.00, nds=0.20, nalog=120.0000, pribil=480.00, zarplata=240.000}
+2025-06-27 18:55:14 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:55:14 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:55:14 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:55:14 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=2, klientName='', toDay='', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=3, summa=3600.0000, nds=0.20, nalog=120.000000, pribil=480.000000, zarplata=240.0000000}
+2025-06-27 18:56:13 INFO  KlientController:32 - showKlients called
+2025-06-27 18:56:47 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1500.0000, kolichestvo=1, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:56:47 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕSail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1500.0000, kolichestvo=1, summa=1200.00, nds=0.20, nalog=40.0000, pribil=160.00, zarplata=80.000}
+2025-06-27 18:56:47 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАОSail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=1, summa=1200.0000, nds=0.20, nalog=40.000000, pribil=160.000000, zarplata=80.0000000}
+2025-06-27 18:56:47 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАОSail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=1, summa=1200.0000, nds=0.20, nalog=40.000000, pribil=160.000000, zarplata=80.0000000}
+2025-06-27 18:56:47 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ Sail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=1, summa=1200.0000, nds=0.20, nalog=40.000000, pribil=160.000000, zarplata=80.0000000}
+2025-06-27 18:56:47 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ Sail{id=3, klientName='', toDay='', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000.00, nacenka=0.20, price=1200.0000, kolichestvo=1, summa=1200.0000, nds=0.20, nalog=40.000000, pribil=160.000000, zarplata=80.0000000}
+2025-06-27 18:59:25 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ 1200.0000
+2025-06-27 18:59:25 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕ1200.0000
+2025-06-27 18:59:25 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАО1200.0000
+2025-06-27 18:59:25 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАО1200.0000
+2025-06-27 18:59:25 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ 1200.0000
+2025-06-27 18:59:25 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ 1200.0000
+2025-06-27 18:59:50 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ 1200.0000
+2025-06-27 18:59:50 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕ1200.0000
+2025-06-27 18:59:50 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАО1200.0000
+2025-06-27 18:59:50 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАО1200.0000
+2025-06-27 18:59:50 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ 1200.0000
+2025-06-27 18:59:50 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ 1200.0000
+2025-06-27 20:50:41 INFO  KlientController:32 - showKlients called
+2025-06-27 20:51:07 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000
+2025-06-27 20:51:07 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕ5917.2000
+2025-06-27 20:51:07 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:07 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:07 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ 5917.2000
+2025-06-27 20:51:07 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000
+2025-06-27 20:51:09 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000
+2025-06-27 20:51:09 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕ5917.2000
+2025-06-27 20:51:09 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:09 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:09 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ 5917.2000
+2025-06-27 20:51:09 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000
+2025-06-27 20:51:19 INFO  SailController:40 - Sail в начале в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000
+2025-06-27 20:51:19 INFO  SailServiceImpl:52 - Sail в начале в методе changedSail в СЕРВИСЕ5917.2000
+2025-06-27 20:51:19 INFO  SailDaoImpl:27 - Sail в начале в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:19 INFO  SailDaoImpl:29 - Sail в конце в методе changedSail в ДАО5917.2000
+2025-06-27 20:51:19 INFO  SailServiceImpl:69 - Sail в конце в методе changedSail В СЕРВИСЕ 5917.2000
+2025-06-27 20:51:19 INFO  SailController:42 - Sail в конце в методе changedSail В КОНТРОЛЛЕРЕ 5917.2000

@@ -1,18 +1,13 @@
 package com.igorgorbachev.SpringBootBK.service;
 
-import com.igorgorbachev.SpringBootBK.dao.CarDao;
 import com.igorgorbachev.SpringBootBK.dao.KlientDao;
-import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
+import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -41,10 +36,8 @@ public class KlientServiceImpl implements KlientService {
     @Transactional
     @Override
     public List<Klient> getAllKlients() {
-
         List<Klient> sortList = klientDao.getAllKlients();
         Collections.sort(sortList, Comparator.comparing(Klient::getName, String.CASE_INSENSITIVE_ORDER));
-
         return sortList;
     }
 

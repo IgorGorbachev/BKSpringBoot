@@ -63,6 +63,37 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
 <body>
 <div>
+    <!-- Кнопки сортировки -->
+    <div style="margin-bottom: 20px;">
+        <button class="btn btn-primary" onclick="sortDetails('name')">Сортировать по названию</button>
+        <button class="btn btn-secondary" onclick="sortDetails('id')">Сортировать по ID</button>
+    </div>
+    <script>
+        function sortDetails(criteria) {
+            // Получаем массив строк таблицы (пропускаем заголовок)
+            const rows = Array.from(document.querySelectorAll("tbody tr")).slice(1);
+
+            // Сортируем строки
+            rows.sort((a, b) => {
+                let valA, valB;
+
+                if (criteria === 'name') {
+                    valA = a.cells[1].textContent.trim(); // Название детали
+                    valB = b.cells[1].textContent.trim();
+                } else if (criteria === 'id') {
+                    valA = parseInt(a.cells[0].textContent.trim()); // ID детали
+                    valB = parseInt(b.cells[0].textContent.trim());
+                }
+
+                return valA > valB ? 1 : -1;
+            });
+
+            // Перерисовываем таблицу
+            const tbody = document.querySelector("tbody");
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+    <!-- Таблица деталей -->
     <table class="table table-dark table-hover">
         <thead>
         <tr>

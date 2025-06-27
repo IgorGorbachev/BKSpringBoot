@@ -3,11 +3,12 @@ package com.igorgorbachev.SpringBootBK.service;
 import com.igorgorbachev.SpringBootBK.dao.CarDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
+import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
