@@ -33,6 +33,13 @@ public class CarController {
         return "cars";
     }
 
+    @GetMapping("/allCars")
+    public String getAllCars(Model model){
+        List<Car> carList = carService.getAllCars();
+        model.addAttribute("carList", carList);
+        return "/allCars";
+    }
+
     @PostMapping("/addCar")
     public String addCar(@ModelAttribute("car") Car car, @ModelAttribute("klient") Klient klient, Model model) {
         Car newCar = new Car(car.getName(), car.getVin());
@@ -56,4 +63,6 @@ public class CarController {
         carService.deleteCar(carForDelete);
         return "redirect:/showCars?id=" + klientId;
     }
+
+
 }

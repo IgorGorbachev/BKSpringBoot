@@ -39,6 +39,13 @@ public class DetailController {
         return "details";
     }
 
+    @GetMapping("/allDetails")
+    public String getAllDetails(Model model){
+        List<Detail> detailList = detailService.getAllDetail();
+        model.addAttribute("detailList", detailList);
+        return "/allDetails";
+    }
+
     @PostMapping("/addDetail")
     public String addDetail(@ModelAttribute("detail") Detail detail,@ModelAttribute("car") Car car,@RequestParam("id") Long carId) {
         logger.info("ADD DETAIL FROM CONTROLLER carID = " + carId);

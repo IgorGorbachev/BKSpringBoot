@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>База клиентов</title>
+    <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
@@ -26,9 +27,8 @@
             width: 95%;
             transition: margin-left 0.3s ease;
             position: relative;
-            top: 0;
+            top: 0
         }
-
         .nav-link {
             color: #fff;
             font-size: 14px; /* опционально — уменьшаем текст */
@@ -38,14 +38,15 @@
 </head>
 <body>
 <!-- Боковое меню -->
-<nav class="col-md-1 d-none d-md-block bg-dark sidebar">
+<nav class="col-md-2 d-none d-md-block bg-dark sidebar">
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
             <li class="nav-item">
                 <a class="nav-link active" href="http://localhost:8080/">
-                   Все Клиенты
+                    Все Клиенты
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
             </li>
@@ -65,51 +66,22 @@
         <table class="table table-dark table-hover">
             <thead>
             <tr>
-                <th scope="col">Номер клиента #</th>
-                <th scope="col">Имя клиента</th>
-                <th scope="col">Телефон клиента</th>
-                <th scope="col">Автомобили</th>
-                <th scope="col">Изменить клиента</th>
-                <th scope="col">Удалить клиента</th>
+                <th scope="col">авто #</th>
+                <th scope="col">Имя авто</th>
+                <th scope="col">вин</th>
+            </tr>
+            <tr th:each="car : ${carList}">
+                <th scope="row" th:text="${car.id}"></th>
+                <td th:text="${car.name}"></td>
+                <td th:text="${car.vin}"></td>
+                <td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="klient : ${klientList}">
-                <th scope="row" th:text="${klient.id}"></th>
-                <td th:text="${klient.name}"></td>
-                <td th:text="${klient.phone}"></td>
-                <td>
-                    <a th:href="@{/showCars(id=${klient.id})}">Показать авто</a>
-                </td>
-                <td>
-                    <form th:action="@{/changeKlient}" method="post">
-                        <input type="hidden" name="id" th:value="${klient.id}">
-                        <input type="text" name="name" th:value="${klient.name}">
-                        <input type="tel" name="phone" th:value="${klient.phone}">
-                        <button type="submit">Change</button>
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/deleteKlient}" method="post">
-                        <input type="hidden" name="id" th:value="${klient.id}">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
+
             </tbody>
         </table>
-        <div>
-            <h4>Добавить нового клиента</h4>
-            <form th:action="@{/addKlient}" method="post">
-                <label>Имя клиента:</label>
-                <input type="text" name="name">
-                <label>Номер телефона:</label>
-                <input type="tel" name="phone">
-                <button type="submit">Add</button>
-            </form>
-        </div>
-    </div>
 </main>
-
+</div>
 </body>
 </html>

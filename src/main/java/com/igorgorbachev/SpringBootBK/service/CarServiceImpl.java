@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -34,7 +36,9 @@ public class CarServiceImpl implements CarService {
     @Transactional
     @Override
     public List<Car> getAllCars() {
-        return carDao.getAllCars();
+        List<Car> carListSort = carDao.getAllCars();
+        Collections.sort(carListSort, Comparator.comparing(Car::getName, String.CASE_INSENSITIVE_ORDER));
+        return carListSort;
     }
 
     @Transactional

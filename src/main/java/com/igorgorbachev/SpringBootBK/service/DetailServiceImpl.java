@@ -32,7 +32,9 @@ public class DetailServiceImpl implements DetailService{
     @Transactional
     @Override
     public List<Detail> getAllDetail() {
-        return detailsDao.getAllDetail();
+        List<Detail> sortDetailList = detailsDao.getAllDetail();
+        Collections.sort(sortDetailList, Comparator.comparing(Detail::getName,String.CASE_INSENSITIVE_ORDER));
+        return sortDetailList;
     }
 
     @Transactional
