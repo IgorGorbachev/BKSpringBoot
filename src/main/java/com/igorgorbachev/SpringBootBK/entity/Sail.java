@@ -6,10 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Min;
-import org.springframework.format.annotation.NumberFormat;
+
 
 
 import java.math.BigDecimal;
@@ -65,6 +67,10 @@ public class Sail {
 
     @Column(name = "zarplata", precision = 10, scale = 2)
     private BigDecimal zarplata;
+
+//    @ManyToOne
+//    @JoinColumn(name = "klient_id", referencedColumnName = "id")
+//    private Klient klient;
 
     public Sail() {
     }
@@ -180,6 +186,14 @@ public class Sail {
     public void setZarplata(BigDecimal zarplata) {
         this.zarplata = zarplata;
     }
+
+//    public Klient getKlient() {
+//        return klient;
+//    }
+//
+//    public void setKlient(Klient klient) {
+//        this.klient = klient;
+//    }
 
     public BigDecimal calculatePriceFromZakupkaAndNacenka() {
         return zakupka.multiply(nacenka).add(zakupka);

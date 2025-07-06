@@ -121,6 +121,17 @@
                         <input type="hidden" name="nalog" th:value="${sail.nalog}">
                         <input type="hidden" name="pribil" th:value="${sail.pribil}">
                         <input type="hidden" name="zarplata" th:value="${sail.zarplata}">
+
+                        <!-- Выпадающий список клиентов -->
+<!--                        <select name="klientId" class="wide-cell form-control">-->
+<!--                            <option th:each="klient : ${klientList}"-->
+<!--                                    th:text="${klient.name}"-->
+<!--                                    th:value="${klient.id}"-->
+<!--                                    th:selected="${klient.id == sail.klient?.id}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+
+
                         <input placeholder="Имя клиента" class="wide-cell" type="text" name="klientName" th:value="${sail.klientName}">
                         <input placeholder="Название детали" class="wide-cell" type="text" name="nameDetail" th:value="${sail.nameDetail}">
                         <input placeholder="Артикул" class="wide-cell" type="text" name="numberArticul" th:value="${sail.numberArticul}">
@@ -142,6 +153,14 @@
         <div>
             <h4>Добавить продажу</h4>
             <form th:action="@{/addSail}" method="post">
+                <!-- Выпадающий список клиентов -->
+                <select name="klientId" class="wide-cell form-control">
+                    <option th:each="klient : ${klientList}"
+                            th:text="${klient.name}"
+                            th:value="${klient.id}"
+                        th:selected="${klient.id == sail.klient?.id}">
+                    </option>
+                </select>
                 <label>Имя клиента:</label>
                 <input type="text" name="nameKlient">
                 <label>Название детали:</label>

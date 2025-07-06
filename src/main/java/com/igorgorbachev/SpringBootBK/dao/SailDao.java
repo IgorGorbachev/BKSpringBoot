@@ -1,9 +1,10 @@
 package com.igorgorbachev.SpringBootBK.dao;
 
 import com.igorgorbachev.SpringBootBK.entity.Sail;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SailDao {
     void addSail(Sail sail);
 

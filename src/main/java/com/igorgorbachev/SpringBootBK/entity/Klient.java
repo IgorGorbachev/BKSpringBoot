@@ -29,6 +29,9 @@ public class Klient {
     @OneToMany(mappedBy = "klient")
     private List<Car> car;
 
+//    @OneToMany(mappedBy = "klient")
+//    private List<Sail> sails;
+
     public List<Car> getCar() {
         return car;
     }
@@ -68,6 +71,14 @@ public class Klient {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+//
+//    public List<Sail> getSails() {
+//        return sails;
+//    }
+//
+//    public void setSails(List<Sail> sails) {
+//        this.sails = sails;
+//    }
 
     @Override
     public boolean equals(Object o) {
