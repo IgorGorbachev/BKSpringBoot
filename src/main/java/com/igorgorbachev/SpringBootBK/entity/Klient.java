@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 @Entity
@@ -27,7 +28,7 @@ public class Klient {
     private String phone;
 
     @OneToMany(mappedBy = "klient")
-    private List<Car> car;
+    private List<Car> car = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "klient")
 //    private List<Sail> sails;

@@ -54,7 +54,7 @@ public class DetailServiceImpl implements DetailService{
     @Override
     public List<Detail> getDetailByCarId(Long id) {
         List<Detail> sortList = detailsDao.getDetailByCarId(id);
-        Collections.sort(sortList, Comparator.comparing(Detail::getName, String.CASE_INSENSITIVE_ORDER));
+        Collections.sort(sortList, Comparator.comparing(Detail::getId).reversed());
 
         return sortList;
     }

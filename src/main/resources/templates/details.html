@@ -15,13 +15,14 @@
             bottom: 0;
             left: 0;
             z-index: 100;
-            width: 140px; /* сузили до 140px */
+            width: 10%;
+            max-width:140px;/* сузили до 140px */
             background-color: #343a40;
             padding: 90px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         }
         .content {
-            margin-left: 140px;
+            margin-left: 10%;
             padding: 20px;
             width: 95%;
             transition: margin-left 0.3s ease;
@@ -52,9 +53,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allDetails">Все детали</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Настройки</a>
-            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">Продажи</a>-->
+<!--            </li>-->
         </ul>
     </div>
 </nav>
@@ -68,6 +69,19 @@
         <button class="btn btn-primary" onclick="sortDetails('name')">Сортировать по названию</button>
         <button class="btn btn-secondary" onclick="sortDetails('id')">Сортировать по ID</button>
     </div>
+    <div>
+        <h4>Добавить деталь</h4>
+        <form th:action="@{/addDetail}" method="post">
+            <input type="hidden" name="id" th:value="${car.id}">
+            <label>Название детали:</label>
+            <input type="text" name="name">
+            <label>Комментарий:</label>
+            <input type="text" name="originArticul">
+            <label>Артикул:</label>
+            <input type="text" name="analogArticul">
+            <button type="submit">Add</button>
+        </form>
+    </div>
     <script>
         function sortDetails(criteria) {
             // Получаем массив строк таблицы (пропускаем заголовок)
@@ -78,8 +92,8 @@
                 let valA, valB;
 
                 if (criteria === 'name') {
-                    valA = a.cells[1].textContent.trim(); // Название детали
-                    valB = b.cells[1].textContent.trim();
+                    valA = a.cells[1].textContent.trim().toLowerCase(); // Название детали
+                    valB = b.cells[1].textContent.trim().toLowerCase();
                 } else if (criteria === 'id') {
                     valA = parseInt(a.cells[0].textContent.trim()); // ID детали
                     valB = parseInt(b.cells[0].textContent.trim());
@@ -102,10 +116,10 @@
         <tr>
             <th scope="col">деталь №</th>
             <th scope="col">Название детали</th>
-            <th scope="col">Оригинальный артикул</th>
-            <th scope="col">Аналог артикул</th>
+            <th scope="col">Комментарий</th>
+            <th scope="col">Артикул</th>
             <th scope="col">Изменить деталь</th>
-            <th scope="col">Удалить деталь</th>
+            <th scope="col">Удалить</th>
         </tr>
         </thead>
         <tbody>
@@ -136,19 +150,6 @@
         </tr>
         </tbody>
     </table>
-    <div>
-        <h4>Добавить деталь</h4>
-        <form th:action="@{/addDetail}" method="post">
-            <input type="hidden" name="id" th:value="${car.id}">
-            <label>Название детали:</label>
-            <input type="text" name="name">
-            <label>Оригинальный артикул:</label>
-            <input type="text" name="originArticul">
-            <label>Аналог артикул:</label>
-            <input type="text" name="analogArticul">
-            <button type="submit">Add</button>
-        </form>
-    </div>
 </div>
 </main>
 </body>

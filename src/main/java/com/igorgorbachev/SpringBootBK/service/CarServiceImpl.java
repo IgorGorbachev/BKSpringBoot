@@ -45,7 +45,13 @@ public class CarServiceImpl implements CarService {
     @Transactional
     @Override
     public void deleteCar(Car car) {
-        carDao.deletCar(car);
+        if(car.getDetails() != null && !car.getDetails().isEmpty()){
+            System.out.println("Нельзя удалить машину, если у нее есть детали");
+            throw new IllegalStateException();
+        }
+        else {
+            carDao.deletCar(car);
+        }
     }
 
     @Transactional

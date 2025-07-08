@@ -1732,3 +1732,466 @@
 2025-07-06 14:42:08 INFO  KlientController:32 - showKlients called
 2025-07-06 14:42:28 INFO  KlientController:32 - showKlients called
 2025-07-06 14:42:35 INFO  KlientController:32 - showKlients called
+2025-07-06 20:33:30 INFO  KlientController:32 - showKlients called
+2025-07-06 20:33:33 INFO  KlientController:32 - showKlients called
+2025-07-06 20:33:36 INFO  KlientController:32 - showKlients called
+2025-07-06 20:33:39 INFO  KlientController:32 - showKlients called
+2025-07-06 20:33:42 INFO  KlientController:32 - showKlients called
+2025-07-06 21:13:41 INFO  KlientController:32 - showKlients called
+2025-07-06 21:13:42 INFO  KlientController:32 - showKlients called
+2025-07-06 21:13:50 INFO  KlientController:32 - showKlients called
+2025-07-06 21:13:55 INFO  KlientController:32 - showKlients called
+2025-07-06 21:14:01 INFO  DetailController:34 - showDetails called
+2025-07-06 21:14:09 INFO  KlientController:32 - showKlients called
+2025-07-06 21:14:11 INFO  DetailController:34 - showDetails called
+2025-07-06 21:14:13 INFO  KlientController:32 - showKlients called
+2025-07-06 21:14:25 INFO  KlientController:32 - showKlients called
+2025-07-06 21:14:29 INFO  DetailController:34 - showDetails called
+2025-07-06 21:14:50 INFO  KlientController:32 - showKlients called
+2025-07-06 21:14:56 INFO  KlientController:32 - showKlients called
+2025-07-06 21:18:13 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Ромашов Александр', phone='89605087979'}
+2025-07-06 21:18:13 INFO  KlientController:32 - showKlients called
+2025-07-06 21:24:35 INFO  DetailController:34 - showDetails called
+2025-07-06 21:24:45 INFO  KlientController:32 - showKlients called
+2025-07-06 21:46:23 INFO  DetailController:34 - showDetails called
+2025-07-06 21:46:39 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 154
+2025-07-06 21:46:39 INFO  DetailController:34 - showDetails called
+2025-07-06 21:46:46 INFO  KlientController:32 - showKlients called
+2025-07-06 21:59:26 INFO  KlientController:32 - showKlients called
+2025-07-06 21:59:33 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф 881 Алексей', phone='89065130971'}
+2025-07-06 21:59:33 INFO  KlientController:32 - showKlients called
+2025-07-06 22:06:21 INFO  KlientController:32 - showKlients called
+2025-07-06 22:06:34 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}
+2025-07-06 22:06:34 INFO  KlientController:32 - showKlients called
+2025-07-06 22:07:05 INFO  DetailController:34 - showDetails called
+2025-07-06 22:07:14 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 160
+2025-07-06 22:07:14 INFO  DetailController:34 - showDetails called
+2025-07-06 22:07:30 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 160
+2025-07-06 22:07:30 INFO  DetailController:34 - showDetails called
+2025-07-06 22:07:41 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 160
+2025-07-06 22:07:41 INFO  DetailController:34 - showDetails called
+2025-07-06 22:07:54 INFO  KlientController:32 - showKlients called
+2025-07-06 22:08:17 INFO  DetailController:34 - showDetails called
+2025-07-06 22:08:29 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 161
+2025-07-06 22:08:29 INFO  DetailController:34 - showDetails called
+2025-07-06 22:08:42 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 161
+2025-07-06 22:08:42 INFO  DetailController:34 - showDetails called
+2025-07-06 22:08:53 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 161
+2025-07-06 22:08:53 INFO  DetailController:34 - showDetails called
+2025-07-06 22:09:00 INFO  KlientController:32 - showKlients called
+2025-07-06 22:12:00 INFO  KlientController:32 - showKlients called
+2025-07-06 22:13:18 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:19 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:19 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:19 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:20 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:20 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:20 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:21 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:21 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:22 INFO  DetailController:34 - showDetails called
+2025-07-06 22:13:31 INFO  KlientController:32 - showKlients called
+2025-07-06 22:15:05 INFO  KlientController:32 - showKlients called
+2025-07-06 22:15:11 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Полтев Иван', phone='89109829719'}
+2025-07-06 22:15:11 INFO  KlientController:32 - showKlients called
+2025-07-06 22:19:36 INFO  DetailController:34 - showDetails called
+2025-07-06 22:19:37 INFO  KlientController:32 - showKlients called
+2025-07-06 22:22:45 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Андрей Максимов', phone='89158167364'}
+2025-07-06 22:22:45 INFO  KlientController:32 - showKlients called
+2025-07-06 22:30:12 INFO  KlientController:32 - showKlients called
+2025-07-06 22:30:31 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}
+2025-07-06 22:30:31 INFO  KlientController:32 - showKlients called
+2025-07-06 22:38:03 INFO  DetailController:34 - showDetails called
+2025-07-06 22:38:08 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 171
+2025-07-06 22:38:08 INFO  DetailController:34 - showDetails called
+2025-07-06 22:38:15 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 171
+2025-07-06 22:38:15 INFO  DetailController:34 - showDetails called
+2025-07-06 22:39:02 INFO  DetailController:34 - showDetails called
+2025-07-06 22:39:26 INFO  DetailController:34 - showDetails called
+2025-07-06 22:39:44 INFO  KlientController:32 - showKlients called
+2025-07-06 22:40:05 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф Южа Максим', phone='89960263369'}
+2025-07-06 22:40:05 INFO  KlientController:32 - showKlients called
+2025-07-06 22:48:12 INFO  KlientController:32 - showKlients called
+2025-07-06 22:48:18 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ГемоРор(Николай Макушин)', phone='89612450116'}
+2025-07-06 22:48:18 INFO  KlientController:32 - showKlients called
+2025-07-06 23:01:37 INFO  DetailController:34 - showDetails called
+2025-07-06 23:08:03 INFO  KlientController:32 - showKlients called
+2025-07-07 18:27:56 INFO  KlientController:32 - showKlients called
+2025-07-07 18:27:58 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:01 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:01 INFO  SailController:37 - METHODS SAIL FROM CONTROLLER klientList = [Klient{id=25, name='Алексей Васечкин (Саф Бпв)', phone='89206721608'}, Klient{id=7, name='Алексей Ман от Пугачева', phone='89605028135'}, Klient{id=16, name='Андрей 3737', phone='89158323737'}, Klient{id=32, name='Андрей Максимов', phone='89158167364'}, Klient{id=17, name='Виноградов', phone='89051050388'}, Klient{id=19, name='Владимир 5055', phone='89632145055'}, Klient{id=6, name='Вольво нудный(Александр Сапогов)', phone='89605137710'}, Klient{id=35, name='ГемоРор(Николай Макушин)', phone='89612450116'}, Klient{id=24, name='Горбунов Санек ', phone='89612471861'}, Klient{id=23, name='Горбунов Сергей ', phone='89051554934'}, Klient{id=29, name='Даф 881 Алексей', phone='89065130971'}, Klient{id=12, name='Даф Валерий с Палеха', phone='89106965411 89065154485'}, Klient{id=33, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}, Klient{id=34, name='Даф Южа Максим', phone='89960263369'}, Klient{id=26, name='Дима китово(Шуйский АТК)', phone='89109846212'}, Klient{id=13, name='Дима Кузя', phone='89092474343'}, Klient{id=2, name='Женя BPW', phone='89206791140'}, Klient{id=11, name='Иван Гришенков', phone='89038887776'}, Klient{id=30, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}, Klient{id=5, name='Игорь Писк Рено', phone='89012892167'}, Klient{id=20, name='ИП Богаткова.', phone='89016927558'}, Klient{id=4, name='Колобков Сергей', phone='89605003969   89158278738'}, Klient{id=9, name='Константин Бойцов', phone='89109880008'}, Klient{id=1, name='Ман(бывший яскина)', phone='89118991532'}, Klient{id=14, name='Петруха(Экспомир)', phone='89109818989 89092475572'}, Klient{id=31, name='Полтев Иван', phone='89109829719'}, Klient{id=21, name='Прокофьев Виктор', phone='89109817281'}, Klient{id=28, name='Ромашов Александр', phone='89605087979'}, Klient{id=3, name='Сергей Белов', phone='89806848593'}, Klient{id=18, name='Сергей Иванов', phone='89106675939'}, Klient{id=10, name='Сергей Надеин (Комбикорм)', phone='89605068997'}, Klient{id=15, name='Сын(Лев Скания)', phone='89109844850'}, Klient{id=8, name='Таёта Алексей Самойлов', phone='89051054001'}, Klient{id=22, name='Филиппов', phone='89158456510'}]
+2025-07-07 18:28:03 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:07 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:09 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:12 INFO  KlientController:32 - showKlients called
+2025-07-07 18:28:14 INFO  KlientController:32 - showKlients called
+2025-07-07 18:31:22 INFO  KlientController:32 - showKlients called
+2025-07-07 18:31:40 INFO  KlientController:32 - showKlients called
+2025-07-07 18:32:24 INFO  KlientController:32 - showKlients called
+2025-07-07 18:32:25 INFO  KlientController:32 - showKlients called
+2025-07-07 18:32:55 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:04 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:05 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:06 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:27 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:28 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:30 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:33 INFO  KlientController:32 - showKlients called
+2025-07-07 18:33:58 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:01 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:22 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:23 INFO  SailController:37 - METHODS SAIL FROM CONTROLLER klientList = [Klient{id=25, name='Алексей Васечкин (Саф Бпв)', phone='89206721608'}, Klient{id=7, name='Алексей Ман от Пугачева', phone='89605028135'}, Klient{id=16, name='Андрей 3737', phone='89158323737'}, Klient{id=32, name='Андрей Максимов', phone='89158167364'}, Klient{id=17, name='Виноградов', phone='89051050388'}, Klient{id=19, name='Владимир 5055', phone='89632145055'}, Klient{id=6, name='Вольво нудный(Александр Сапогов)', phone='89605137710'}, Klient{id=35, name='ГемоРор(Николай Макушин)', phone='89612450116'}, Klient{id=24, name='Горбунов Санек ', phone='89612471861'}, Klient{id=23, name='Горбунов Сергей ', phone='89051554934'}, Klient{id=29, name='Даф 881 Алексей', phone='89065130971'}, Klient{id=12, name='Даф Валерий с Палеха', phone='89106965411 89065154485'}, Klient{id=33, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}, Klient{id=34, name='Даф Южа Максим', phone='89960263369'}, Klient{id=26, name='Дима китово(Шуйский АТК)', phone='89109846212'}, Klient{id=13, name='Дима Кузя', phone='89092474343'}, Klient{id=2, name='Женя BPW', phone='89206791140'}, Klient{id=11, name='Иван Гришенков', phone='89038887776'}, Klient{id=30, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}, Klient{id=5, name='Игорь Писк Рено', phone='89012892167'}, Klient{id=20, name='ИП Богаткова.', phone='89016927558'}, Klient{id=4, name='Колобков Сергей', phone='89605003969   89158278738'}, Klient{id=9, name='Константин Бойцов', phone='89109880008'}, Klient{id=1, name='Ман(бывший яскина)', phone='89118991532'}, Klient{id=14, name='Петруха(Экспомир)', phone='89109818989 89092475572'}, Klient{id=31, name='Полтев Иван', phone='89109829719'}, Klient{id=21, name='Прокофьев Виктор', phone='89109817281'}, Klient{id=28, name='Ромашов Александр', phone='89605087979'}, Klient{id=3, name='Сергей Белов', phone='89806848593'}, Klient{id=18, name='Сергей Иванов', phone='89106675939'}, Klient{id=10, name='Сергей Надеин (Комбикорм)', phone='89605068997'}, Klient{id=15, name='Сын(Лев Скания)', phone='89109844850'}, Klient{id=8, name='Таёта Алексей Самойлов', phone='89051054001'}, Klient{id=22, name='Филиппов', phone='89158456510'}]
+2025-07-07 18:34:24 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:29 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:42 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:46 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:46 INFO  SailController:37 - METHODS SAIL FROM CONTROLLER klientList = [Klient{id=25, name='Алексей Васечкин (Саф Бпв)', phone='89206721608'}, Klient{id=7, name='Алексей Ман от Пугачева', phone='89605028135'}, Klient{id=16, name='Андрей 3737', phone='89158323737'}, Klient{id=32, name='Андрей Максимов', phone='89158167364'}, Klient{id=17, name='Виноградов', phone='89051050388'}, Klient{id=19, name='Владимир 5055', phone='89632145055'}, Klient{id=6, name='Вольво нудный(Александр Сапогов)', phone='89605137710'}, Klient{id=35, name='ГемоРор(Николай Макушин)', phone='89612450116'}, Klient{id=24, name='Горбунов Санек ', phone='89612471861'}, Klient{id=23, name='Горбунов Сергей ', phone='89051554934'}, Klient{id=29, name='Даф 881 Алексей', phone='89065130971'}, Klient{id=12, name='Даф Валерий с Палеха', phone='89106965411 89065154485'}, Klient{id=33, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}, Klient{id=34, name='Даф Южа Максим', phone='89960263369'}, Klient{id=26, name='Дима китово(Шуйский АТК)', phone='89109846212'}, Klient{id=13, name='Дима Кузя', phone='89092474343'}, Klient{id=2, name='Женя BPW', phone='89206791140'}, Klient{id=11, name='Иван Гришенков', phone='89038887776'}, Klient{id=30, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}, Klient{id=5, name='Игорь Писк Рено', phone='89012892167'}, Klient{id=20, name='ИП Богаткова.', phone='89016927558'}, Klient{id=4, name='Колобков Сергей', phone='89605003969   89158278738'}, Klient{id=9, name='Константин Бойцов', phone='89109880008'}, Klient{id=1, name='Ман(бывший яскина)', phone='89118991532'}, Klient{id=14, name='Петруха(Экспомир)', phone='89109818989 89092475572'}, Klient{id=31, name='Полтев Иван', phone='89109829719'}, Klient{id=21, name='Прокофьев Виктор', phone='89109817281'}, Klient{id=28, name='Ромашов Александр', phone='89605087979'}, Klient{id=3, name='Сергей Белов', phone='89806848593'}, Klient{id=18, name='Сергей Иванов', phone='89106675939'}, Klient{id=10, name='Сергей Надеин (Комбикорм)', phone='89605068997'}, Klient{id=15, name='Сын(Лев Скания)', phone='89109844850'}, Klient{id=8, name='Таёта Алексей Самойлов', phone='89051054001'}, Klient{id=22, name='Филиппов', phone='89158456510'}]
+2025-07-07 18:34:47 INFO  KlientController:32 - showKlients called
+2025-07-07 18:34:51 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:00 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:11 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:12 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:13 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:13 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:13 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:13 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:14 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:25 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:28 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:31 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:33 INFO  KlientController:32 - showKlients called
+2025-07-07 18:35:57 INFO  KlientController:32 - showKlients called
+2025-07-07 18:36:00 INFO  KlientController:32 - showKlients called
+2025-07-07 18:36:01 INFO  SailController:37 - METHODS SAIL FROM CONTROLLER klientList = [Klient{id=25, name='Алексей Васечкин (Саф Бпв)', phone='89206721608'}, Klient{id=7, name='Алексей Ман от Пугачева', phone='89605028135'}, Klient{id=16, name='Андрей 3737', phone='89158323737'}, Klient{id=32, name='Андрей Максимов', phone='89158167364'}, Klient{id=17, name='Виноградов', phone='89051050388'}, Klient{id=19, name='Владимир 5055', phone='89632145055'}, Klient{id=6, name='Вольво нудный(Александр Сапогов)', phone='89605137710'}, Klient{id=35, name='ГемоРор(Николай Макушин)', phone='89612450116'}, Klient{id=24, name='Горбунов Санек ', phone='89612471861'}, Klient{id=23, name='Горбунов Сергей ', phone='89051554934'}, Klient{id=29, name='Даф 881 Алексей', phone='89065130971'}, Klient{id=12, name='Даф Валерий с Палеха', phone='89106965411 89065154485'}, Klient{id=33, name='ДАФ Задний мост(Евгений Калинин)', phone='89605073755'}, Klient{id=34, name='Даф Южа Максим', phone='89960263369'}, Klient{id=26, name='Дима китово(Шуйский АТК)', phone='89109846212'}, Klient{id=13, name='Дима Кузя', phone='89092474343'}, Klient{id=2, name='Женя BPW', phone='89206791140'}, Klient{id=11, name='Иван Гришенков', phone='89038887776'}, Klient{id=30, name='Ивеко Стралис Михаил Ерохин', phone='89106885528'}, Klient{id=5, name='Игорь Писк Рено', phone='89012892167'}, Klient{id=20, name='ИП Богаткова.', phone='89016927558'}, Klient{id=4, name='Колобков Сергей', phone='89605003969   89158278738'}, Klient{id=9, name='Константин Бойцов', phone='89109880008'}, Klient{id=1, name='Ман(бывший яскина)', phone='89118991532'}, Klient{id=14, name='Петруха(Экспомир)', phone='89109818989 89092475572'}, Klient{id=31, name='Полтев Иван', phone='89109829719'}, Klient{id=21, name='Прокофьев Виктор', phone='89109817281'}, Klient{id=28, name='Ромашов Александр', phone='89605087979'}, Klient{id=3, name='Сергей Белов', phone='89806848593'}, Klient{id=18, name='Сергей Иванов', phone='89106675939'}, Klient{id=10, name='Сергей Надеин (Комбикорм)', phone='89605068997'}, Klient{id=15, name='Сын(Лев Скания)', phone='89109844850'}, Klient{id=8, name='Таёта Алексей Самойлов', phone='89051054001'}, Klient{id=22, name='Филиппов', phone='89158456510'}]
+2025-07-07 18:36:02 INFO  KlientController:32 - showKlients called
+2025-07-07 18:36:14 INFO  DetailController:34 - showDetails called
+2025-07-07 18:36:31 INFO  KlientController:32 - showKlients called
+2025-07-07 18:37:40 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Игорь Щитки Бпв', phone='89612488531'}
+2025-07-07 18:37:41 INFO  KlientController:32 - showKlients called
+2025-07-07 18:41:59 INFO  DetailController:34 - showDetails called
+2025-07-07 18:42:59 INFO  KlientController:32 - showKlients called
+2025-07-07 18:43:05 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Андрей Бпв Ключ Ступицы', phone='89158439121'}
+2025-07-07 18:43:05 INFO  KlientController:32 - showKlients called
+2025-07-07 18:51:25 INFO  KlientController:32 - showKlients called
+2025-07-07 18:51:36 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Мамаев Сергей', phone='89038885833'}
+2025-07-07 18:51:36 INFO  KlientController:32 - showKlients called
+2025-07-07 19:02:26 INFO  KlientController:32 - showKlients called
+2025-07-07 19:02:32 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Марк Ивеко', phone='89065140001'}
+2025-07-07 19:02:32 INFO  KlientController:32 - showKlients called
+2025-07-07 19:04:46 INFO  KlientController:32 - showKlients called
+2025-07-07 19:04:52 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Дмитрий Ман Фильтоа', phone='89106683335'}
+2025-07-07 19:04:52 INFO  KlientController:32 - showKlients called
+2025-07-07 19:17:06 INFO  KlientController:32 - showKlients called
+2025-07-07 19:18:24 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Простор Иваново', phone=''}
+2025-07-07 19:18:24 INFO  KlientController:32 - showKlients called
+2025-07-07 21:17:20 INFO  KlientController:32 - showKlients called
+2025-07-07 21:17:37 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Дмитрий Рябцов', phone='89806879029'}
+2025-07-07 21:17:37 INFO  KlientController:32 - showKlients called
+2025-07-07 21:32:05 INFO  KlientController:32 - showKlients called
+2025-07-07 21:32:11 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Михаил Мерс Стоянка', phone='89106879698'}
+2025-07-07 21:32:11 INFO  KlientController:32 - showKlients called
+2025-07-07 21:33:11 INFO  KlientController:32 - showKlients called
+2025-07-07 21:33:16 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Вольво Сергей Кутилов', phone='89038894802'}
+2025-07-07 21:33:16 INFO  KlientController:32 - showKlients called
+2025-07-07 21:39:12 INFO  KlientController:32 - showKlients called
+2025-07-07 21:39:18 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Андрей Филичев (Ман)', phone='89158364364'}
+2025-07-07 21:39:18 INFO  KlientController:32 - showKlients called
+2025-07-07 21:41:26 INFO  KlientController:32 - showKlients called
+2025-07-07 21:41:32 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Василий МАН (Аморт Ящика) ИП Корабельников', phone='89109829344'}
+2025-07-07 21:41:32 INFO  KlientController:32 - showKlients called
+2025-07-07 21:47:43 INFO  KlientController:32 - showKlients called
+2025-07-07 21:47:48 INFO  DetailController:34 - showDetails called
+2025-07-07 21:48:16 INFO  KlientController:32 - showKlients called
+2025-07-07 21:48:24 INFO  DetailController:34 - showDetails called
+2025-07-07 21:49:34 INFO  KlientController:32 - showKlients called
+2025-07-07 21:49:41 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Констатин скания ', phone='89051096533'}
+2025-07-07 21:49:41 INFO  KlientController:32 - showKlients called
+2025-07-07 21:53:14 INFO  KlientController:32 - showKlients called
+2025-07-07 21:53:20 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Павел Южа Скания ', phone='89158392481'}
+2025-07-07 21:53:20 INFO  KlientController:32 - showKlients called
+2025-07-07 21:56:21 INFO  KlientController:32 - showKlients called
+2025-07-07 21:56:27 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Саша Рено 8787', phone='89051568787'}
+2025-07-07 21:56:27 INFO  KlientController:32 - showKlients called
+2025-07-07 22:02:00 INFO  KlientController:32 - showKlients called
+2025-07-07 22:02:07 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Вячеслав Ман От Филичева', phone='89109944564'}
+2025-07-07 22:02:07 INFO  KlientController:32 - showKlients called
+2025-07-07 22:04:16 INFO  KlientController:32 - showKlients called
+2025-07-07 22:04:22 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ДАФ Автолайн', phone='89106805754'}
+2025-07-07 22:04:22 INFO  KlientController:32 - showKlients called
+2025-07-07 22:09:08 INFO  KlientController:32 - showKlients called
+2025-07-07 22:09:14 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Подшипник Оси BPW (Павел Шапов)', phone='89038893539'}
+2025-07-07 22:09:14 INFO  KlientController:32 - showKlients called
+2025-07-07 22:10:54 INFO  KlientController:32 - showKlients called
+2025-07-07 22:10:59 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Голиков Алексей', phone='89050593746'}
+2025-07-07 22:10:59 INFO  KlientController:32 - showKlients called
+2025-07-07 22:13:20 INFO  KlientController:32 - showKlients called
+2025-07-07 22:13:35 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Конст от Подш БПВ', phone=''}
+2025-07-07 22:13:35 INFO  KlientController:32 - showKlients called
+2025-07-07 22:16:27 INFO  KlientController:32 - showKlients called
+2025-07-07 22:16:33 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Максим Подушка 4022', phone='89109991225'}
+2025-07-07 22:16:33 INFO  KlientController:32 - showKlients called
+2025-07-07 22:21:12 INFO  KlientController:32 - showKlients called
+2025-07-07 22:21:17 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Эдик Вольво ', phone='89807316735'}
+2025-07-07 22:21:17 INFO  KlientController:32 - showKlients called
+2025-07-07 22:23:03 INFO  KlientController:32 - showKlients called
+2025-07-07 22:23:08 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф ПГУ Вова', phone='89965164980'}
+2025-07-07 22:23:08 INFO  KlientController:32 - showKlients called
+2025-07-07 22:25:05 INFO  KlientController:32 - showKlients called
+2025-07-07 22:25:23 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Скания Новенький', phone='89158298563'}
+2025-07-07 22:25:23 INFO  KlientController:32 - showKlients called
+2025-07-07 22:32:06 INFO  KlientController:32 - showKlients called
+2025-07-07 22:32:12 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Рено (ВТОРМА)', phone='89605049986'}
+2025-07-07 22:32:12 INFO  KlientController:32 - showKlients called
+2025-07-07 22:33:08 INFO  KlientController:32 - showKlients called
+2025-07-07 22:33:14 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Василий Верхний Ландех. Скания', phone='89092482132'}
+2025-07-07 22:33:14 INFO  KlientController:32 - showKlients called
+2025-07-07 22:36:21 INFO  KlientController:32 - showKlients called
+2025-07-07 22:36:26 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Дима Дорофеев Рено', phone='89109848437'}
+2025-07-07 22:36:26 INFO  KlientController:32 - showKlients called
+2025-07-07 22:39:41 INFO  KlientController:32 - showKlients called
+2025-07-07 22:39:48 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Рассадин Александр Ман.', phone='89384256570'}
+2025-07-07 22:39:48 INFO  KlientController:32 - showKlients called
+2025-07-07 22:44:06 INFO  KlientController:32 - showKlients called
+2025-07-07 22:44:11 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Сергей ISUZU', phone='89290464880'}
+2025-07-07 22:44:11 INFO  KlientController:32 - showKlients called
+2025-07-07 22:45:03 INFO  KlientController:32 - showKlients called
+2025-07-07 22:45:08 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Булкин', phone='89992400045'}
+2025-07-07 22:45:08 INFO  KlientController:32 - showKlients called
+2025-07-07 22:47:39 INFO  KlientController:32 - showKlients called
+2025-07-07 22:47:45 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Олег Рено Магнум', phone='89303412274'}
+2025-07-07 22:47:45 INFO  KlientController:32 - showKlients called
+2025-07-07 22:51:33 INFO  KlientController:32 - showKlients called
+2025-07-07 22:51:39 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Андрей Baw Стартер', phone='89807352081'}
+2025-07-07 22:51:39 INFO  KlientController:32 - showKlients called
+2025-07-07 22:53:02 INFO  KlientController:32 - showKlients called
+2025-07-07 22:53:08 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Женя Ивеко ( Сейчас Скания)', phone='89106904190'}
+2025-07-07 22:53:08 INFO  KlientController:32 - showKlients called
+2025-07-07 22:55:41 INFO  KlientController:32 - showKlients called
+2025-07-07 22:55:47 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Подушка Вольво R4713DFS02(Мухомор)', phone='89106694845'}
+2025-07-07 22:55:47 INFO  KlientController:32 - showKlients called
+2025-07-07 23:02:01 INFO  KlientController:32 - showKlients called
+2025-07-07 23:02:07 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Индустриал Групп Безнал', phone='89303456255'}
+2025-07-07 23:02:07 INFO  KlientController:32 - showKlients called
+2025-07-07 23:04:08 INFO  DetailController:34 - showDetails called
+2025-07-07 23:04:13 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 279
+2025-07-07 23:04:13 INFO  DetailController:34 - showDetails called
+2025-07-07 23:04:16 INFO  KlientController:32 - showKlients called
+2025-07-07 23:05:18 INFO  KlientController:32 - showKlients called
+2025-07-07 23:05:23 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Стас Боков', phone='89158108458'}
+2025-07-07 23:05:23 INFO  KlientController:32 - showKlients called
+2025-07-07 23:34:52 INFO  DetailController:34 - showDetails called
+2025-07-07 23:34:56 INFO  KlientController:32 - showKlients called
+2025-07-07 23:35:03 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Даф Владимр Челышев', phone='89109814899'}
+2025-07-07 23:35:03 INFO  KlientController:32 - showKlients called
+2025-07-07 23:49:02 INFO  KlientController:32 - showKlients called
+2025-07-07 23:49:08 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Вольво 717 Вова Смирнов', phone='89109992442'}
+2025-07-07 23:49:08 INFO  KlientController:32 - showKlients called
+2025-07-07 23:56:22 INFO  KlientController:32 - showKlients called
+2025-07-07 23:56:30 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Мария BPW', phone='89158499493'}
+2025-07-07 23:56:30 INFO  KlientController:32 - showKlients called
+2025-07-08 00:00:50 INFO  KlientController:32 - showKlients called
+2025-07-08 00:00:56 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Mixail - Ивеко Стралис', phone='89109958316'}
+2025-07-08 00:00:56 INFO  KlientController:32 - showKlients called
+2025-07-08 00:04:03 INFO  KlientController:32 - showKlients called
+2025-07-08 00:04:09 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Скания Южа', phone='89109826105'}
+2025-07-08 00:04:09 INFO  KlientController:32 - showKlients called
+2025-07-08 00:05:28 INFO  KlientController:32 - showKlients called
+2025-07-08 00:05:34 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Александр Скания Горячево', phone='89203549819'}
+2025-07-08 00:05:34 INFO  KlientController:32 - showKlients called
+2025-07-08 00:07:01 INFO  KlientController:32 - showKlients called
+2025-07-08 00:07:07 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Василий Даф Центральный', phone='89806911739'}
+2025-07-08 00:07:07 INFO  KlientController:32 - showKlients called
+2025-07-08 00:08:33 INFO  KlientController:32 - showKlients called
+2025-07-08 00:08:53 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='ООО "СТК" и  ООО "ССТ"', phone=''}
+2025-07-08 00:08:53 INFO  KlientController:32 - showKlients called
+2025-07-08 00:11:31 INFO  KlientController:32 - showKlients called
+2025-07-08 00:11:37 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Алексей Меркулов', phone='89612493728'}
+2025-07-08 00:11:37 INFO  KlientController:32 - showKlients called
+2025-07-08 00:12:24 INFO  KlientController:32 - showKlients called
+2025-07-08 00:12:30 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Котыгин Андрей', phone='89106684133'}
+2025-07-08 00:12:30 INFO  KlientController:32 - showKlients called
+2025-07-08 00:14:58 INFO  KlientController:32 - showKlients called
+2025-07-08 00:15:06 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Николай Рубачёв (Савино)', phone='89106891331'}
+2025-07-08 00:15:06 INFO  KlientController:32 - showKlients called
+2025-07-08 00:15:50 INFO  DetailController:34 - showDetails called
+2025-07-08 00:15:56 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 312
+2025-07-08 00:15:56 INFO  DetailController:34 - showDetails called
+2025-07-08 00:16:00 INFO  KlientController:32 - showKlients called
+2025-07-08 00:16:23 INFO  DetailController:34 - showDetails called
+2025-07-08 00:16:29 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 313
+2025-07-08 00:16:29 INFO  DetailController:34 - showDetails called
+2025-07-08 00:16:32 INFO  KlientController:32 - showKlients called
+2025-07-08 00:17:08 INFO  DetailController:34 - showDetails called
+2025-07-08 00:17:14 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 314
+2025-07-08 00:17:14 INFO  DetailController:34 - showDetails called
+2025-07-08 00:17:20 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 314
+2025-07-08 00:17:20 INFO  DetailController:34 - showDetails called
+2025-07-08 00:17:26 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 314
+2025-07-08 00:17:26 INFO  DetailController:34 - showDetails called
+2025-07-08 00:17:33 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 314
+2025-07-08 00:17:33 INFO  DetailController:34 - showDetails called
+2025-07-08 00:17:51 INFO  KlientController:32 - showKlients called
+2025-07-08 00:18:05 INFO  DetailController:34 - showDetails called
+2025-07-08 00:18:09 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 315
+2025-07-08 00:18:09 INFO  DetailController:34 - showDetails called
+2025-07-08 00:18:15 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 315
+2025-07-08 00:18:15 INFO  DetailController:34 - showDetails called
+2025-07-08 00:18:21 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 315
+2025-07-08 00:18:21 INFO  DetailController:34 - showDetails called
+2025-07-08 00:18:37 INFO  KlientController:32 - showKlients called
+2025-07-08 00:19:07 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='Александр(Прокладки ГБЦ МАН)', phone='89117800347'}
+2025-07-08 00:19:07 INFO  KlientController:32 - showKlients called
+2025-07-08 00:20:31 INFO  KlientController:32 - showKlients called
+2025-07-08 18:48:56 INFO  KlientController:32 - showKlients called
+2025-07-08 18:49:26 INFO  KlientController:32 - showKlients called
+2025-07-08 18:49:46 INFO  KlientController:32 - showKlients called
+2025-07-08 18:49:51 INFO  KlientController:32 - showKlients called
+2025-07-08 18:50:31 INFO  DetailController:34 - showDetails called
+2025-07-08 18:50:48 INFO  DetailController:34 - showDetails called
+2025-07-08 18:51:19 INFO  KlientController:32 - showKlients called
+2025-07-08 18:51:22 INFO  KlientController:32 - showKlients called
+2025-07-08 18:52:08 INFO  KlientController:32 - showKlients called
+2025-07-08 18:52:11 INFO  DetailController:34 - showDetails called
+2025-07-08 18:52:18 INFO  KlientController:32 - showKlients called
+2025-07-08 18:52:30 INFO  KlientController:32 - showKlients called
+2025-07-08 18:52:35 INFO  DetailController:34 - showDetails called
+2025-07-08 18:59:00 INFO  DetailController:34 - showDetails called
+2025-07-08 18:59:13 INFO  DetailController:34 - showDetails called
+2025-07-08 18:59:24 INFO  KlientController:32 - showKlients called
+2025-07-08 18:59:28 INFO  DetailController:34 - showDetails called
+2025-07-08 18:59:43 INFO  KlientController:32 - showKlients called
+2025-07-08 18:59:46 INFO  DetailController:34 - showDetails called
+2025-07-08 18:59:53 INFO  KlientController:32 - showKlients called
+2025-07-08 19:00:00 INFO  DetailController:34 - showDetails called
+2025-07-08 19:00:45 INFO  KlientController:32 - showKlients called
+2025-07-08 19:03:24 INFO  KlientController:32 - showKlients called
+2025-07-08 19:03:25 INFO  KlientController:32 - showKlients called
+2025-07-08 19:03:28 INFO  DetailController:34 - showDetails called
+2025-07-08 19:03:37 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 297
+2025-07-08 19:03:37 INFO  DetailController:34 - showDetails called
+2025-07-08 19:03:46 INFO  DetailController:34 - showDetails called
+2025-07-08 19:07:49 INFO  DetailController:34 - showDetails called
+2025-07-08 19:08:22 INFO  KlientController:32 - showKlients called
+2025-07-08 19:08:26 INFO  DetailController:34 - showDetails called
+2025-07-08 19:08:35 INFO  KlientController:32 - showKlients called
+2025-07-08 19:08:38 INFO  KlientController:32 - showKlients called
+2025-07-08 19:08:58 INFO  KlientController:56 - deletetKlient called with id: Klient{id=56, name='null', phone='null'}
+2025-07-08 19:08:58 INFO  KlientController:32 - showKlients called
+2025-07-08 19:15:12 INFO  KlientController:32 - showKlients called
+2025-07-08 19:15:15 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:20:57 INFO  KlientController:32 - showKlients called
+2025-07-08 19:21:00 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:21:06 INFO  KlientController:32 - showKlients called
+2025-07-08 19:21:08 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:23:43 INFO  KlientController:32 - showKlients called
+2025-07-08 19:23:44 INFO  KlientController:32 - showKlients called
+2025-07-08 19:23:46 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:26:41 INFO  KlientController:32 - showKlients called
+2025-07-08 19:26:43 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:27:31 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:33 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:27:33 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:36 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 19:27:36 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:38 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:38 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:39 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:39 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:39 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:39 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:39 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:39 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:40 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:40 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:52 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:52 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:52 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:52 INFO  KlientController:32 - showKlients called
+2025-07-08 19:27:52 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:27:52 INFO  KlientController:32 - showKlients called
+2025-07-08 19:30:41 INFO  KlientController:32 - showKlients called
+2025-07-08 19:30:43 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:30:43 INFO  KlientController:32 - showKlients called
+2025-07-08 19:31:14 INFO  KlientController:32 - showKlients called
+2025-07-08 19:31:16 INFO  KlientController:56 - deletetKlient called with id: Klient{id=74, name='null', phone='null'}
+2025-07-08 19:31:16 INFO  KlientController:32 - showKlients called
+2025-07-08 19:36:43 INFO  KlientController:32 - showKlients called
+2025-07-08 19:39:55 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:01 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:04 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:08 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:12 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:21 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:25 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:29 INFO  KlientController:32 - showKlients called
+2025-07-08 19:40:33 INFO  DetailController:34 - showDetails called
+2025-07-08 19:40:36 INFO  DetailController:34 - showDetails called
+2025-07-08 20:17:34 INFO  KlientController:32 - showKlients called
+2025-07-08 20:19:29 INFO  KlientController:49 - changeKlient called with id: Klient{id=70, name='Боков Стас', phone='89158108458'}
+2025-07-08 20:19:29 INFO  KlientController:32 - showKlients called
+2025-07-08 20:19:45 INFO  DetailController:34 - showDetails called
+2025-07-08 20:20:16 INFO  DetailController:34 - showDetails called
+2025-07-08 20:22:00 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:09 INFO  DetailController:34 - showDetails called
+2025-07-08 20:22:12 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:16 INFO  DetailController:34 - showDetails called
+2025-07-08 20:22:27 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:35 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:35 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:36 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:36 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:36 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:36 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:37 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:37 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:37 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:37 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:37 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:37 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:37 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:37 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:38 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:38 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:38 INFO  KlientController:56 - deletetKlient called with id: Klient{id=76, name='null', phone='null'}
+2025-07-08 20:22:38 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:43 INFO  KlientController:32 - showKlients called
+2025-07-08 20:22:46 INFO  DetailController:34 - showDetails called
+2025-07-08 20:22:52 INFO  KlientController:32 - showKlients called
+2025-07-08 20:23:00 INFO  KlientController:56 - deletetKlient called with id: Klient{id=22, name='null', phone='null'}
+2025-07-08 20:23:00 INFO  KlientController:32 - showKlients called
+2025-07-08 20:23:10 INFO  KlientController:32 - showKlients called
+2025-07-08 20:23:13 INFO  KlientController:32 - showKlients called
+2025-07-08 20:25:04 INFO  KlientController:32 - showKlients called
+2025-07-08 20:27:42 INFO  KlientController:32 - showKlients called
+2025-07-08 20:33:27 INFO  KlientController:32 - showKlients called
+2025-07-08 20:33:36 INFO  KlientController:41 - addKlient called with id: Klient{id=null, name='gdsgsd', phone='342352'}
+2025-07-08 20:33:36 INFO  KlientController:32 - showKlients called
+2025-07-08 20:33:48 INFO  DetailController:34 - showDetails called
+2025-07-08 20:33:55 INFO  DetailController:51 - ADD DETAIL FROM CONTROLLER carID = 317
+2025-07-08 20:33:55 INFO  DetailController:34 - showDetails called
+2025-07-08 20:33:58 INFO  DetailController:34 - showDetails called
+2025-07-08 20:34:00 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:02 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:06 INFO  DetailController:34 - showDetails called
+2025-07-08 20:34:08 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:13 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:19 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:26 INFO  KlientController:32 - showKlients called
+2025-07-08 20:34:28 INFO  KlientController:56 - deletetKlient called with id: Klient{id=83, name='null', phone='null'}
+2025-07-08 20:34:28 INFO  KlientController:32 - showKlients called
+2025-07-08 20:35:01 INFO  DetailController:34 - showDetails called
+2025-07-08 20:35:25 INFO  KlientController:32 - showKlients called
+2025-07-08 20:35:28 INFO  KlientController:32 - showKlients called
+2025-07-08 20:37:29 INFO  KlientController:32 - showKlients called
+2025-07-08 20:37:34 INFO  KlientController:32 - showKlients called
+2025-07-08 20:37:36 INFO  KlientController:56 - deletetKlient called with id: Klient{id=83, name='null', phone='null'}
+2025-07-08 20:37:36 INFO  KlientController:32 - showKlients called
+2025-07-08 20:37:52 INFO  KlientController:32 - showKlients called
