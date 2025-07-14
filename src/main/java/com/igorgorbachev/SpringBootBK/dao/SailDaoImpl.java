@@ -30,8 +30,10 @@ public class SailDaoImpl implements SailDao {
     }
 
     @Override
-    public void deleteSail(Sail sail) {
-        entityManager.remove(entityManager.contains(sail) ? sail : entityManager.merge(sail));
+    public void deleteSail(Long id) {
+        entityManager.createQuery("DELETE FROM Sail WHERE id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
     }
 
     @Override
@@ -42,5 +44,12 @@ public class SailDaoImpl implements SailDao {
     @Override
     public Sail getSailById(Long id) {
         return entityManager.find(Sail.class, id);
+    }
+
+    @Override
+    public List<Sail> getListSailByKlient(Long id) {
+        return entityManager.createQuery("SELECT s from Sail s where s.klient.id = :id", Sail.class)
+                .setParameter("id",id)
+                .getResultList();
     }
 }

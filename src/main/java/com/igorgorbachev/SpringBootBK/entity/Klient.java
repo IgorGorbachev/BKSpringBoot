@@ -1,6 +1,7 @@
 package com.igorgorbachev.SpringBootBK.entity;
 
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,11 +28,19 @@ public class Klient {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "klient")
-    private List<Car> car = new ArrayList<>();
+//    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Sail> sails = new ArrayList<>();
+//
+//    public List<Sail> getSails() {
+//        return sails;
+//    }
+//
+//    public void setSails(List<Sail> sails) {
+//        this.sails = sails;
+//    }
 
-//    @OneToMany(mappedBy = "klient")
-//    private List<Sail> sails;
+    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Car> car = new ArrayList<>();
 
     public List<Car> getCar() {
         return car;

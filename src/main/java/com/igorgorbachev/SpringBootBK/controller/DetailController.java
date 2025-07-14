@@ -61,7 +61,7 @@ public class DetailController {
         detailForChange.setName(detail.getName());
         detailForChange.setOriginArticul(detail.getOriginArticul());
         detailForChange.setAnalogArticul(detail.getAnalogArticul());
-        detailService.changeDetail(detail);
+        detailService.changeDetail(detailForChange);
         return "redirect:/showDetails?id=" + carId;
     }
 

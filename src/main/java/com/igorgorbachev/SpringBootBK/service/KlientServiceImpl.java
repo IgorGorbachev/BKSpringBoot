@@ -44,7 +44,7 @@ public class KlientServiceImpl implements KlientService {
     @Transactional
     @Override
     public void deleteKlient(Klient klient) {
-        if (klient.getCar() != null && !klient.getCar().isEmpty()) {
+        if (klient.getCar() != null && klient.getCar().isEmpty()) {
             throw new IllegalStateException("Клиента нельзя удалить, так как у него есть автомобили.");
         } else  {
             klientDao.deleteKlient(klient);

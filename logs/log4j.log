@@ -2195,3 +2195,204 @@
 2025-07-08 20:37:36 INFO  KlientController:56 - deletetKlient called with id: Klient{id=83, name='null', phone='null'}
 2025-07-08 20:37:36 INFO  KlientController:32 - showKlients called
 2025-07-08 20:37:52 INFO  KlientController:32 - showKlients called
+2025-07-08 21:33:29 INFO  KlientController:32 - showKlients called
+2025-07-08 21:33:44 INFO  KlientController:32 - showKlients called
+2025-07-08 21:34:05 INFO  KlientController:32 - showKlients called
+2025-07-08 21:34:37 INFO  KlientController:32 - showKlients called
+2025-07-08 21:35:35 INFO  KlientController:32 - showKlients called
+2025-07-08 21:35:49 INFO  KlientController:32 - showKlients called
+2025-07-08 21:41:10 INFO  KlientController:32 - showKlients called
+2025-07-08 21:57:23 INFO  KlientController:32 - showKlients called
+2025-07-08 21:59:14 INFO  KlientController:32 - showKlients called
+2025-07-08 22:00:15 INFO  KlientController:32 - showKlients called
+2025-07-08 22:11:33 INFO  KlientController:32 - showKlients called
+2025-07-08 22:11:36 INFO  KlientController:32 - showKlients called
+2025-07-08 22:14:37 INFO  KlientController:32 - showKlients called
+2025-07-08 22:18:27 INFO  KlientController:32 - showKlients called
+2025-07-08 22:19:16 INFO  KlientController:32 - showKlients called
+2025-07-10 20:10:43 INFO  KlientController:32 - showKlients called
+2025-07-10 20:10:46 INFO  KlientController:32 - showKlients called
+2025-07-10 20:10:48 INFO  KlientController:32 - showKlients called
+2025-07-10 20:10:50 INFO  KlientController:32 - showKlients called
+2025-07-10 20:11:02 INFO  KlientController:32 - showKlients called
+2025-07-10 20:11:03 INFO  KlientController:32 - showKlients called
+2025-07-10 20:11:37 INFO  KlientController:32 - showKlients called
+2025-07-10 20:11:40 INFO  KlientController:32 - showKlients called
+2025-07-10 20:14:41 INFO  KlientController:32 - showKlients called
+2025-07-10 20:14:43 INFO  KlientController:32 - showKlients called
+2025-07-10 20:14:45 INFO  KlientController:32 - showKlients called
+2025-07-10 20:17:56 INFO  KlientController:32 - showKlients called
+2025-07-10 20:18:10 INFO  KlientController:32 - showKlients called
+2025-07-10 20:18:13 INFO  KlientController:32 - showKlients called
+2025-07-10 20:19:21 INFO  KlientController:32 - showKlients called
+2025-07-10 20:19:22 INFO  KlientController:32 - showKlients called
+2025-07-10 20:19:24 INFO  KlientController:32 - showKlients called
+2025-07-10 20:19:52 INFO  KlientController:32 - showKlients called
+2025-07-10 20:31:32 INFO  KlientController:32 - showKlients called
+2025-07-10 20:31:33 INFO  KlientController:32 - showKlients called
+2025-07-10 20:32:54 INFO  KlientController:32 - showKlients called
+2025-07-10 20:34:24 INFO  KlientController:32 - showKlients called
+2025-07-10 20:40:22 INFO  KlientController:32 - showKlients called
+2025-07-10 20:41:14 INFO  KlientController:32 - showKlients called
+2025-07-10 20:44:44 INFO  KlientController:32 - showKlients called
+2025-07-10 20:51:38 INFO  KlientController:32 - showKlients called
+2025-07-10 20:51:46 INFO  SailController:35 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='null', numberArticul='null', zakupka=null, nacenka=0.2, price=null, kolichestvo=0, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 20:55:30 INFO  KlientController:32 - showKlients called
+2025-07-10 20:55:39 INFO  SailController:35 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='null', numberArticul='null', zakupka=null, nacenka=0.2, price=null, kolichestvo=0, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 20:58:37 INFO  KlientController:32 - showKlients called
+2025-07-10 20:58:46 INFO  SailController:35 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 21:00:03 INFO  KlientController:32 - showKlients called
+2025-07-10 21:00:29 INFO  KlientController:32 - showKlients called
+2025-07-10 21:04:53 INFO  SailController:35 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='342', zakupka=1342.60, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 21:07:31 INFO  SailController:35 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Масло моторное Gazpromneft Diesel Premium 10W-40 API CI-4/SL, ACEA E7 (20 л)', numberArticul='2389900042', zakupka=1342.60, nacenka=0.2, price=null, kolichestvo=2, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 21:13:07 INFO  KlientController:32 - showKlients called
+2025-07-10 21:13:39 INFO  KlientController:32 - showKlients called
+2025-07-10 21:18:26 INFO  KlientController:32 - showKlients called
+2025-07-10 22:09:16 INFO  KlientController:32 - showKlients called
+2025-07-10 22:11:13 INFO  KlientController:32 - showKlients called
+2025-07-10 22:20:59 INFO  KlientController:32 - showKlients called
+2025-07-10 22:22:30 INFO  KlientController:32 - showKlients called
+2025-07-10 22:24:50 INFO  KlientController:32 - showKlients called
+2025-07-10 22:25:17 INFO  SailController:42 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='2389900042', zakupka=1000, nacenka=0.2, price=null, kolichestvo=3, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 22:25:30 INFO  KlientController:32 - showKlients called
+2025-07-10 22:25:32 INFO  KlientController:32 - showKlients called
+2025-07-10 22:27:16 INFO  KlientController:32 - showKlients called
+2025-07-10 22:29:29 INFO  KlientController:32 - showKlients called
+2025-07-10 22:30:20 INFO  SailController:42 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='', numberArticul='', zakupka=0, nacenka=0.2, price=null, kolichestvo=-1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 22:30:25 INFO  SailController:42 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='', numberArticul='', zakupka=0, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 22:35:20 INFO  KlientController:32 - showKlients called
+2025-07-10 22:39:43 INFO  KlientController:32 - showKlients called
+2025-07-10 22:39:46 INFO  KlientController:32 - showKlients called
+2025-07-10 22:39:48 INFO  KlientController:32 - showKlients called
+2025-07-10 22:39:52 INFO  KlientController:32 - showKlients called
+2025-07-10 22:39:54 INFO  DetailController:34 - showDetails called
+2025-07-10 22:39:56 INFO  KlientController:32 - showKlients called
+2025-07-10 22:41:56 INFO  KlientController:32 - showKlients called
+2025-07-10 22:41:58 INFO  KlientController:32 - showKlients called
+2025-07-10 22:42:01 INFO  KlientController:32 - showKlients called
+2025-07-10 22:42:55 INFO  KlientController:32 - showKlients called
+2025-07-10 22:43:46 INFO  KlientController:32 - showKlients called
+2025-07-10 22:51:14 INFO  KlientController:32 - showKlients called
+2025-07-10 22:51:16 INFO  KlientController:32 - showKlients called
+2025-07-10 22:51:33 INFO  KlientController:32 - showKlients called
+2025-07-10 22:51:43 INFO  KlientController:32 - showKlients called
+2025-07-10 22:51:45 INFO  KlientController:32 - showKlients called
+2025-07-10 22:52:24 INFO  SailController:43 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1342.60, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 22:52:57 INFO  SailController:43 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=241241.52, nacenka=0.2, price=null, kolichestvo=2, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 22:53:19 INFO  KlientController:32 - showKlients called
+2025-07-10 23:09:57 INFO  KlientController:37 - showKlients called
+2025-07-10 23:11:05 INFO  KlientController:37 - showKlients called
+2025-07-10 23:11:38 INFO  KlientController:37 - showKlients called
+2025-07-10 23:14:16 INFO  KlientController:37 - showKlients called
+2025-07-10 23:16:11 INFO  KlientController:37 - showKlients called
+2025-07-10 23:17:15 INFO  KlientController:37 - showKlients called
+2025-07-10 23:17:23 INFO  KlientController:37 - showKlients called
+2025-07-10 23:17:50 INFO  KlientController:37 - showKlients called
+2025-07-10 23:18:16 INFO  SailController:43 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Кабель спиральный EBS (3000 mm/max 4200 mm) 7-pin ISO 7638', numberArticul='4460087000', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-10 23:18:27 INFO  KlientController:37 - showKlients called
+2025-07-11 08:50:14 INFO  KlientController:37 - showKlients called
+2025-07-11 08:58:38 INFO  KlientController:37 - showKlients called
+2025-07-11 08:58:45 INFO  KlientController:37 - showKlients called
+2025-07-11 08:58:50 INFO  KlientController:37 - showKlients called
+2025-07-11 08:58:52 INFO  KlientController:37 - showKlients called
+2025-07-11 09:01:53 INFO  KlientController:37 - showKlients called
+2025-07-11 09:01:55 INFO  KlientController:37 - showKlients called
+2025-07-11 09:02:00 INFO  KlientController:37 - showKlients called
+2025-07-11 09:03:53 INFO  KlientController:37 - showKlients called
+2025-07-11 09:07:26 INFO  KlientController:37 - showKlients called
+2025-07-11 09:07:34 INFO  KlientController:37 - showKlients called
+2025-07-11 09:08:49 INFO  KlientController:37 - showKlients called
+2025-07-11 09:11:25 INFO  KlientController:37 - showKlients called
+2025-07-11 09:11:27 INFO  SailController:53 - deleteSailSail{id=null, toDay='null', nameDetail='null', numberArticul='null', zakupka=null, nacenka=0.2, price=null, kolichestvo=0, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:14:30 INFO  KlientController:37 - showKlients called
+2025-07-11 09:14:32 INFO  SailController:53 - deleteSailSail{id=8, toDay='null', nameDetail='null', numberArticul='null', zakupka=null, nacenka=0.2, price=null, kolichestvo=0, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:19:12 INFO  KlientController:37 - showKlients called
+2025-07-11 09:19:22 INFO  KlientController:37 - showKlients called
+2025-07-11 09:19:53 INFO  KlientController:37 - showKlients called
+2025-07-11 09:20:06 INFO  SailController:44 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1342.60, nacenka=0.2, price=null, kolichestvo=2, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:22:14 INFO  KlientController:37 - showKlients called
+2025-07-11 09:27:49 INFO  KlientController:37 - showKlients called
+2025-07-11 09:29:17 INFO  SailController:44 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G12+, готовый к применению, красный, канистра 5 кг. ()', numberArticul='M9812005', zakupka=802, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:30:00 INFO  SailController:44 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='M9811005', zakupka=754, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:30:37 INFO  KlientController:37 - showKlients called
+2025-07-11 09:30:46 INFO  KlientController:46 - addKlient called with id: Klient{id=null, name='Кирилл фш13', phone=''}
+2025-07-11 09:30:46 INFO  KlientController:37 - showKlients called
+2025-07-11 09:31:05 INFO  SailController:44 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Масло моторное Gazpromneft Diesel Premium 10W-40 API CI-4/SL, ACEA E7 (20 л)', numberArticul='2389900042', zakupka=4931, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 09:36:40 INFO  KlientController:37 - showKlients called
+2025-07-11 09:38:39 INFO  KlientController:37 - showKlients called
+2025-07-11 09:39:31 INFO  KlientController:37 - showKlients called
+2025-07-11 09:50:57 INFO  KlientController:37 - showKlients called
+2025-07-11 09:52:17 INFO  KlientController:37 - showKlients called
+2025-07-11 09:55:52 INFO  KlientController:37 - showKlients called
+2025-07-11 09:56:35 INFO  KlientController:37 - showKlients called
+2025-07-11 09:59:51 INFO  KlientController:37 - showKlients called
+2025-07-11 10:11:10 INFO  KlientController:37 - showKlients called
+2025-07-11 10:18:24 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000, nacenka=0.2, price=1200, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:19:06 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Масло моторное Gazpromneft Diesel Premium 10W-40 API CI-4/SL, ACEA E7 (20 л)', numberArticul='4460087000', zakupka=1342.60, nacenka=0.2, price=4000, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:19:11 INFO  KlientController:37 - showKlients called
+2025-07-11 10:19:53 INFO  KlientController:37 - showKlients called
+2025-07-11 10:20:31 INFO  KlientController:37 - showKlients called
+2025-07-11 10:20:46 INFO  KlientController:46 - addKlient called with id: Klient{id=null, name='Залетный', phone=''}
+2025-07-11 10:20:46 INFO  KlientController:37 - showKlients called
+2025-07-11 10:20:59 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=5000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:30:17 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:37:39 INFO  KlientController:37 - showKlients called
+2025-07-11 10:37:43 INFO  KlientController:37 - showKlients called
+2025-07-11 10:37:44 INFO  KlientController:37 - showKlients called
+2025-07-11 10:38:39 INFO  KlientController:37 - showKlients called
+2025-07-11 10:46:47 INFO  KlientController:37 - showKlients called
+2025-07-11 10:47:30 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:49:57 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:49:59 INFO  KlientController:37 - showKlients called
+2025-07-11 10:50:08 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1342.60, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:51:24 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:51:40 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:53:39 INFO  KlientController:37 - showKlients called
+2025-07-11 10:53:50 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:54:03 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:56:13 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:56:15 INFO  KlientController:37 - showKlients called
+2025-07-11 10:56:21 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:56:35 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:57:01 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 10:57:10 INFO  SailController:46 - Вызов метода addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='123123', zakupka=1000, nacenka=0.2, price=null, kolichestvo=1, summa=null, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-11 11:03:58 INFO  KlientController:37 - showKlients called
+2025-07-13 18:23:09 INFO  KlientController:37 - showKlients called
+2025-07-13 18:23:24 INFO  DetailController:34 - showDetails called
+2025-07-14 16:47:30 INFO  KlientController:37 - showKlients called
+2025-07-14 16:47:38 INFO  KlientController:37 - showKlients called
+2025-07-14 16:47:41 INFO  KlientController:37 - showKlients called
+2025-07-14 16:47:44 INFO  KlientController:37 - showKlients called
+2025-07-14 16:47:46 INFO  KlientController:37 - showKlients called
+2025-07-14 16:47:49 INFO  KlientController:37 - showKlients called
+2025-07-14 16:49:46 INFO  KlientController:37 - showKlients called
+2025-07-14 16:49:48 INFO  KlientController:37 - showKlients called
+2025-07-14 17:09:08 INFO  KlientController:37 - showKlients called
+2025-07-14 17:09:10 INFO  KlientController:37 - showKlients called
+2025-07-14 17:09:24 INFO  KlientController:37 - showKlients called
+2025-07-14 17:16:23 INFO  KlientController:37 - showKlients called
+2025-07-14 17:17:45 INFO  KlientController:37 - showKlients called
+2025-07-14 17:18:31 INFO  KlientController:37 - showKlients called
+2025-07-14 17:18:33 INFO  KlientController:37 - showKlients called
+2025-07-14 17:20:11 INFO  KlientController:37 - showKlients called
+2025-07-14 17:21:33 INFO  KlientController:37 - showKlients called
+2025-07-14 17:31:58 INFO  KlientController:37 - showKlients called
+2025-07-14 17:50:09 INFO  KlientController:37 - showKlients called
+2025-07-14 17:51:19 INFO  KlientController:37 - showKlients called
+2025-07-14 17:51:19 INFO  KlientController:37 - showKlients called
+2025-07-14 17:53:22 INFO  KlientController:37 - showKlients called
+2025-07-14 17:53:24 INFO  KlientController:37 - showKlients called
+2025-07-14 17:55:41 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:00:50 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:05:08 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:05:26 INFO  KlientController:37 - showKlients called
+2025-07-14 18:05:35 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:09:08 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:09:40 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Масло моторное Gazpromneft Diesel Premium 10W-40 API CI-4/SL, ACEA E7 (20 л)', numberArticul='44600870001', zakupka=1000, price=1200, kolichestvo=1, summa=1200, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:11:06 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Масло моторное Gazpromneft Diesel Premium 10W-40 API CI-4/SL, ACEA E7 (20 л)', numberArticul='2389900042', zakupka=1500, price=1800, kolichestvo=2, summa=3600, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:12:17 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='4460087000', zakupka=1343, price=1700, kolichestvo=2, summa=3400.00, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:19:40 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='213123', zakupka=5000, price=6000.00, kolichestvo=2, summa=12000.00, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:19:58 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Кабель спиральный EBS (3000 mm/max 4200 mm) 7-pin ISO 7638', numberArticul='fdgd', zakupka=1000, price=1200.00, kolichestvo=1, summa=1200.00, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:30:57 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='фывфвфв', numberArticul='123123', zakupka=1343, price=1700, kolichestvo=1, summa=1700.00, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:41:31 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='Антифриз MARSHALL G11, готовый к применению, зеленый, канистра 5 кг. ()', numberArticul='2389900042', zakupka=1645, price=2000.00, kolichestvo=2, summa=4000.00, nds=0.2, nalog=null, pribil=null, zarplata=null}
+2025-07-14 18:41:56 INFO  SailController:39 - addSail = Sail{id=null, toDay='null', nameDetail='фильтра воздушный', numberArticul='2389900042', zakupka=1000, price=1200.00, kolichestvo=1, summa=1200.00, nds=0.2, nalog=null, pribil=null, zarplata=null}

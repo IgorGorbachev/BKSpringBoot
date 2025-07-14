@@ -10,9 +10,11 @@ public interface SailDao {
 
     void changeSail(Sail sail);
 
-    void deleteSail(Sail sail);
+    void deleteSail(Long id);
 
     List<Sail> getAllSail();
 
     Sail getSailById(Long id);
+
+    List<Sail> getListSailByKlient(Long id);
 }
