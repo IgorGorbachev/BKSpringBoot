@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${klient.name}">Имя клиента </title>
+    <title th:text="${klient.name}">Имя клиента</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Добавляем иконки Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
         body {
             margin: 0;
@@ -17,7 +19,7 @@
             left: 0;
             z-index: 100;
             width: 10%;
-            max-width: 140px;/* сузили до 140px */
+            max-width: 140px;
             background-color: #343a40;
             padding: 90px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
@@ -28,12 +30,37 @@
             width: 93.5%;
             transition: margin-left 0.3s ease;
             position: relative;
-            top: 0
+            top: 0;
         }
         .nav-link {
             color: #fff;
-            font-size: 14px; /* опционально — уменьшаем текст */
+            font-size: 14px;
             white-space: nowrap;
+        }
+        .view-mode {
+            display: inline-block;
+        }
+        .edit-mode {
+            display: none;
+            width: 100%;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .table-dark {
+            background-color: #343a40;
+        }
+        .table-dark th, .table-dark td {
+            border-color: #454d55;
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+        .btn-group-sm > .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
         }
     </style>
 </head>
@@ -43,91 +70,212 @@
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="http://localhost:8080/">
-                    Все Клиенты
-                </a>
+                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Продажи</a>-->
-<!--            </li>-->
         </ul>
     </div>
 </nav>
 
 <!-- Основной контент -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-<div>
-    <table class="table table-dark table-hover">
-        <thead>
-        <tr>
-            <td colspan="6" th:text="'Клиент: ' + ${klient.name}"></td>
-        </tr>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Имя авто</th>
-            <th scope="col">вин</th>
-            <th scope="col">Показать запчасти</th>
-            <th scope="col">Изменить</th>
-            <th scope="col">Удалить</th>
-        </tr>
-        </thead>
-        <tbody>
+    <!-- Кнопка "Назад" -->
+    <div class="back-button">
+        <a href="/" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Назад к списку клиентов
+        </a>
+    </div>
 
-        <tr th:each="car : ${carList}">
-            <th scope="row" th:text="${car.id}"></th>
-            <td th:text="${car.name}"></td>
-            <td th:text="${car.vin}"></td>
-            <td>
-                <a th:href="@{/showDetails(id=${car.id})}">Показать запчасти</a>
-            </td>
+    <div class="card mb-4">
+        <div class="card-header" th:text="'Клиент: ' + ${klient.name}"></div>
+        <div class="card-body">
+            <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя авто</th>
+                    <th scope="col">VIN</th>
+                    <th scope="col">Запчасти</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="car : ${carList}">
+                    <th scope="row" th:text="${car.id}"></th>
+                    <td>
+                        <span class="view-mode name-view" th:text="${car.name}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="name" th:value="${car.name}">
+                    </td>
+                    <td>
+                        <span class="view-mode vin-view" th:text="${car.vin}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="vin" th:value="${car.vin}">
+                    </td>
+                    <td>
+                        <a th:href="@{/showDetails(id=${car.id})}" class="btn btn-sm btn-info">Показать</a>
+                    </td>
+                    <td class="action-buttons">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-primary edit-btn">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-success save-btn" style="display:none;"
+                                    th:attr="data-id=${car.id}, data-klient-id=${klient.id}">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning cancel-btn" style="display:none;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger delete-btn"
+                                    th:attr="data-id=${car.id}, data-klient-id=${klient.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-
-            <td>
-                <form th:action="@{/changedCar}" method="post">
-                    <input type="hidden" name="klientId" th:value="${klient.id}">
-                    <input type="hidden" name="carId" th:value="${car.id}">-->
-                    <input type="text" name="name" th:value="${car.name}">
-                    <input type="text" name="vin" th:value="${car.vin}">
-                    <button type="submit">Change</button>
-                </form>
-            </td>
-
-            <td>
-                <form th:action="@{/deleteCar}" method="post">
-                    <input type="hidden" name="klientId" th:value="${klient.id}">
-                    <input type="hidden" name="carId" th:value="${car.id}">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-    <div>
-        <h4>Добавить авто клиенту</h4>
-        <form th:action="@{/addCar}" method="post">
-            <input type="hidden" name="id" th:value="${klient.id}">
-            <label>Название автомобиля:</label>
-            <input type="text" name="name">
-            <label>VIN:</label>
-            <input type="text" name="vin">
-            <button type="submit">Add</button>
-        </form>
+    <div class="card">
+        <div class="card-header">Добавить авто клиенту</div>
+        <div class="card-body">
+            <form th:action="@{/addCar}" method="post" class="row g-3">
+                <input type="hidden" name="klientId" th:value="${klient.id}">
+                <div class="col-md-4">
+                    <label class="form-label">Название автомобиля:</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">VIN:</label>
+                    <input type="text" name="vin" class="form-control" required>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
     </div>
 </main>
-</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Функции для редактирования строк
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Сохраняем исходные значения
+                row.dataset.originalName = row.querySelector('input[name="name"]').value;
+                row.dataset.originalVin = row.querySelector('input[name="vin"]').value;
+
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+                row.querySelectorAll('.edit-mode').forEach(el => {
+                    el.style.display = 'block';
+                    el.style.width = '100%';
+                });
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'inline-block';
+                row.querySelector('.cancel-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка отмены изменений
+        document.querySelectorAll('.cancel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Восстанавливаем исходные значения
+                row.querySelector('input[name="name"]').value = row.dataset.originalName;
+                row.querySelector('input[name="vin"]').value = row.dataset.originalVin;
+
+                // Обновляем отображаемые значения
+                row.querySelector('.name-view').textContent = row.dataset.originalName;
+                row.querySelector('.vin-view').textContent = row.dataset.originalVin;
+
+                // Возвращаем в режим просмотра
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                row.querySelector('.edit-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'inline-block';
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка сохранения изменений
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const carId = this.getAttribute('data-id');
+                const klientId = this.getAttribute('data-klient-id');
+                const formData = new FormData();
+
+                formData.append('carId', carId);
+                formData.append('klientId', klientId);
+                row.querySelectorAll('.edit-mode').forEach(input => {
+                    formData.append(input.name, input.value);
+                    if(input.name === 'name') {
+                        row.querySelector('.name-view').textContent = input.value;
+                    } else if(input.name === 'vin') {
+                        row.querySelector('.vin-view').textContent = input.value;
+                    }
+                });
+
+                fetch('/changedCar', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (response.ok) {
+                        row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                        row.querySelector('.edit-btn').style.display = 'inline-block';
+                        row.querySelector('.delete-btn').style.display = 'inline-block';
+                        this.style.display = 'none';
+                        row.querySelector('.cancel-btn').style.display = 'none';
+                    } else {
+                        alert('Ошибка при сохранении изменений');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Ошибка при сохранении изменений');
+                });
+            });
+        });
+
+        // Обработка удаления автомобиля
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Вы действительно хотите удалить этот автомобиль?')) {
+                    const carId = this.getAttribute('data-id');
+                    const klientId = this.getAttribute('data-klient-id');
+                    const formData = new FormData();
+
+                    formData.append('carId', carId);
+                    formData.append('klientId', klientId);
+
+                    fetch('/deleteCar', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            window.location.href = '/showCars?id=' + klientId;
+                        } else {
+                            alert('Ошибка при удалении автомобиля');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Ошибка при удалении автомобиля');
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
-
-
-
-
-
-

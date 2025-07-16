@@ -1,180 +1,319 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить продажу</title>
+    <title>Продажи</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
         }
+
         .sidebar {
             position: fixed;
             top: 0;
             bottom: 0;
             left: 0;
             z-index: 100;
-            width: 10%;
-            max-width: 140px;
+            width: 140px;
             background-color: #343a40;
             padding: 90px 0 0;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         }
+
         .content {
-            margin-left: 5%;
+            margin-left: 140px;
             padding: 20px;
-            width: 93.5%;
-            transition: margin-left 0.3s ease;
-            position: relative;
-            top: 0;
         }
+
         .nav-link {
             color: #fff;
             font-size: 14px;
-            white-space: nowrap;
         }
+
         .form-container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
             background-color: #f8f9fa;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .form-group {
-            margin-bottom: 15px;
+
+        .edit-mode {
+            width: 80px;
+            display: none;
+        }
+
+        .view-mode {
+            min-width: 80px;
+            display: inline-block;
+        }
+
+        .action-buttons {
+            white-space: nowrap;
+        }
+
+        .status-neoplachen {
+            background-color: white;
+        }
+
+        .status-nalichnie {
+            background-color: #3a7bd5;
+        }
+
+        .status-terminal {
+            background-color: #FFA500;
+        }
+        .status-cell-v-puti {
+            background-color: #ffebee;  /* Светло-красный */
+        }
+        .status-cell-pribil {
+            background-color: #fffde7;  /* Светло-желтый */
+        }
+        .status-cell-vydan {
+            background-color: #e8f5e9;  /* Светло-зеленый */
+        }
+
+        /* Для красоты добавим скругленные углы */
+        .table td {
+            border-radius: 4px;
+        }
+        .salary-sidebar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 140px;
+            background-color: #343a40;
+            padding: 15px;
+            color: white;
+            border-top: 1px solid #495057;
+        }
+
+        .salary-period {
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #adb5bd;
+        }
+
+        .salary-amount {
+            font-size: 14px;
+            font-weight: bold;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-<!-- Боковое меню -->
-<nav class="col-md-1 d-none d-md-block bg-dark sidebar">
+<nav class="sidebar">
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="http://localhost:8080/">
-                    Все Клиенты
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/showSails">Продажи</a>
-            </li>
+            <li class="nav-item"><a class="nav-link active" href="/">Все Клиенты</a></li>
+            <li class="nav-item"><a class="nav-link" href="/allCars">Все Автомобили</a></li>
+            <li class="nav-item"><a class="nav-link" href="/allDetails">Все Детали</a></li>
+            <li class="nav-item"><a class="nav-link" href="/showSails">Продажи</a></li>
         </ul>
+
+        <!-- Добавляем блок с зарплатой внизу сайдбара -->
+        <div class="salary-sidebar">
+            <div class="salary-period">
+                <small th:text="${'Неделя: ' + #temporals.format(startOfWeek, 'dd.MM') + '-' + #temporals.format(endOfWeek, 'dd.MM')}"></small>
+            </div>
+            <div class="salary-amount" th:text="${'Зарплата: ' + #numbers.formatDecimal(weeklySalary, 0, 'COMMA', 2, 'POINT') + ' ₽'}"></div>
+        </div>
     </div>
 </nav>
 
 <!-- Основной контент -->
-<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-    <div>
-        <h4>Добавить продажу</h4>
-        <form th:action="@{/addSail}" method="post">
-            <label>Название</label>
-            <input type="text" name="nameDetail" required>
-            <label>Артикул</label>
-            <input type="text" name="numberArticul" required>
-            <label>Закупка</label>
-            <input type="number" name="zakupka" id="zakupka" required>
-            <label>Наценка</label>
-            <input type="number" name="nacenka" id="nacenka" step="0.01" value="0.2" required>
-            <label>Цена</label>
-            <input type="number" name="price" id="price" required>
-            <label>Кол-во</label>
-            <input type="number" name="kolichestvo" id="kolichestvo" value="1" required>
-            <label>Сумма</label>
-            <input type="number" name="summa" id="summa" required>
-            <button type="submit" class="btn btn-primary">Добавить</button>
+<main class="content">
+    <div class="card mb-4">
+        <div class="card-header">Добавить продажу</div>
+        <div class="card-body">
+            <form th:action="@{/addSail}" method="post" class="row g-2">
+                <div class="col-md-2">
+                    <label class="form-label">Клиент</label>
+                    <select class="form-select" name="klientId" id="klientSelect" required>
+                        <option value="">Выберите клиента</option>
+                        <option th:each="klient : ${klientList}"
+                                th:value="${klient.id}"
+                                th:text="${klient.name}"
+                                th:selected="${lastSelectedKlientId != null and lastSelectedKlientId == klient.id}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">Название</label>
+                    <input type="text" class="form-control" name="nameDetail" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Артикул</label>
+                    <input type="text" class="form-control" name="numberArticul" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Закупка</label>
+                    <input type="number" class="form-control" name="zakupka" id="zakupka" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Наценка (%)</label>
+                    <input type="number" class="form-control" name="nacenka" id="nacenka" value="20" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Цена</label>
+                    <input type="number" class="form-control" name="price" id="price" required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Кол-во</label>
+                    <input type="number" class="form-control" name="kolichestvo" id="kolichestvo" value="1" min="1"
+                           required>
+                </div>
+                <div class="col-md-1">
+                    <label class="form-label">Сумма</label>
+                    <input type="number" class="form-control" name="summa" id="summa" readonly>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
 
-        </form>
-    </div>
-    <br>
-    <div>
-        <table class="table table-dark table-hover">
-            <thead>
+        <div class="card mb-4">
+            <div class="card-header">Фильтр продаж</div>
+            <div class="card-body">
+                <form th:action="@{/showSails}" method="get" class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Клиент</label>
+                        <select name="klientFilter" class="form-select">
+                            <option value="">Все клиенты</option>
+                            <option th:each="klient : ${klientList}"
+                                    th:value="${klient.id}"
+                                    th:text="${klient.name}"
+                                    th:selected="${klientFilter == klient.id}"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">Применить фильтр</button>
+                        <a th:href="@{/showSails}" class="btn btn-secondary ms-2">Сбросить</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Дата</th>
-                <th scope="col">Название</th>
-                <th scope="col">Артикул</th>
-                <th scope="col">Закупка</th>
-                <th scope="col">Цена</th>
-                <th scope="col">Кол-во</th>
-                <th scope="col">Сумма</th>
-<!--                <th scope="col">НДС</th>-->
-<!--                <th scope="col">Налог</th>-->
-<!--                <th scope="col">Прибыль</th>-->
-<!--                <th scope="col">Зарплата</th>-->
-                <th scope="col">Удалить</th>
+                <th>#</th>
+                <th>Дата</th>
+                <th>Статус</th>
+                <th>Оплата</th>
+                <th>Клиент</th>
+                <th>Название</th>
+                <th>Артикул</th>
+                <th>Закупка</th>
+                <th>Цена</th>
+                <th>Кол-во</th>
+                <th>Сумма</th>
+                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="sail : ${sailList}">
-                <th scope="row" th:text="${sail.id}"></th>
+            <tr th:each="sail : ${sailList}"
+                th:class="${sail.oplata == 'Наличные'} ? 'status-nalichnie' :
+              (${sail.oplata == 'Терминал'} ? 'status-terminal' : 'status-neoplachen')">
+                <td th:text="${sail.id}"></td>
                 <td th:text="${sail.toDay}"></td>
-                <td th:text="${sail.nameDetail}"></td>
-                <td th:text="${sail.numberArticul}"></td>
-                <td th:text="${sail.zakupka}"></td>
-                <td th:text="${sail.price}"></td>
-                <td th:text="${sail.kolichestvo}"></td>
-                <td th:text="${sail.summa}"></td>
-<!--                <td th:text="${sail.nds}"></td>-->
-<!--                <td th:text="${sail.nalog}"></td>-->
-<!--                <td th:text="${sail.pribil}"></td>-->
-<!--                <td th:text="${sail.zarplata}"></td>-->
+
+
+                <td th:class="${sail.status == 'В пути'} ? 'status-cell-v-puti' :
+          (${sail.status == 'Приехал, НЕ выдан'} ? 'status-cell-pribil' :
+          'status-cell-vydan')">
+
+                    <span class="view-mode" th:text="${sail.status}"></span>
+                    <select class="edit-mode form-control form-control-sm" name="status">
+                        <option value="В пути">В пути</option>
+                        <option value="Приехал, НЕ выдан">Приехал, НЕ выдан</option>
+                        <option value="Товар выдан">Товар выдан</option>
+                    </select>
+                </td>
+
                 <td>
-                    <form th:action="@{/changeSail}" method="post">
-                        <input type="hidden" name="id" th:value="${sail.id}">
-                        <input type="text" name="nameDetail" th:value="${sail.nameDetail}">
-                        <input type="text" name="numberArticul" th:value="${sail.numberArticul}">
-                        <input type="text" name="zakupka" th:value="${sail.zakupka}">
-                        <input type="text" name="price" th:value="${sail.price}">
-                        <input type="text" name="kolichestvo" th:value="${sail.kolichestvo}">
-                        <button type="submit">Изменить</button>
-                    </form>
+                    <span class="view-mode" th:text="${sail.oplata}"></span>
+                    <select class="edit-mode form-control form-control-sm" name="oplata">
+                        <option value="Не оплачен">Не оплачен</option>
+                        <option value="Наличные">Наличные</option>
+                        <option value="Терминал">Терминал</option>
+                        <option value="Безнал">Безнал</option>
+                    </select>
+                </td>
+
+                <td>
+                    <span class="view-mode" th:text="${sail.klient?.name}"></span>
+                    <select class="edit-mode form-control form-control-sm" name="klientId">
+                        <option th:each="klient : ${klientList}"
+                                th:value="${klient.id}"
+                                th:text="${klient.name}"
+                                th:selected="${sail.klient != null and klient.id == sail.klient.id}"></option>
+                    </select>
                 </td>
                 <td>
-                    <form th:action="@{/deleteSail}" method="post">
-                        <input type="hidden" name="id" th:value="${sail.id}">
-                        <button type="submit">Delete</button>
-                    </form>
+                    <span class="view-mode" th:text="${sail.nameDetail}"></span>
+                    <input type="text" class="edit-mode form-control form-control-sm" name="nameDetail"
+                           th:value="${sail.nameDetail}">
+                </td>
+                <td>
+                    <span class="view-mode" th:text="${sail.numberArticul}"></span>
+                    <input type="text" class="edit-mode form-control form-control-sm" name="numberArticul"
+                           th:value="${sail.numberArticul}">
+                </td>
+                <td>
+                    <span class="view-mode" th:text="${#numbers.formatInteger(sail.zakupka, 0)}"></span>
+                    <input type="number" class="edit-mode form-control form-control-sm" name="zakupka"
+                           th:value="${sail.zakupka}">
+                </td>
+                <td>
+                    <span class="view-mode" th:text="${#numbers.formatInteger(sail.price, 0)}"></span>
+                    <input type="number" class="edit-mode form-control form-control-sm" name="price"
+                           th:value="${sail.price}">
+                </td>
+                <td>
+                    <span class="view-mode" th:text="${sail.kolichestvo}"></span>
+                    <input type="number" class="edit-mode form-control form-control-sm" name="kolichestvo"
+                           th:value="${sail.kolichestvo}">
+                </td>
+                <td th:text="${#numbers.formatInteger(sail.summa, 0)}"></td>
+                <td class="action-buttons">
+                    <div class="btn-group btn-group-sm">
+                        <button type="button" class="btn btn-primary edit-btn">Изменить</button>
+                        <button type="button" class="btn btn-success save-btn" style="display:none;"
+                                th:attr="data-id=${sail.id}">Сохранить
+                        </button>
+                        <form class="d-inline" th:action="@{/deleteSail}" method="post">
+                            <input type="hidden" name="id" th:value="${sail.id}">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
+                    </div>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const zakupkaInput = document.querySelector('input[name="zakupka"]');
-            const kolichestvoInput = document.querySelector('input[name="kolichestvo"]');
+        document.addEventListener('DOMContentLoaded', function () {
+            // ========== Функции для формы добавления ==========
+            const zakupkaInput = document.getElementById('zakupka');
+            const kolichestvoInput = document.getElementById('kolichestvo');
             const priceInput = document.getElementById('price');
             const summaInput = document.getElementById('summa');
-            const nacenkaInput = document.querySelector('input[name="nacenka"]');
-
-            let isPriceManuallyChanged = false;
+            const nacenkaInput = document.getElementById('nacenka');
 
             function roundUpToTen(value) {
                 return Math.ceil(value / 10) * 10;
             }
 
             function calculatePrices() {
-                if (isPriceManuallyChanged) return;
-
                 const zakupka = parseFloat(zakupkaInput.value) || 0;
-                const kolichestvo = parseInt(kolichestvoInput.value) || 0;
-                const nacenka = parseFloat(nacenkaInput.value) || 0.2;
+                const nacenka = (parseFloat(nacenkaInput.value) || 0) / 100;
 
-                // Цена = закупка + наценка
                 const price = roundUpToTen(zakupka * (1 + nacenka));
                 priceInput.value = price.toFixed(0);
-
                 calculateSumma();
             }
 
@@ -185,23 +324,61 @@
                 summaInput.value = summa.toFixed(2);
             }
 
-            // Отслеживаем ручное изменение цены
-            priceInput.addEventListener('input', function() {
-                isPriceManuallyChanged = true;
-                calculateSumma();
-            });
-
-            // Отслеживаем изменения в других полях
             zakupkaInput.addEventListener('input', calculatePrices);
             kolichestvoInput.addEventListener('input', calculateSumma);
             nacenkaInput.addEventListener('input', calculatePrices);
+            priceInput.addEventListener('input', calculateSumma);
 
-            // Инициализируем расчет при загрузке
-            calculatePrices();
+            // ========== Функции для редактирования строк ==========
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+                    row.querySelectorAll('.edit-mode').forEach(el => {
+                        el.style.display = 'block';
+                        el.style.width = '80px';
+                    });
+                    this.style.display = 'none';
+                    row.querySelector('.save-btn').style.display = 'inline-block';
+                });
+            });
+
+            document.querySelectorAll('.save-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const row = this.closest('tr');
+                    const id = this.getAttribute('data-id');
+                    const formData = new FormData();
+
+                    formData.append('id', id);
+                    row.querySelectorAll('.edit-mode').forEach(input => {
+                        formData.append(input.name, input.value);
+                        row.querySelector(`span.view-mode`).textContent = input.value;
+                    });
+
+                    fetch('/changeSail', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                            row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                            row.querySelector('.edit-btn').style.display = 'inline-block';
+                            this.style.display = 'none';
+                            location.reload(); // Перезагружаем страницу для обновления суммы
+                        } else {
+                            alert('Ошибка при сохранении изменений');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Ошибка при сохранении изменений');
+                    });
+                });
+            });
         });
+
     </script>
+</main>
 
-
-    </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

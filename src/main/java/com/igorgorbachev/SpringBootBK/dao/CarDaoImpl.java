@@ -30,8 +30,11 @@ public class CarDaoImpl implements CarDao{
     }
 
     @Override
-    public void deletCar(Car car) {
-        entityManager.remove(entityManager.contains(car) ? car : entityManager.merge(car));
+    public void deleteCar(Long carId) {
+        Car car = entityManager.find(Car.class, carId);
+        if (car != null) {
+            entityManager.remove(car);
+        }
     }
     @Override
     public List<Car> getListCarsById(Long id) {

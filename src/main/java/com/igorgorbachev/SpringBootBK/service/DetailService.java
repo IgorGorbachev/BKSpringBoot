@@ -3,18 +3,11 @@ package com.igorgorbachev.SpringBootBK.service;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
 
 import java.util.List;
-
 public interface DetailService {
-
-    void addDetail(Detail detail);
-
-    void changeDetail(Detail detail);
-
-    List<Detail> getAllDetail();
-
-    void deleteDetail(Detail detail);
-
-    Detail getDetailFromBD(Long id);
-
-    List<Detail> getDetailByCarId(Long id);
+    void addDetailToCar(Detail detail, Long carId);
+    void updateDetail(Long detailId, Detail detail);
+    List<Detail> getAllSortedDetails();
+    void deleteDetail(Long detailId);
+    Detail getDetailById(Long id);
+    List<Detail> getSortedDetailsByCarId(Long carId);
 }

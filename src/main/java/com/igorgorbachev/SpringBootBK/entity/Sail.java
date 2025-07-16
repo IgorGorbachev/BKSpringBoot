@@ -3,9 +3,13 @@ package com.igorgorbachev.SpringBootBK.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
@@ -22,6 +26,28 @@ public class Sail {
 
     @Column(name = "data")
     private String toDay;
+
+    @Column(name = "status")
+    private String status = "В пути";
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Column(name = "oplata")
+    private String oplata = "не оплачен";
+
+    public String getOplata() {
+        return oplata;
+    }
+
+    public void setOplata(String oplata) {
+        this.oplata = oplata;
+    }
 
     @Column(name = "name_detail")
     private String nameDetail;
@@ -53,17 +79,18 @@ public class Sail {
     @Column(name = "zarplata")
     private BigDecimal zarplata;
 
-//    @ManyToOne
-//    @JoinColumn(name = "klient_id")
-//    private Klient klient;
-//
-//    public Klient getKlient() {
-//        return klient;
-//    }
-//
-//    public void setKlient(Klient klient) {
-//        this.klient = klient;
-//    }
+
+    @ManyToOne
+    @JoinColumn(name = "klient_id")
+    private Klient klient;
+
+    public Klient getKlient() {
+        return klient;
+    }
+
+    public void setKlient(Klient klient) {
+        this.klient = klient;
+    }
 
     public Long getId() {
         return id;

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${car.name}">Автомобиль </title>
+    <title th:text="${car.name}">Автомобиль</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Добавляем иконки Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
         body {
             margin: 0;
@@ -16,7 +19,7 @@
             left: 0;
             z-index: 100;
             width: 10%;
-            max-width:140px;/* сузили до 140px */
+            max-width: 140px;
             background-color: #343a40;
             padding: 90px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
@@ -27,12 +30,49 @@
             width: 93.5%;
             transition: margin-left 0.3s ease;
             position: relative;
-            top: 0
+            top: 0;
         }
         .nav-link {
             color: #fff;
-            font-size: 14px; /* опционально — уменьшаем текст */
+            font-size: 14px;
             white-space: nowrap;
+        }
+        .view-mode {
+            display: inline-block;
+        }
+        .edit-mode {
+            display: none;
+            width: 100%;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .table-dark {
+            background-color: #343a40;
+        }
+        .table-dark th, .table-dark td {
+            border-color: #454d55;
+        }
+        .back-button {
+            margin-bottom: 20px;
+        }
+        .sort-buttons {
+            margin-bottom: 20px;
+        }
+        .btn-group-sm > .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+        .car-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .vin-code {
+            font-size: 0.9rem;
+            color: #adb5bd;
         }
     </style>
 </head>
@@ -42,115 +82,258 @@
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="http://localhost:8080/">
-                    Все Клиенты
-                </a>
+                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>
             </li>
-
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/allDetails">Все детали</a>
+                <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>
             </li>
-<!--            <li class="nav-item">-->
-<!--                <a class="nav-link" href="#">Продажи</a>-->
-<!--            </li>-->
         </ul>
     </div>
 </nav>
 
 <!-- Основной контент -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-<body>
-<div>
+    <!-- Кнопка "Назад" -->
+    <div class="back-button">
+        <a th:href="@{/showCars(id=${car.klient.id})}" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Назад к автомобилям
+        </a>
+    </div>
+
     <!-- Кнопки сортировки -->
-    <div style="margin-bottom: 20px;">
+    <div class="sort-buttons">
         <button class="btn btn-primary" onclick="sortDetails('name')">Сортировать по названию</button>
         <button class="btn btn-secondary" onclick="sortDetails('id')">Сортировать по ID</button>
     </div>
-    <div>
-        <h4>Добавить деталь</h4>
-        <form th:action="@{/addDetail}" method="post">
-            <input type="hidden" name="id" th:value="${car.id}">
-            <label>Название детали:</label>
-            <input type="text" name="name">
-            <label>Комментарий:</label>
-            <input type="text" name="originArticul">
-            <label>Артикул:</label>
-            <input type="text" name="analogArticul">
-            <button type="submit">Add</button>
-        </form>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="car-title">
+                <span th:text="'Автомобиль: ' + ${car.name}"></span>
+                <span th:text="'VIN: ' + ${car.vin}"></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название детали</th>
+                    <th scope="col">Комментарий</th>
+                    <th scope="col">Артикул</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="detail : ${detailList}">
+                    <th scope="row" th:text="${detail.id}"></th>
+                    <td>
+                        <span class="view-mode name-view" th:text="${detail.name}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="name" th:value="${detail.name}">
+                    </td>
+                    <td>
+                        <span class="view-mode origin-view" th:text="${detail.originArticul}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="originArticul" th:value="${detail.originArticul}">
+                    </td>
+                    <td>
+                        <span class="view-mode analog-view" th:text="${detail.analogArticul}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="analogArticul" th:value="${detail.analogArticul}">
+                    </td>
+                    <td class="action-buttons">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-primary edit-btn">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-success save-btn" style="display:none;"
+                                    th:attr="data-id=${detail.id}, data-car-id=${car.id}">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning cancel-btn" style="display:none;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger delete-btn"
+                                    th:attr="data-id=${detail.id}, data-car-id=${car.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <script>
-        function sortDetails(criteria) {
-            // Получаем массив строк таблицы (пропускаем заголовок)
-            const rows = Array.from(document.querySelectorAll("tbody tr")).slice(1);
 
-            // Сортируем строки
-            rows.sort((a, b) => {
-                let valA, valB;
-
-                if (criteria === 'name') {
-                    valA = a.cells[1].textContent.trim().toLowerCase(); // Название детали
-                    valB = b.cells[1].textContent.trim().toLowerCase();
-                } else if (criteria === 'id') {
-                    valA = parseInt(a.cells[0].textContent.trim()); // ID детали
-                    valB = parseInt(b.cells[0].textContent.trim());
-                }
-
-                return valA > valB ? 1 : -1;
-            });
-
-            // Перерисовываем таблицу
-            const tbody = document.querySelector("tbody");
-            rows.forEach(row => tbody.appendChild(row));
-        }
-    </script>
-    <!-- Таблица деталей -->
-    <table class="table table-dark table-hover">
-        <thead>
-        <tr>
-            <td colspan="6" th:text="'Авто: ' + ${car.name}"></td>
-        </tr>
-        <tr>
-            <th scope="col">деталь №</th>
-            <th scope="col">Название детали</th>
-            <th scope="col">Комментарий</th>
-            <th scope="col">Артикул</th>
-            <th scope="col">Изменить деталь</th>
-            <th scope="col">Удалить</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="detail : ${detailList}">
-            <th scope="row" th:text="${detail.id}"></th>
-            <td th:text="${detail.name}"></td>
-            <td th:text="${detail.originArticul}"></td>
-            <td th:text="${detail.analogArticul}"></td>
-
-            <td>
-                <form th:action="@{/changeDetail}" method="post">
-                    <input type="hidden" name="carId" th:value="${car.id}">
-                    <input type="hidden" name="detailId" th:value="${detail.id}">
-                    <input type="text" name="name" th:value="${detail.name}">
-                    <input type="text" name="originArticul" th:value="${detail.originArticul}">
-                    <input type="text" name="analogArticul" th:value="${detail.analogArticul}">
-                    <button type="submit">Changed</button>
-                </form>
-            </td>
-
-            <td>
-                <form th:action="@{/deleteDetail}" method="post">
-                    <input type="hidden" name="carId" th:value="${car.id}">
-                    <input type="hidden" name="detailId" th:value="${detail.id}">
-                    <button type="submit">Delete</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="card">
+        <div class="card-header">Добавить деталь</div>
+        <div class="card-body">
+            <form th:action="@{/addDetail}" method="post" class="row g-3">
+                <input type="hidden" name="carId" th:value="${car.id}">
+                <div class="col-md-3">
+                    <label class="form-label">Название детали:</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Комментарий:</label>
+                    <input type="text" name="originArticul" class="form-control">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Артикул:</label>
+                    <input type="text" name="analogArticul" class="form-control">
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Функции для редактирования строк
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Сохраняем исходные значения
+                row.dataset.originalName = row.querySelector('input[name="name"]').value;
+                row.dataset.originalOrigin = row.querySelector('input[name="originArticul"]').value;
+                row.dataset.originalAnalog = row.querySelector('input[name="analogArticul"]').value;
+
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+                row.querySelectorAll('.edit-mode').forEach(el => {
+                    el.style.display = 'block';
+                    el.style.width = '100%';
+                });
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'inline-block';
+                row.querySelector('.cancel-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка отмены изменений
+        document.querySelectorAll('.cancel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Восстанавливаем исходные значения
+                row.querySelector('input[name="name"]').value = row.dataset.originalName;
+                row.querySelector('input[name="originArticul"]').value = row.dataset.originalOrigin;
+                row.querySelector('input[name="analogArticul"]').value = row.dataset.originalAnalog;
+
+                // Обновляем отображаемые значения
+                row.querySelector('.name-view').textContent = row.dataset.originalName;
+                row.querySelector('.origin-view').textContent = row.dataset.originalOrigin;
+                row.querySelector('.analog-view').textContent = row.dataset.originalAnalog;
+
+                // Возвращаем в режим просмотра
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                row.querySelector('.edit-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'inline-block';
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка сохранения изменений
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const detailId = this.getAttribute('data-id');
+                const carId = this.getAttribute('data-car-id');
+                const formData = new FormData();
+
+                formData.append('detailId', detailId);
+                formData.append('carId', carId);
+                row.querySelectorAll('.edit-mode').forEach(input => {
+                    formData.append(input.name, input.value);
+                    if(input.name === 'name') {
+                        row.querySelector('.name-view').textContent = input.value;
+                    } else if(input.name === 'originArticul') {
+                        row.querySelector('.origin-view').textContent = input.value;
+                    } else if(input.name === 'analogArticul') {
+                        row.querySelector('.analog-view').textContent = input.value;
+                    }
+                });
+
+                fetch('/changeDetail', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (response.ok) {
+                        row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                        row.querySelector('.edit-btn').style.display = 'inline-block';
+                        row.querySelector('.delete-btn').style.display = 'inline-block';
+                        this.style.display = 'none';
+                        row.querySelector('.cancel-btn').style.display = 'none';
+                    } else {
+                        alert('Ошибка при сохранении изменений');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Ошибка при сохранении изменений');
+                });
+            });
+        });
+
+        // Обработка удаления детали
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Вы действительно хотите удалить эту деталь?')) {
+                    const detailId = this.getAttribute('data-id');
+                    const carId = this.getAttribute('data-car-id');
+                    const formData = new FormData();
+
+                    formData.append('detailId', detailId);
+                    formData.append('carId', carId);
+
+                    fetch('/deleteDetail', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            window.location.href = '/showDetails?id=' + carId;
+                        } else {
+                            alert('Ошибка при удалении детали');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Ошибка при удалении детали');
+                    });
+                }
+            });
+        });
+    });
+
+    function sortDetails(criteria) {
+        // Получаем массив строк таблицы (пропускаем заголовок)
+        const rows = Array.from(document.querySelectorAll("tbody tr"));
+
+        // Сортируем строки
+        rows.sort((a, b) => {
+            let valA, valB;
+
+            if (criteria === 'name') {
+                valA = a.querySelector('.name-view').textContent.trim().toLowerCase();
+                valB = b.querySelector('.name-view').textContent.trim().toLowerCase();
+            } else if (criteria === 'id') {
+                valA = parseInt(a.querySelector('th').textContent.trim());
+                valB = parseInt(b.querySelector('th').textContent.trim());
+            }
+
+            return valA > valB ? 1 : -1;
+        });
+
+        // Перерисовываем таблицу
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = '';
+        rows.forEach(row => tbody.appendChild(row));
+    }
+</script>
 </body>
 </html>

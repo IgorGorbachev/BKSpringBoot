@@ -8,65 +8,65 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-@Service
-public class CarServiceImpl implements CarService {
 
+@Service
+@Transactional
+public class CarServiceImpl implements CarService {
     private static final Logger logger = Logger.getLogger(CarServiceImpl.class);
 
+    private final CarDao carDao;
+    private final KlientService klientService;
+
     @Autowired
-    CarDao carDao;
+    public CarServiceImpl(CarDao carDao, KlientService klientService) {
+        this.carDao = carDao;
+        this.klientService = klientService;
+    }
 
-    @Transactional
     @Override
-    public void addCar(Car car) {
-        carDao.addCar(car);
+    public void addCarForKlient(Car car, Long klientId) {
+        Klient klient = klientService.getKlientById(klientId);
+        Car newCar = new Car(car.getName(), car.getVin());
+        newCar.setKlient(klient);
+        carDao.addCar(newCar);
+    }
+
+    @Override
+    public void updateCar(Long carId, Car car) {
+        Car existingCar = getCarById(carId);
+        existingCar.setName(car.getName());
+        existingCar.setVin(car.getVin());
+        carDao.changeCar(existingCar);
+    }
+
+    @Override
+    public List<Car> getAllSortedCars() {
+        List<Car> cars = carDao.getAllCars();
+        cars.sort(Comparator.comparing(Car::getName, String.CASE_INSENSITIVE_ORDER));
+        return cars;
     }
 
     @Transactional
     @Override
-    public void changeCar(Car car) {
-        carDao.changeCar(car);
-    }
-
-    @Transactional
-    @Override
-    public List<Car> getAllCars() {
-        List<Car> carListSort = carDao.getAllCars();
-        Collections.sort(carListSort, Comparator.comparing(Car::getName, String.CASE_INSENSITIVE_ORDER));
-        return carListSort;
-    }
-
-    @Transactional
-    @Override
-    public void deleteCar(Car car) {
-        if(car.getDetails() != null && !car.getDetails().isEmpty()){
-            System.out.println("Нельзя удалить машину, если у нее есть детали");
+    public void deleteCar(Long carId) {
+        Car car = carDao.getCarFromBD(carId);
+        logger.info("**********************************************"+car.getDetails());
+        if (!car.getDetails().isEmpty()) {
             throw new IllegalStateException();
         }
-        else {
-            carDao.deletCar(car);
-        }
+        carDao.deleteCar(carId);
     }
 
-    @Transactional
     @Override
-    public List<Car> getCarsByKlientId(Klient klient) {
-        List<Car> carList = new ArrayList<>();
-        for (Car car : carDao.getListCarsById(klient.getId())) carList.add(car);
-        return carList;
-    }
-
-    @Transactional
-    @Override
-    public Car getCarFromBD(Long id) {
+    public Car getCarById(Long id) {
         return carDao.getCarFromBD(id);
     }
 
-
+    @Override
+    public List<Car> getCarsByKlientId(Long klientId) {
+        return carDao.getListCarsById(klientId);
+    }
 }

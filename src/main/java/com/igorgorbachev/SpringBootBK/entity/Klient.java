@@ -28,18 +28,18 @@ public class Klient {
     @Column(name = "phone")
     private String phone;
 
-//    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Sail> sails = new ArrayList<>();
-//
-//    public List<Sail> getSails() {
-//        return sails;
-//    }
-//
-//    public void setSails(List<Sail> sails) {
-//        this.sails = sails;
-//    }
+    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL)
+    private List<Sail> sails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<Sail> getSails() {
+        return sails;
+    }
+
+    public void setSails(List<Sail> sails) {
+        this.sails = sails;
+    }
+
+    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL)
     private List<Car> car = new ArrayList<>();
 
     public List<Car> getCar() {
@@ -81,14 +81,6 @@ public class Klient {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-//
-//    public List<Sail> getSails() {
-//        return sails;
-//    }
-//
-//    public void setSails(List<Sail> sails) {
-//        this.sails = sails;
-//    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,10 +1,236 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>База клиентов</title>-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">-->
+<!--    <style>-->
+<!--        /* Ваши существующие стили */-->
+<!--        body {-->
+<!--            margin: 0;-->
+<!--            font-family: Arial, sans-serif;-->
+<!--        }-->
+<!--        .sidebar {-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            bottom: 0;-->
+<!--            left: 0;-->
+<!--            z-index: 100;-->
+<!--            width: 10%;-->
+<!--            max-width: 140px;-->
+<!--            background-color: #343a40;-->
+<!--            padding: 90px 0 0;-->
+<!--            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);-->
+<!--        }-->
+<!--        .content {-->
+<!--            margin-left: 5%;-->
+<!--            padding: 20px;-->
+<!--            width: 93.5%;-->
+<!--            transition: margin-left 0.3s ease;-->
+<!--            position: relative;-->
+<!--            top: 0;-->
+<!--        }-->
+<!--        .nav-link {-->
+<!--            color: #fff;-->
+<!--            font-size: 14px;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+<!--        /* Новые стили для редактирования */-->
+<!--        .view-mode {-->
+<!--            display: inline-block;-->
+<!--        }-->
+<!--        .edit-mode {-->
+<!--            display: none;-->
+<!--            width: 100%;-->
+<!--        }-->
+<!--        .action-buttons {-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash; Боковое меню (оставляем как было) &ndash;&gt;-->
+<!--<nav class="col-md-1 d-none d-md-block bg-dark sidebar">-->
+<!--    <div class="position-sticky pt-md-5">-->
+<!--        <ul class="nav flex-column">-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="http://localhost:8080/showSails">Продажи</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+<!--</nav>-->
+
+<!--&lt;!&ndash; Основной контент &ndash;&gt;-->
+<!--<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">-->
+<!--    <div class="card mb-4">-->
+<!--        <div class="card-header">Список клиентов</div>-->
+<!--        <div class="card-body">-->
+<!--            <table class="table table-dark table-hover">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th scope="col">#</th>-->
+<!--                    <th scope="col">Имя клиента</th>-->
+<!--                    <th scope="col">Телефон</th>-->
+<!--                    <th scope="col">Автомобили</th>-->
+
+<!--                    <th scope="col">Действия</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="klient : ${klientList}">-->
+<!--                    <th scope="row" th:text="${klient.id}"></th>-->
+<!--                    <td>-->
+<!--                        <span class="view-mode name-view" th:text="${klient.name}"></span>-->
+<!--                        <input type="text" class="edit-mode form-control form-control-sm" name="name" th:value="${klient.name}">-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <span class="view-mode phone-view" th:text="${klient.phone}"></span>-->
+<!--                        <input type="tel" class="edit-mode form-control form-control-sm" name="phone" th:value="${klient.phone}">-->
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <a th:href="@{/showCars(id=${klient.id})}" class="btn btn-sm btn-info">Показать авто</a>-->
+<!--                    </td>-->
+
+<!--                    <td class="action-buttons">-->
+<!--                        <div class="btn-group btn-group-sm">-->
+<!--                            <button type="button" class="btn btn-primary edit-btn">Изменить</button>-->
+<!--                            <button type="button" class="btn btn-success save-btn" style="display:none;"-->
+<!--                                    th:attr="data-id=${klient.id}">Сохранить</button>-->
+<!--                            <button type="button" class="btn btn-danger delete-btn" th:attr="data-id=${klient.id}">Удалить</button>-->
+<!--                        </div>-->
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <div class="card">-->
+<!--        <div class="card-header">Добавить нового клиента</div>-->
+<!--        <div class="card-body">-->
+<!--            <form th:action="@{/addKlient}" method="post" class="row g-3">-->
+<!--                <div class="col-md-4">-->
+<!--                    <label class="form-label">Имя клиента:</label>-->
+<!--                    <input type="text" name="name" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="col-md-4">-->
+<!--                    <label class="form-label">Номер телефона:</label>-->
+<!--                    <input type="tel" name="phone" class="form-control" required>-->
+<!--                </div>-->
+<!--                <div class="col-md-4 d-flex align-items-end">-->
+<!--                    <button type="submit" class="btn btn-primary">Добавить</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</main>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>-->
+<!--<script>-->
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        // Обработка редактирования клиента-->
+<!--        document.querySelectorAll('.edit-btn').forEach(btn => {-->
+<!--            btn.addEventListener('click', function() {-->
+<!--                const row = this.closest('tr');-->
+<!--                row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');-->
+<!--                row.querySelectorAll('.edit-mode').forEach(el => {-->
+<!--                    el.style.display = 'block';-->
+<!--                    el.style.width = '100%';-->
+<!--                });-->
+<!--                this.style.display = 'none';-->
+<!--                row.querySelector('.save-btn').style.display = 'inline-block';-->
+<!--                row.querySelector('.delete-btn').style.display = 'none';-->
+<!--            });-->
+<!--        });-->
+
+<!--        // Обработка сохранения изменений-->
+<!--        document.querySelectorAll('.save-btn').forEach(btn => {-->
+<!--            btn.addEventListener('click', function() {-->
+<!--                const row = this.closest('tr');-->
+<!--                const id = this.getAttribute('data-id');-->
+<!--                const formData = new FormData();-->
+
+<!--                formData.append('id', id);-->
+<!--                row.querySelectorAll('.edit-mode').forEach(input => {-->
+<!--                    formData.append(input.name, input.value);-->
+<!--                    // Обновляем соответствующие поля просмотра-->
+<!--                    if(input.name === 'name') {-->
+<!--                        row.querySelector('.name-view').textContent = input.value;-->
+<!--                    } else if(input.name === 'phone') {-->
+<!--                        row.querySelector('.phone-view').textContent = input.value;-->
+<!--                    }-->
+<!--                });-->
+
+<!--                fetch('/changeKlient', {-->
+<!--                    method: 'POST',-->
+<!--                    body: formData-->
+<!--                }).then(response => {-->
+<!--                    if (response.ok) {-->
+<!--                        row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');-->
+<!--                        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');-->
+<!--                        row.querySelector('.edit-btn').style.display = 'inline-block';-->
+<!--                        row.querySelector('.delete-btn').style.display = 'inline-block';-->
+<!--                        this.style.display = 'none';-->
+<!--                    } else {-->
+<!--                        alert('Ошибка при сохранении изменений');-->
+<!--                    }-->
+<!--                }).catch(error => {-->
+<!--                    console.error('Error:', error);-->
+<!--                    alert('Ошибка при сохранении изменений');-->
+<!--                });-->
+<!--            });-->
+<!--        });-->
+
+<!--        // Обработка удаления клиента-->
+<!--        document.querySelectorAll('.delete-btn').forEach(btn => {-->
+<!--            btn.addEventListener('click', function() {-->
+<!--                if (confirm('Вы действительно хотите удалить этого клиента?')) {-->
+<!--                    const id = this.getAttribute('data-id');-->
+<!--                    const formData = new FormData();-->
+<!--                    formData.append('id', id);-->
+
+<!--                    fetch('/deleteKlient', {-->
+<!--                        method: 'POST',-->
+<!--                        body: formData-->
+<!--                    }).then(response => {-->
+<!--                        if (response.ok) {-->
+<!--                            location.reload();-->
+<!--                        } else {-->
+<!--                            alert('Ошибка при удалении клиента');-->
+<!--                        }-->
+<!--                    }).catch(error => {-->
+<!--                        console.error('Error:', error);-->
+<!--                        alert('Ошибка при удалении клиента');-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>База клиентов</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Добавляем иконки Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
+        /* Ваши существующие стили */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -15,8 +241,8 @@
             bottom: 0;
             left: 0;
             z-index: 100;
-            width: 10%; /* сузили до 140px */
-            max-width: 140px; /* Ограничение максимальной ширины */
+            width: 10%;
+            max-width: 140px;
             background-color: #343a40;
             padding: 90px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
@@ -29,11 +255,26 @@
             position: relative;
             top: 0;
         }
-
         .nav-link {
             color: #fff;
-            font-size: 14px; /* опционально — уменьшаем текст */
+            font-size: 14px;
             white-space: nowrap;
+        }
+        .view-mode {
+            display: inline-block;
+        }
+        .edit-mode {
+            display: none;
+            width: 100%;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .btn-group-sm > .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
         }
     </style>
 </head>
@@ -43,9 +284,7 @@
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="http://localhost:8080/">
-                   Все Клиенты
-                </a>
+                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
@@ -62,59 +301,192 @@
 
 <!-- Основной контент -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-    <div>
-        <table class="table table-dark table-hover">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Имя клиента</th>
-                <th scope="col">Телефон</th>
-                <th scope="col">Автомобили</th>
-                <th scope="col">Продажи</th>
-                <th scope="col">Изменить клиента</th>
-                <th scope="col">Удалить</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="klient : ${klientList}">
-                <th scope="row" th:text="${klient.id}"></th>
-                <td th:text="${klient.name}"></td>
-                <td th:text="${klient.phone}"></td>
-                <td>
-                    <a th:href="@{/showCars(id=${klient.id})}">Показать авто</a>
-                </td>
-<!--                <td>-->
-<!--                    <a th:href="@{/addSailForm(id=${klient.id})}">Продажи</a>-->
-<!--                </td>-->
-                <td>
-                    <form th:action="@{/changeKlient}" method="post">
-                        <input type="hidden" name="id" th:value="${klient.id}">
-                        <input type="text" name="name" th:value="${klient.name}">
-                        <input type="tel" name="phone" th:value="${klient.phone}">
-                        <button type="submit">Change</button>
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/deleteKlient}" method="post">
-                        <input type="hidden" name="id" th:value="${klient.id}">
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div>
-            <h4>Добавить нового клиента</h4>
-            <form th:action="@{/addKlient}" method="post">
-                <label>Имя клиента:</label>
-                <input type="text" name="name">
-                <label>Номер телефона:</label>
-                <input type="tel" name="phone">
-                <button type="submit">Add</button>
+    <div class="card mb-4">
+        <div class="card-header">Список клиентов</div>
+        <div class="card-body">
+            <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя клиента</th>
+                    <th scope="col">Телефон</th>
+                    <th scope="col">Автомобили</th>
+                    <th scope="col">Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="klient : ${klientList}">
+                    <th scope="row" th:text="${klient.id}"></th>
+                    <td>
+                        <span class="view-mode name-view" th:text="${klient.name}"></span>
+                        <input type="text" class="edit-mode form-control form-control-sm" name="name" th:value="${klient.name}">
+                    </td>
+                    <td>
+                        <span class="view-mode phone-view" th:text="${klient.phone}"></span>
+                        <input type="tel" class="edit-mode form-control form-control-sm" name="phone" th:value="${klient.phone}">
+                    </td>
+                    <td>
+                        <a th:href="@{/showCars(id=${klient.id})}" class="btn btn-sm btn-info">Показать авто</a>
+                    </td>
+                    <td class="action-buttons">
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-primary edit-btn">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-success save-btn" style="display:none;"
+                                    th:attr="data-id=${klient.id}">
+                                <i class="bi bi-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning cancel-btn" style="display:none;">
+                                <i class="bi bi-x"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger delete-btn" th:attr="data-id=${klient.id}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Добавить нового клиента</div>
+        <div class="card-body">
+            <form th:action="@{/addKlient}" method="post" class="row g-3">
+                <div class="col-md-4">
+                    <label class="form-label">Имя клиента:</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Номер телефона:</label>
+                    <input type="tel" name="phone" class="form-control" required>
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
             </form>
         </div>
     </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Обработка редактирования клиента
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Сохраняем исходные значения перед редактированием
+                const originalName = row.querySelector('input[name="name"]').value;
+                const originalPhone = row.querySelector('input[name="phone"]').value;
+                row.dataset.originalName = originalName;
+                row.dataset.originalPhone = originalPhone;
+
+                // Переключаем режимы отображения
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = 'none');
+                row.querySelectorAll('.edit-mode').forEach(el => {
+                    el.style.display = 'block';
+                    el.style.width = '100%';
+                });
+
+                // Переключаем кнопки
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'inline-block';
+                row.querySelector('.cancel-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка отмены изменений
+        document.querySelectorAll('.cancel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                // Восстанавливаем исходные значения
+                row.querySelector('input[name="name"]').value = row.dataset.originalName;
+                row.querySelector('input[name="phone"]').value = row.dataset.originalPhone;
+
+                // Обновляем поля просмотра
+                row.querySelector('.name-view').textContent = row.dataset.originalName;
+                row.querySelector('.phone-view').textContent = row.dataset.originalPhone;
+
+                // Переключаем режимы отображения
+                row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+
+                // Переключаем кнопки
+                row.querySelector('.edit-btn').style.display = 'inline-block';
+                row.querySelector('.delete-btn').style.display = 'inline-block';
+                this.style.display = 'none';
+                row.querySelector('.save-btn').style.display = 'none';
+            });
+        });
+
+        // Обработка сохранения изменений
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const id = this.getAttribute('data-id');
+                const formData = new FormData();
+
+                formData.append('id', id);
+                row.querySelectorAll('.edit-mode').forEach(input => {
+                    formData.append(input.name, input.value);
+                    // Обновляем соответствующие поля просмотра
+                    if(input.name === 'name') {
+                        row.querySelector('.name-view').textContent = input.value;
+                    } else if(input.name === 'phone') {
+                        row.querySelector('.phone-view').textContent = input.value;
+                    }
+                });
+
+                fetch('/changeKlient', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => {
+                    if (response.ok) {
+                        row.querySelectorAll('.view-mode').forEach(el => el.style.display = '');
+                        row.querySelectorAll('.edit-mode').forEach(el => el.style.display = 'none');
+                        row.querySelector('.edit-btn').style.display = 'inline-block';
+                        row.querySelector('.delete-btn').style.display = 'inline-block';
+                        this.style.display = 'none';
+                        row.querySelector('.cancel-btn').style.display = 'none';
+                    } else {
+                        alert('Ошибка при сохранении изменений');
+                    }
+                }).catch(error => {
+                    console.error('Error:', error);
+                    alert('Ошибка при сохранении изменений');
+                });
+            });
+        });
+
+        // Обработка удаления клиента
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Вы действительно хотите удалить этого клиента?')) {
+                    const id = this.getAttribute('data-id');
+                    const formData = new FormData();
+                    formData.append('id', id);
+
+                    fetch('/deleteKlient', {
+                        method: 'POST',
+                        body: formData
+                    }).then(response => {
+                        if (response.ok) {
+                            location.reload();
+                        } else {
+                            alert('Ошибка при удалении клиента');
+                        }
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        alert('Ошибка при удалении клиента');
+                    });
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

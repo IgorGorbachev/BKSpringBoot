@@ -12,7 +12,7 @@ public interface CarDao {
 
     List<Car> getAllCars();
 
-    void deletCar(Car car);
+    void deleteCar(Long carId);
 
     List<Car> getListCarsById(Long id);
 

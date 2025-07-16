@@ -1,61 +1,72 @@
 package com.igorgorbachev.SpringBootBK.service;
 
+import com.igorgorbachev.SpringBootBK.dao.CarDao;
 import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
+import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
 import jakarta.transaction.Transactional;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
-
-import java.awt.dnd.DragGestureEvent;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+
 @Service
-public class DetailServiceImpl implements DetailService{
+@Transactional
+public class DetailServiceImpl implements DetailService {
+    Logger logger = Logger.getLogger(DetailServiceImpl.class);
 
     @Autowired
-    DetailsDao detailsDao;
+    private DetailsDao detailsDao;
 
-    @Transactional
-    @Override
-    public void addDetail(Detail detail) {
-        detailsDao.addDetail(detail);
+    @Autowired
+    private CarDao carDao;
+
+    @Autowired
+    public DetailServiceImpl(DetailsDao detailsDao) {
+        this.detailsDao = detailsDao;
     }
 
-    @Transactional
     @Override
-    public void changeDetail(Detail detail) {
-        detailsDao.changeDetail(detail);
+    public void addDetailToCar(Detail detail, Long carId) {
+        Car car = carDao.getCarFromBD(carId);
+        Detail newDetail = new Detail(detail.getName(), detail.getOriginArticul(), detail.getAnalogArticul());
+        newDetail.setCar(car);
+        car.getDetails().add(newDetail);
+        detailsDao.addDetail(newDetail);
     }
 
-    @Transactional
     @Override
-    public List<Detail> getAllDetail() {
-        List<Detail> sortDetailList = detailsDao.getAllDetail();
-        Collections.sort(sortDetailList, Comparator.comparing(Detail::getName,String.CASE_INSENSITIVE_ORDER));
-        return sortDetailList;
+    public void updateDetail(Long detailId, Detail detail) {
+        Detail existingDetail = getDetailById(detailId);
+        existingDetail.setName(detail.getName());
+        existingDetail.setOriginArticul(detail.getOriginArticul());
+        existingDetail.setAnalogArticul(detail.getAnalogArticul());
+        detailsDao.changeDetail(existingDetail);
     }
 
-    @Transactional
     @Override
-    public void deleteDetail(Detail detail) {
-        detailsDao.deleteDetail(detail);
+    public List<Detail> getAllSortedDetails() {
+        List<Detail> details = detailsDao.getAllDetail();
+        details.sort(Comparator.comparing(Detail::getName, String.CASE_INSENSITIVE_ORDER));
+        return details;
     }
 
-    @Transactional
     @Override
-    public Detail getDetailFromBD(Long id) {
+    public void deleteDetail(Long detailId) {
+        detailsDao.deleteDetail(getDetailById(detailId));
+    }
+
+    @Override
+    public Detail getDetailById(Long id) {
         return detailsDao.getDetailFromBD(id);
     }
 
-    @Transactional
     @Override
-    public List<Detail> getDetailByCarId(Long id) {
-        List<Detail> sortList = detailsDao.getDetailByCarId(id);
-        Collections.sort(sortList, Comparator.comparing(Detail::getId).reversed());
-
-        return sortList;
+    public List<Detail> getSortedDetailsByCarId(Long carId) {
+        List<Detail> details = detailsDao.getDetailByCarId(carId);
+        details.sort(Comparator.comparing(Detail::getId).reversed());
+        return details;
     }
 }

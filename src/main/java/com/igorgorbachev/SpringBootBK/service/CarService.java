@@ -1,23 +1,15 @@
 package com.igorgorbachev.SpringBootBK.service;
 
-import com.igorgorbachev.SpringBootBK.dao.KlientDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
-import com.igorgorbachev.SpringBootBK.entity.Klient;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public interface CarService {
-    void addCar(Car car);
-
-    void changeCar(Car car);
-
-    List<Car> getAllCars();
-
-    void deleteCar(Car car);
-
-    List<Car> getCarsByKlientId(Klient klient);
-
-    Car getCarFromBD(Long id);
-
+    void addCarForKlient(Car car, Long klientId);
+    void updateCar(Long carId, Car car);
+    List<Car> getAllSortedCars();
+    void deleteCar(Long carId);
+    Car getCarById(Long id);
+    List<Car> getCarsByKlientId(Long klientId);
 }
