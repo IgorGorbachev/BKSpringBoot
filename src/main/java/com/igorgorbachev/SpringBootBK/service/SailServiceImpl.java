@@ -42,10 +42,7 @@ public class SailServiceImpl implements SailService {
 
     @Override
     public void addSail(Sail sail) {
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE, dd.MM.yy", new Locale("ru"));
-        String data = today.format(formatter).toUpperCase();
-        sail.setToDay(data);
+        sail.setToDay(LocalDate.now());
         calculate(sail);
         sailDao.addSail(sail);
     }
@@ -77,6 +74,10 @@ public class SailServiceImpl implements SailService {
         return sailDao.getFilteredSails(klientId, statusId, oplataId);
     }
 
+    @Override
+    public BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end) {
+        return sailDao.getZarplataForPeriod(start, end);
+    }
 
 
 }

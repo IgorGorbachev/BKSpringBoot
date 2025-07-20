@@ -21,5 +21,5 @@ public interface SailService {
 
     public List<Sail> getFilteredSails(Long klientId, Long statusId, Long oplataId);
 
-
+    BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end);
 }

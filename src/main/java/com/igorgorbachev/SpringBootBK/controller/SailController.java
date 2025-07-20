@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +96,11 @@ public class SailController {
                 "Не оплачено", "ff0000",
                 "Наличные", "007bff",
                 "Терминал", "ffc107",
-                "Безнал", "28a745"
+                "Безнал (счет ОПЛАЧЕН)", "28a745",
+                "Наличные + чек", "007bff",
+                "Терминал + чек", "ffc107",
+                "Безнал (добавил в счет)", "808080",
+                "Безнал (счет выставлен)", "ffc107"
         ));
 
         model.addAttribute("lastSelectedKlientId", session.getAttribute("lastSelectedKlientId"));
@@ -154,8 +160,22 @@ public class SailController {
         return "redirect:/showSails";
     }
 
+    @ModelAttribute
+    public void addWeeklySalary(Model model) {
+        LocalDate today = LocalDate.now();
+        logger.info("START addWeeklySalary today =" + today);
+        LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        logger.info("START addWeeklySalary weekStart =" + weekStart);
+        LocalDate weekEnd = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+        logger.info("START addWeeklySalary weekEnd =" + weekEnd);
 
+        BigDecimal weeklySalary = sailService.getZarplataForPeriod(weekStart, weekEnd);
+        logger.info("START addWeeklySalary weeklySalary =" + weeklySalary);
 
+        model.addAttribute("weeklySalary", weeklySalary);
+        model.addAttribute("weekStart", weekStart);
+        model.addAttribute("weekEnd", weekEnd);
+    }
 
 
 }

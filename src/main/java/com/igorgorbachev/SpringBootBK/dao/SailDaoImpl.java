@@ -80,7 +80,16 @@ public class SailDaoImpl implements SailDao {
         return query.getResultList();
     }
 
+    @Override
+    public BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end) {
+        String jpql = "SELECT COALESCE(SUM(s.zarplata), 0) FROM Sail s " +
+                      "WHERE s.toDay BETWEEN :start AND :end";
 
+        return entityManager.createQuery(jpql, BigDecimal.class)
+                .setParameter("start", start)
+                .setParameter("end", end)
+                .getSingleResult();
+    }
 
 }
 

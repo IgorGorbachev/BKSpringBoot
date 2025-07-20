@@ -23,5 +23,5 @@ public interface SailDao {
 
     public List<Sail> getFilteredSails(Long klientId, Long statusId, Long oplataId);
 
-//    BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end);
+    BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end);
 }

@@ -53,85 +53,72 @@
             line-height: 1.5;
             border-radius: 0.2rem;
         }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            width: 10%;
+            max-width: 140px;
+            background-color: #343a40;
+            padding: 90px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+
+        /* Стиль для блока зарплаты */
+        .weekly-salary {
+            background-color: #495057;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-<!-- Боковое меню -->
+
 <nav class="col-md-1 d-none d-md-block bg-dark sidebar">
     <div class="position-sticky pt-md-5">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>
+                <a class="nav-link active" th:href="@{/}">Все Клиенты</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
+                <a class="nav-link" th:href="@{/allCars}">Все Автомобили</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>
+                <a class="nav-link" th:href="@{/allDetails}">Все Детали</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/showSails">Продажи</a>
+                <a class="nav-link" th:href="@{/showSails}">Продажи</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8080/kassa">Касса</a>
+                <a class="nav-link" th:href="@{/kassa}">Касса</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/task">Задачи</a>
+            </li>
+
+            <!-- Блок с зарплатой за текущую неделю -->
+            <li class="nav-item mt-4 p-2 bg-secondary rounded">
+                <div class="text-white small">Зарплата за неделю:</div>
+                <div class="text-warning fw-bold"
+                     th:text="${weeklySalary != null ? #numbers.formatDecimal(weeklySalary, 1, 2, 'COMMA') + ' ₽' : 'Загрузка...'}">
+                </div>
+                <div class="text-white small"
+                     th:text="'(' + ${#temporals.format(weekStart, 'dd.MM')} +
+                         ' - ' + ${#temporals.format(weekEnd, 'dd.MM')} + ')'">
+                </div>
+
             </li>
         </ul>
     </div>
 </nav>
 
+
+
 <!-- Основной контент -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-    <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Отчет по зарплате</h5>
-        </div>
-        <div class="card-body">
-            <!-- Форма выбора периода -->
-            <form th:action="@{/salaryReport}" method="get" class="mb-4">
-                <div class="row">
-                    <div class="col-md-5">
-                        <label for="startDate" class="form-label">Начало периода</label>
-                        <input type="date" class="form-control" id="startDate" name="startDate"
-                               th:value="${startDate != null} ? ${#temporals.format(startDate, 'yyyy-MM-dd')} : ''" required>
-                    </div>
-                    <div class="col-md-5">
-                        <label for="endDate" class="form-label">Конец периода</label>
-                        <input type="date" class="form-control" id="endDate" name="endDate"
-                               th:value="${endDate != null} ? ${#temporals.format(endDate, 'yyyy-MM-dd')} : ''" required>
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">Показать</button>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Таблица с результатом -->
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead class="table-light">
-                    <tr>
-                        <th class="text-center">Начало периода</th>
-                        <th class="text-center">Конец периода</th>
-                        <th class="text-center">Сумма зарплаты</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:if="${salaryResult != null}">
-                        <td class="text-center align-middle"
-                            th:text="${#temporals.format(startDate, 'dd.MM.yyyy')}"></td>
-                        <td class="text-center align-middle"
-                            th:text="${#temporals.format(endDate, 'dd.MM.yyyy')}"></td>
-                        <td class="text-center align-middle font-weight-bold text-success"
-                            th:text="${#numbers.formatDecimal(salaryResult, 1, 2, 'COMMA') + ' ₽'}"></td>
-                    </tr>
-                    <tr th:if="${salaryResult == null}">
-                        <td colspan="3" class="text-center text-muted">Выберите период для отображения данных</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
     <div class="card mb-4">
         <div class="card-header">Долги нам</div>
         <div class="card-body">

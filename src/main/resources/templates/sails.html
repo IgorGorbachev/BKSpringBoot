@@ -12,6 +12,7 @@
             margin: 0;
             font-family: Arial, sans-serif;
         }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -24,6 +25,7 @@
             padding: 90px 0 0;
             box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
         }
+
         .content {
             margin-left: 5%;
             padding: 20px;
@@ -32,11 +34,13 @@
             position: relative;
             top: 0;
         }
+
         .nav-link {
             color: #fff;
             font-size: 14px;
             white-space: nowrap;
         }
+
         .btn-group-sm {
             display: flex;
             gap: 5px;
@@ -55,15 +59,18 @@
             font-size: 0.875rem;
             padding: 0.375rem 0.75rem;
         }
+
         .action-buttons {
             white-space: nowrap;
         }
+
         .btn-group-sm > .btn {
             padding: 0.25rem 0.5rem;
             font-size: 0.875rem;
             line-height: 1.5;
             border-radius: 0.2rem;
         }
+
         .summa-cell {
             border: 2px solid #007bff; /* Синяя рамка */
             border-radius: 4px;
@@ -90,6 +97,20 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="http://localhost:8080/kassa">Касса</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/task">Задачи</a>
+            </li>
+            <li class="nav-item mt-4 p-2 bg-secondary rounded">
+                <div class="text-white small">Зарплата за неделю:</div>
+                <div class="text-warning fw-bold"
+                     th:text="${weeklySalary != null ? #numbers.formatDecimal(weeklySalary, 1, 2, 'COMMA') + ' ₽' : 'Загрузка...'}">
+                </div>
+                <div class="text-white small"
+                     th:text="'(' + ${#temporals.format(weekStart, 'dd.MM')} +
+                         ' - ' + ${#temporals.format(weekEnd, 'dd.MM')} + ')'">
+                </div>
+
             </li>
         </ul>
     </div>
@@ -136,7 +157,7 @@
                            name="price"
                            class="form-control"
                            oninput="calculateSum()"
-                           >
+                    >
                 </div>
                 <div class="col-md-1">
                     <label class="form-label">Количество</label>
@@ -217,27 +238,23 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">toData</th>
-            <th scope="col">Status and Oplata</th>
-            <th scope="col">Klient</th>
-            <th scope="col">NameSail</th>
-            <th scope="col">Articul</th>
-            <th scope="col">Zakupka</th>
-            <th scope="col">Price</th>
-            <th scope="col">Kol-vo</th>
-            <th scope="col">Summa</th>
-<!--            <th scope="col">Nds</th>-->
-<!--            <th scope="col">Nalog</th>-->
-<!--            <th scope="col">Pribil</th>-->
-<!--            <th scope="col">Zarplata</th>-->
+            <th scope="col">Дата</th>
+            <th scope="col">Статус и Оплата</th>
+            <th scope="col">Клиент</th>
+            <th scope="col">Наименование</th>
+            <th scope="col">Артикул</th>
+            <th scope="col">Закупка</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Кол-во</th>
+            <th scope="col">Сумма</th>
             <th scope="col">Действие</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="sail : ${sailList}">
             <td th:text="${sail.id}"></td>
-            <td th:text="${sail.toDay}"></td>
 
+            <td th:text="${sail.formattedDate}"></td>
 
 
             <td>
@@ -282,17 +299,20 @@
 
             <td class="editable-field" data-field="zakupka">
                 <span class="view-text" th:text="${#numbers.formatInteger(sail.zakupka, 0)}"></span>
-                <input type="number" class="edit-input form-control" th:value="${#numbers.formatInteger(sail.zakupka, 0)}" style="display: none;">
+                <input type="number" class="edit-input form-control"
+                       th:value="${#numbers.formatInteger(sail.zakupka, 0)}" style="display: none;">
             </td>
 
             <td class="editable-field" data-field="price">
                 <span class="view-text" th:text="${#numbers.formatInteger(sail.price, 0)}"></span>
-                <input type="number" class="edit-input form-control" th:value="${#numbers.formatInteger(sail.price, 0)}" style="display: none;" step="0.01" min="0">
+                <input type="number" class="edit-input form-control" th:value="${#numbers.formatInteger(sail.price, 0)}"
+                       style="display: none;" step="0.01" min="0">
             </td>
 
             <td class="editable-field" data-field="kolichestvo">
                 <span class="view-text" th:text="${#numbers.formatInteger(sail.kolichestvo, 0)}"></span>
-                <input type="number" class="edit-input form-control" th:value="${#numbers.formatInteger(sail.kolichestvo, 0)}" style="display: none;" min="1">
+                <input type="number" class="edit-input form-control"
+                       th:value="${#numbers.formatInteger(sail.kolichestvo, 0)}" style="display: none;" min="1">
             </td>
 
             <td class="summa-cell text-center align-middle"
@@ -300,11 +320,6 @@
                 th:text="${#numbers.formatInteger(sail.summa, 0)}"
                 style="font-weight: bold; text-align: right;">
             </td>
-<!--            <td th:text="${#numbers.formatInteger(sail.nds, 0)}"></td>-->
-<!--            <td th:text="${#numbers.formatInteger(sail.nalog, 0)}"></td>-->
-<!--            <td th:text="${#numbers.formatInteger(sail.pribil, 0)}"></td>-->
-<!--            <td th:text="${#numbers.formatInteger(sail.zarplata, 0)}"></td>-->
-
             <td class="action-buttons">
                 <div class="btn-group btn-group-sm">
                     <button type="button" class="btn btn-primary edit-btn">
@@ -410,7 +425,7 @@
     }
 
     // Инициализация при загрузке страницы
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         // Назначаем обработчики событий для формы добавления
         document.getElementById("purchasePrice").addEventListener("input", calculatePrice);
         document.getElementById("quantity").addEventListener("input", calculateSum);
@@ -418,19 +433,19 @@
 
         // Обработчики для кнопок редактирования/сохранения/удаления
         document.querySelectorAll('.edit-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 enableEditMode(this.closest('tr'));
             });
         });
 
         document.querySelectorAll('.cancel-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 cancelEditMode(this.closest('tr'));
             });
         });
 
         document.querySelectorAll('.save-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 const row = this.closest('tr');
                 const id = this.getAttribute('data-id');
                 // const formData = new FormData();
@@ -467,7 +482,7 @@
         });
 
         document.querySelectorAll('.delete-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function () {
                 if (confirm('Вы действительно хотите удалить эту продажу?')) {
                     const id = this.getAttribute('data-id');
                     const formData = new FormData();

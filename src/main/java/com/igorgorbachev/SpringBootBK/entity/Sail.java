@@ -14,9 +14,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Objects;
 
 @Entity
@@ -28,7 +32,14 @@ public class Sail {
     private Long id;
 
     @Column(name = "data")
-    private String toDay;
+    private LocalDate toDay;
+
+    @Transient
+    public String getFormattedDate() {
+        if (toDay == null) return "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EE, dd.MM.yy", new Locale("ru"));
+        return toDay.format(formatter).toUpperCase();
+    }
 
     @ManyToOne
     @JoinColumn(name = "status_id")
@@ -88,11 +99,11 @@ public class Sail {
         this.id = id;
     }
 
-    public String getToDay() {
+    public LocalDate getToDay() {
         return toDay;
     }
 
-    public void setToDay(String toDay) {
+    public void setToDay(LocalDate toDay) {
         this.toDay = toDay;
     }
 
@@ -196,6 +207,8 @@ public class Sail {
     public void setArticul(String articul) {
         this.articul = articul;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

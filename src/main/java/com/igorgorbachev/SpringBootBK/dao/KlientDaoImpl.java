@@ -45,7 +45,7 @@ public class KlientDaoImpl implements KlientDao{
                         "SELECT k.name, SUM(s.summa) " +
                         "FROM Klient k " +
                         "JOIN k.sails s " +
-                        "WHERE s.oplata.id = 4 " +  // ID для "Не оплачено"
+                        "WHERE s.oplata.id IN(3,4,7,8)" +  // ID для "Не оплачено"
                         "GROUP BY k.name",
                         Object[].class)
                 .getResultList();
