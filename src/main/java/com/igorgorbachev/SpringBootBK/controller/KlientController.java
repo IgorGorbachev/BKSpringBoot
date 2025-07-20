@@ -47,12 +47,11 @@ public class KlientController {
         return "redirect:/";
     }
 
-    @PostMapping("/showSailsKlient")
-    public String getSailsByKlient(@RequestParam(value = "klientId", required = false) Long klientId,
-                                   Model model) {
+    @GetMapping("/kassa")
+    public String kassa(Model model){
+        model.addAttribute("sailList", sailService.getAllSail());
         model.addAttribute("klientList", klientService.getAllSortedKlients());
-        model.addAttribute("sailList", sailService.getListSailByKlient(klientId));
-        model.addAttribute("allKlients", klientService.getAllSortedKlients());
-        return "/sails";
+        model.addAttribute("debts", klientService.getAllDebt());
+        return "kassa";
     }
 }

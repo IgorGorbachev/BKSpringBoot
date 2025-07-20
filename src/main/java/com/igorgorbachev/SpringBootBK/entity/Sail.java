@@ -5,11 +5,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -27,33 +30,19 @@ public class Sail {
     @Column(name = "data")
     private String toDay;
 
-    @Column(name = "status")
-    private String status = "В пути";
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private Status status;
 
-    public String getStatus() {
-        return status;
-    }
+    @ManyToOne
+    @JoinColumn(name = "oplata_id")
+    private Oplata oplata;
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    @Column(name = "nameSail")
+    private String nameSail;
 
-    @Column(name = "oplata")
-    private String oplata = "не оплачен";
-
-    public String getOplata() {
-        return oplata;
-    }
-
-    public void setOplata(String oplata) {
-        this.oplata = oplata;
-    }
-
-    @Column(name = "name_detail")
-    private String nameDetail;
-
-    @Column(name = "number_articul")
-    private String numberArticul;
+    @Column(name = "articul")
+    private String articul;
 
     @Column(name = "zakupka")
     private BigDecimal zakupka;
@@ -79,9 +68,8 @@ public class Sail {
     @Column(name = "zarplata")
     private BigDecimal zarplata;
 
-
-    @ManyToOne
-    @JoinColumn(name = "klient_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "klient_id", referencedColumnName = "id")
     private Klient klient;
 
     public Klient getKlient() {
@@ -106,22 +94,6 @@ public class Sail {
 
     public void setToDay(String toDay) {
         this.toDay = toDay;
-    }
-
-    public String getNameDetail() {
-        return nameDetail;
-    }
-
-    public void setNameDetail(String nameDetail) {
-        this.nameDetail = nameDetail;
-    }
-
-    public String getNumberArticul() {
-        return numberArticul;
-    }
-
-    public void setNumberArticul(String numberArticul) {
-        this.numberArticul = numberArticul;
     }
 
     public BigDecimal getZakupka() {
@@ -186,24 +158,55 @@ public class Sail {
     }
 
     public BigDecimal getZarplata() {
-        return pribil.multiply((BigDecimal.valueOf(0.5)));
+        return this.zarplata;
     }
 
     public void setZarplata(BigDecimal zarplata) {
         this.zarplata = zarplata;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Oplata getOplata() {
+        return oplata;
+    }
+
+    public void setOplata(Oplata oplata) {
+        this.oplata = oplata;
+    }
+
+    public String getNameSail() {
+        return nameSail;
+    }
+
+    public void setNameSail(String nameSail) {
+        this.nameSail = nameSail;
+    }
+
+    public String getArticul() {
+        return articul;
+    }
+
+    public void setArticul(String articul) {
+        this.articul = articul;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Sail sail = (Sail) o;
-        return kolichestvo == sail.kolichestvo && Objects.equals(id, sail.id)  && Objects.equals(toDay, sail.toDay) && Objects.equals(nameDetail, sail.nameDetail) && Objects.equals(numberArticul, sail.numberArticul) && Objects.equals(zakupka, sail.zakupka) && Objects.equals(price, sail.price) && Objects.equals(summa, sail.summa) && Objects.equals(nds, sail.nds) && Objects.equals(nalog, sail.nalog) && Objects.equals(pribil, sail.pribil) && Objects.equals(zarplata, sail.zarplata);
+        return Objects.equals(id, sail.id) && Objects.equals(toDay, sail.toDay) && Objects.equals(status, sail.status) && Objects.equals(oplata, sail.oplata) && Objects.equals(nameSail, sail.nameSail) && Objects.equals(articul, sail.articul) && Objects.equals(zakupka, sail.zakupka) && Objects.equals(price, sail.price) && Objects.equals(kolichestvo, sail.kolichestvo) && Objects.equals(summa, sail.summa) && Objects.equals(nds, sail.nds) && Objects.equals(nalog, sail.nalog) && Objects.equals(pribil, sail.pribil) && Objects.equals(zarplata, sail.zarplata) && Objects.equals(klient, sail.klient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id,  toDay, nameDetail, numberArticul, zakupka, price, kolichestvo, summa, nds, nalog, pribil, zarplata);
+        return Objects.hash(id, toDay, status, oplata, nameSail, articul, zakupka, price, kolichestvo, summa, nds, nalog, pribil, zarplata, klient);
     }
 
     @Override
@@ -211,8 +214,10 @@ public class Sail {
         return "Sail{" +
                "id=" + id +
                ", toDay='" + toDay + '\'' +
-               ", nameDetail='" + nameDetail + '\'' +
-               ", numberArticul='" + numberArticul + '\'' +
+               ", status=" + status +
+               ", oplata=" + oplata +
+               ", nameSail='" + nameSail + '\'' +
+               ", articul='" + articul + '\'' +
                ", zakupka=" + zakupka +
                ", price=" + price +
                ", kolichestvo=" + kolichestvo +
@@ -221,6 +226,7 @@ public class Sail {
                ", nalog=" + nalog +
                ", pribil=" + pribil +
                ", zarplata=" + zarplata +
+               ", klient=" + klient +
                '}';
     }
 }

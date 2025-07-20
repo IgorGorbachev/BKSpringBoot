@@ -17,6 +17,6 @@ public interface KlientDao {
 
     Klient getKlientById(Long id);
 
-
+    List<Object[]> getAllDebt();
 
 }

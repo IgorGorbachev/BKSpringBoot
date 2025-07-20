@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>База клиентов</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Добавляем иконки Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <style>
+        /* Ваши существующие стили */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            width: 10%;
+            max-width: 140px;
+            background-color: #343a40;
+            padding: 90px 0 0;
+            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+        }
+        .content {
+            margin-left: 5%;
+            padding: 20px;
+            width: 93.5%;
+            transition: margin-left 0.3s ease;
+            position: relative;
+            top: 0;
+        }
+        .nav-link {
+            color: #fff;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .view-mode {
+            display: inline-block;
+        }
+        .edit-mode {
+            display: none;
+            width: 100%;
+        }
+        .action-buttons {
+            white-space: nowrap;
+        }
+        .btn-group-sm > .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+<!-- Боковое меню -->
+<nav class="col-md-1 d-none d-md-block bg-dark sidebar">
+    <div class="position-sticky pt-md-5">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" href="http://localhost:8080/">Все Клиенты</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/allCars">Все Автомобили</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/allDetails">Все Детали</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/showSails">Продажи</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://localhost:8080/kassa">Касса</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Основной контент -->
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Отчет по зарплате</h5>
+        </div>
+        <div class="card-body">
+            <!-- Форма выбора периода -->
+            <form th:action="@{/salaryReport}" method="get" class="mb-4">
+                <div class="row">
+                    <div class="col-md-5">
+                        <label for="startDate" class="form-label">Начало периода</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate"
+                               th:value="${startDate != null} ? ${#temporals.format(startDate, 'yyyy-MM-dd')} : ''" required>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="endDate" class="form-label">Конец периода</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate"
+                               th:value="${endDate != null} ? ${#temporals.format(endDate, 'yyyy-MM-dd')} : ''" required>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Показать</button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Таблица с результатом -->
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Начало периода</th>
+                        <th class="text-center">Конец периода</th>
+                        <th class="text-center">Сумма зарплаты</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${salaryResult != null}">
+                        <td class="text-center align-middle"
+                            th:text="${#temporals.format(startDate, 'dd.MM.yyyy')}"></td>
+                        <td class="text-center align-middle"
+                            th:text="${#temporals.format(endDate, 'dd.MM.yyyy')}"></td>
+                        <td class="text-center align-middle font-weight-bold text-success"
+                            th:text="${#numbers.formatDecimal(salaryResult, 1, 2, 'COMMA') + ' ₽'}"></td>
+                    </tr>
+                    <tr th:if="${salaryResult == null}">
+                        <td colspan="3" class="text-center text-muted">Выберите период для отображения данных</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <div class="card-header">Долги нам</div>
+        <div class="card-body">
+            <table class="table table-dark table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя клиента</th>
+                    <th scope="col">Долг</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="debt, iter : ${debts}">
+                    <td th:text="${iter.count}"></td>
+                    <td th:text="${debt[0]}"></td> <!-- Имя клиента -->
+                    <td th:text="${#numbers.formatDecimal(debt[1], 1, 2, 'COMMA')} + ' руб.'"></td> <!-- Сумма долга -->
+                </tr>
+                <tr th:if="${debts.isEmpty()}">
+                    <td colspan="3" class="text-center">Нет клиентов с задолженностью</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</main>
+</body>
+</html>

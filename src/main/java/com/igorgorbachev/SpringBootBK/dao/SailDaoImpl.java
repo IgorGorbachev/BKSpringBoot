@@ -2,18 +2,18 @@ package com.igorgorbachev.SpringBootBK.dao;
 
 import com.igorgorbachev.SpringBootBK.entity.Sail;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.apache.log4j.Logger;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 @Repository
 public class SailDaoImpl implements SailDao {
@@ -30,16 +30,18 @@ public class SailDaoImpl implements SailDao {
 
     @Override
     public void changeSail(Sail sail) {
-        logger.info("Sail в начале в методе changedSail в ДАО" + sail.getPrice());
+        logger.info("Sail в начале в методе changedSail в ДАО " + sail);
         entityManager.merge(sail);
-        logger.info("Sail в конце в методе changedSail в ДАО" + sail.getPrice());
+        logger.info("Sail в конце в методе changedSail в ДАО " + sail);
     }
 
     @Override
-    public void deleteSail(Long id) {
-        entityManager.createQuery("DELETE FROM Sail WHERE id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
+    public void deleteSail(Long sailId) {
+
+        Sail sail = entityManager.find(Sail.class, sailId);
+        if (sail != null) {
+            entityManager.remove(sail);
+        }
     }
 
     @Override
@@ -53,30 +55,32 @@ public class SailDaoImpl implements SailDao {
     }
 
     @Override
-    public List<Sail> getListSailByKlient(Long id) {
-        return entityManager.createQuery("SELECT s from Sail s where s.klient.id = :id", Sail.class)
-                .setParameter("id", id)
-                .getResultList();
-    }
+    public List<Sail> getFilteredSails(Long klientId, Long statusId, Long oplataId) {
+        String queryStr = "SELECT s FROM Sail s WHERE 1=1";
+        Map<String, Object> params = new HashMap<>();
 
-    @Override
-    public BigDecimal zarplataFromPeriod(LocalDate start, LocalDate end) {
-        Objects.requireNonNull(start, "Start date cannot be null");
-        Objects.requireNonNull(end, "End date cannot be null");
-
-        if (start.isAfter(end)) {
-            logger.warn("Start date " + start + " is after end date " + end);
-            return BigDecimal.ZERO;
+        if (klientId != null) {
+            queryStr += " AND s.klient.id = :klientId";
+            params.put("klientId", klientId);
         }
 
-        logger.debug(String.format("Calculating salary from %s to %s", start, end));
+        if (statusId != null) {
+            queryStr += " AND s.status.id = :statusId";
+            params.put("statusId", statusId);
+        }
 
-        return entityManager.createQuery(
-                        "SELECT COALESCE(SUM(s.zarplata), 0) FROM Sail s WHERE s.toDay BETWEEN :start AND :end",
-                        BigDecimal.class)
-                .setParameter("start", start)
-                .setParameter("end", end)
-                .getSingleResult();
+        if (oplataId != null) {
+            queryStr += " AND s.oplata.id = :oplataId";
+            params.put("oplataId", oplataId);
+        }
+
+        Query query = entityManager.createQuery(queryStr);
+        params.forEach(query::setParameter);
+
+        return query.getResultList();
     }
+
+
+
 }
 

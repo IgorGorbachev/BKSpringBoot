@@ -61,4 +61,9 @@ public class KlientServiceImpl implements KlientService {
     public Klient getKlientById(Long id) {
         return klientDao.getKlientById(id);
     }
+
+    @Override
+    public List<Object[]> getAllDebt() {
+        return klientDao.getAllDebt();
+    }
 }

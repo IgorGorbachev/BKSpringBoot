@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -28,7 +29,7 @@ public class Klient {
     @Column(name = "phone")
     private String phone;
 
-    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "klient", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false)
     private List<Sail> sails = new ArrayList<>();
 
     public List<Sail> getSails() {
@@ -39,7 +40,7 @@ public class Klient {
         this.sails = sails;
     }
 
-    @OneToMany(mappedBy = "klient", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "klient", cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = false)
     private List<Car> car = new ArrayList<>();
 
     public List<Car> getCar() {

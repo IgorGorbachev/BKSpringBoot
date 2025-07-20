@@ -9,4 +9,5 @@ public interface KlientService {
     List<Klient> getAllSortedKlients();
     void deleteKlientWithValidation(Long klientId);
     Klient getKlientById(Long id);
+    List<Object[]> getAllDebt();
 }

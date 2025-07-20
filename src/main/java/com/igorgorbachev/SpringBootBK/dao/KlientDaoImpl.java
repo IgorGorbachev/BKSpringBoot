@@ -38,4 +38,16 @@ public class KlientDaoImpl implements KlientDao{
     public Klient getKlientById(Long id) {
         return entityManager.find(Klient.class, id);
     }
+
+    @Override
+    public List<Object[]> getAllDebt() {
+        return entityManager.createQuery(
+                        "SELECT k.name, SUM(s.summa) " +
+                        "FROM Klient k " +
+                        "JOIN k.sails s " +
+                        "WHERE s.oplata.id = 4 " +  // ID для "Не оплачено"
+                        "GROUP BY k.name",
+                        Object[].class)
+                .getResultList();
+    }
 }
