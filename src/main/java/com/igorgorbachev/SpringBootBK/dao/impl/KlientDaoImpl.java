@@ -1,5 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
+import com.igorgorbachev.SpringBootBK.dao.KlientDao;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 
 import jakarta.persistence.EntityManager;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class KlientDaoImpl implements KlientDao{
+public class KlientDaoImpl implements KlientDao {
 
     @PersistenceContext
     EntityManager entityManager;

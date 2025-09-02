@@ -1,5 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
+import com.igorgorbachev.SpringBootBK.dao.CarDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CarDaoImpl implements CarDao{
+public class CarDaoImpl implements CarDao {
 
     @PersistenceContext
     EntityManager entityManager;

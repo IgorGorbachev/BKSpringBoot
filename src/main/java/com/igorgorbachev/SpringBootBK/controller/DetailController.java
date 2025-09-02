@@ -43,7 +43,6 @@ public class DetailController {
     @PostMapping("/addDetail")
     public String addDetail(@ModelAttribute("detail") Detail detail,
                             @RequestParam("carId") Long carId) {
-        logger.info("****************************************************************************************************************ADD DETAIL FROM CONTROLLER carID = " + carId);
         detailService.addDetailToCar(detail, carId);
         return "redirect:/showDetails?id=" + carId;
     }

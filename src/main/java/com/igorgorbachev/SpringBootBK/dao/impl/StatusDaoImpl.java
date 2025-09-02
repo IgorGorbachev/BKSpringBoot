@@ -1,5 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
+import com.igorgorbachev.SpringBootBK.dao.StatusDao;
 import com.igorgorbachev.SpringBootBK.entity.Status;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -7,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class StatusDaoImpl implements StatusDao{
+public class StatusDaoImpl implements StatusDao {
 
     @PersistenceContext
     EntityManager entityManager;

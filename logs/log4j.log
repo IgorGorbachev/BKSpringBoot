@@ -7491,3 +7491,230 @@
 2025-07-20 13:49:47 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-07-20
 2025-07-20 13:49:47 INFO  SailController:173 - START addWeeklySalary weeklySalary =2049.80
 2025-07-20 13:50:30 INFO  KlientController:25 - showKlients called
+2025-09-02 22:01:48 INFO  KlientController:25 - showKlients called
+2025-09-02 22:01:58 INFO  KlientController:25 - showKlients called
+2025-09-02 22:02:00 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:02:00 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:02:00 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:02:00 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:02:04 INFO  KlientController:25 - showKlients called
+2025-09-02 22:02:08 INFO  KlientController:32 - addKlient called with id: Klient{id=null, name='Lev Gorbachev', phone='89065130971'}
+2025-09-02 22:02:08 INFO  KlientController:25 - showKlients called
+2025-09-02 22:02:11 INFO  KlientController:25 - showKlients called
+2025-09-02 22:02:11 INFO  KlientController:25 - showKlients called
+2025-09-02 22:36:44 INFO  KlientController:25 - showKlients called
+2025-09-02 22:36:46 INFO  KlientController:25 - showKlients called
+2025-09-02 22:36:52 INFO  KlientController:25 - showKlients called
+2025-09-02 22:36:53 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:36:53 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:36:53 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:36:53 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:36:55 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:36:55 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:36:55 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:36:55 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:36:56 INFO  KlientController:25 - showKlients called
+2025-09-02 22:36:57 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:36:57 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:36:57 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:36:57 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:36:58 INFO  KlientController:25 - showKlients called
+2025-09-02 22:41:33 INFO  KlientController:32 - addKlient called with id: Klient{id=null, name='Lev Gorbachev', phone='89065130971'}
+2025-09-02 22:41:33 INFO  KlientController:25 - showKlients called
+2025-09-02 22:41:41 INFO  DetailController:31 - showDetails called
+2025-09-02 22:41:55 INFO  DetailController:31 - showDetails called
+2025-09-02 22:41:58 INFO  KlientController:25 - showKlients called
+2025-09-02 22:42:03 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:42:03 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:42:03 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:42:03 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:42:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:42:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:42:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:42:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:42:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:42:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:42:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:42:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =80.00
+2025-09-02 22:44:31 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:44:31 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:44:31 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:44:31 INFO  SailController:173 - START addWeeklySalary weeklySalary =80.00
+2025-09-02 22:44:53 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:44:53 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:44:53 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:44:53 INFO  SailController:173 - START addWeeklySalary weeklySalary =80.00
+2025-09-02 22:45:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:45:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:45:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:45:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =80.00
+2025-09-02 22:45:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:45:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:45:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:45:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =6474.80
+2025-09-02 22:45:23 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:45:23 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:45:23 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:45:23 INFO  SailController:173 - START addWeeklySalary weeklySalary =6474.80
+2025-09-02 22:45:23 INFO  SailDaoImpl:32 - Sail в начале в методе changedSail в ДАО Sail{id=2, toDay='2025-09-02', status=Status{id=1, nameStatus='В пути'}, oplata=Oplata{id=1, nameOplata='Наличные'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='M9812005', zakupka=1342.00, price=12000.00, kolichestvo=3.00, summa=36000.0000, nds=0.20, nalog=6394.800000, pribil=25579.200000, zarplata=6394.80000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:45:23 INFO  SailDaoImpl:34 - Sail в конце в методе changedSail в ДАО Sail{id=2, toDay='2025-09-02', status=Status{id=1, nameStatus='В пути'}, oplata=Oplata{id=1, nameOplata='Наличные'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='M9812005', zakupka=1342.00, price=12000.00, kolichestvo=3.00, summa=36000.0000, nds=0.20, nalog=6394.800000, pribil=25579.200000, zarplata=6394.80000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:45:23 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:45:23 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:45:23 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:45:23 INFO  SailController:173 - START addWeeklySalary weeklySalary =6474.80
+2025-09-02 22:50:42 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:50:42 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:50:42 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:50:42 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:50:54 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:50:54 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:50:54 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:50:54 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:50:54 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:50:54 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:50:54 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:50:54 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 22:51:16 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:16 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:16 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:16 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 22:51:16 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:16 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:16 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:16 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:18 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:18 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:18 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:18 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:18 INFO  SailDaoImpl:32 - Sail в начале в методе changedSail в ДАО Sail{id=4, toDay='2025-09-02', status=Status{id=2, nameStatus='Приехал, Не выдан'}, oplata=Oplata{id=4, nameOplata='Не оплачено'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='075.096', zakupka=1569.00, price=1890.00, kolichestvo=3.00, summa=5670.0000, nds=0.20, nalog=192.600000, pribil=770.400000, zarplata=192.60000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:51:18 INFO  SailDaoImpl:34 - Sail в конце в методе changedSail в ДАО Sail{id=4, toDay='2025-09-02', status=Status{id=2, nameStatus='Приехал, Не выдан'}, oplata=Oplata{id=4, nameOplata='Не оплачено'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='075.096', zakupka=1569.00, price=1890.00, kolichestvo=3.00, summa=5670.0000, nds=0.20, nalog=192.600000, pribil=770.400000, zarplata=192.60000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:51:18 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:18 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:18 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:18 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:20 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:20 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:20 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:20 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:20 INFO  SailDaoImpl:32 - Sail в начале в методе changedSail в ДАО Sail{id=4, toDay='2025-09-02', status=Status{id=2, nameStatus='Приехал, Не выдан'}, oplata=Oplata{id=1, nameOplata='Наличные'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='075.096', zakupka=1569.00, price=1890.00, kolichestvo=3.00, summa=5670.0000, nds=0.20, nalog=192.600000, pribil=770.400000, zarplata=192.60000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:51:20 INFO  SailDaoImpl:34 - Sail в конце в методе changedSail в ДАО Sail{id=4, toDay='2025-09-02', status=Status{id=2, nameStatus='Приехал, Не выдан'}, oplata=Oplata{id=1, nameOplata='Наличные'}, nameSail='Герметик REINZOSIL [70мл] [-50/+300С]', articul='075.096', zakupka=1569.00, price=1890.00, kolichestvo=3.00, summa=5670.0000, nds=0.20, nalog=192.600000, pribil=770.400000, zarplata=192.60000000, klient=Klient{id=2, name='Lev Gorbachev', phone='89065130971'}}
+2025-09-02 22:51:20 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:20 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:20 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:20 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:22 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:22 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:22 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:22 INFO  SailController:173 - START addWeeklySalary weeklySalary =232.60
+2025-09-02 22:51:22 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:22 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:22 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:22 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 22:51:22 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:22 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:22 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:22 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 22:51:24 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:24 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:24 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:24 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 22:51:24 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:24 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:24 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:24 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:51:24 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:24 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:24 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:24 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:51:28 INFO  KlientController:25 - showKlients called
+2025-09-02 22:51:29 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:29 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:29 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:29 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:51:38 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:38 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:38 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:38 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:51:45 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:45 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:45 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:45 INFO  SailController:173 - START addWeeklySalary weeklySalary =0.00
+2025-09-02 22:51:45 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 22:51:45 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 22:51:45 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 22:51:45 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:06:18 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:06:18 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:06:18 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:06:18 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:06:19 INFO  KlientController:25 - showKlients called
+2025-09-02 23:06:22 INFO  DetailController:31 - showDetails called
+2025-09-02 23:06:25 INFO  KlientController:25 - showKlients called
+2025-09-02 23:06:28 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:06:28 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:06:28 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:06:28 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:06:33 INFO  KlientController:25 - showKlients called
+2025-09-02 23:07:00 INFO  KlientController:25 - showKlients called
+2025-09-02 23:07:01 INFO  KlientController:25 - showKlients called
+2025-09-02 23:07:04 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:07:04 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:07:04 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:07:04 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:07:13 INFO  KlientController:25 - showKlients called
+2025-09-02 23:08:09 INFO  KlientController:25 - showKlients called
+2025-09-02 23:08:10 INFO  KlientController:25 - showKlients called
+2025-09-02 23:08:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:08:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:08:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:08:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:08:14 INFO  KlientController:25 - showKlients called
+2025-09-02 23:17:40 INFO  KlientController:25 - showKlients called
+2025-09-02 23:17:46 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:17:46 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:17:46 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:17:46 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:17:58 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:17:58 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:17:58 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:17:58 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:18:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:18:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:18:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:18:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =40.00
+2025-09-02 23:18:12 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:18:12 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:18:12 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:18:12 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:20:31 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:20:31 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:20:31 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:20:31 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:20:33 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:20:33 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:20:33 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:20:33 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:21:26 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:21:26 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:21:26 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:21:26 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:22:00 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:22:00 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:22:00 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:22:00 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:22:28 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:22:28 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:22:28 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:22:28 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:23:09 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:23:09 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:23:09 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:23:09 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:24:44 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:24:44 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:24:44 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:24:44 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00
+2025-09-02 23:24:59 INFO  SailController:166 - START addWeeklySalary today =2025-09-02
+2025-09-02 23:24:59 INFO  SailController:168 - START addWeeklySalary weekStart =2025-09-01
+2025-09-02 23:24:59 INFO  SailController:170 - START addWeeklySalary weekEnd =2025-09-07
+2025-09-02 23:24:59 INFO  SailController:173 - START addWeeklySalary weeklySalary =48.00

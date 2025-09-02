@@ -1,0 +1,18 @@
+02.09.2025
+
+Подключить ломбок
+
+Везде поменять внедрение зависимостей (через конструктор)
+
+Контроллеры:
+Исправить контроллер GlobalModelAttributes
+Исправить контроллер SailController
+Исправить контроллер TaskController
+
+Сервис:
+DetailServiceImpl -carDao заменить на carService
+
+
+DAO:
+заменить на JPA + JPQL
+

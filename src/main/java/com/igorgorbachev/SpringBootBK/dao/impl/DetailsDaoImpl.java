@@ -1,6 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
-import com.igorgorbachev.SpringBootBK.entity.Car;
+import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
-public class DetailsDaoImpl implements DetailsDao{
+public class DetailsDaoImpl implements DetailsDao {
 
     @PersistenceContext
     EntityManager entityManager;

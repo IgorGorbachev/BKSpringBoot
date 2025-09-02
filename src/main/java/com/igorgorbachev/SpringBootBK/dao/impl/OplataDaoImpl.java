@@ -1,5 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
+import com.igorgorbachev.SpringBootBK.dao.OplataDao;
 import com.igorgorbachev.SpringBootBK.entity.Oplata;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

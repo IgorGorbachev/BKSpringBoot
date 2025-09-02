@@ -58,7 +58,7 @@ public class CarController {
     @PostMapping("/deleteCar")
     public String deleteCar(@RequestParam("carId") Long carId,
                             @RequestParam("klientId") Long klientId) {
-        carService.deleteCar(carId); // Вам нужно добавить этот метод в сервис
+        carService.deleteCar(carId);
         return "redirect:/showCars?id=" + klientId;
     }
 }

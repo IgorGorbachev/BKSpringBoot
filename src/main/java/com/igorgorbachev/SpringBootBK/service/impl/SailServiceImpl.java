@@ -1,21 +1,17 @@
-package com.igorgorbachev.SpringBootBK.service;
+package com.igorgorbachev.SpringBootBK.service.impl;
 
 
 import com.igorgorbachev.SpringBootBK.dao.SailDao;
 import com.igorgorbachev.SpringBootBK.entity.Sail;
+import com.igorgorbachev.SpringBootBK.service.SailService;
 import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 
 @Service

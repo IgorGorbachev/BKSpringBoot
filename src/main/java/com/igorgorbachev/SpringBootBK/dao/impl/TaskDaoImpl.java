@@ -1,5 +1,6 @@
-package com.igorgorbachev.SpringBootBK.dao;
+package com.igorgorbachev.SpringBootBK.dao.impl;
 
+import com.igorgorbachev.SpringBootBK.dao.TaskDao;
 import com.igorgorbachev.SpringBootBK.entity.Task;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

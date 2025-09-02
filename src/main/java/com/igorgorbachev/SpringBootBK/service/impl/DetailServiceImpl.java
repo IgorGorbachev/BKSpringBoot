@@ -1,9 +1,10 @@
-package com.igorgorbachev.SpringBootBK.service;
+package com.igorgorbachev.SpringBootBK.service.impl;
 
 import com.igorgorbachev.SpringBootBK.dao.CarDao;
 import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
+import com.igorgorbachev.SpringBootBK.service.DetailService;
 import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

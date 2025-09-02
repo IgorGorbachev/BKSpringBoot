@@ -1,7 +1,8 @@
-package com.igorgorbachev.SpringBootBK.service;
+package com.igorgorbachev.SpringBootBK.service.impl;
 
 import com.igorgorbachev.SpringBootBK.dao.TaskDao;
 import com.igorgorbachev.SpringBootBK.entity.Task;
+import com.igorgorbachev.SpringBootBK.service.TaskService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private TaskDao taskDao;

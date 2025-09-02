@@ -3,14 +3,21 @@ package com.igorgorbachev.SpringBootBK.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.Objects;
+
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "details")
 public class Detail {
@@ -29,11 +36,9 @@ public class Detail {
     @Column(name = "analog_articul")
     private String analogArticul;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "car_id")
     private Car car;
-
-    public Detail() {
-    }
 
     public Detail(String name, String originArticul, String analogArticul) {
         this.name = name;
@@ -41,65 +46,25 @@ public class Detail {
         this.analogArticul = analogArticul;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getOriginArticul() {
-        return originArticul;
-    }
-
-    public void setOriginArticul(String originArticul) {
-        this.originArticul = originArticul;
-    }
-
-    public String getAnalogArticul() {
-        return analogArticul;
-    }
-
-    public void setAnalogArticul(String analogArticul) {
-        this.analogArticul = analogArticul;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Detail details = (Detail) o;
-        return Objects.equals(id, details.id) && Objects.equals(name, details.name) && Objects.equals(originArticul, details.originArticul) && Objects.equals(analogArticul, details.analogArticul);
+        Detail detail = (Detail) o;
+        return Objects.equals(analogArticul, detail.analogArticul);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, originArticul, analogArticul);
+        return Objects.hashCode(analogArticul);
     }
 
     @Override
     public String toString() {
-        return "Details{" +
-               "id=" + id +
-               ", name='" + name + '\'' +
-               ", originArticul='" + originArticul + '\'' +
-               ", analogArticul='" + analogArticul + '\'' +
-               '}';
+        return "Detail{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", originArticul='" + originArticul + '\'' +
+                ", analogArticul='" + analogArticul + '\'' +
+                '}';
     }
 }

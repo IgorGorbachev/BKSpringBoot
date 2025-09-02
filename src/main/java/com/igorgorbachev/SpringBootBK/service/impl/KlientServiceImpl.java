@@ -1,14 +1,14 @@
-package com.igorgorbachev.SpringBootBK.service;
+package com.igorgorbachev.SpringBootBK.service.impl;
 
 import com.igorgorbachev.SpringBootBK.dao.KlientDao;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
+import com.igorgorbachev.SpringBootBK.service.KlientService;
 import jakarta.transaction.Transactional;
 import org.apache.log4j.Logger;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -43,13 +43,11 @@ public class KlientServiceImpl implements KlientService {
     @Override
     @Transactional
     public void deleteKlientWithValidation(Long klientId) {
-        // Загружаем клиента вместе с автомобилями
         Klient klient = klientDao.getKlientById(klientId);
 
-        // Явно инициализируем коллекцию автомобилей
-        Hibernate.initialize(klient.getCar());
+        Hibernate.initialize(klient.getCars());
 
-        if (klient.getCar() != null && !klient.getCar().isEmpty()) {
+        if (klient.getCars() != null && !klient.getCars().isEmpty()) {
             throw new IllegalStateException("Клиента нельзя удалить, так как у него есть автомобили.");
         }
 
