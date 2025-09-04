@@ -7,7 +7,7 @@ public interface DetailService {
     void addDetailToCar(Detail detail, Long carId);
     void updateDetail(Long detailId, Detail detail);
     List<Detail> getAllSortedDetails();
-    void deleteDetail(Long detailId);
+    void deleteDetail(Long detailId,  Long carId);
     Detail getDetailById(Long id);
     List<Detail> getSortedDetailsByCarId(Long carId);
 }

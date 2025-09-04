@@ -1,41 +1,39 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
-import com.igorgorbachev.SpringBootBK.dao.CarRepository;
-import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
+import com.igorgorbachev.SpringBootBK.dao.DetailsRepository;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
+import com.igorgorbachev.SpringBootBK.service.CarService;
 import com.igorgorbachev.SpringBootBK.service.DetailService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 
-
+@Slf4j
 @Service
 @Transactional
 public class DetailServiceImpl implements DetailService {
-    Logger logger = Logger.getLogger(DetailServiceImpl.class);
 
-    @Autowired
-    private DetailsDao detailsDao;
+    private final DetailsRepository detailsRepository;
+    private final CarService carService;
 
-    @Autowired
-    private CarRepository carDao;
 
-    @Autowired
-    public DetailServiceImpl(DetailsDao detailsDao) {
-        this.detailsDao = detailsDao;
+    public DetailServiceImpl(DetailsRepository detailsRepository, CarService  carService) {
+        this.detailsRepository = detailsRepository;
+        this.carService = carService;
     }
 
     @Override
     public void addDetailToCar(Detail detail, Long carId) {
-        Car car = carDao.getCarFromBD(carId);
+        Car car = carService.getCarById(carId);
         Detail newDetail = new Detail(detail.getName(), detail.getOriginArticul(), detail.getAnalogArticul());
         newDetail.setCar(car);
         car.getDetails().add(newDetail);
-        detailsDao.addDetail(newDetail);
+        detailsRepository.save(newDetail);
     }
 
     @Override
@@ -44,29 +42,35 @@ public class DetailServiceImpl implements DetailService {
         existingDetail.setName(detail.getName());
         existingDetail.setOriginArticul(detail.getOriginArticul());
         existingDetail.setAnalogArticul(detail.getAnalogArticul());
-        detailsDao.changeDetail(existingDetail);
+        detailsRepository.save(existingDetail);
     }
 
     @Override
     public List<Detail> getAllSortedDetails() {
-        List<Detail> details = detailsDao.getAllDetail();
+        List<Detail> details = detailsRepository.findAll();
         details.sort(Comparator.comparing(Detail::getName, String.CASE_INSENSITIVE_ORDER));
         return details;
     }
 
     @Override
-    public void deleteDetail(Long detailId) {
-        detailsDao.deleteDetail(getDetailById(detailId));
+    public void deleteDetail(Long detailId, Long carId) {
+        Detail detail = detailsRepository.findById(detailId).orElseThrow(()-> new EntityNotFoundException("Detail not found"));
+        Car car = carService.getCarById(carId);
+        if (!car.getDetails().contains(detail)) {
+            throw new IllegalStateException("Detail not associated with this car");
+        }
+        car.getDetails().remove(detail);
+        detailsRepository.delete(detail);
     }
 
     @Override
     public Detail getDetailById(Long id) {
-        return detailsDao.getDetailFromBD(id);
+        return detailsRepository.getDetailFromBD(id);
     }
 
     @Override
     public List<Detail> getSortedDetailsByCarId(Long carId) {
-        List<Detail> details = detailsDao.getDetailByCarId(carId);
+        List<Detail> details = detailsRepository.getDetailByCarId(carId);
         details.sort(Comparator.comparing(Detail::getId).reversed());
         return details;
     }
