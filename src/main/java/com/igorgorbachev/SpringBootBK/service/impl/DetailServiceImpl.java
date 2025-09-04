@@ -1,6 +1,6 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
-import com.igorgorbachev.SpringBootBK.dao.CarDao;
+import com.igorgorbachev.SpringBootBK.dao.CarRepository;
 import com.igorgorbachev.SpringBootBK.dao.DetailsDao;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Detail;
@@ -22,7 +22,7 @@ public class DetailServiceImpl implements DetailService {
     private DetailsDao detailsDao;
 
     @Autowired
-    private CarDao carDao;
+    private CarRepository carDao;
 
     @Autowired
     public DetailServiceImpl(DetailsDao detailsDao) {

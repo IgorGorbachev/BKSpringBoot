@@ -45,8 +45,6 @@ public class KlientServiceImpl implements KlientService {
         Klient klient = klientRepository.findById(klientId)
                 .orElseThrow(() -> new IllegalArgumentException("Klient with id " + klientId + " not found"));
 
-//        Hibernate.initialize(klient.getCars());
-
         if (klient.getCars() != null && !klient.getCars().isEmpty()) {
             throw new IllegalStateException("Клиента нельзя удалить, так как у него есть автомобили.");
         }

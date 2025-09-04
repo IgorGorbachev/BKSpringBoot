@@ -1,30 +1,27 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
-import com.igorgorbachev.SpringBootBK.dao.CarDao;
+import com.igorgorbachev.SpringBootBK.dao.CarRepository;
 import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 import com.igorgorbachev.SpringBootBK.service.CarService;
 import com.igorgorbachev.SpringBootBK.service.KlientService;
 import jakarta.transaction.Transactional;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 
-
+@Slf4j
 @Service
 @Transactional
 public class CarServiceImpl implements CarService {
-    private static final Logger logger = Logger.getLogger(CarServiceImpl.class);
 
-    private final CarDao carDao;
+    private final CarRepository carRepository;
     private final KlientService klientService;
 
-    @Autowired
-    public CarServiceImpl(CarDao carDao, KlientService klientService) {
-        this.carDao = carDao;
+    public CarServiceImpl(CarRepository carDao, KlientService klientService) {
+        this.carRepository = carDao;
         this.klientService = klientService;
     }
 
@@ -33,7 +30,7 @@ public class CarServiceImpl implements CarService {
         Klient klient = klientService.getKlientById(klientId);
         Car newCar = new Car(car.getName(), car.getVin());
         newCar.setKlient(klient);
-        carDao.addCar(newCar);
+        carRepository.save(newCar);
     }
 
     @Override
@@ -41,12 +38,12 @@ public class CarServiceImpl implements CarService {
         Car existingCar = getCarById(carId);
         existingCar.setName(car.getName());
         existingCar.setVin(car.getVin());
-        carDao.changeCar(existingCar);
+        carRepository.save(existingCar);
     }
 
     @Override
     public List<Car> getAllSortedCars() {
-        List<Car> cars = carDao.getAllCars();
+        List<Car> cars = carRepository.findAll();
         cars.sort(Comparator.comparing(Car::getName, String.CASE_INSENSITIVE_ORDER));
         return cars;
     }
@@ -54,21 +51,21 @@ public class CarServiceImpl implements CarService {
     @Transactional
     @Override
     public void deleteCar(Long carId) {
-        Car car = carDao.getCarFromBD(carId);
-        logger.info("**********************************************"+car.getDetails());
+        Car car = carRepository.getCarFromBD(carId);
+        log.info("**********************************************"+car.getDetails());
         if (!car.getDetails().isEmpty()) {
             throw new IllegalStateException();
         }
-        carDao.deleteCar(carId);
+        carRepository.delete(car);
     }
 
     @Override
     public Car getCarById(Long id) {
-        return carDao.getCarFromBD(id);
+        return carRepository.getCarFromBD(id);
     }
 
     @Override
     public List<Car> getCarsByKlientId(Long klientId) {
-        return carDao.getListCarsById(klientId);
+        return carRepository.getListCarsById(klientId);
     }
 }

@@ -4,6 +4,7 @@ import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 import com.igorgorbachev.SpringBootBK.service.CarService;
 import com.igorgorbachev.SpringBootBK.service.KlientService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+@Slf4j
 @Controller
 public class CarController {
-    private static final Logger logger = Logger.getLogger(CarController.class);
 
     private final CarService carService;
     private final KlientService klientService;
 
-    @Autowired
     public CarController(CarService carService, KlientService klientService) {
         this.carService = carService;
         this.klientService = klientService;
