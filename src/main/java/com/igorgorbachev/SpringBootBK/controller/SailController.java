@@ -5,6 +5,9 @@ import com.igorgorbachev.SpringBootBK.service.SailService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,8 @@ public class SailController {
                             @RequestParam(required = false) Long statusFilter,
                             @RequestParam(required = false) Long oplataFilter,
                             @RequestParam(required = false) Boolean reset,
+                            @RequestParam(defaultValue = "0") int page,
+                            @RequestParam(defaultValue = "60") int size,
                             Model model,
                             HttpSession session) {
 
@@ -41,7 +46,9 @@ public class SailController {
         statusFilter = updateSessionAttribute(session, "statusFilter", statusFilter);
         oplataFilter = updateSessionAttribute(session, "oplataFilter", oplataFilter);
 
-        Map<String, Object> viewData = sailService.getSailViewData(klientFilter, statusFilter, oplataFilter);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").descending());
+
+        Map<String, Object> viewData = sailService.getSailViewData(klientFilter, statusFilter, oplataFilter, pageable);
         model.addAllAttributes(viewData);
         model.addAttribute("lastSelectedKlientId", session.getAttribute("lastSelectedKlientId"));
 

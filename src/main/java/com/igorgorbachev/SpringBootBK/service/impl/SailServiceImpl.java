@@ -13,9 +13,13 @@ import com.igorgorbachev.SpringBootBK.specification.SailSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -141,12 +145,20 @@ public class SailServiceImpl implements SailService {
 
     @Transactional
     @Override
-    public Map<String, Object> getSailViewData(Long klientFilter, Long statusFilter, Long oplataFilter) {
+    public Map<String, Object> getSailViewData(Long klientFilter, Long statusFilter, Long oplataFilter, Pageable pageable) {
 
         Map<String, Object> modelData = new HashMap<>();
 
-        List<Sail> sailList = getFilteredSails(klientFilter, statusFilter, oplataFilter);
-        sailList.sort(Comparator.comparing(Sail::getId).reversed());
+        Page<Sail> sailPage = sailRepository.findFilteredSails(klientFilter, statusFilter, oplataFilter, pageable);
+
+        modelData.put("sailList", sailPage.getContent());
+        modelData.put("currentPage", sailPage.getNumber());
+        modelData.put("totalPages", sailPage.getTotalPages());
+        modelData.put("totalItems", sailPage.getTotalElements());
+        modelData.put("pageSize", pageable.getPageSize());
+
+//        List<Sail> sailList = getFilteredSails(klientFilter, statusFilter, oplataFilter);
+//        sailList.sort(Comparator.comparing(Sail::getId).reversed());
 
         modelData.put("statusColors", Map.of(
                 "В пути", "ff0000",
@@ -165,7 +177,7 @@ public class SailServiceImpl implements SailService {
                 "Безнал (счет выставлен)", "ffc107"
         ));
 
-        modelData.put("sailList", sailList);
+//        modelData.put("sailList", sailList);
         modelData.put("klientList", klientService.getAllSortedKlients());
         modelData.put("statusList", statusService.getAllStatus());
         modelData.put("oplataList", oplataService.findAll());

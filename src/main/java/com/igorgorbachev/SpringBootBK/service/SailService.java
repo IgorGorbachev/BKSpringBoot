@@ -1,6 +1,8 @@
 package com.igorgorbachev.SpringBootBK.service;
 
 import com.igorgorbachev.SpringBootBK.entity.Sail;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
@@ -26,7 +28,7 @@ public interface SailService {
 
     BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end);
 
-    Map<String, Object> getSailViewData(Long klientFilter, Long statusFilter, Long oplataFilter);
+    Map<String, Object> getSailViewData(Long klientFilter, Long statusFilter, Long oplataFilter, Pageable pageable);
 
     void addWeeklySalaryData(Model model);
 

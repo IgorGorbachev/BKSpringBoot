@@ -258,12 +258,13 @@
 
 
             <td>
-                <form th:action="@{/changeSail}" method="post" class="d-flex gap-2">
+                <div class="d-flex gap-2">
                     <input type="hidden" name="sailId" th:value="${sail.id}">
 
-                    <select name="statusId" class="form-select" onchange="this.form.submit()"
+                    <select name="statusId" class="form-select status-select"
                             style="padding: 0.25rem 0.5rem; font-size: 0.875rem;"
-                            th:styleappend="${'background-color: #' + statusColors.get(sail.status?.nameStatus)}">
+                            th:styleappend="${'background-color: #' + statusColors.get(sail.status?.nameStatus)}"
+                            th:data-sail-id="${sail.id}">
                         <option th:each="status : ${statusList}"
                                 th:value="${status.id}"
                                 th:text="${status.nameStatus}"
@@ -271,18 +272,18 @@
                         </option>
                     </select>
 
-                    <select name="oplataId" class="form-select" onchange="this.form.submit()"
+                    <select name="oplataId" class="form-select oplata-select"
                             style="padding: 0.25rem 0.5rem; font-size: 0.875rem;"
-                            th:styleappend="${'background-color: #' + oplataColors.get(sail.oplata?.nameOplata)}">
+                            th:styleappend="${'background-color: #' + oplataColors.get(sail.oplata?.nameOplata)}"
+                            th:data-sail-id="${sail.id}">
                         <option th:each="oplata : ${oplataList}"
                                 th:value="${oplata.id}"
                                 th:text="${oplata.nameOplata}"
                                 th:selected="${sail.oplata?.id == oplata.id}">
                         </option>
                     </select>
-                </form>
+                </div>
             </td>
-
 
             <td th:text="${sail.klient != null} ? ${sail.klient.name} : 'Нет клиента'"></td>
 
@@ -341,6 +342,77 @@
         </tr>
         </tbody>
     </table>
+    <div th:if="${totalPages > 1}" class="d-flex justify-content-between align-items-center mt-3">
+        <div class="text-muted">
+            Показано <span th:text="${sailList.size()}"></span> из
+            <span th:text="${totalItems}"></span> записей
+        </div>
+
+        <nav>
+            <ul class="pagination">
+                <!-- Первая страница -->
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/showSails(page=0, size=${pageSize},
+                    klientFilter=${currentKlientFilter},
+                    statusFilter=${currentStatusFilter},
+                    oplataFilter=${currentOplataFilter})}">
+                        Первая
+                    </a>
+                </li>
+
+                <!-- Предыдущая страница -->
+                <li class="page-item" th:classappend="${currentPage == 0} ? 'disabled'">
+                    <a class="page-link" th:href="@{/showSails(page=${currentPage - 1}, size=${pageSize},
+                    klientFilter=${currentKlientFilter},
+                    statusFilter=${currentStatusFilter},
+                    oplataFilter=${currentOplataFilter})}">
+                        Назад
+                    </a>
+                </li>
+
+                <!-- Номера страниц -->
+<!--                <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"-->
+<!--                    class="page-item" th:classappend="${i == currentPage} ? 'active'">-->
+<!--                    <a class="page-link" th:href="@{/showSails(page=${i}, size=${pageSize},-->
+<!--                    klientFilter=${currentKlientFilter},-->
+<!--                    statusFilter=${currentStatusFilter},-->
+<!--                    oplataFilter=${currentOplataFilter})}"-->
+<!--                       th:text="${i + 1}">-->
+<!--                    </a>-->
+<!--                </li>-->
+
+                <!-- Следующая страница -->
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/showSails(page=${currentPage + 1}, size=${pageSize},
+                    klientFilter=${currentKlientFilter},
+                    statusFilter=${currentStatusFilter},
+                    oplataFilter=${currentOplataFilter})}">
+                        Вперед
+                    </a>
+                </li>
+
+                <!-- Последняя страница -->
+                <li class="page-item" th:classappend="${currentPage == totalPages - 1} ? 'disabled'">
+                    <a class="page-link" th:href="@{/showSails(page=${totalPages - 1}, size=${pageSize},
+                    klientFilter=${currentKlientFilter},
+                    statusFilter=${currentStatusFilter},
+                    oplataFilter=${currentOplataFilter})}">
+                        Последняя
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+<!--        <div class="form-group">-->
+<!--            <select class="form-select form-select-sm" onchange="changePageSize(this)"-->
+<!--                    style="width: 80px;">-->
+<!--                <option value="10" th:selected="${pageSize == 10}">10</option>-->
+<!--                <option value="20" th:selected="${pageSize == 20}">20</option>-->
+<!--                <option value="50" th:selected="${pageSize == 50}">50</option>-->
+<!--                <option value="100" th:selected="${pageSize == 100}">100</option>-->
+<!--            </select>-->
+<!--        </div>-->
+    </div>
 </main>
 
 
@@ -480,6 +552,94 @@
                 });
             });
         });
+
+        // Функция для обновления статуса
+        function updateStatus(sailId, statusId) {
+            fetch('/changeSailStatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    sailId: sailId,
+                    statusId: statusId
+                })
+            }).then(response => {
+                if (!response.ok) {
+                    alert('Ошибка при обновлении статуса');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при обновлении статуса');
+            });
+        }
+
+// Функция для обновления оплаты
+        function updateOplata(sailId, oplataId) {
+            fetch('/changeSailOplata', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    sailId: sailId,
+                    oplataId: oplataId
+                })
+            }).then(response => {
+                if (!response.ok) {
+                    alert('Ошибка при обновлении оплаты');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка при обновлении оплаты');
+            });
+        }
+
+// Функция для обновления внешнего вида после изменения
+        function updateAppearance(selectElement, colorMap) {
+            const selectedText = selectElement.options[selectElement.selectedIndex].text;
+            const color = colorMap[selectedText] || 'ffffff';
+            selectElement.style.backgroundColor = '#' + color;
+        }
+
+
+// Обработчики для изменения статуса и оплаты
+        document.querySelectorAll('.status-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const sailId = this.getAttribute('data-sail-id');
+                const statusId = this.value;
+                updateStatus(sailId, statusId);
+                updateAppearance(this, statusColors);
+            });
+        });
+
+        document.querySelectorAll('.oplata-select').forEach(select => {
+            select.addEventListener('change', function() {
+                const sailId = this.getAttribute('data-sail-id');
+                const oplataId = this.value;
+                updateOplata(sailId, oplataId);
+                updateAppearance(this, oplataColors);
+            });
+        });
+
+        const statusColors = {
+            "В пути": "ff0000",
+            "Приехал, Не выдан": "ffc107",
+            "Выдан": "28a745",
+            "Возврат": "007bff"
+        };
+
+        const oplataColors = {
+            "Не оплачено": "ff0000",
+            "Наличные": "007bff",
+            "Терминал": "ffc107",
+            "Безнал (счет ОПЛАЧЕН)": "28a745",
+            "Наличные + чек": "28a745",
+            "Терминал + чек": "28a745",
+            "Безнал (добавил в счет)": "808080",
+            "Безнал (счет выставлен)": "ffc107"
+        };
+
 
         document.querySelectorAll('.delete-btn').forEach(btn => {
             btn.addEventListener('click', function () {
