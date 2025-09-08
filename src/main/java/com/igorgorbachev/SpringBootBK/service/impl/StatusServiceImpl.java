@@ -1,27 +1,27 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
-import com.igorgorbachev.SpringBootBK.dao.StatusDao;
+import com.igorgorbachev.SpringBootBK.dao.StatusRepository;
 import com.igorgorbachev.SpringBootBK.entity.Status;
 import com.igorgorbachev.SpringBootBK.service.StatusService;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class StatusServiceImpl implements StatusService {
 
-    @Autowired
-    private StatusDao statusDao;
+    private final StatusRepository statusRepository;
 
     @Override
     public List<Status> getAllStatus() {
-        return statusDao.getAllStatus();
+        return statusRepository.findAll();
     }
 
     @Override
     public Status getStatusById(Long id) {
-        return statusDao.getStatusById(id);
+        return statusRepository.findStatusById(id);
     }
 }

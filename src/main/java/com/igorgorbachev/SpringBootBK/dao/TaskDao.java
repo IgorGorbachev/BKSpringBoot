@@ -1,13 +1,10 @@
 package com.igorgorbachev.SpringBootBK.dao;
 
 import com.igorgorbachev.SpringBootBK.entity.Task;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface TaskDao {
-    void addTask(Task task);
-    void changeTask(Task task);
-    void deleteTask(Long id);
-    List<Task> getAllTask();
-    Task getTaskById(Long id);
+public interface TaskDao extends JpaRepository<Task, Long> {
+    Task findTaskById(Long id);
 }

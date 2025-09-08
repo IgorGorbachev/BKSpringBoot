@@ -1,22 +1,26 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
 
-import com.igorgorbachev.SpringBootBK.dao.SailDao;
+import com.igorgorbachev.SpringBootBK.dao.SailRepository;
 import com.igorgorbachev.SpringBootBK.entity.Sail;
 import com.igorgorbachev.SpringBootBK.service.SailService;
+import com.igorgorbachev.SpringBootBK.specification.SailSpecifications;
 import jakarta.transaction.Transactional;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 
+
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class SailServiceImpl implements SailService {
+
+    private final SailRepository sailRepository;
 
     public void calculate(Sail sail) {
         BigDecimal zakupka = sail.getZakupka().multiply(sail.getKolichestvo());
@@ -31,48 +35,76 @@ public class SailServiceImpl implements SailService {
         sail.setZarplata(zarplata);
     }
 
-    private static final Logger logger = Logger.getLogger(SailServiceImpl.class);
-
-    @Autowired
-    private SailDao sailDao;
-
+    @Transactional
     @Override
     public void addSail(Sail sail) {
         sail.setToDay(LocalDate.now());
         calculate(sail);
-        sailDao.addSail(sail);
+        sailRepository.save(sail);
     }
 
+
+
+    @Transactional
     @Override
     public void changeSail(Sail sail) {
         sail.setToDay(sail.getToDay());
         calculate(sail);
-        sailDao.changeSail(sail);
+        sailRepository.save(sail);
     }
 
+
+
+    @Transactional
     @Override
     public void deleteSail(Long sailId) {
-        sailDao.deleteSail(sailId);
+        Sail sail = sailRepository.findById(sailId)
+                .orElseThrow(() -> new IllegalArgumentException("Sail with id " + sailId + " not found"));
+
+        sailRepository.delete(sail);
     }
 
+
+
+    @Transactional
     @Override
     public List<Sail> getAllSail() {
-        return sailDao.getAllSail();
+        return sailRepository.findAll();
     }
 
+
+
+    @Transactional
     @Override
     public Sail getSailById(Long id) {
-        return sailDao.getSailById(id);
+        return sailRepository.findSailById(id);
     }
 
+
+
+    @Transactional
     @Override
     public List<Sail> getFilteredSails(Long klientId, Long statusId, Long oplataId) {
-        return sailDao.getFilteredSails(klientId, statusId, oplataId);
+        Specification<Sail> spec = Specification.where(null);
+
+        if (klientId != null) {
+            spec = spec.and(SailSpecifications.withKlientId(klientId));
+        }
+        if (statusId != null) {
+            spec = spec.and(SailSpecifications.withStatusId(statusId));
+        }
+        if (oplataId != null) {
+            spec = spec.and(SailSpecifications.withOplataId(oplataId));
+        }
+
+        return sailRepository.findAll(spec);
     }
 
+
+    @Transactional
     @Override
     public BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end) {
-        return sailDao.getZarplataForPeriod(start, end);
+        return sailRepository.getZarplataForPeriod(start, end);
     }
 
 

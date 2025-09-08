@@ -10,9 +10,7 @@ import com.igorgorbachev.SpringBootBK.service.OplataService;
 import com.igorgorbachev.SpringBootBK.service.SailService;
 import com.igorgorbachev.SpringBootBK.service.StatusService;
 import jakarta.servlet.http.HttpSession;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,21 +28,20 @@ import java.util.Map;
 
 
 @Controller
+@Slf4j
 public class SailController {
 
-    private static final Logger logger = Logger.getLogger(SailController.class);
+    private final SailService sailService;
+    private final KlientService klientService;
+    private final StatusService statusService;
+    private final OplataService oplataService;
 
-    @Autowired
-    private SailService sailService;
-
-    @Autowired
-    private KlientService klientService;
-
-    @Autowired
-    private StatusService statusService;
-
-    @Autowired
-    private OplataService oplataService;
+    public SailController(SailService sailService, KlientService klientService, StatusService statusService, OplataService oplataService) {
+        this.sailService = sailService;
+        this.klientService = klientService;
+        this.statusService = statusService;
+        this.oplataService = oplataService;
+    }
 
     @GetMapping("/showSails")
     public String showSails(@RequestParam(required = false) Long klientFilter,
@@ -107,7 +104,7 @@ public class SailController {
         model.addAttribute("sailList", sailList); // Используем только отфильтрованный список
         model.addAttribute("klientList", klientService.getAllSortedKlients());
         model.addAttribute("statusList", statusService.getAllStatus());
-        model.addAttribute("oplataList", oplataService.getAllOplata());
+        model.addAttribute("oplataList", oplataService.findAll());
 
         // Добавляем текущие значения фильтров для формы
         model.addAttribute("currentKlientFilter", klientFilter);
@@ -121,7 +118,7 @@ public class SailController {
     public String addSail(@ModelAttribute Sail sail, @RequestParam Long klientId, HttpSession session) {
         Klient klient = klientService.getKlientById(klientId);
         sail.setStatus(statusService.getStatusById(1L));
-        sail.setOplata(oplataService.getOplataById(4L));
+        sail.setOplata(oplataService.findOplatasById(4L));
         sail.setKlient(klient);
         session.setAttribute("lastSelectedKlientId", sail.getKlient().getId());
         sailService.addSail(sail);
@@ -153,7 +150,7 @@ public class SailController {
         if (kolichestvo != null) sail.setKolichestvo(kolichestvo);
 
         Status status = statusService.getStatusById(statusId);
-        Oplata oplata = oplataService.getOplataById(oplataId);
+        Oplata oplata = oplataService.findOplatasById(oplataId);
         sail.setOplata(oplata);
         sail.setStatus(status);
         sailService.changeSail(sail);
@@ -163,14 +160,14 @@ public class SailController {
     @ModelAttribute
     public void addWeeklySalary(Model model) {
         LocalDate today = LocalDate.now();
-        logger.info("START addWeeklySalary today =" + today);
+        log.info("START addWeeklySalary today =" + today);
         LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        logger.info("START addWeeklySalary weekStart =" + weekStart);
+        log.info("START addWeeklySalary weekStart =" + weekStart);
         LocalDate weekEnd = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
-        logger.info("START addWeeklySalary weekEnd =" + weekEnd);
+        log.info("START addWeeklySalary weekEnd =" + weekEnd);
 
         BigDecimal weeklySalary = sailService.getZarplataForPeriod(weekStart, weekEnd);
-        logger.info("START addWeeklySalary weeklySalary =" + weeklySalary);
+        log.info("START addWeeklySalary weeklySalary =" + weeklySalary);
 
         model.addAttribute("weeklySalary", weeklySalary);
         model.addAttribute("weekStart", weekStart);
