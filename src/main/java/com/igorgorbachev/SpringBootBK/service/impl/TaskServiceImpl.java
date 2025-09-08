@@ -1,11 +1,10 @@
 package com.igorgorbachev.SpringBootBK.service.impl;
 
-import com.igorgorbachev.SpringBootBK.dao.TaskDao;
+import com.igorgorbachev.SpringBootBK.dao.TaskRepository;
 import com.igorgorbachev.SpringBootBK.entity.Task;
 import com.igorgorbachev.SpringBootBK.service.TaskService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,32 +14,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-    private final TaskDao taskDao;
+    private final TaskRepository taskRepository;
 
     @Override
     public void addTask(Task task) {
-        taskDao.save(task);
+        taskRepository.save(task);
     }
 
     @Override
     public void changeTask(Task task) {
-        taskDao.save(task);
+        taskRepository.save(task);
     }
 
     @Override
     public void deleteTask(Long id) {
-        Task task = taskDao.findById(id).get();
-        taskDao.delete(task);
+        Task task = taskRepository.findById(id).get();
+        taskRepository.delete(task);
     }
 
     @Override
     public List<Task> getAllTask() {
-        return taskDao.findAll();
+        return taskRepository.findAll();
     }
 
     @Override
     public Task getTaskById(Long id) {
-        return taskDao.findTaskById(id);
+        return taskRepository.findTaskById(id);
     }
 
 }

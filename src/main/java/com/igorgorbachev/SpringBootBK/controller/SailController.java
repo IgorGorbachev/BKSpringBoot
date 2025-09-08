@@ -10,6 +10,7 @@ import com.igorgorbachev.SpringBootBK.service.OplataService;
 import com.igorgorbachev.SpringBootBK.service.SailService;
 import com.igorgorbachev.SpringBootBK.service.StatusService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,19 +30,13 @@ import java.util.Map;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class SailController {
 
     private final SailService sailService;
     private final KlientService klientService;
     private final StatusService statusService;
     private final OplataService oplataService;
-
-    public SailController(SailService sailService, KlientService klientService, StatusService statusService, OplataService oplataService) {
-        this.sailService = sailService;
-        this.klientService = klientService;
-        this.statusService = statusService;
-        this.oplataService = oplataService;
-    }
 
     @GetMapping("/showSails")
     public String showSails(@RequestParam(required = false) Long klientFilter,
@@ -173,6 +168,4 @@ public class SailController {
         model.addAttribute("weekStart", weekStart);
         model.addAttribute("weekEnd", weekEnd);
     }
-
-
 }

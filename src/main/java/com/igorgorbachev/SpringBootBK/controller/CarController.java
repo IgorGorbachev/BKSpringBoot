@@ -4,9 +4,8 @@ import com.igorgorbachev.SpringBootBK.entity.Car;
 import com.igorgorbachev.SpringBootBK.entity.Klient;
 import com.igorgorbachev.SpringBootBK.service.CarService;
 import com.igorgorbachev.SpringBootBK.service.KlientService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class CarController {
 
     private final CarService carService;
     private final KlientService klientService;
 
-    public CarController(CarService carService, KlientService klientService) {
-        this.carService = carService;
-        this.klientService = klientService;
-    }
 
     @GetMapping("/showCars")
     public String showCars(@ModelAttribute("klient") Klient klient, Model model) {

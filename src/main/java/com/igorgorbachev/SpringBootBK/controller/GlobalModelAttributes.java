@@ -1,23 +1,20 @@
 package com.igorgorbachev.SpringBootBK.controller;
 
 import com.igorgorbachev.SpringBootBK.service.SailService;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
 @ControllerAdvice
+@RequiredArgsConstructor
 public class GlobalModelAttributes {
-    Logger logger = Logger.getLogger(GlobalModelAttributes.class);
 
-    @Autowired
-    private SailService sailService;
+    private final SailService sailService;
 
     @ModelAttribute
     public void addWeeklySalary(Model model) {
