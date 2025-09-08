@@ -51,8 +51,8 @@ public class CarServiceImpl implements CarService {
     @Transactional
     @Override
     public void deleteCar(Long carId) {
-        Car car = carRepository.getCarFromBD(carId);
-        log.info("**********************************************"+car.getDetails());
+        Car car = carRepository.findById(carId).orElseThrow(()-> new IllegalArgumentException("Car not found"));
+        log.info("**********************************************{}",car.getDetails());
         if (!car.getDetails().isEmpty()) {
             throw new IllegalStateException();
         }
@@ -61,7 +61,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car getCarById(Long id) {
-        return carRepository.getCarFromBD(id);
+        return carRepository.findById(id).orElseThrow(()-> new IllegalArgumentException("Car not found"));
     }
 
     @Override

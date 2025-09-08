@@ -2,7 +2,7 @@ package com.igorgorbachev.SpringBootBK.controller;
 
 import com.igorgorbachev.SpringBootBK.entity.Task;
 import com.igorgorbachev.SpringBootBK.service.TaskService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequiredArgsConstructor
 public class TaskController {
 
-    @Autowired
-    private TaskService taskService;
+
+    private final TaskService taskService;
 
     @GetMapping("/task")
     public String showTask(Model model){

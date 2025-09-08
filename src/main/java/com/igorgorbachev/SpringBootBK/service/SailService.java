@@ -1,17 +1,20 @@
 package com.igorgorbachev.SpringBootBK.service;
 
 import com.igorgorbachev.SpringBootBK.entity.Sail;
+import org.springframework.ui.Model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.Map;
 
 
 public interface SailService {
-    void addSail(Sail sail);
+    void addSail(Sail sail, Long klientId);
 
-    void changeSail(Sail sail);
+    void changeSail(Sail sail, Long statusId, Long oplataId,
+                    String nameSail, String articul,
+                    BigDecimal zakupka, BigDecimal price, BigDecimal kolichestvo);
 
     void deleteSail(Long sailId);
 
@@ -22,4 +25,9 @@ public interface SailService {
     List<Sail> getFilteredSails(Long klientId, Long statusId, Long oplataId);
 
     BigDecimal getZarplataForPeriod(LocalDate start, LocalDate end);
+
+    Map<String, Object> getSailViewData(Long klientFilter, Long statusFilter, Long oplataFilter);
+
+    void addWeeklySalaryData(Model model);
+
 }
