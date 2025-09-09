@@ -2,15 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>База клиентов</title>
+    <title>База клиентов - Долги</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Добавляем иконки Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
-        /* Ваши существующие стили */
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
         .sidebar {
             position: fixed;
@@ -28,50 +27,75 @@
             margin-left: 5%;
             padding: 20px;
             width: 93.5%;
-            transition: margin-left 0.3s ease;
-            position: relative;
-            top: 0;
         }
         .nav-link {
             color: #fff;
             font-size: 14px;
             white-space: nowrap;
         }
-        .view-mode {
-            display: inline-block;
-        }
-        .edit-mode {
-            display: none;
-            width: 100%;
-        }
-        .action-buttons {
-            white-space: nowrap;
-        }
-        .btn-group-sm > .btn {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            line-height: 1.5;
-            border-radius: 0.2rem;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 100;
-            width: 10%;
-            max-width: 140px;
-            background-color: #343a40;
-            padding: 90px 0 0;
-            box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
-        }
-
-        /* Стиль для блока зарплаты */
         .weekly-salary {
             background-color: #495057;
             padding: 8px;
             border-radius: 4px;
             margin-top: 20px;
+        }
+
+        /* Новые стили для компактных таблиц */
+        .debt-card {
+            height: 500px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        .debt-card:hover {
+            transform: translateY(-2px);
+        }
+        .debt-header {
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .debt-table {
+            margin-bottom: 0;
+            font-size: 12px;
+        }
+        .debt-table thead th {
+            padding: 8px 10px;
+            font-size: 11px;
+            background-color: #495057;
+        }
+        .debt-table tbody td {
+            padding: 6px 10px;
+            vertical-align: middle;
+        }
+        .debt-amount {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .empty-state {
+            padding: 40px 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+        .table-responsive {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .card-beznal-nevistavlen .debt-header {
+            background-color: #808080;
+            color: white;
+        }
+        .card-beznal-vistavlen .debt-header {
+            background-color: #ffc107;
+            color: white;
+        }
+        .card-nal .debt-header {
+            background-color: #ff0000;
+            color: white;
+        }
+        .card-all .debt-header {
+            background-color: #6c757d;
+            color: white;
         }
     </style>
 </head>
@@ -99,7 +123,6 @@
                 <a class="nav-link" href="http://localhost:8080/task">Задачи</a>
             </li>
 
-            <!-- Блок с зарплатой за текущую неделю -->
             <li class="nav-item mt-4 p-2 bg-secondary rounded">
                 <div class="text-white small">Зарплата за неделю:</div>
                 <div class="text-warning fw-bold"
@@ -109,42 +132,154 @@
                      th:text="'(' + ${#temporals.format(weekStart, 'dd.MM')} +
                          ' - ' + ${#temporals.format(weekEnd, 'dd.MM')} + ')'">
                 </div>
-
             </li>
         </ul>
     </div>
 </nav>
 
-
-
-<!-- Основной контент -->
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
-    <div class="card mb-4">
-        <div class="card-header">Долги нам</div>
-        <div class="card-body">
-            <table class="table table-dark table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Имя клиента</th>
-                    <th scope="col">Долг</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="debt, iter : ${debts}">
-                    <td th:text="${iter.count}"></td>
-                    <td th:text="${debt[0]}"></td> <!-- Имя клиента -->
-                    <td th:text="${#numbers.formatDecimal(debt[1], 1, 2, 'COMMA')} + ' руб.'"></td> <!-- Сумма долга -->
-                </tr>
-                <tr th:if="${debts.isEmpty()}">
-                    <td colspan="3" class="text-center">Нет клиентов с задолженностью</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
+    <!-- Заголовок страницы -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h4 mb-0">Долги нам</h2>
     </div>
 
+    <!-- Карточки с таблицами в ряд -->
+    <div class="row">
+
+        <!-- Долги наличные -->
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+            <div class="card debt-card card-nal">
+                <div class="debt-header d-flex justify-content-between align-items-center">
+                    <span>Наличные</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover debt-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Клиент</th>
+                                <th scope="col">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="debt, iter : ${debtsOnlyNal}" th:if="${iter.index < 30}">
+                                <td th:text="${iter.count}"></td>
+                                <td th:text="${#strings.abbreviate(debt[0], 30)}"></td>
+                                <td class="debt-amount text-nowrap"
+                                    th:text="${#numbers.formatDecimal(debt[1], 1, 2, 'COMMA')} + ' ₽'"></td>
+                            </tr>
+                            <tr th:if="${debtsOnlyNal.isEmpty()}">
+                                <td colspan="3" class="text-center">
+                                    <div class="empty-state">
+                                        <i class="bi bi-check-circle-fill text-success" style="font-size: 24px;"></i>
+                                        <p class="mt-2 mb-0">Нет долгов</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark py-2">
+                    <small class="text-muted">Всего:
+                        <span th:text="${#numbers.formatDecimal(totalNalDebts, 1, 2, 'COMMA')} + ' ₽'"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Безнал не выставлен -->
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+            <div class="card debt-card card-beznal-nevistavlen">
+                <div class="debt-header d-flex justify-content-between align-items-center">
+                    <span>Безнал не выставлен</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover debt-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Клиент</th>
+                                <th scope="col">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="debt, iter : ${debtsOnlyBezNalNeVistavlen}" th:if="${iter.index < 30}">
+                                <td th:text="${iter.count}"></td>
+                                <td th:text="${#strings.abbreviate(debt[0], 30)}"></td>
+                                <td class="debt-amount text-nowrap"
+                                    th:text="${#numbers.formatDecimal(debt[1], 1, 2, 'COMMA')} + ' ₽'"></td>
+                            </tr>
+                            <tr th:if="${debtsOnlyBezNalNeVistavlen.isEmpty()}">
+                                <td colspan="3" class="text-center">
+                                    <div class="empty-state">
+                                        <i class="bi bi-check-circle-fill text-success" style="font-size: 24px;"></i>
+                                        <p class="mt-2 mb-0">Нет долгов</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark py-2">
+                    <small class="text-muted">Всего:
+                        <span th:text="${#numbers.formatDecimal(totalBezNalNeVistavlenDebts, 1, 2, 'COMMA')} + ' ₽'"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Безнал выставлен -->
+        <div class="col-xl-3 col-lg-6 col-md-6 mb-4">
+            <div class="card debt-card card-beznal-vistavlen">
+                <div class="debt-header d-flex justify-content-between align-items-center">
+                    <span>Безнал выставлен</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover debt-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Клиент</th>
+                                <th scope="col">Сумма</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="debt, iter : ${debtsOnlyBezNalVistavlen}" th:if="${iter.index < 30}">
+                                <td th:text="${iter.count}"></td>
+                                <td th:text="${#strings.abbreviate(debt[0], 30)}"></td>
+                                <td class="debt-amount text-nowrap"
+                                    th:text="${#numbers.formatDecimal(debt[1], 1, 2, 'COMMA')} + ' ₽'"></td>
+                            </tr>
+                            <tr th:if="${debtsOnlyBezNalVistavlen.isEmpty()}">
+                                <td colspan="3" class="text-center">
+                                    <div class="empty-state">
+                                        <i class="bi bi-check-circle-fill text-success" style="font-size: 24px;"></i>
+                                        <p class="mt-2 mb-0">Нет долгов</p>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer bg-dark py-2">
+                    <small class="text-muted">Всего:
+                        <span th:text="${#numbers.formatDecimal(totalBezNalVistavlenDebts, 1, 2, 'COMMA')} + ' ₽'"></span>
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

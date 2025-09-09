@@ -6,7 +6,6 @@ import com.igorgorbachev.SpringBootBK.service.KlientService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -56,10 +55,5 @@ public class KlientServiceImpl implements KlientService {
     @Transactional
     public Klient getKlientById(Long id) {
         return klientRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Klient with id " + id + " not found"));
-    }
-
-    @Override
-    public List<Object[]> getAllDebt() {
-        return klientRepository.getAllDebt();
     }
 }

@@ -44,11 +44,11 @@ public class KlientController {
         return "redirect:/";
     }
 
-    @GetMapping("/kassa")
-    public String kassa(Model model) {
-        model.addAttribute("sailList", sailService.getAllSail());
-        model.addAttribute("klientList", klientService.getAllSortedKlients());
-        model.addAttribute("debts", klientService.getAllDebt());
-        return "kassa";
-    }
+//    @GetMapping("/kassa")
+//    public String kassa(Model model) {
+//        model.addAttribute("sailList", sailService.getAllSail());
+//        model.addAttribute("klientList", klientService.getAllSortedKlients());
+//        model.addAttribute("debts", klientService.getAllDebt());
+//        return "kassa";
+//    }
 }

@@ -15,5 +15,4 @@ public interface KlientService {
 
     Klient getKlientById(Long id);
 
-    List<Object[]> getAllDebt();
 }
