@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -24,6 +25,8 @@ import java.util.Map;
 public class SailController {
 
     private final SailService sailService;
+
+//    private final UndoManager undoManager;
 
     @GetMapping("/showSails")
     public String showSails(@RequestParam(required = false) Long klientFilter,
@@ -62,11 +65,24 @@ public class SailController {
         return "redirect:/showSails";
     }
 
+//    @PostMapping("/addSail")
+//    public String addSail(@ModelAttribute Sail sail, @RequestParam Long klientId, HttpSession session) {
+//        sailService.executeAddSailCommand(sail, klientId);
+//        session.setAttribute("lastSelectedKlientId", sail.getKlient().getId());
+//        return "redirect:/showSails";
+//    }
+
     @PostMapping("/deleteSail")
     public String deleteSail(@RequestParam Long id) {
         sailService.deleteSail(id);
         return "redirect:/showSails";
     }
+
+//    @PostMapping("/deleteSail")
+//    public String deleteSail(@RequestParam Long id) {
+//        sailService.executeDeleteSailCommand(id);
+//        return "redirect:/showSails";
+//    }
 
     @PostMapping("/changeSail")
     public String changeSail(@RequestParam(required = false) String nameSail,
@@ -82,6 +98,38 @@ public class SailController {
         sailService.changeSail(sail, statusId, oplataId, nameSail, articul, zakupka, price, kolichestvo);
         return "redirect:/showSails";
     }
+
+//    @PostMapping("/changeSail")
+//    public String changeSail(@RequestParam(required = false) String nameSail,
+//                             @RequestParam(required = false) String articul,
+//                             @RequestParam(required = false) BigDecimal zakupka,
+//                             @RequestParam(required = false) BigDecimal price,
+//                             @RequestParam(required = false) BigDecimal kolichestvo,
+//                             @RequestParam Long sailId,
+//                             @RequestParam Long statusId,
+//                             @RequestParam Long oplataId) {
+//
+//        Sail sail = sailService.getSailById(sailId);
+//        sailService.executeEditSailCommand(sail, statusId, oplataId,
+//                nameSail, articul, zakupka, price, kolichestvo);
+//        return "redirect:/showSails";
+//    }
+
+//    @PostMapping("/undo")
+//    public String undo() {
+//        if (undoManager.canUndo()) {
+//            undoManager.undo();
+//        }
+//        return "redirect:/showSails";
+//    }
+//
+//    // Добавляем информацию о возможности undo/redo в модель
+//    @ModelAttribute
+//    public void addUndoRedoInfo(Model model) {
+//        model.addAttribute("canUndo", undoManager.canUndo());
+//        model.addAttribute("canRedo", undoManager.canRedo());
+//    }
+
 
     @ModelAttribute
     public void addWeeklySalary(Model model) {

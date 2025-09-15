@@ -234,6 +234,16 @@
             </form>
         </div>
     </div>
+
+<!--    <div class="d-flex gap-2 mb-3">-->
+<!--        <form th:action="@{/undo}" method="post">-->
+<!--            <button type="submit" class="btn btn-secondary"-->
+<!--                    th:disabled="${!canUndo}" title="Отменить последнее действие">-->
+<!--                <i class="bi bi-arrow-counterclockwise"></i> Отменить-->
+<!--            </button>-->
+<!--        </form>-->
+<!--    </div>-->
+
     <table class="table table-dark table-hover">
         <thead>
         <tr>
@@ -252,7 +262,7 @@
         </thead>
         <tbody>
         <tr th:each="sail : ${sailList}">
-<!--            <td th:text="${sail.id}"></td>-->
+            <td th:text="${sail.id}"></td>
 
             <td th:text="${sail.formattedDate}"></td>
 

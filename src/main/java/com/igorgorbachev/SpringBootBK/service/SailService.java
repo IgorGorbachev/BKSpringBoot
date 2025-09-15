@@ -32,4 +32,15 @@ public interface SailService {
 
     void addWeeklySalaryData(Model model);
 
+//
+//    void saveSail(Sail sail);
+//
+//    void executeAddSailCommand(Sail sail, Long klientId);
+//
+//    void executeEditSailCommand(Sail sail, Long statusId, Long oplataId,
+//                                String nameSail, String articul,
+//                                BigDecimal zakupka, BigDecimal price, BigDecimal kolichestvo);
+//
+//    void executeDeleteSailCommand(Long sailId);
+
 }

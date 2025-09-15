@@ -9,6 +9,9 @@ import com.igorgorbachev.SpringBootBK.service.KlientService;
 import com.igorgorbachev.SpringBootBK.service.OplataService;
 import com.igorgorbachev.SpringBootBK.service.SailService;
 import com.igorgorbachev.SpringBootBK.service.StatusService;
+//import com.igorgorbachev.SpringBootBK.service.command.Command;
+//import com.igorgorbachev.SpringBootBK.service.command.CommandFactory;
+//import com.igorgorbachev.SpringBootBK.service.command.UndoManager;
 import com.igorgorbachev.SpringBootBK.specification.SailSpecifications;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +23,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 
+import javax.swing.undo.UndoManager;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +43,9 @@ public class SailServiceImpl implements SailService {
     private final StatusService statusService;
     private final OplataService oplataService;
 
+//    private final CommandFactory  commandFactory;
+//    private final UndoManager undoManager;
+
 
     public void calculate(Sail sail) {
         BigDecimal zakupka = sail.getZakupka().multiply(sail.getKolichestvo());
@@ -53,6 +59,35 @@ public class SailServiceImpl implements SailService {
         sail.setPribil(pribil);
         sail.setZarplata(zarplata);
     }
+
+//    @Override
+//    public void saveSail(Sail sail) {
+//        calculate(sail);
+//        sailRepository.save(sail);
+//    }
+//
+//    @Override
+//    public void executeAddSailCommand(Sail sail, Long klientId) {
+//        Command command = commandFactory.createAddSailCommand(this, sail, klientId);
+//        undoManager.executeCommand(command);
+//    }
+//
+//    @Override
+//    public void executeEditSailCommand(Sail sail, Long statusId, Long oplataId,
+//                                       String nameSail, String articul,
+//                                       BigDecimal zakupka, BigDecimal price, BigDecimal kolichestvo) {
+//        Command command = commandFactory.createEditSailCommand(this, sail, statusId, oplataId,
+//                nameSail, articul, zakupka, price, kolichestvo);
+//        undoManager.executeCommand(command);
+//    }
+//
+//    @Override
+//    public void executeDeleteSailCommand(Long sailId) {
+//        Command command = commandFactory.createDeleteSailCommand(this, sailId);
+//        undoManager.executeCommand(command);
+//    }
+
+
 
     @Transactional
     @Override
@@ -69,6 +104,8 @@ public class SailServiceImpl implements SailService {
         calculate(sail);
         sailRepository.save(sail);
     }
+
+
 
 
     @Transactional
@@ -157,9 +194,6 @@ public class SailServiceImpl implements SailService {
         modelData.put("totalItems", sailPage.getTotalElements());
         modelData.put("pageSize", pageable.getPageSize());
 
-//        List<Sail> sailList = getFilteredSails(klientFilter, statusFilter, oplataFilter);
-//        sailList.sort(Comparator.comparing(Sail::getId).reversed());
-
         modelData.put("statusColors", Map.of(
                 "В пути", "ff0000",
                 "Приехал, Не выдан", "ffc107",
@@ -177,7 +211,6 @@ public class SailServiceImpl implements SailService {
                 "Безнал (счет выставлен)", "ffc107"
         ));
 
-//        modelData.put("sailList", sailList);
         modelData.put("klientList", klientService.getAllSortedKlients());
         modelData.put("statusList", statusService.getAllStatus());
         modelData.put("oplataList", oplataService.findAll());
