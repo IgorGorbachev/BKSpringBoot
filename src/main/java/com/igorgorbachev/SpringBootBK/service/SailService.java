@@ -32,6 +32,10 @@ public interface SailService {
 
     void addWeeklySalaryData(Model model);
 
+    LocalDate[] getCurrentWeekDates();
+
+    BigDecimal calculateWeeklySalary(LocalDate startDate, LocalDate endDate);
+
 //
 //    void saveSail(Sail sail);
 //

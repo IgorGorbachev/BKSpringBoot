@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Repository
@@ -29,4 +30,8 @@ public interface SailRepository extends JpaRepository<Sail, Long>, JpaSpecificat
                                  @Param("statusFilter") Long statusFilter,
                                  @Param("oplataFilter") Long oplataFilter,
                                  Pageable pageable);
+
+    @Query("SELECT s FROM Sail s WHERE s.toDay BETWEEN :startDate AND :endDate ORDER BY s.toDay")
+    List<Sail> findByDateBetween(@Param("startDate") LocalDate startDate,
+                                 @Param("endDate") LocalDate endDate);
 }

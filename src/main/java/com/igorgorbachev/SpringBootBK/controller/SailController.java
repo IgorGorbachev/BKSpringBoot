@@ -2,6 +2,7 @@ package com.igorgorbachev.SpringBootBK.controller;
 
 import com.igorgorbachev.SpringBootBK.entity.Sail;
 import com.igorgorbachev.SpringBootBK.service.SailService;
+import com.igorgorbachev.SpringBootBK.service.telegram.TelegramNotificationService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Map;
 
 
@@ -25,6 +27,7 @@ import java.util.Map;
 public class SailController {
 
     private final SailService sailService;
+    private final TelegramNotificationService telegramNotificationService;
 
 //    private final UndoManager undoManager;
 
@@ -61,6 +64,24 @@ public class SailController {
     @PostMapping("/addSail")
     public String addSail(@ModelAttribute Sail sail, @RequestParam Long klientId, HttpSession session) {
         sailService.addSail(sail, klientId);
+        try {
+            // Сохраняем продажу
+            sailService.addSail(sail, klientId);
+
+            // Отправляем уведомление о новой продаже
+            telegramNotificationService.sendNewSaleNotification(sail);
+
+            // Получаем актуальные данные о зарплате за неделю
+            LocalDate[] weekDates = sailService.getCurrentWeekDates();
+            BigDecimal weeklySalary = sailService.calculateWeeklySalary(weekDates[0], weekDates[1]);
+
+            // Отправляем уведомление о зарплате
+            telegramNotificationService.sendSalaryNotification(weeklySalary, weekDates[0], weekDates[1]);
+
+        } catch (Exception e) {
+            log.error("Error in addSail: {}", e.getMessage());
+            // Можно добавить сообщение об ошибке в модель
+        }
         session.setAttribute("lastSelectedKlientId", sail.getKlient().getId());
         return "redirect:/showSails";
     }

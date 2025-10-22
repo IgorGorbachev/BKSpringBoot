@@ -31,6 +31,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -92,17 +93,27 @@ public class SailServiceImpl implements SailService {
     @Transactional
     @Override
     public void addSail(Sail sail, Long klientId) {
-        Klient klient = klientService.getKlientById(klientId);
-        Status status = statusService.getStatusById(1L);
-        Oplata oplata = oplataService.findOplatasById(4L);
+        try {
+            log.info("Adding new sail: {}, klientId: {}", sail.getNameSail(), klientId);
 
-        sail.setKlient(klient);
-        sail.setStatus(status);
-        sail.setOplata(oplata);
-        sail.setToDay(LocalDate.now());
+            Klient klient = klientService.getKlientById(klientId);
+            Status status = statusService.getStatusById(1L);
+            Oplata oplata = oplataService.findOplatasById(4L);
 
-        calculate(sail);
-        sailRepository.save(sail);
+            sail.setKlient(klient);
+            sail.setStatus(status);
+            sail.setOplata(oplata);
+            sail.setToDay(LocalDate.now());
+
+            calculate(sail);
+            sailRepository.save(sail);
+
+            log.info("Sail added successfully. Zarplata: {}", sail.getZarplata());
+
+        } catch (Exception e) {
+            log.error("Error adding sail: {}", e.getMessage());
+            throw e;
+        }
     }
 
 
@@ -238,6 +249,30 @@ public class SailServiceImpl implements SailService {
         model.addAttribute("weeklySalary", weeklySalary);
         model.addAttribute("weekStart", weekStart);
         model.addAttribute("weekEnd", weekEnd);
+    }
+
+    @Override
+    public LocalDate[] getCurrentWeekDates() {
+        LocalDate today = LocalDate.now();
+        LocalDate weekStart = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+        LocalDate weekEnd = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
+
+        return new LocalDate[]{weekStart, weekEnd};
+    }
+
+    @Override
+    public BigDecimal calculateWeeklySalary(LocalDate startDate, LocalDate endDate) {
+        // Получаем все продажи за период
+        List<Sail> weeklySales = sailRepository.findByDateBetween(startDate, endDate);
+
+        // Суммируем зарплату из каждой продажи
+        BigDecimal totalSalary = weeklySales.stream()
+                .map(Sail::getZarplata)
+                .filter(Objects::nonNull)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        log.info("Calculated weekly salary from {} to {}: {}", startDate, endDate, totalSalary);
+        return totalSalary;
     }
 
 
