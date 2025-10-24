@@ -21,6 +21,7 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -325,6 +326,32 @@ public class ForumAutoServiceImpl implements ForumAutoService, SupplierService {
         return "Forum-Auto";
     }
 
+//    @Override
+//    public List<PartOfferDto> searchParts(String article, String brand) {
+//        try {
+//            log.info("ForumAuto searchParts called: article='{}', brand='{}'", article, brand);
+//
+//            // Ищем БЕЗ кросс-поиска, только оригинальные детали
+//            List<ForumAutoGoods> goods = this.listGoods(article, brand, false, null);
+//
+//            log.info("ForumAuto search completed: found {} goods", goods.size());
+//
+//            // Преобразуем в DTO (будет до 2 товаров с разных складов)
+//            List<PartOfferDto> result = goods.stream()
+//                    .map(good -> new PartOfferDto(good))
+//                    .collect(Collectors.toList());
+//
+//            log.info("ForumAuto converted to {} DTOs", result.size());
+//            return result;
+//
+//        } catch (Exception e) {
+//            // Логируем ошибку, но не прерываем выполнение
+//            log.error("Ошибка при поиске в Forum-Auto for article: {}, brand: {}. Error: {}",
+//                    article, brand, e.getMessage(), e);
+//            return List.of();
+//        }
+//    }
+
     @Override
     public List<PartOfferDto> searchParts(String article, String brand) {
         try {
@@ -344,12 +371,201 @@ public class ForumAutoServiceImpl implements ForumAutoService, SupplierService {
             return result;
 
         } catch (Exception e) {
-            // Логируем ошибку, но не прерываем выполнение
             log.error("Ошибка при поиске в Forum-Auto for article: {}, brand: {}. Error: {}",
                     article, brand, e.getMessage(), e);
             return List.of();
         }
     }
+
+    /**
+     * Новый метод для поиска аналогов (кросс-поиск)
+     */
+    public List<PartOfferDto> searchAnalogues(String article, String brand) {
+        try {
+            log.info("ForumAuto searchAnalogues called: article='{}', brand='{}'", article, brand);
+
+            // Ищем С кросс-поиском - все товары для этой модели
+            List<ForumAutoGoods> allGoods = this.listGoodsWithCross(article, brand, true, null);
+
+            log.info("ForumAuto analogues search completed: found {} total goods", allGoods.size());
+
+            // Фильтруем только аналоги (другие бренды) - ВСЕ товары кроме точных совпадений
+            List<PartOfferDto> result = allGoods.stream()
+                    .filter(good -> brand == null ||
+                            (good.getBrand() != null && !normalizeString(good.getBrand()).equals(normalizeString(brand))))
+                    // Дополнительная фильтрация: убираем товары с нулевой ценой или количеством
+                    .filter(good -> good.getPrice() != null && good.getPrice() > 0)
+                    .filter(good -> good.getQuantity() != null && good.getQuantity() > 0)
+                    .map(good -> new PartOfferDto(good))
+                    .collect(Collectors.toList());
+
+            log.info("ForumAuto analogues filtered to {} DTOs (other brands)", result.size());
+
+            // Логируем все найденные аналоги для отладки
+            if (!result.isEmpty()) {
+                log.info("ForumAuto analogues found (first 10):");
+                result.stream()
+                        .limit(10)
+                        .forEach(dto ->
+                                log.info(" - Brand: '{}', Article: '{}', Price: {}, Quantity: {}",
+                                        dto.getBrand(), dto.getOriginalArticle(), dto.getPrice(), dto.getQuantityAvailable())
+                        );
+                if (result.size() > 10) {
+                    log.info("... and {} more analogues", result.size() - 10);
+                }
+            }
+
+            return result;
+
+        } catch (Exception e) {
+            log.error("Ошибка при поиске аналогов в Forum-Auto for article: {}, brand: {}. Error: {}",
+                    article, brand, e.getMessage(), e);
+            return List.of();
+        }
+    }
+
+    /**
+     * Новый метод для поиска с кросс-поиском БЕЗ фильтрации оригиналов
+     */
+    private List<ForumAutoGoods> listGoodsWithCross(String article, String brand, Boolean cross, String gid) {
+        try {
+            String responseBody = webClient.get()
+                    .uri(uriBuilder -> buildUri(uriBuilder, article, brand, cross, gid))
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .timeout(Duration.ofSeconds(30))
+                    .block();
+
+            if (responseBody == null || responseBody.trim().isEmpty()) {
+                return List.of();
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(responseBody);
+
+            ForumAutoGoods[] goodsArray = null;
+
+            // Пробуем разные форматы ответа
+            JsonNode goodsNode = root.get("goods");
+            if (goodsNode != null && goodsNode.isArray()) {
+                goodsArray = mapper.treeToValue(goodsNode, ForumAutoGoods[].class);
+            } else if (root.isArray()) {
+                goodsArray = mapper.treeToValue(root, ForumAutoGoods[].class);
+            }
+
+            if (goodsArray != null) {
+                // Возвращаем ВСЕ товары без фильтрации по артикулу
+                List<ForumAutoGoods> allGoods = Arrays.stream(goodsArray)
+                        .filter(Objects::nonNull)
+                        .collect(Collectors.toList());
+
+                log.info("Raw goods from API: {} items", allGoods.size());
+                return allGoods;
+            }
+
+            return List.of();
+
+        } catch (Exception e) {
+            log.error("Error getting goods with cross: {}", e.getMessage(), e);
+            return List.of();
+        }
+    }
+
+    /**
+     * Фильтрует ВСЕ товары (включая аналоги) по артикулу
+     * Без ограничения по бренду и без ограничения количества
+     */
+    private List<ForumAutoGoods> filterAllGoods(ForumAutoGoods[] goodsArray, String requestedArticle, String requestedBrand) {
+        if (goodsArray == null || goodsArray.length == 0) {
+            return List.of();
+        }
+
+        // Нормализуем запрашиваемые значения для сравнения
+        String normalizedRequestedArticle = normalizeString(requestedArticle);
+
+        log.info("ForumAuto filtering ALL goods: requested article='{}' (normalized: '{}'), total goods: {}",
+                requestedArticle, normalizedRequestedArticle, goodsArray.length);
+
+        List<ForumAutoGoods> filteredGoods = Arrays.stream(goodsArray)
+                .filter(goods -> goods != null)
+                // Фильтруем только товары в наличии
+                .filter(goods -> goods.getQuantity() != null && goods.getQuantity() > 0)
+                // Фильтруем товары с валидной ценой
+                .filter(goods -> goods.getPrice() != null && goods.getPrice() > 0)
+                // Фильтруем по артикулу (включая аналоги) - РАССЛАБЛЕННАЯ ФИЛЬТРАЦИЯ
+                .filter(goods -> isArticleMatchRelaxed(goods.getArt(), requestedArticle))
+                // Сортируем по цене (по возрастанию)
+                .sorted(Comparator.comparing(ForumAutoGoods::getPrice))
+                // Убираем лимит - берем все подходящие товары
+                .collect(Collectors.toList());
+
+        log.info("ForumAuto found {} goods after relaxed filtering (all brands)", filteredGoods.size());
+        if (!filteredGoods.isEmpty()) {
+            log.info("ForumAuto filtered goods (all brands, first 10):");
+            filteredGoods.stream()
+                    .limit(10)
+                    .forEach(goods -> {
+                        log.info(" - Article: '{}', Brand: '{}', Price: {}, Quantity: {}, Returnable: {}, Warehouse: {}",
+                                goods.getArt(), goods.getBrand(), goods.getPrice(),
+                                goods.getQuantity(), goods.getIsReturnable(), goods.getWarehouse());
+                    });
+            if (filteredGoods.size() > 10) {
+                log.info("... and {} more goods", filteredGoods.size() - 10);
+            }
+        }
+
+        return filteredGoods;
+    }
+
+    private boolean isArticleMatchRelaxed(String goodsArticle, String requestedArticle) {
+        if (goodsArticle == null || requestedArticle == null) {
+            return false;
+        }
+
+        // Нормализуем оба артикула
+        String normalizedGoodsArticle = normalizeString(goodsArticle);
+        String normalizedRequestedArticle = normalizeString(requestedArticle);
+
+        // 1. Прямое сравнение после нормализации
+        if (normalizedGoodsArticle.equals(normalizedRequestedArticle)) {
+            return true;
+        }
+
+        // 2. Убираем ВСЕ не-цифровые символы и сравниваем
+        String digitsOnlyGoods = normalizedGoodsArticle.replaceAll("[^0-9]", "");
+        String digitsOnlyRequested = normalizedRequestedArticle.replaceAll("[^0-9]", "");
+
+        if (!digitsOnlyRequested.isEmpty() && digitsOnlyGoods.contains(digitsOnlyRequested)) {
+            log.debug("ForumAuto: article matched by digits contains: '{}' contains '{}'",
+                    digitsOnlyGoods, digitsOnlyRequested);
+            return true;
+        }
+
+        // 3. Проверяем частичное совпадение (если один артикул содержит другой)
+        if (normalizedGoodsArticle.contains(normalizedRequestedArticle) ||
+                normalizedRequestedArticle.contains(normalizedGoodsArticle)) {
+            log.debug("ForumAuto: article partial match: '{}' vs '{}'",
+                    normalizedGoodsArticle, normalizedRequestedArticle);
+            return true;
+        }
+
+        // 4. Проверяем совпадение по основным цифрам (для случаев типа A899 vs 899)
+        if (digitsOnlyGoods.equals(digitsOnlyRequested) && !digitsOnlyGoods.isEmpty()) {
+            log.debug("ForumAuto: article matched by digits only: '{}' -> '{}'",
+                    normalizedGoodsArticle, digitsOnlyGoods);
+            return true;
+        }
+
+        // 5. Проверяем обратное совпадение (requested содержит goods)
+        if (normalizedRequestedArticle.contains(normalizedGoodsArticle)) {
+            log.debug("ForumAuto: article reverse match: '{}' contained in '{}'",
+                    normalizedGoodsArticle, normalizedRequestedArticle);
+            return true;
+        }
+
+        return false;
+    }
+
 
     @Override
     public boolean isAvailable() {

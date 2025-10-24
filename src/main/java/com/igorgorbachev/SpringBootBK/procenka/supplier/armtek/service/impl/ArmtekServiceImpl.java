@@ -389,7 +389,7 @@ public class ArmtekServiceImpl implements ArmtekService, SupplierService {
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return false;
     }
 
 

@@ -1,3 +1,813 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Результаты поиска - Проценка</title>-->
+<!--    <link rel="stylesheet" href="/css/style.css">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">-->
+<!--    <style>-->
+<!--        /* Базовые стили */-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            box-sizing: border-box;-->
+<!--        }-->
+
+<!--        body {-->
+<!--            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;-->
+<!--            background: #f5f7fa;-->
+<!--            color: #333;-->
+<!--            line-height: 1.6;-->
+<!--            width: 100vw;-->
+<!--            overflow-x: hidden;-->
+<!--        }-->
+
+<!--        /* Шапка с поиском - на всю ширину */-->
+<!--        .search-header {-->
+<!--            background: white;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--            padding: 20px 0;-->
+<!--            margin-bottom: 20px;-->
+<!--            width: 100%;-->
+<!--        }-->
+
+<!--        .header-content {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: space-between;-->
+<!--            gap: 30px;-->
+<!--            width: 100%;-->
+<!--            padding: 0 40px;-->
+<!--        }-->
+
+<!--        .logo h1 {-->
+<!--            color: #667eea;-->
+<!--            font-size: 1.8rem;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+<!--        .search-form {-->
+<!--            display: flex;-->
+<!--            flex: 1;-->
+<!--            max-width: 800px;-->
+<!--            gap: 10px;-->
+<!--        }-->
+
+<!--        .search-input {-->
+<!--            flex: 1;-->
+<!--            padding: 15px 20px;-->
+<!--            border: 2px solid #e1e5e9;-->
+<!--            border-radius: 10px;-->
+<!--            font-size: 1.1rem;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
+
+<!--        .search-input:focus {-->
+<!--            outline: none;-->
+<!--            border-color: #667eea;-->
+<!--            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);-->
+<!--        }-->
+
+<!--        .search-btn {-->
+<!--            padding: 15px 30px;-->
+<!--            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            border-radius: 10px;-->
+<!--            font-size: 1.1rem;-->
+<!--            font-weight: 600;-->
+<!--            cursor: pointer;-->
+<!--            transition: all 0.3s ease;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+<!--        .search-btn:hover {-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);-->
+<!--        }-->
+
+<!--        /* Основной контент - на всю ширину */-->
+<!--        .main-layout {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: 1fr;-->
+<!--            gap: 20px;-->
+<!--            width: 100%;-->
+<!--            padding: 0 40px;-->
+<!--        }-->
+
+<!--        /* Основная область с результатами */-->
+<!--        .results-area {-->
+<!--            width: 100%;-->
+<!--            min-width: 0;-->
+<!--        }-->
+
+<!--        /* Информация о поиске */-->
+<!--        .search-info {-->
+<!--            background: white;-->
+<!--            border-radius: 12px;-->
+<!--            padding: 20px;-->
+<!--            margin-bottom: 20px;-->
+<!--            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);-->
+<!--            width: 100%;-->
+<!--        }-->
+
+<!--        .search-info h2 {-->
+<!--            color: #333;-->
+<!--            margin-bottom: 15px;-->
+<!--            font-size: 1.5rem;-->
+<!--            font-weight: 700;-->
+<!--        }-->
+
+
+<!--        .search-meta span {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            gap: 8px;-->
+<!--        }-->
+
+<!--        /* Таблица результатов - на всю ширину */-->
+<!--        .results-section {-->
+<!--            background: white;-->
+<!--            border-radius: 12px;-->
+<!--            padding: 0;-->
+<!--            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);-->
+<!--            width: 100%;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .return-cell {-->
+<!--            text-align: center;-->
+<!--            font-size: 0.85rem;-->
+<!--            font-weight: 500;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+<!--        .return-cell.returnable {-->
+<!--            color: #28a745;-->
+<!--            background: #f0fff4;-->
+<!--        }-->
+
+<!--        .return-cell.non-returnable {-->
+<!--            color: #dc3545;-->
+<!--            background: #fff5f5;-->
+<!--        }-->
+
+<!--        .return-cell span {-->
+<!--            padding: 4px 8px;-->
+<!--            border-radius: 4px;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+
+<!--        /* Стили для таблицы - на всю ширину */-->
+<!--        .offers-table {-->
+<!--            width: 100%;-->
+<!--            border-collapse: collapse;-->
+<!--            font-size: 0.9rem;-->
+<!--        }-->
+
+<!--        .offers-table th {-->
+<!--            background: #f8f9fa;-->
+<!--            padding: 18px 15px;-->
+<!--            text-align: left;-->
+<!--            font-weight: 600;-->
+<!--            color: #333;-->
+<!--            border-bottom: 2px solid #e1e5e9;-->
+<!--            white-space: nowrap;-->
+<!--            position: sticky;-->
+<!--            top: 0;-->
+<!--        }-->
+
+<!--        .offers-table td {-->
+<!--            padding: 15px;-->
+<!--            border-bottom: 1px solid #e1e5e9;-->
+<!--            vertical-align: top;-->
+<!--        }-->
+
+<!--        .offers-table tr:hover {-->
+<!--            background: #f8f9fa;-->
+<!--        }-->
+
+<!--        .offers-table tr.exact-match {-->
+<!--            background: #f0fff4;-->
+<!--            border-left: 4px solid #28a745;-->
+<!--        }-->
+
+<!--        /* Стили для аналогов - отдельные строки таблицы */-->
+<!--        .offers-table tr.analogue-row {-->
+<!--            background: #f8faff;-->
+<!--            border-left: 4px solid #667eea;-->
+<!--        }-->
+
+<!--        .offers-table tr.analogue-row td {-->
+<!--            padding: 10px 12px;-->
+<!--            font-size: 0.85rem;-->
+<!--        }-->
+
+<!--        /* Стили для складов с выпадающим списком */-->
+
+
+<!--        .warehouses-toggle {-->
+<!--            background: #667eea;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            padding: 3px 6px;-->
+<!--            border-radius: 3px;-->
+<!--            font-size: 0.65rem;-->
+<!--            cursor: pointer;-->
+<!--            margin-top: 3px;-->
+<!--            transition: all 0.3s ease;-->
+<!--            display: block; /* Чтобы кнопка была на отдельной строке */-->
+<!--            width: 100%;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .warehouses-toggle:hover {-->
+<!--            background: #5a6fd8;-->
+<!--            transform: translateY(-1px);-->
+<!--        }-->
+
+<!--        .warehouses-dropdown {-->
+<!--            display: none;-->
+<!--            background: #f8f9fa;-->
+<!--            border-radius: 6px;-->
+<!--            padding: 10px;-->
+<!--            margin-top: 5px;-->
+<!--            border: 1px solid #e1e5e9;-->
+<!--        }-->
+
+<!--        .warehouses-dropdown.show {-->
+<!--            display: block;-->
+<!--        }-->
+
+
+<!--        .warehouse-code {-->
+<!--            font-weight: 600;-->
+<!--            color: #333;-->
+<!--            min-width: 40px;-->
+<!--        }-->
+
+<!--        .warehouse-price {-->
+<!--            color: #28a745;-->
+<!--            font-weight: 600;-->
+<!--            min-width: 60px;-->
+<!--        }-->
+
+<!--        .warehouse-stock {-->
+<!--            color: #666;-->
+<!--            min-width: 40px;-->
+<!--        }-->
+
+<!--        .warehouse-delivery {-->
+<!--            color: #666;-->
+<!--            font-size: 0.7rem;-->
+<!--            min-width: 50px;-->
+<!--        }-->
+
+<!--        .warehouse-badges {-->
+<!--            display: flex;-->
+<!--            gap: 2px;-->
+<!--            flex-wrap: wrap;-->
+<!--        }-->
+
+<!--        .warehouse-badge {-->
+<!--            padding: 1px 4px;-->
+<!--            border-radius: 2px;-->
+<!--            font-size: 0.6rem;-->
+<!--            font-weight: 600;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+<!--        .warehouse-badge.own {-->
+<!--            background: #d4edda;-->
+<!--            color: #155724;-->
+<!--        }-->
+
+<!--        .warehouse-badge.no-return {-->
+<!--            background: #f8d7da;-->
+<!--            color: #721c24;-->
+<!--        }-->
+
+<!--        .warehouse-compact-list {-->
+<!--            display: flex;-->
+<!--            flex-direction: column;-->
+<!--            gap: 2px;-->
+<!--        }-->
+
+<!--        .warehouse-compact-item {-->
+<!--            display: flex;-->
+<!--            justify-content: space-between;-->
+<!--            align-items: center;-->
+<!--            padding: 4px 6px;-->
+<!--            background: white;-->
+<!--            border-radius: 3px;-->
+<!--            border-left: 2px solid #667eea;-->
+<!--            font-size: 0.7rem;-->
+<!--        }-->
+
+<!--        .warehouse-main-info {-->
+<!--            display: flex;-->
+<!--            gap: 12px;-->
+<!--            align-items: center;-->
+<!--            flex-wrap: nowrap;-->
+<!--        }-->
+
+<!--        /* Стили для ячеек таблицы */-->
+<!--        .brand-cell {-->
+<!--            font-weight: 600;-->
+<!--            color: #333;-->
+<!--            white-space: nowrap;-->
+<!--            font-size: 0.95rem;-->
+<!--        }-->
+
+<!--        .article-cell {-->
+<!--            font-family: 'Courier New', monospace;-->
+<!--            color: #666;-->
+<!--            background: #f8f9fa;-->
+<!--            padding: 4px 8px;-->
+<!--            border-radius: 4px;-->
+<!--            font-size: 0.9rem;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        .name-cell {-->
+<!--            color: #555;-->
+<!--            font-size: 0.95rem;-->
+<!--            line-height: 1.5;-->
+<!--        }-->
+
+<!--        .supplier-cell {-->
+<!--            color: #667eea;-->
+<!--            font-weight: 500;-->
+<!--            white-space: nowrap;-->
+<!--            vertical-align: top; /* Важно для выравнивания */-->
+<!--        }-->
+
+<!--        .price-cell {-->
+<!--            font-weight: 700;-->
+<!--            color: #28a745;-->
+<!--            font-size: 1rem;-->
+<!--            text-align: right;-->
+<!--        }-->
+
+
+<!--        .delivery-cell {-->
+<!--            color: #666;-->
+<!--            white-space: nowrap;-->
+<!--        }-->
+
+
+<!--        /* Стили для выбора бренда */-->
+<!--        .brand-selection {-->
+<!--            background: white;-->
+<!--            border-radius: 12px;-->
+<!--            padding: 40px;-->
+<!--            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);-->
+<!--            text-align: center;-->
+<!--            width: 90%;-->
+<!--            max-width: 1200px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        .brand-selection h2 {-->
+<!--            color: #333;-->
+<!--            margin-bottom: 20px;-->
+<!--            font-size: 1.4rem;-->
+<!--        }-->
+
+<!--        .brand-selection h3 {-->
+<!--            color: #333;-->
+<!--            margin-bottom: 15px;-->
+<!--            font-size: 1.2rem;-->
+<!--        }-->
+
+<!--        .brands-grid {-->
+<!--            display: grid;-->
+<!--            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));-->
+<!--            gap: 15px;-->
+<!--            margin-bottom: 25px;-->
+<!--        }-->
+
+<!--        .brand-card {-->
+<!--            display: block;-->
+<!--            padding: 20px 15px;-->
+<!--            background: white;-->
+<!--            border: 2px solid #e1e5e9;-->
+<!--            border-radius: 8px;-->
+<!--            text-decoration: none;-->
+<!--            color: #333;-->
+<!--            transition: all 0.3s ease;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        .brand-card:hover {-->
+<!--            border-color: #667eea;-->
+<!--            transform: translateY(-2px);-->
+<!--            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);-->
+<!--            text-decoration: none;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        .brand-name {-->
+<!--            font-weight: 600;-->
+<!--            font-size: 1.1rem;-->
+<!--            margin-bottom: 5px;-->
+<!--        }-->
+
+<!--        .brand-select {-->
+<!--            color: #667eea;-->
+<!--            font-size: 0.9rem;-->
+<!--        }-->
+
+<!--        .brand-supplier {-->
+<!--            font-size: 0.8rem;-->
+<!--            color: #666;-->
+<!--            margin-top: 5px;-->
+<!--            padding: 3px 8px;-->
+<!--            background: #f8f9fa;-->
+<!--            border-radius: 4px;-->
+<!--            display: inline-block;-->
+<!--            border-left: 3px solid #667eea;-->
+<!--        }-->
+
+<!--        .supplier-forum-auto { border-left-color: #1976d2; background: #e3f2fd; }-->
+<!--        .supplier-favorite-parts { border-left-color: #7b1fa2; background: #f3e5f5; }-->
+<!--        .supplier-armtek { border-left-color: #388e3c; background: #e8f5e8; }-->
+<!--        .supplier-tmtr { border-left-color: #f57c00; background: #fff3e0; }-->
+<!--        .supplier-etsp { border-left-color: #c2185b; background: #fce4ec; }-->
+
+
+<!--        .text-primary {-->
+<!--            color: #667eea;-->
+<!--        }-->
+
+<!--        .no-results {-->
+<!--            text-align: center;-->
+<!--            padding: 40px 20px;-->
+<!--            color: #666;-->
+<!--        }-->
+
+<!--        .no-results i {-->
+<!--            font-size: 3rem;-->
+<!--            color: #ddd;-->
+<!--            margin-bottom: 15px;-->
+<!--        }-->
+
+<!--        .no-results h3 {-->
+<!--            color: #333;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
+
+<!--        .warehouse-delivery {-->
+<!--            color: #666;-->
+<!--            font-size: 0.7rem;-->
+<!--            min-width: 60px;-->
+<!--        }-->
+
+
+<!--        /* Адаптивность */-->
+<!--        @media (max-width: 1200px) {-->
+<!--            .main-layout {-->
+<!--                padding: 0 30px;-->
+<!--            }-->
+
+<!--            .header-content {-->
+<!--                padding: 0 30px;-->
+<!--            }-->
+
+<!--            .offers-table {-->
+<!--                font-size: 0.85rem;-->
+<!--            }-->
+<!--        }-->
+
+<!--        @media (max-width: 968px) {-->
+<!--            .main-layout {-->
+<!--                grid-template-columns: 1fr;-->
+<!--                gap: 15px;-->
+<!--            }-->
+
+<!--            .offers-table {-->
+<!--                display: block;-->
+<!--                overflow-x: auto;-->
+<!--                white-space: nowrap;-->
+<!--            }-->
+
+<!--            .offers-table th,-->
+<!--            .offers-table td {-->
+<!--                white-space: nowrap;-->
+<!--            }-->
+<!--        }-->
+
+<!--        @media (max-width: 768px) {-->
+
+<!--            .main-layout {-->
+<!--                padding: 0 20px;-->
+<!--            }-->
+
+<!--            .header-content {-->
+<!--                padding: 0 20px;-->
+<!--                flex-direction: column;-->
+<!--                gap: 15px;-->
+<!--                text-align: center;-->
+<!--            }-->
+
+<!--            .search-form {-->
+<!--                width: 100%;-->
+<!--            }-->
+
+
+<!--            .brand-selection {-->
+<!--                padding: 20px;-->
+<!--                width: 95%;-->
+<!--            }-->
+
+<!--            .brands-grid {-->
+<!--                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));-->
+<!--            }-->
+
+<!--            .offers-table {-->
+<!--                display: block;-->
+<!--                overflow-x: auto;-->
+<!--                white-space: nowrap;-->
+<!--            }-->
+<!--        }-->
+
+<!--        @media (max-width: 480px) {-->
+<!--            .header-content {-->
+<!--                padding: 0 15px;-->
+<!--            }-->
+
+<!--            .main-layout {-->
+<!--                padding: 0 15px;-->
+<!--            }-->
+
+<!--            .search-input {-->
+<!--                padding: 12px 15px;-->
+<!--                font-size: 1rem;-->
+<!--            }-->
+
+<!--            .search-btn {-->
+<!--                padding: 12px 20px;-->
+<!--                font-size: 1rem;-->
+<!--            }-->
+
+<!--            .brands-grid {-->
+<!--                grid-template-columns: 1fr;-->
+<!--            }-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="search-header">-->
+<!--    <div class="header-content">-->
+<!--        <div class="logo">-->
+<!--            <h1><i class="fas fa-car"></i> Проценка</h1>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Строка поиска &ndash;&gt;-->
+<!--        <form th:action="@{/search}" method="get" class="search-form">-->
+<!--            <input-->
+<!--                    type="text"-->
+<!--                    name="article"-->
+<!--                    class="search-input"-->
+<!--                    placeholder="Введите артикул запчасти..."-->
+<!--                    required-->
+<!--                    th:value="${article}"-->
+<!--            >-->
+<!--            <button type="submit" class="search-btn">-->
+<!--                <i class="fas fa-search"></i> Найти-->
+<!--            </button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--&lt;!&ndash; Режим выбора бренда &ndash;&gt;-->
+<!--<div th:if="${selectBrandMode}" class="brand-selection">-->
+<!--    <h2>Выберите бренд для артикула: <span class="text-primary" th:text="${article}"></span></h2>-->
+<!--    <div class="search-info">-->
+<!--        <p><i class="fas fa-info-circle"></i> Для точного поиска аналогов необходимо выбрать бренд</p>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; Список доступных брендов &ndash;&gt;-->
+<!--    <div th:if="${availableBrands != null and !availableBrands.empty}">-->
+<!--        <h3>Доступные бренды:</h3>-->
+<!--        <div class="brands-grid">-->
+<!--            <th:block th:each="brandSupplier : ${availableBrands}">-->
+<!--                <a th:href="@{/search(article=${article}, brand=${brandSupplier.brand}, selectBrand=true)}"-->
+<!--                   class="brand-card">-->
+<!--                    <div class="brand-name" th:text="${brandSupplier.brand}"></div>-->
+<!--                    &lt;!&ndash; ПОДПИСЬ ПОСТАВЩИКА &ndash;&gt;-->
+<!--                    <div th:classappend="'brand-supplier supplier-' + ${brandSupplier.supplierName.toLowerCase().replace(' ', '-')}"-->
+<!--                         th:text="'От: ' + ${brandSupplier.supplierName}">-->
+<!--                    </div>-->
+<!--                    <div class="brand-select">Выбрать <i class="fas fa-arrow-right"></i></div>-->
+<!--                </a>-->
+<!--            </th:block>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--    &lt;!&ndash; Если бренды не найдены &ndash;&gt;-->
+<!--    <div th:if="${availableBrands == null or availableBrands.empty}">-->
+<!--        <div class="no-results">-->
+<!--            <i class="fas fa-tags"></i>-->
+<!--            <h3>Бренды не найдены</h3>-->
+<!--            <p>Попробуйте изменить артикул или выполнить поиск без указания бренда</p>-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+<!--&lt;!&ndash; Режим показа результатов (когда бренд выбран) &ndash;&gt;-->
+<!--<div th:unless="${selectBrandMode}" class="main-layout">-->
+<!--    &lt;!&ndash; Основная область с результатами &ndash;&gt;-->
+<!--    <main class="results-area">-->
+<!--        <div class="results-section">-->
+<!--            <table class="offers-table" id="offersTable">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>Бренд</th>-->
+<!--                    <th>Наименование</th>-->
+<!--                    <th>Поставщик</th>-->
+<!--                    <th>Артикул</th>-->
+<!--                    <th>Цена</th>-->
+<!--                    <th>Наличие</th>-->
+<!--                    <th>Доставка</th>-->
+<!--                    &lt;!&ndash; НОВЫЙ СТОЛБЕЦ &ndash;&gt;-->
+<!--                    <th>Возвратность</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                &lt;!&ndash; Точные совпадения &ndash;&gt;-->
+<!--                <th:block th:each="offer, iterStat : ${exactMatches}">-->
+<!--                    &lt;!&ndash; Основное предложение &ndash;&gt;-->
+<!--                    <tr class="exact-match"-->
+<!--                        th:data-supplier="${offer.supplierName}"-->
+<!--                        th:data-brand="${offer.brand}">-->
+<!--                        <td class="brand-cell" th:text="${offer.brand}"></td>-->
+<!--                        <td class="name-cell" th:text="${offer.partName}"></td>-->
+<!--                        <td class="supplier-cell">-->
+<!--                            <span th:text="${offer.supplierName}"></span>-->
+<!--                            &lt;!&ndash; Кнопка показа складов ПОД ПОСТАВЩИКОМ &ndash;&gt;-->
+<!--                            <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">-->
+<!--                                <button class="warehouses-toggle"-->
+<!--                                        th:onclick="toggleWarehouses(this)"-->
+<!--                                        th:data-target="'warehouses-' + ${iterStat.index}">-->
+<!--                                    <i class="fas fa-warehouse"></i>-->
+<!--                                    Склады (<span th:text="${offer.warehouses.size()}"></span>)-->
+<!--                                    <i class="fas fa-chevron-down"></i>-->
+<!--                                </button>-->
+<!--                                <div class="warehouses-dropdown" th:id="'warehouses-' + ${iterStat.index}">-->
+<!--                                    <div class="warehouse-compact-list">-->
+<!--                                        <div class="warehouse-compact-item" th:each="warehouse : ${offer.warehouses}">-->
+<!--                                            <div class="warehouse-main-info">-->
+<!--                                                <span class="warehouse-code" th:text="${warehouse.code}"></span>-->
+<!--                                                <span class="warehouse-price" th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>-->
+<!--                                                <span class="warehouse-stock" th:text="${warehouse.stock} + ' шт.'"></span>-->
+<!--                                                <span class="warehouse-delivery" th:text="${warehouse.formattedDelivery}"></span>-->
+<!--                                            </div>-->
+<!--                                            <div class="warehouse-badges">-->
+<!--                                                <span th:if="${warehouse.own}" class="warehouse-badge own">Свой</span>-->
+<!--                                                <span th:if="${warehouse.notRefund}" class="warehouse-badge no-return">Без возвр.</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="article-cell" th:text="${offer.originalArticle}"></div>-->
+<!--                        </td>-->
+<!--                        <td class="price-cell" th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>-->
+<!--                        <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"-->
+<!--                            th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>-->
+<!--                        <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>-->
+<!--                        &lt;!&ndash; НОВАЯ ЯЧЕЙКА: Возвратность &ndash;&gt;-->
+<!--                        <td class="return-cell" th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">-->
+<!--                            <span th:text="${offer.returnInfo}"></span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </th:block>-->
+
+<!--                &lt;!&ndash; Остальные предложения &ndash;&gt;-->
+<!--                <th:block th:each="offer, iterStat : ${otherOffers}">-->
+<!--                    &lt;!&ndash; Основное предложение &ndash;&gt;-->
+<!--                    <tr th:data-supplier="${offer.supplierName}"-->
+<!--                        th:data-brand="${offer.brand}">-->
+<!--                        <td class="brand-cell" th:text="${offer.brand}"></td>-->
+<!--                        <td class="name-cell" th:text="${offer.partName}"></td>-->
+<!--                        <td class="supplier-cell">-->
+<!--                            <span th:text="${offer.supplierName}"></span>-->
+<!--                            &lt;!&ndash; Кнопка показа складов ПОД ПОСТАВЩИКОМ &ndash;&gt;-->
+<!--                            <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">-->
+<!--                                <button class="warehouses-toggle"-->
+<!--                                        th:onclick="toggleWarehouses(this)"-->
+<!--                                        th:data-target="'warehouses-' + ${iterStat.index + exactMatches.size()}">-->
+<!--                                    <i class="fas fa-warehouse"></i>-->
+<!--                                    Склады (<span th:text="${offer.warehouses.size()}"></span>)-->
+<!--                                    <i class="fas fa-chevron-down"></i>-->
+<!--                                </button>-->
+<!--                                <div class="warehouses-dropdown" th:id="'warehouses-' + ${iterStat.index + exactMatches.size()}">-->
+<!--                                    <div class="warehouse-compact-list">-->
+<!--                                        <div class="warehouse-compact-item" th:each="warehouse : ${offer.warehouses}">-->
+<!--                                            <div class="warehouse-main-info">-->
+<!--                                                <span class="warehouse-code" th:text="${warehouse.code}"></span>-->
+<!--                                                <span class="warehouse-price" th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>-->
+<!--                                                <span class="warehouse-stock" th:text="${warehouse.stock} + ' шт.'"></span>-->
+<!--                                                <span class="warehouse-delivery" th:text="${warehouse.formattedDelivery}"></span>-->
+<!--                                            </div>-->
+<!--                                            <div class="warehouse-badges">-->
+<!--                                                <span th:if="${warehouse.own}" class="warehouse-badge own">Свой</span>-->
+<!--                                                <span th:if="${warehouse.notRefund}" class="warehouse-badge no-return">Без возвр.</span>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                        <td>-->
+<!--                            <div class="article-cell" th:text="${offer.originalArticle}"></div>-->
+<!--                        </td>-->
+<!--                        <td class="price-cell" th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>-->
+<!--                        <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"-->
+<!--                            th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>-->
+<!--                        <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>-->
+<!--                        &lt;!&ndash; НОВАЯ ЯЧЕЙКА: Возвратность &ndash;&gt;-->
+<!--                        <td class="return-cell" th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">-->
+<!--                            <span th:text="${offer.returnInfo}"></span>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+<!--                </th:block>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
+<!--    </main>-->
+<!--</div>-->
+
+<!--<script>-->
+<!--    function toggleWarehouses(button) {-->
+<!--        const targetId = button.getAttribute('data-target');-->
+<!--        const dropdown = document.getElementById(targetId);-->
+<!--        const icon = button.querySelector('.fa-chevron-down');-->
+
+<!--        if (dropdown.classList.contains('show')) {-->
+<!--            dropdown.classList.remove('show');-->
+<!--            icon.classList.remove('fa-chevron-up');-->
+<!--            icon.classList.add('fa-chevron-down');-->
+<!--        } else {-->
+<!--            // Закрываем все остальные выпадающие списки-->
+<!--            document.querySelectorAll('.warehouses-dropdown.show').forEach(dropdown => {-->
+<!--                dropdown.classList.remove('show');-->
+<!--                const otherButton = dropdown.previousElementSibling;-->
+<!--                const otherIcon = otherButton.querySelector('.fa-chevron-up');-->
+<!--                if (otherIcon) {-->
+<!--                    otherIcon.classList.remove('fa-chevron-up');-->
+<!--                    otherIcon.classList.add('fa-chevron-down');-->
+<!--                }-->
+<!--            });-->
+
+<!--            dropdown.classList.add('show');-->
+<!--            icon.classList.remove('fa-chevron-down');-->
+<!--            icon.classList.add('fa-chevron-up');-->
+<!--        }-->
+<!--    }-->
+
+<!--    // Закрытие всех выпадающих списков при клике вне их-->
+<!--    document.addEventListener('click', function(event) {-->
+<!--        if (!event.target.closest('.warehouses-toggle') && !event.target.closest('.warehouses-dropdown')) {-->
+<!--            const dropdowns = document.querySelectorAll('.warehouses-dropdown.show');-->
+<!--            dropdowns.forEach(dropdown => {-->
+<!--                dropdown.classList.remove('show');-->
+<!--                const button = dropdown.previousElementSibling;-->
+<!--                const icon = button.querySelector('.fa-chevron-up');-->
+<!--                if (icon) {-->
+<!--                    icon.classList.remove('fa-chevron-up');-->
+<!--                    icon.classList.add('fa-chevron-down');-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    });-->
+
+<!--    document.addEventListener('DOMContentLoaded', function() {-->
+<!--        if (!document.querySelector('.brand-selection')) {-->
+<!--            const sortSelectMain = document.getElementById('sortSelectMain');-->
+<!--            const offersTable = document.getElementById('offersTable');-->
+
+<!--            if (sortSelectMain && offersTable) {-->
+<!--                sortSelectMain.addEventListener('change', function() {-->
+<!--                    // Здесь будет логика сортировки-->
+<!--                    console.log('Выбрана сортировка:', this.value);-->
+<!--                });-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
@@ -87,6 +897,67 @@
             box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
+        /* Стили для вкладок */
+        .tabs-container {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .tabs-header {
+            display: flex;
+            border-bottom: 1px solid #e1e5e9;
+            padding: 0 40px;
+        }
+
+        .tab {
+            padding: 15px 30px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+            background: #f8faff;
+        }
+
+        .tab-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #667eea;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 40px;
+            min-height: 200px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         /* Основной контент - на всю ширину */
         .main-layout {
             display: grid;
@@ -118,7 +989,6 @@
             font-size: 1.5rem;
             font-weight: 700;
         }
-
 
         .search-meta span {
             display: flex;
@@ -159,7 +1029,6 @@
             display: inline-block;
         }
 
-
         /* Стили для таблицы - на всю ширину */
         .offers-table {
             width: 100%;
@@ -194,20 +1063,17 @@
             border-left: 4px solid #28a745;
         }
 
-        /* Стили для аналогов - отдельные строки таблицы */
         .offers-table tr.analogue-row {
             background: #f8faff;
             border-left: 4px solid #667eea;
         }
 
-        .offers-table tr.analogue-row td {
-            padding: 10px 12px;
-            font-size: 0.85rem;
+        .offers-table tr.processed-analogue {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
         }
 
         /* Стили для складов с выпадающим списком */
-
-
         .warehouses-toggle {
             background: #667eea;
             color: white;
@@ -218,7 +1084,7 @@
             cursor: pointer;
             margin-top: 3px;
             transition: all 0.3s ease;
-            display: block; /* Чтобы кнопка была на отдельной строке */
+            display: block;
             width: 100%;
             text-align: center;
         }
@@ -240,7 +1106,6 @@
         .warehouses-dropdown.show {
             display: block;
         }
-
 
         .warehouse-code {
             font-weight: 600;
@@ -341,7 +1206,7 @@
             color: #667eea;
             font-weight: 500;
             white-space: nowrap;
-            vertical-align: top; /* Важно для выравнивания */
+            vertical-align: top;
         }
 
         .price-cell {
@@ -351,13 +1216,10 @@
             text-align: right;
         }
 
-
         .delivery-cell {
             color: #666;
             white-space: nowrap;
         }
-
-
 
         /* Стили для выбора бренда */
         .brand-selection {
@@ -432,12 +1294,30 @@
             border-left: 3px solid #667eea;
         }
 
-        .supplier-forum-auto { border-left-color: #1976d2; background: #e3f2fd; }
-        .supplier-favorite-parts { border-left-color: #7b1fa2; background: #f3e5f5; }
-        .supplier-armtek { border-left-color: #388e3c; background: #e8f5e8; }
-        .supplier-tmtr { border-left-color: #f57c00; background: #fff3e0; }
-        .supplier-etsp { border-left-color: #c2185b; background: #fce4ec; }
+        .supplier-forum-auto {
+            border-left-color: #1976d2;
+            background: #e3f2fd;
+        }
 
+        .supplier-favorite-parts {
+            border-left-color: #7b1fa2;
+            background: #f3e5f5;
+        }
+
+        .supplier-armtek {
+            border-left-color: #388e3c;
+            background: #e8f5e8;
+        }
+
+        .supplier-tmtr {
+            border-left-color: #f57c00;
+            background: #fff3e0;
+        }
+
+        .supplier-etsp {
+            border-left-color: #c2185b;
+            background: #fce4ec;
+        }
 
         .text-primary {
             color: #667eea;
@@ -466,14 +1346,33 @@
             min-width: 60px;
         }
 
+        /* Возвратные + быстрая доставка (лучший вариант) */
+        .analogue-row.returnable-fast-delivery {
+            background: #f0fff4;
+            border-left: 4px solid #28a745;
+        }
+
+        /* Возвратные + медленная доставка */
+        .analogue-row.returnable-slow-delivery {
+            background: #f8fff8;
+            border-left: 4px solid #20c997;
+        }
+
+        /* Невозвратные + быстрая доставка */
+        .analogue-row.non-returnable-fast-delivery {
+            background: #fff5f5;
+            border-left: 4px solid #fd7e14;
+        }
+
+        /* Невозвратные + медленная доставка (худший вариант) */
+        .analogue-row.non-returnable-slow-delivery {
+            background: #fff0f0;
+            border-left: 4px solid #dc3545;
+        }
 
         /* Адаптивность */
         @media (max-width: 1200px) {
-            .main-layout {
-                padding: 0 30px;
-            }
-
-            .header-content {
+            .main-layout, .header-content, .tabs-header {
                 padding: 0 30px;
             }
 
@@ -494,20 +1393,22 @@
                 white-space: nowrap;
             }
 
-            .offers-table th,
-            .offers-table td {
-                white-space: nowrap;
+            .tabs-header {
+                flex-wrap: wrap;
+            }
+
+            .tab {
+                padding: 12px 20px;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 768px) {
-
-            .main-layout {
+            .main-layout, .header-content, .tabs-header {
                 padding: 0 20px;
             }
 
             .header-content {
-                padding: 0 20px;
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
@@ -516,7 +1417,6 @@
             .search-form {
                 width: 100%;
             }
-
 
             .brand-selection {
                 padding: 20px;
@@ -527,19 +1427,18 @@
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             }
 
-            .offers-table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
+            .tabs-header {
+                justify-content: center;
+            }
+
+            .tab {
+                padding: 10px 15px;
+                font-size: 0.85rem;
             }
         }
 
         @media (max-width: 480px) {
-            .header-content {
-                padding: 0 15px;
-            }
-
-            .main-layout {
+            .header-content, .main-layout, .tabs-header {
                 padding: 0 15px;
             }
 
@@ -555,6 +1454,15 @@
 
             .brands-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .tabs-header {
+                flex-direction: column;
+            }
+
+            .tab {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -590,22 +1498,6 @@
         <p><i class="fas fa-info-circle"></i> Для точного поиска аналогов необходимо выбрать бренд</p>
     </div>
 
-<!--    &lt;!&ndash; Список доступных брендов &ndash;&gt;-->
-<!--    <div th:if="${availableBrands != null and !availableBrands.empty}">-->
-<!--        <h3>Доступные бренды:</h3>-->
-<!--        <div class="brands-grid">-->
-<!--            <th:block th:each="availableBrand : ${availableBrands}">-->
-<!--                <a th:href="@{/search(article=${article}, brand=${availableBrand}, selectBrand=true)}"-->
-<!--                   class="brand-card">-->
-<!--                    <div class="brand-name" th:text="${availableBrand}"></div>-->
-<!--                    <div class="brand-select">Выбрать <i class="fas fa-arrow-right"></i></div>-->
-<!--                </a>-->
-<!--            </th:block>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
     <!-- Список доступных брендов -->
     <div th:if="${availableBrands != null and !availableBrands.empty}">
         <h3>Доступные бренды:</h3>
@@ -624,8 +1516,6 @@
         </div>
     </div>
 
-
-
     <!-- Если бренды не найдены -->
     <div th:if="${availableBrands == null or availableBrands.empty}">
         <div class="no-results">
@@ -634,136 +1524,270 @@
             <p>Попробуйте изменить артикул или выполнить поиск без указания бренда</p>
         </div>
     </div>
-
 </div>
 
 <!-- Режим показа результатов (когда бренд выбран) -->
 <div th:unless="${selectBrandMode}" class="main-layout">
-    <!-- Основная область с результатами -->
-    <main class="results-area">
-        <div class="results-section">
-            <table class="offers-table" id="offersTable">
-                <thead>
-                <tr>
-                    <th>Бренд</th>
-                    <th>Наименование</th>
-                    <th>Поставщик</th>
-                    <th>Артикул</th>
-                    <th>Цена</th>
-                    <th>Наличие</th>
-                    <th>Доставка</th>
-                    <!-- НОВЫЙ СТОЛБЕЦ -->
-                    <th>Возвратность</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- Точные совпадения -->
-                <th:block th:each="offer, iterStat : ${exactMatches}">
-                    <!-- Основное предложение -->
-                    <tr class="exact-match"
-                        th:data-supplier="${offer.supplierName}"
-                        th:data-brand="${offer.brand}">
-                        <td class="brand-cell" th:text="${offer.brand}"></td>
-                        <td class="name-cell" th:text="${offer.partName}"></td>
-                        <td class="supplier-cell">
-                            <span th:text="${offer.supplierName}"></span>
-                            <!-- Кнопка показа складов ПОД ПОСТАВЩИКОМ -->
-                            <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">
-                                <button class="warehouses-toggle"
-                                        th:onclick="toggleWarehouses(this)"
-                                        th:data-target="'warehouses-' + ${iterStat.index}">
-                                    <i class="fas fa-warehouse"></i>
-                                    Склады (<span th:text="${offer.warehouses.size()}"></span>)
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="warehouses-dropdown" th:id="'warehouses-' + ${iterStat.index}">
-                                    <div class="warehouse-compact-list">
-                                        <div class="warehouse-compact-item" th:each="warehouse : ${offer.warehouses}">
-                                            <div class="warehouse-main-info">
-                                                <span class="warehouse-code" th:text="${warehouse.code}"></span>
-                                                <span class="warehouse-price" th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>
-                                                <span class="warehouse-stock" th:text="${warehouse.stock} + ' шт.'"></span>
-                                                <span class="warehouse-delivery" th:text="${warehouse.formattedDelivery}"></span>
-                                            </div>
-                                            <div class="warehouse-badges">
-                                                <span th:if="${warehouse.own}" class="warehouse-badge own">Свой</span>
-                                                <span th:if="${warehouse.notRefund}" class="warehouse-badge no-return">Без возвр.</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="article-cell" th:text="${offer.originalArticle}"></div>
-                        </td>
-                        <td class="price-cell" th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>
-                        <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"
-                            th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>
-                        <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>
-                        <!-- НОВАЯ ЯЧЕЙКА: Возвратность -->
-                        <td class="return-cell" th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">
-                            <span th:text="${offer.returnInfo}"></span>
-                        </td>
-                    </tr>
-                </th:block>
 
-                <!-- Остальные предложения -->
-                <th:block th:each="offer, iterStat : ${otherOffers}">
-                    <!-- Основное предложение -->
-                    <tr th:data-supplier="${offer.supplierName}"
-                        th:data-brand="${offer.brand}">
-                        <td class="brand-cell" th:text="${offer.brand}"></td>
-                        <td class="name-cell" th:text="${offer.partName}"></td>
-                        <td class="supplier-cell">
-                            <span th:text="${offer.supplierName}"></span>
-                            <!-- Кнопка показа складов ПОД ПОСТАВЩИКОМ -->
-                            <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">
-                                <button class="warehouses-toggle"
-                                        th:onclick="toggleWarehouses(this)"
-                                        th:data-target="'warehouses-' + ${iterStat.index + exactMatches.size()}">
-                                    <i class="fas fa-warehouse"></i>
-                                    Склады (<span th:text="${offer.warehouses.size()}"></span>)
-                                    <i class="fas fa-chevron-down"></i>
-                                </button>
-                                <div class="warehouses-dropdown" th:id="'warehouses-' + ${iterStat.index + exactMatches.size()}">
-                                    <div class="warehouse-compact-list">
-                                        <div class="warehouse-compact-item" th:each="warehouse : ${offer.warehouses}">
-                                            <div class="warehouse-main-info">
-                                                <span class="warehouse-code" th:text="${warehouse.code}"></span>
-                                                <span class="warehouse-price" th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>
-                                                <span class="warehouse-stock" th:text="${warehouse.stock} + ' шт.'"></span>
-                                                <span class="warehouse-delivery" th:text="${warehouse.formattedDelivery}"></span>
-                                            </div>
-                                            <div class="warehouse-badges">
-                                                <span th:if="${warehouse.own}" class="warehouse-badge own">Свой</span>
-                                                <span th:if="${warehouse.notRefund}" class="warehouse-badge no-return">Без возвр.</span>
+    <!-- Вкладки для разных типов результатов -->
+    <div class="tabs-container">
+        <div class="tabs-header">
+            <button class="tab active" onclick="switchTab(0)">
+                <i class="fas fa-check-circle"></i> Точные совпадения
+                <span class="tab-badge" th:text="${exactMatches != null ? exactMatches.size() : 0}"></span>
+            </button>
+            <button class="tab" onclick="switchTab(1)">
+                <i class="fas fa-exchange-alt"></i> Аналоги
+                <span class="tab-badge" th:text="${analogueOffers != null ? analogueOffers.size() : 0}"></span>
+            </button>
+            <button class="tab" onclick="switchTab(2)">
+                <i class="fas fa-cogs"></i> Обработанные аналоги
+                <span class="tab-badge" th:text="${processedAnalogues != null ? processedAnalogues.size() : 0}"></span>
+            </button>
+        </div>
+
+        <!-- Вкладка 1: Точные совпадения -->
+        <div class="tab-content active" id="tab-0">
+            <div class="results-section">
+                <table class="offers-table">
+                    <thead>
+                    <tr>
+                        <th>Бренд</th>
+                        <th>Наименование</th>
+                        <th>Поставщик</th>
+                        <th>Артикул</th>
+                        <th>Цена</th>
+                        <th>Наличие</th>
+                        <th>Доставка</th>
+                        <th>Возвратность</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="offer, iterStat : ${exactMatches}">
+                        <tr class="exact-match">
+                            <td class="brand-cell" th:text="${offer.brand}"></td>
+                            <td class="name-cell" th:text="${offer.partName}"></td>
+                            <td class="supplier-cell">
+                                <span th:text="${offer.supplierName}"></span>
+                                <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">
+                                    <button class="warehouses-toggle"
+                                            th:onclick="toggleWarehouses(this)"
+                                            th:data-target="'warehouses-exact-' + ${iterStat.index}">
+                                        <i class="fas fa-warehouse"></i>
+                                        Склады (<span th:text="${offer.warehouses.size()}"></span>)
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="warehouses-dropdown" th:id="'warehouses-exact-' + ${iterStat.index}">
+                                        <div class="warehouse-compact-list">
+                                            <div class="warehouse-compact-item"
+                                                 th:each="warehouse : ${offer.warehouses}">
+                                                <div class="warehouse-main-info">
+                                                    <span class="warehouse-code" th:text="${warehouse.code}"></span>
+                                                    <span class="warehouse-price"
+                                                          th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>
+                                                    <span class="warehouse-stock"
+                                                          th:text="${warehouse.stock} + ' шт.'"></span>
+                                                    <span class="warehouse-delivery"
+                                                          th:text="${warehouse.formattedDelivery}"></span>
+                                                </div>
+                                                <div class="warehouse-badges">
+                                                    <span th:if="${warehouse.own}"
+                                                          class="warehouse-badge own">Свой</span>
+                                                    <span th:if="${warehouse.notRefund}"
+                                                          class="warehouse-badge no-return">Без возвр.</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="article-cell" th:text="${offer.originalArticle}"></div>
-                        </td>
-                        <td class="price-cell" th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>
-                        <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"
-                            th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>
-                        <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>
-                        <!-- НОВАЯ ЯЧЕЙКА: Возвратность -->
-                        <td class="return-cell" th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">
-                            <span th:text="${offer.returnInfo}"></span>
-                        </td>
-                    </tr>
-                </th:block>
-                </tbody>
-            </table>
+                            </td>
+                            <td>
+                                <div class="article-cell" th:text="${offer.originalArticle}"></div>
+                            </td>
+                            <td class="price-cell"
+                                th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>
+                            <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"
+                                th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>
+                            <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>
+                            <td class="return-cell"
+                                th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">
+                                <span th:text="${offer.returnInfo}"></span>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </main>
+        <!-- Вкладка 2: Аналоги -->
+        <div class="tab-content" id="tab-1">
+            <div class="results-section">
+                <table class="offers-table">
+                    <thead>
+                    <tr>
+                        <th>Бренд</th>
+                        <th>Наименование</th>
+                        <th>Поставщик</th>
+                        <th>Артикул</th>
+                        <th>Цена</th>
+                        <th>Наличие</th>
+                        <th>Доставка</th>
+                        <th>Возвратность</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Все аналоги в отсортированном порядке -->
+                    <th:block th:each="offer, iterStat : ${analogueOffers}">
+                        <tr class="analogue-row"
+                            th:classappend="${offer.isReturnable} ?
+                        (${deliveryUtils.hasFastDelivery(offer, 2)} ? 'returnable-fast-delivery' : 'returnable-slow-delivery') :
+                        (${deliveryUtils.hasFastDelivery(offer, 2)} ? 'non-returnable-fast-delivery' : 'non-returnable-slow-delivery')">
+
+                            <td class="brand-cell" th:text="${offer.brand}"></td>
+                            <td class="name-cell" th:text="${offer.partName}"></td>
+                            <td class="supplier-cell">
+                                <span th:text="${offer.supplierName}"></span>
+                                <!-- Кнопка показа складов -->
+                                <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">
+                                    <button class="warehouses-toggle"
+                                            th:onclick="toggleWarehouses(this)"
+                                            th:data-target="'warehouses-analogue-' + ${iterStat.index}">
+                                        <i class="fas fa-warehouse"></i>
+                                        Склады (<span th:text="${offer.warehouses.size()}"></span>)
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="warehouses-dropdown" th:id="'warehouses-analogue-' + ${iterStat.index}">
+                                        <div class="warehouse-compact-list">
+                                            <div class="warehouse-compact-item" th:each="warehouse : ${offer.warehouses}">
+                                                <div class="warehouse-main-info">
+                                                    <span class="warehouse-code" th:text="${warehouse.code}"></span>
+                                                    <span class="warehouse-price" th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>
+                                                    <span class="warehouse-stock" th:text="${warehouse.stock} + ' шт.'"></span>
+                                                    <span class="warehouse-delivery" th:text="${warehouse.formattedDelivery}"></span>
+                                                </div>
+                                                <div class="warehouse-badges">
+                                                    <span th:if="${warehouse.own}" class="warehouse-badge own">Свой</span>
+                                                    <span th:if="${warehouse.notRefund}" class="warehouse-badge no-return">Без возвр.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="article-cell" th:text="${offer.originalArticle}"></div>
+                            </td>
+                            <td class="price-cell" th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>
+                            <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"
+                                th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>
+                            <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>
+                            <td class="return-cell" th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">
+                                <span th:text="${offer.returnInfo}"></span>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Вкладка 3: Обработанные аналоги -->
+        <div class="tab-content" id="tab-2">
+            <div class="results-section">
+                <table class="offers-table">
+                    <thead>
+                    <tr>
+                        <th>Бренд</th>
+                        <th>Наименование</th>
+                        <th>Поставщик</th>
+                        <th>Артикул</th>
+                        <th>Цена</th>
+                        <th>Наличие</th>
+                        <th>Доставка</th>
+                        <th>Возвратность</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="offer, iterStat : ${processedAnalogues}">
+                        <tr class="processed-analogue">
+                            <td class="brand-cell" th:text="${offer.brand}"></td>
+                            <td class="name-cell" th:text="${offer.partName}"></td>
+                            <td class="supplier-cell">
+                                <span th:text="${offer.supplierName}"></span>
+                                <div th:if="${offer.warehouses != null and !offer.warehouses.empty and offer.supplierName != 'TMTR'}">
+                                    <button class="warehouses-toggle"
+                                            th:onclick="toggleWarehouses(this)"
+                                            th:data-target="'warehouses-processed-' + ${iterStat.index}">
+                                        <i class="fas fa-warehouse"></i>
+                                        Склады (<span th:text="${offer.warehouses.size()}"></span>)
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="warehouses-dropdown"
+                                         th:id="'warehouses-processed-' + ${iterStat.index}">
+                                        <div class="warehouse-compact-list">
+                                            <div class="warehouse-compact-item"
+                                                 th:each="warehouse : ${offer.warehouses}">
+                                                <div class="warehouse-main-info">
+                                                    <span class="warehouse-code" th:text="${warehouse.code}"></span>
+                                                    <span class="warehouse-price"
+                                                          th:text="${#numbers.formatDecimal(warehouse.price, 1, 2)} + ' ₽'"></span>
+                                                    <span class="warehouse-stock"
+                                                          th:text="${warehouse.stock} + ' шт.'"></span>
+                                                    <span class="warehouse-delivery"
+                                                          th:text="${warehouse.formattedDelivery}"></span>
+                                                </div>
+                                                <div class="warehouse-badges">
+                                                    <span th:if="${warehouse.own}"
+                                                          class="warehouse-badge own">Свой</span>
+                                                    <span th:if="${warehouse.notRefund}"
+                                                          class="warehouse-badge no-return">Без возвр.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="article-cell" th:text="${offer.originalArticle}"></div>
+                            </td>
+                            <td class="price-cell"
+                                th:text="${offer.price != null} ? ${#numbers.formatDecimal(offer.price, 1, 2)} + ' ₽' : 'Нет цены'"></td>
+                            <td th:class="${(offer.quantityAvailable != null and offer.quantityAvailable > 0)} ? 'stock-cell in-stock' : 'stock-cell out-of-stock'"
+                                th:text="${offer.quantityAvailable != null} ? ${offer.quantityAvailable} + ' шт.' : 'Нет данных'"></td>
+                            <td class="delivery-cell" th:text="${offer.formattedDelivery}"></td>
+                            <td class="return-cell"
+                                th:classappend="${offer.isReturnable} ? 'returnable' : 'non-returnable'">
+                                <span th:text="${offer.returnInfo}"></span>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
+    // Функция переключения вкладок
+    function switchTab(tabIndex) {
+        // Скрываем все вкладки
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Убираем активный класс со всех кнопок
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
+
+        // Показываем выбранную вкладку
+        document.getElementById('tab-' + tabIndex).classList.add('active');
+
+        // Активируем соответствующую кнопку
+        document.querySelectorAll('.tab')[tabIndex].classList.add('active');
+    }
+
     function toggleWarehouses(button) {
         const targetId = button.getAttribute('data-target');
         const dropdown = document.getElementById(targetId);
@@ -792,7 +1816,7 @@
     }
 
     // Закрытие всех выпадающих списков при клике вне их
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         if (!event.target.closest('.warehouses-toggle') && !event.target.closest('.warehouses-dropdown')) {
             const dropdowns = document.querySelectorAll('.warehouses-dropdown.show');
             dropdowns.forEach(dropdown => {
@@ -806,28 +1830,8 @@
             });
         }
     });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        if (!document.querySelector('.brand-selection')) {
-            const sortSelectMain = document.getElementById('sortSelectMain');
-            const offersTable = document.getElementById('offersTable');
-
-            if (sortSelectMain && offersTable) {
-                sortSelectMain.addEventListener('change', function() {
-                    // Здесь будет логика сортировки
-                    console.log('Выбрана сортировка:', this.value);
-                });
-            }
-        }
-    });
 </script>
 </body>
 </html>
-
-
-
-
-
-
 
 

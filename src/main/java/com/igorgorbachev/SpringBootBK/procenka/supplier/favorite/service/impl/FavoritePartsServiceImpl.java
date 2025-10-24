@@ -238,7 +238,7 @@ public class FavoritePartsServiceImpl implements FavoriteService, SupplierServic
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return false;
     }
 
     public List<String> findBrandsByArticle(String number) {

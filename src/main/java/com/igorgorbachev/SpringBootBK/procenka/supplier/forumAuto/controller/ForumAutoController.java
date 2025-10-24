@@ -26,7 +26,7 @@ public class ForumAutoController {
     public ResponseEntity<?> listGoods(
             @RequestParam String art,
             @RequestParam(required = false) String br,
-            @RequestParam(required = false, defaultValue = "false") Boolean cross,
+            @RequestParam(required = false, defaultValue = "true") Boolean cross,
             @RequestParam(required = false) String gid) {
 
         try {
@@ -41,7 +41,7 @@ public class ForumAutoController {
     public Mono<ResponseEntity<List<ForumAutoGoods>>> listGoodsReactive(
             @RequestParam String art,
             @RequestParam(required = false) String br,
-            @RequestParam(required = false, defaultValue = "false") Boolean cross,
+            @RequestParam(required = false, defaultValue = "true") Boolean cross,
             @RequestParam(required = false) String gid) {
 
         return forumAutoService.listGoodsReactive(art, br, cross, gid)

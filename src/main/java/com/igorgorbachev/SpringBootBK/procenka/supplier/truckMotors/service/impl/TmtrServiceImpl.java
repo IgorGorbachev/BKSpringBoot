@@ -386,7 +386,7 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
 
     @Override
     public boolean isAvailable() {
-        return true;
+        return false;
     }
 
     private List<PartOfferDto> convertToPartOffers(List<TmtrGoods> tmtrGoods) {

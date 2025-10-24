@@ -582,12 +582,13 @@ public class EtspServiceImpl implements SupplierService {
 
     @Override
     public boolean isAvailable() {
-        try {
-            String hashSession = getValidHashSession();
-            return hashSession != null;
-        } catch (Exception e) {
-            log.warn("ETSP недоступен: {}", e.getMessage());
-            return false;
-        }
+//        try {
+//            String hashSession = getValidHashSession();
+//            return hashSession != null;
+//        } catch (Exception e) {
+//            log.warn("ETSP недоступен: {}", e.getMessage());
+//            return false;
+//        }
+        return false;
     }
 }
