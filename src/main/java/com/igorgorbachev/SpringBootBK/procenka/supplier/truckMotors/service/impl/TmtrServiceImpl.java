@@ -16,12 +16,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
-
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -31,6 +30,7 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
     private final WebClient webClient;
     private final TmtrConfig tmtrConfig;
     private final ObjectMapper objectMapper;
+    private String lastRawResponse;
 
     public TmtrServiceImpl(WebClient.Builder webClientBuilder,
                            TmtrConfig tmtrConfig,
@@ -55,11 +55,6 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
         try {
             String requestBody = buildPreProboyRequestBody(article);
 
-//            log.info("=== TMTR PreProboy API Request ===");
-//            log.info("URL: {}/API.asmx/PreProboy", tmtrConfig.getBaseUrl());
-//            log.info("Headers: login={}, password={}", tmtrConfig.getLogin(), "***");
-//            log.info("Body: {}", requestBody);
-
             String responseBody = webClient.post()
                     .uri("/API.asmx/PreProboy")
                     .header("login", tmtrConfig.getLogin())
@@ -70,15 +65,11 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                     .timeout(Duration.ofSeconds(tmtrConfig.getTimeoutSeconds()))
                     .block();
 
-            log.info("=== TMTR PreProboy API Response ===");
-//            log.info("Response: {}", responseBody);
-
-            return parsePreProboyResponse(responseBody, article); // Передаем article для фильтрации
+            return parsePreProboyResponse(responseBody, article);
 
         } catch (WebClientResponseException e) {
-            log.error("=== TMTR PreProboy API Error ===");
-            log.error("Status: {}", e.getStatusCode());
-            log.error("Response: {}", e.getResponseBodyAsString());
+            log.error("TMTR PreProboy API Error - Status: {}, Response: {}",
+                    e.getStatusCode(), e.getResponseBodyAsString());
             throw new TmtrException("HTTP error " + e.getStatusCode().value() + ": " + e.getResponseBodyAsString());
         } catch (Exception e) {
             log.error("TMTR PreProboy service error: {}", e.getMessage());
@@ -94,10 +85,7 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
         try {
             String requestBody = buildProboyRequestBody(article, brand);
 
-            log.info("=== TMTR Proboy API Request ===");
-            log.info("URL: {}/API.asmx/Proboy", tmtrConfig.getBaseUrl());
-            log.info("Headers: login={}, password={}", tmtrConfig.getLogin(), "***");
-            log.info("Body: {}", requestBody);
+            log.debug("TMTR Proboy API Request - Article: {}, Brand: {}", article, brand);
 
             String responseBody = webClient.post()
                     .uri("/API.asmx/Proboy")
@@ -109,18 +97,21 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                     .timeout(Duration.ofSeconds(tmtrConfig.getTimeoutSeconds()))
                     .block();
 
-            log.info("=== TMTR Proboy API Response ===");
-//            log.info("Response: {}", responseBody);
+            // Сохраняем сырой ответ
+            this.lastRawResponse = responseBody;
+            log.info("TMTR raw response saved, length: {}", responseBody != null ? responseBody.length() : 0);
 
             return parseProboyResponse(responseBody, article, brand);
 
         } catch (WebClientResponseException e) {
-            log.error("=== TMTR Proboy API Error ===");
-            log.error("Status: {}", e.getStatusCode());
-            log.error("Response: {}", e.getResponseBodyAsString());
+            log.error("TMTR Proboy API Error - Status: {}, Response: {}",
+                    e.getStatusCode(), e.getResponseBodyAsString());
+            // Сохраняем ответ даже при ошибке
+            this.lastRawResponse = e.getResponseBodyAsString();
             throw new TmtrException("HTTP error " + e.getStatusCode().value() + ": " + e.getResponseBodyAsString());
         } catch (Exception e) {
             log.error("TMTR Proboy service error: {}", e.getMessage());
+            this.lastRawResponse = null;
             throw new TmtrException("Service error: " + e.getMessage());
         }
     }
@@ -157,27 +148,30 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
     @Override
     public List<PartOfferDto> searchParts(String article, String brand) {
         try {
-            log.info("TMTR searchParts called: article={}, brand={}", article, brand);
+            log.debug("TMTR searchParts - Article: {}, Brand: {}", article, brand);
 
             // Если бренд не указан, возвращаем пустой список
             if (brand == null || brand.trim().isEmpty()) {
-                log.info("TMTR: brand is empty, returning empty list");
+                log.debug("TMTR: brand is empty, returning empty list");
                 return Collections.emptyList();
             }
 
-            log.info("TMTR: searching for brand '{}'", brand);
+            // Используем старый метод с фильтрацией для основного поиска
             List<TmtrGoods> goods = this.searchTmtrParts(article, brand);
-            log.info("TMTR searchTmtrParts returned {} items for brand '{}'", goods.size(), brand);
+            log.info("TMTR found {} FILTERED items for article: {}, brand: {}",
+                    goods.size(), article, brand);
 
             List<PartOfferDto> offers = convertToPartOffers(goods);
-            log.info("TMTR convertToPartOffers returned {} offers", offers.size());
-
             return offers;
         } catch (Exception e) {
             log.error("Error searching in TMTR for article: {}, brand: {}. Error: {}",
                     article, brand, e.getMessage());
             return Collections.emptyList();
         }
+    }
+
+    public String getLastRawResponse() {
+        return this.lastRawResponse;
     }
 
     /**
@@ -217,15 +211,12 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
             JsonNode root = objectMapper.readTree(responseBody);
 
             if (root.isArray()) {
-                // Парсим как массив объектов TmtrBrand
                 TmtrBrand[] brandArray = objectMapper.treeToValue(root, TmtrBrand[].class);
 
-                // Нормализуем запрашиваемый артикул для сравнения
                 String normalizedRequestedArticle = normalizeString(requestedArticle);
 
                 List<String> brands = Arrays.stream(brandArray)
                         .filter(brand -> brand != null && brand.getBrand() != null && !brand.getBrand().trim().isEmpty())
-                        // Фильтруем по точному совпадению артикула
                         .filter(brand -> {
                             if (brand.getArticle() == null) return false;
                             String normalizedBrandArticle = normalizeString(brand.getArticle());
@@ -236,23 +227,17 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                         .distinct()
                         .collect(Collectors.toList());
 
-                log.info("TMTR PreProboy found {} unique brands for article {} from {} total items",
-                        brands.size(), requestedArticle, brandArray.length);
-
-                // Логируем найденные бренды для отладки
-                if (!brands.isEmpty()) {
-                    log.info("Found TMTR brands for article {}: {}", requestedArticle, String.join(", ", brands));
-                }
+                log.info("TMTR PreProboy found {} unique brands for article {}",
+                        brands.size(), requestedArticle);
 
                 return brands;
             }
 
-            log.info("TMTR PreProboy returned no brands (not an array)");
+            log.info("TMTR PreProboy returned no brands");
             return Collections.emptyList();
 
         } catch (Exception e) {
             log.error("Failed to parse TMTR PreProboy response: {}", e.getMessage());
-            log.debug("Response body: {}", responseBody);
             throw new TmtrException("Failed to parse PreProboy response: " + e.getMessage());
         }
     }
@@ -273,38 +258,28 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                 TmtrGoods[] goodsArray = objectMapper.treeToValue(root, TmtrGoods[].class);
                 List<TmtrGoods> allGoods = goodsArray != null ? Arrays.asList(goodsArray) : Collections.emptyList();
 
-                log.info("TMTR Proboy search successful, found {} total results", allGoods.size());
+                log.debug("TMTR Proboy search found {} total results", allGoods.size());
 
-                // Применяем фильтрацию по бренду
                 return filterOriginalGoods(allGoods, requestedArticle, requestedBrand);
             }
 
-            log.info("TMTR Proboy search returned no results (not an array)");
+            log.info("TMTR Proboy search returned no results");
             return Collections.emptyList();
 
         } catch (Exception e) {
             log.error("Failed to parse TMTR Proboy response: {}", e.getMessage());
-            log.debug("Response body: {}", responseBody);
             throw new TmtrException("Failed to parse Proboy response: " + e.getMessage());
         }
     }
 
     /**
-     * Фильтрует только оригинальные детали (не аналоги) по артикулу и бренду
+     * Фильтрует только оригинальные детали по артикулу и бренду
      */
     private List<TmtrGoods> filterOriginalGoods(List<TmtrGoods> allGoods, String requestedArticle, String requestedBrand) {
         if (allGoods == null || allGoods.isEmpty()) {
             return Collections.emptyList();
         }
 
-//        // Логируем все товары до фильтрации
-//        log.info("TMTR ALL goods before filtering ({} items):", allGoods.size());
-//        allGoods.forEach(goods ->
-//                log.info(" - Brand: '{}', Article: '{}', Price: {}, Qty: {}, Returnable: {}, OS: {}",
-//                        goods.getBrand(), goods.getNumber(), goods.getPrice(),
-//                        goods.getParsedQuantity(), goods.isReturnable(), goods.getOs()));
-
-        // Нормализуем запрашиваемый бренд для сравнения
         String normalizedRequestedBrand = requestedBrand != null ? normalizeString(requestedBrand) : "";
 
         List<TmtrGoods> filtered = allGoods.stream()
@@ -321,25 +296,7 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                 .sorted((g1, g2) -> Double.compare(g1.getPrice(), g2.getPrice()))
                 .collect(Collectors.toList());
 
-        log.info("TMTR filterOriginalGoods: {} -> {} items after all filters", allGoods.size(), filtered.size());
-
-        // Логируем отфильтрованные товары
-        if (!filtered.isEmpty()) {
-            log.info("TMTR FILTERED goods (brand '{}', OS=1):", requestedBrand);
-            filtered.forEach(goods ->
-                    log.info(" - Brand: '{}', Article: '{}', Price: {}, Qty: {}, OS: {}",
-                            goods.getBrand(), goods.getNumber(), goods.getPrice(),
-                            goods.getParsedQuantity(), goods.getOs()));
-        } else {
-            log.info("TMTR: No goods found after filtering for brand '{}' and OS=1", requestedBrand);
-
-            // Для диагностики: посмотрим какие значения OS есть в исходных данных
-            Map<Integer, Long> osDistribution = allGoods.stream()
-                    .filter(goods -> goods != null && goods.getOs() != null)
-                    .collect(Collectors.groupingBy(TmtrGoods::getOs, Collectors.counting()));
-
-            log.info("TMTR OS distribution in original data: {}", osDistribution);
-        }
+        log.debug("TMTR filtered: {} -> {} items", allGoods.size(), filtered.size());
 
         return filtered;
     }
@@ -350,23 +307,7 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
         }
 
         String normalizedGoodsBrand = normalizeString(goodsBrand);
-
-        boolean matches = normalizedGoodsBrand.equals(requestedBrand);
-
-        log.debug("TMTR brand match: '{}' == '{}' -> {}",
-                normalizedGoodsBrand, requestedBrand, matches);
-
-        return matches;
-    }
-
-
-    /**
-     * Проверяет, является ли товар оригинальным (не аналогом)
-     */
-    private boolean isOriginalGoods(TmtrGoods goods, String requestedArticle, String requestedBrand) {
-        // ВРЕМЕННО: пропускаем все товары без проверки
-        log.info("TMTR TEMPORARY: accepting ALL goods without filtering");
-        return true;
+        return normalizedGoodsBrand.equals(requestedBrand);
     }
 
     /**
@@ -386,12 +327,11 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
 
     @Override
     public boolean isAvailable() {
-        return false;
+        return true;
     }
 
-    private List<PartOfferDto> convertToPartOffers(List<TmtrGoods> tmtrGoods) {
+    private List<PartOfferDto> convertAllToPartOffers(List<TmtrGoods> tmtrGoods) {
         if (tmtrGoods == null || tmtrGoods.isEmpty()) {
-            log.info("TMTR convertToPartOffers: empty input");
             return List.of();
         }
 
@@ -399,8 +339,20 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                 .filter(Objects::nonNull)
                 .map(goods -> {
                     try {
+                        // Используем существующий конструктор PartOfferDto(TmtrGoods goods)
                         PartOfferDto offer = new PartOfferDto(goods);
-                        log.debug("TMTR converted: {} - {} - {}", offer.getBrand(), offer.getOriginalArticle(), offer.getPrice());
+
+                        // Устанавливаем deliveryDays = 1 для всех отфильтрованных товаров
+                        // так как они прошли проверку isFastDelivery()
+                        offer.setDeliveryDays(1);
+
+                        // Добавляем информацию о складе для отображения
+                        if (goods.getOs() != null) {
+                            offer.setWarehouse("OS=" + goods.getOs() + " (" + goods.getWarehouseName() + ")");
+                        } else {
+                            offer.setWarehouse(goods.getWarehouse());
+                        }
+
                         return offer;
                     } catch (Exception e) {
                         log.error("Error converting TMTR goods to offer: {}", e.getMessage());
@@ -410,7 +362,28 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        log.info("TMTR convertToPartOffers: {} -> {} offers", tmtrGoods.size(), offers.size());
+        log.info("Converted {} TMTR goods to {} offers", tmtrGoods.size(), offers.size());
+        return offers;
+    }
+
+    private List<PartOfferDto> convertToPartOffers(List<TmtrGoods> tmtrGoods) {
+        if (tmtrGoods == null || tmtrGoods.isEmpty()) {
+            return List.of();
+        }
+
+        List<PartOfferDto> offers = tmtrGoods.stream()
+                .filter(Objects::nonNull)
+                .map(goods -> {
+                    try {
+                        return new PartOfferDto(goods);
+                    } catch (Exception e) {
+                        log.error("Error converting TMTR goods to offer: {}", e.getMessage());
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
         return offers;
     }
 
@@ -437,5 +410,155 @@ public class TmtrServiceImpl implements TmtrService, SupplierService {
 
         public String getArticle() { return article; }
         public String getBrand() { return brand; }
+    }
+
+    public List<TmtrGoods> getAllTmtrGoods(String article, String brand) {
+        try {
+            String requestBody = buildProboyRequestBody(article, brand);
+            log.debug("TMTR Proboy API Request - Article: {}, Brand: {}", article, brand);
+
+            String responseBody = webClient.post()
+                    .uri("/API.asmx/Proboy")
+                    .header("login", tmtrConfig.getLogin())
+                    .header("password", tmtrConfig.getPassword())
+                    .bodyValue(requestBody)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .timeout(Duration.ofSeconds(tmtrConfig.getTimeoutSeconds()))
+                    .block();
+
+            log.info("=== RAW TMTR RESPONSE ===");
+            log.info("Length: {} chars", responseBody.length());
+            log.info("First 500 chars: {}", responseBody.substring(0, Math.min(500, responseBody.length())));
+
+            // Сохраняем сырой ответ
+            this.lastRawResponse = responseBody;
+            log.info("TMTR raw response saved, length: {}", responseBody != null ? responseBody.length() : 0);
+
+            // Парсим ВСЕ товары без фильтрации
+            return parseAllProboyResponse(responseBody, article, brand);
+
+        } catch (WebClientResponseException e) {
+            log.error("TMTR Proboy API Error - Status: {}, Response: {}",
+                    e.getStatusCode(), e.getResponseBodyAsString());
+            this.lastRawResponse = e.getResponseBodyAsString();
+            throw new TmtrException("HTTP error " + e.getStatusCode().value() + ": " + e.getResponseBodyAsString());
+        } catch (Exception e) {
+            log.error("TMTR Proboy service error: {}", e.getMessage());
+            this.lastRawResponse = null;
+            throw new TmtrException("Service error: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public List<PartOfferDto> getAllTmtrParts(String article, String brand) {
+        try {
+            log.debug("TMTR getAllTmtrParts - Article: {}, Brand: {}", article, brand);
+
+            if (brand == null || brand.trim().isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            // Получаем ВСЕ товары без фильтрации
+            List<TmtrGoods> allGoods = this.getAllTmtrGoods(article, brand);
+            log.info("TMTR found {} ALL items for article: {}, brand: {}",
+                    allGoods.size(), article, brand);
+
+            // ФИЛЬТРАЦИЯ: только товары в наличии с сортировкой по цене и ТОЛЬКО OS=1
+            List<TmtrGoods> filteredGoods = allGoods.stream()
+                    .filter(goods -> goods != null)
+                    .filter(goods -> goods.getParsedQuantity() != null && goods.getParsedQuantity() > 0) // только в наличии
+                    .filter(goods -> goods.getPrice() != null && goods.getPrice() > 0) // только с валидной ценой
+                    .filter(goods -> goods.getOs() != null && goods.getOs() == 1) // ТОЛЬКО OS=1 (основной склад)
+                    .sorted(Comparator.comparing(TmtrGoods::getPrice)) // сортировка по возрастанию цены
+                    .collect(Collectors.toList());
+
+            log.info("TMTR after filtering (in stock, OS=1): {} -> {} items",
+                    allGoods.size(), filteredGoods.size());
+
+            // Конвертируем отфильтрованные товары в PartOfferDto
+            List<PartOfferDto> filteredOffers = convertAllToPartOffers(filteredGoods);
+            return filteredOffers;
+        } catch (Exception e) {
+            log.error("Error getting all TMTR parts for article: {}, brand: {}. Error: {}",
+                    article, brand, e.getMessage());
+            return Collections.emptyList();
+        }
+    }
+
+    public List<PartOfferDto> getAllTmtrPartsRaw(String article, String brand) {
+        try {
+            log.debug("TMTR getAllTmtrPartsRaw - Article: {}, Brand: {}", article, brand);
+
+            if (brand == null || brand.trim().isEmpty()) {
+                return Collections.emptyList();
+            }
+
+            // Получаем ВСЕ товары без фильтрации
+            List<TmtrGoods> allGoods = this.getAllTmtrGoods(article, brand);
+            log.info("TMTR found {} RAW items for article: {}, brand: {}",
+                    allGoods.size(), article, brand);
+
+            // Конвертируем все товары в PartOfferDto без фильтрации
+            List<PartOfferDto> allOffers = convertAllToPartOffers(allGoods);
+            return allOffers;
+        } catch (Exception e) {
+            log.error("Error getting raw TMTR parts for article: {}, brand: {}. Error: {}",
+                    article, brand, e.getMessage());
+            return Collections.emptyList();
+        }
+    }
+
+
+    private List<TmtrGoods> parseAllProboyResponse(String responseBody, String requestedArticle, String requestedBrand) {
+        if (responseBody == null || responseBody.trim().isEmpty()) {
+            log.warn("Empty response from TMTR Proboy API");
+            return Collections.emptyList();
+        }
+
+        try {
+            JsonNode root = objectMapper.readTree(responseBody);
+
+            if (root.isArray()) {
+                TmtrGoods[] goodsArray = objectMapper.treeToValue(root, TmtrGoods[].class);
+                List<TmtrGoods> allGoods = goodsArray != null ? Arrays.asList(goodsArray) : Collections.emptyList();
+
+                log.info("TMTR Proboy search found {} total results (ALL ITEMS)", allGoods.size());
+
+                // Логируем первые несколько товаров для отладки
+                if (!allGoods.isEmpty()) {
+                    log.info("First 5 TMTR items (ALL):");
+                    for (int i = 0; i < Math.min(5, allGoods.size()); i++) {
+                        TmtrGoods goods = allGoods.get(i);
+                        log.info("  {}: Brand='{}', Article='{}', Price={}, Quantity={}, OS={}, Warehouse='{}'",
+                                i+1, goods.getBrand(), goods.getNumber(), goods.getPrice(),
+                                goods.getParsedQuantity(), goods.getOs(), goods.getWarehouse());
+                    }
+                }
+
+                return allGoods;
+            }
+
+            log.info("TMTR Proboy search returned no results");
+            return Collections.emptyList();
+
+        } catch (Exception e) {
+            log.error("Failed to parse TMTR Proboy response: {}", e.getMessage());
+            throw new TmtrException("Failed to parse Proboy response: " + e.getMessage());
+        }
+    }
+
+    private boolean isFastDelivery(TmtrGoods goods) {
+        if (goods == null) {
+            return false;
+        }
+
+        // Все товары OS=1 считаем с быстрой доставкой
+        if (goods.getOs() != null && goods.getOs() == 1) {
+            return true;
+        }
+
+        // Остальная логика для других случаев (если понадобится)
+        return false;
     }
 }

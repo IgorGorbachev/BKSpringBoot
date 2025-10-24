@@ -3,11 +3,13 @@ package com.igorgorbachev.SpringBootBK.procenka.service.impl;
 import com.igorgorbachev.SpringBootBK.procenka.dto.PartOfferDto;
 import com.igorgorbachev.SpringBootBK.procenka.service.SupplierService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.service.impl.ForumAutoServiceImpl;
+import com.igorgorbachev.SpringBootBK.procenka.supplier.truckMotors.service.impl.TmtrServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +22,28 @@ import java.util.stream.Collectors;
 @Service
 public class SupplierAggregationService {
     private final List<SupplierService> supplierServices;
+    private String lastTmtrRawResponse;
+    public String getTmtrRawResponse() {
+        return this.lastTmtrRawResponse;
+    }
 
     public SupplierAggregationService(List<SupplierService> supplierServices) {
         this.supplierServices = supplierServices;
-        log.info("Loaded suppliers: {}", supplierServices.stream()
-                .map(SupplierService::getSupplierName)
-                .collect(Collectors.toList()));
+        log.info("=== SUPPLIER AGGREGATION SERVICE INITIALIZED ===");
+        log.info("Total suppliers found: {}", supplierServices.size());
+        log.info("Available suppliers:");
+        supplierServices.forEach(supplier -> {
+            boolean isTmtr = "TMTR".equals(supplier.getSupplierName());
+            log.info(" - {}: available={} {}",
+                    supplier.getSupplierName(),
+                    supplier.isAvailable(),
+                    isTmtr ? "<<< TMTR >>>" : "");
+        });
+
+        // Проверяем наличие TMTR
+        boolean hasTmtr = supplierServices.stream()
+                .anyMatch(supplier -> "TMTR".equals(supplier.getSupplierName()));
+        log.info("TMTR service present: {}", hasTmtr);
     }
 
     /**
@@ -143,44 +161,156 @@ public class SupplierAggregationService {
 //
 //        return allResults;
 //    }
-
+//
     public List<PartOfferDto> searchAllSuppliers(String article, String brand) {
-        List<PartOfferDto> allOffers = new ArrayList<>();
+        log.info("Starting search across all suppliers for article: '{}', brand: '{}'", article, brand);
 
-        // Сначала ищем точные совпадения
+        // Сбрасываем предыдущий сырой ответ
+        this.lastTmtrRawResponse = null;
+
+        List<PartOfferDto> allOffers = Collections.synchronizedList(new ArrayList<>());
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+
         for (SupplierService supplier : supplierServices) {
-            if (supplier.isAvailable()) {
+            if (!supplier.isAvailable()) {
+                log.info("Supplier {} is not available, skipping", supplier.getSupplierName());
+                continue;
+            }
+
+            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
                 try {
-                    List<PartOfferDto> offers = supplier.searchParts(article, brand);
-                    allOffers.addAll(offers);
-                    log.info("Supplier {} found {} exact matches", supplier.getSupplierName(), offers.size());
-                } catch (Exception e) {
-                    log.error("Ошибка при поиске в поставщике {}: {}",
-                            supplier.getSupplierName(), e.getMessage());
-                }
-            }
-        }
+                    log.info("Searching in supplier: {}", supplier.getSupplierName());
 
-        // Затем ищем аналоги (если указан бренд)
-        if (brand != null && !brand.trim().isEmpty()) {
-            for (SupplierService supplier : supplierServices) {
-                if (supplier.isAvailable() && supplier instanceof ForumAutoServiceImpl) {
-                    try {
-                        ForumAutoServiceImpl forumAuto = (ForumAutoServiceImpl) supplier;
-                        List<PartOfferDto> analogues = forumAuto.searchAnalogues(article, brand);
-                        allOffers.addAll(analogues);
-                        log.info("Supplier {} found {} analogues", supplier.getSupplierName(), analogues.size());
-                    } catch (Exception e) {
-                        log.error("Ошибка при поиске аналогов в поставщике {}: {}",
-                                supplier.getSupplierName(), e.getMessage());
+                    List<PartOfferDto> supplierOffers;
+
+                    // ОСОБАЯ ЛОГИКА ДЛЯ FORUM AUTO - ИЩЕМ АНАЛОГИ
+                    if (supplier instanceof ForumAutoServiceImpl) {
+                        ForumAutoServiceImpl forumAutoService = (ForumAutoServiceImpl) supplier;
+                        supplierOffers = forumAutoService.searchAnalogues(article, brand);
+                        log.info("Forum Auto analogues search returned {} offers", supplierOffers.size());
+                    } else {
+                        // Для остальных поставщиков используем стандартный поиск
+                        supplierOffers = supplier.searchParts(article, brand);
                     }
+
+                    // Сохраняем сырой ответ TMTR
+                    if (supplier instanceof TmtrServiceImpl) {
+                        TmtrServiceImpl tmtrService = (TmtrServiceImpl) supplier;
+                        String rawResponse = tmtrService.getLastRawResponse();
+                        if (rawResponse != null) {
+                            this.lastTmtrRawResponse = rawResponse;
+                            log.info("Saved TMTR raw response, length: {}", rawResponse.length());
+                        }
+                    }
+
+                    if (supplierOffers != null && !supplierOffers.isEmpty()) {
+                        allOffers.addAll(supplierOffers);
+                        log.info("Supplier {} returned {} offers", supplier.getSupplierName(), supplierOffers.size());
+                    } else {
+                        log.info("Supplier {} returned no offers", supplier.getSupplierName());
+                    }
+                } catch (Exception e) {
+                    log.error("Error searching in supplier {}: {}", supplier.getSupplierName(), e.getMessage());
                 }
-            }
+            });
+
+            futures.add(future);
         }
 
-        log.info("Total offers found: {} (exact matches + analogues)", allOffers.size());
+        try {
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(30, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            log.error("Error waiting for search completion: {}", e.getMessage());
+        }
+
+        log.info("Total offers from all suppliers: {}", allOffers.size());
         return allOffers;
     }
+
+//    public String getTmtrRawResponse() {
+//        return this.lastTmtrRawResponse;
+//    }
+
+
+//    public List<PartOfferDto> searchAllSuppliers(String article, String brand) {
+//        log.info("Starting search across all suppliers for article: '{}', brand: '{}'", article, brand);
+//
+//        // Сбрасываем предыдущий сырой ответ
+//        this.lastTmtrRawResponse = null;
+//
+//        List<PartOfferDto> allOffers = Collections.synchronizedList(new ArrayList<>());
+//        List<CompletableFuture<Void>> futures = new ArrayList<>();
+//
+//        for (SupplierService supplier : supplierServices) {
+//            if (!supplier.isAvailable()) {
+//                log.info("Supplier {} is not available, skipping", supplier.getSupplierName());
+//                continue;
+//            }
+//
+//            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+//                try {
+//                    log.info("Searching in supplier: {}", supplier.getSupplierName());
+//
+//                    List<PartOfferDto> supplierOffers;
+//
+//                    // ОСОБАЯ ЛОГИКА ДЛЯ FORUM AUTO - ИЩЕМ И ОРИГИНАЛЫ И АНАЛОГИ
+//                    if (supplier instanceof ForumAutoServiceImpl) {
+//                        ForumAutoServiceImpl forumAutoService = (ForumAutoServiceImpl) supplier;
+//
+//                        // Получаем оригиналы через searchParts
+//                        List<PartOfferDto> originals = forumAutoService.searchParts(article, brand);
+//                        log.info("Forum Auto originals search returned {} offers", originals.size());
+//
+//                        // Получаем аналоги через searchAnalogues
+//                        List<PartOfferDto> analogues = forumAutoService.searchAnalogues(article, brand);
+//                        log.info("Forum Auto analogues search returned {} offers", analogues.size());
+//
+//                        // Объединяем оригиналы и аналоги
+//                        supplierOffers = new ArrayList<>();
+//                        supplierOffers.addAll(originals);
+//                        supplierOffers.addAll(analogues);
+//
+//                        log.info("Forum Auto total offers: {} ({} originals + {} analogues)",
+//                                supplierOffers.size(), originals.size(), analogues.size());
+//
+//                    } else {
+//                        // Для остальных поставщиков используем стандартный поиск
+//                        supplierOffers = supplier.searchParts(article, brand);
+//                    }
+//
+//                    // Сохраняем сырой ответ TMTR
+//                    if (supplier instanceof TmtrServiceImpl) {
+//                        TmtrServiceImpl tmtrService = (TmtrServiceImpl) supplier;
+//                        String rawResponse = tmtrService.getLastRawResponse();
+//                        if (rawResponse != null) {
+//                            this.lastTmtrRawResponse = rawResponse;
+//                            log.info("Saved TMTR raw response, length: {}", rawResponse.length());
+//                        }
+//                    }
+//
+//                    if (supplierOffers != null && !supplierOffers.isEmpty()) {
+//                        allOffers.addAll(supplierOffers);
+//                        log.info("Supplier {} returned {} offers", supplier.getSupplierName(), supplierOffers.size());
+//                    } else {
+//                        log.info("Supplier {} returned no offers", supplier.getSupplierName());
+//                    }
+//                } catch (Exception e) {
+//                    log.error("Error searching in supplier {}: {}", supplier.getSupplierName(), e.getMessage());
+//                }
+//            });
+//
+//            futures.add(future);
+//        }
+//
+//        try {
+//            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(30, TimeUnit.SECONDS);
+//        } catch (Exception e) {
+//            log.error("Error waiting for search completion: {}", e.getMessage());
+//        }
+//
+//        log.info("Total offers from all suppliers: {}", allOffers.size());
+//        return allOffers;
+//    }
 
     /**
      * Поиск с фильтрацией дубликатов (оставляем самую низкую цену)

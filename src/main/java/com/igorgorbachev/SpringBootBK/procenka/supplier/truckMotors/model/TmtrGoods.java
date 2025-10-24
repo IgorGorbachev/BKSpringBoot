@@ -34,6 +34,9 @@ public class TmtrGoods {
     @JsonProperty("MinPackQuantity")
     private Integer minPackQuantity;
 
+    @JsonProperty("StockName")
+    private String stockName;
+
     @JsonProperty("Price")
     private Double price;
 

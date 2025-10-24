@@ -174,34 +174,26 @@ public class PartOfferDto {
         this.originalArticle = goods.getNumber() != null ? goods.getNumber() : "Не указан";
         this.price = goods.getPrice() != null ? goods.getPrice() : 0.0;
         this.quantityAvailable = goods.getParsedQuantity() != null ? goods.getParsedQuantity() : 0;
+        this.deliveryDays = goods.getDeliveryPeriod() != null ? goods.getDeliveryPeriod() : 1;
+        this.brand = goods.getBrand() != null ? goods.getBrand() : "Не указан";
 
-        // ЛОГИКА ДОСТАВКИ ДЛЯ TMTR:
-        // Если товар на основном складе (OS=1) и есть в наличии - 1 день
-        // Иначе используем deliveryPeriod из API
-        if (goods.getOs() != null && goods.getOs() == 1 &&
-                goods.getParsedQuantity() != null && goods.getParsedQuantity() > 0) {
-            this.deliveryDays = 1;
-        } else if (goods.getDeliveryPeriod() != null && goods.getDeliveryPeriod() > 0) {
-            this.deliveryDays = goods.getDeliveryPeriod();
+        // ОТОБРАЖАЕМ КОНКРЕТНОЕ НАЗВАНИЕ СКЛАДА ИЗ StockName
+        if (goods.getStockName() != null && !goods.getStockName().trim().isEmpty()) {
+            this.warehouse = goods.getStockName(); // "Владимир", "Москва" и т.д.
+        } else if (goods.getWarehouse() != null && !goods.getWarehouse().trim().isEmpty()) {
+            this.warehouse = goods.getWarehouse(); // fallback на Warehouse
         } else {
-            this.deliveryDays = 1; // По умолчанию 1 день
+            this.warehouse = goods.getWarehouseName(); // последний fallback
         }
 
-        this.brand = goods.getBrand() != null ? goods.getBrand() : "Не указан";
-        this.warehouse = goods.getWarehouseName() != null ? goods.getWarehouseName() : "TMTR";
         this.warranty = goods.isReturnable() ? "14 дней" : "Без возврата";
-
-        // ИНФОРМАЦИЯ О ВОЗВРАТНОСТИ
         this.isReturnable = true;
         this.returnInfo = this.isReturnable ? "Возвратная" : "Без возврата";
-
-        // Убираем список складов для TMTR
         this.warehouses = null;
 
-        log.debug("TMTR offer created: article={}, brand={}, deliveryDays={}, os={}",
-                this.originalArticle, this.brand, this.deliveryDays, goods.getOs());
+        log.debug("TMTR offer created: article={}, brand={}, stockName={}, warehouse={}",
+                this.originalArticle, this.brand, goods.getStockName(), this.warehouse);
     }
-
     // Конструктор для ETSP
     public PartOfferDto(EtspGoods goods) {
         this.supplierName = "ETSP";

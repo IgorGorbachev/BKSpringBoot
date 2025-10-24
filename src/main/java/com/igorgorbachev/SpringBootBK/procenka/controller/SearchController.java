@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -158,6 +159,16 @@ public class SearchController {
 //
 //        return "search-results";
 //    }
+
+
+    private TmtrService getTmtrService() {
+        return supplierServices.stream()
+                .filter(service -> service instanceof TmtrService)
+                .map(service -> (TmtrService) service)
+                .findFirst()
+                .orElse(null);
+    }
+
     @GetMapping("/search")
     public String searchParts(
             @RequestParam String article,
@@ -195,40 +206,85 @@ public class SearchController {
             String cleanedBrand = brand != null ? brand.trim() : null;
 
             // Этап 3: Поиск с выбранным брендом
-            String cacheKey = String.format("search_%s_%s", cleanedArticle, cleanedBrand != null ? cleanedBrand : "");
-            Map<String, List<PartOfferDto>> offersBySupplier;
+            log.info("=== FORCING FRESH SEARCH - IGNORING CACHE ===");
 
-            if (refresh || session.getAttribute(cacheKey) == null) {
-                List<PartOfferDto> allOffers = aggregationService.searchAllSuppliers(cleanedArticle, cleanedBrand);
-                offersBySupplier = allOffers.stream()
-                        .collect(Collectors.groupingBy(PartOfferDto::getSupplierName));
-                session.setAttribute(cacheKey, offersBySupplier);
+            List<PartOfferDto> allOffers = aggregationService.searchAllSuppliers(cleanedArticle, cleanedBrand);
+            log.info("aggregationService returned {} offers", allOffers.size());
+
+            Map<String, List<PartOfferDto>> offersBySupplier = allOffers.stream()
+                    .collect(Collectors.groupingBy(PartOfferDto::getSupplierName));
+
+            // Получаем ОТФИЛЬТРОВАННЫЕ товары TMTR
+            List<PartOfferDto> tmtrOffers = Collections.emptyList();
+            TmtrService tmtrService = getTmtrService();
+            if (tmtrService != null) {
+                try {
+                    tmtrOffers = tmtrService.getAllTmtrParts(cleanedArticle, cleanedBrand);
+                    log.info("TMTR offers: {} items (in stock, sorted by price)", tmtrOffers.size());
+                } catch (Exception e) {
+                    log.error("Error getting TMTR offers: {}", e.getMessage());
+                    tmtrOffers = offersBySupplier.getOrDefault("TMTR", Collections.emptyList())
+                            .stream()
+                            .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                            .collect(Collectors.toList());
+                }
             } else {
-                offersBySupplier = (Map<String, List<PartOfferDto>>) session.getAttribute(cacheKey);
+                tmtrOffers = offersBySupplier.getOrDefault("TMTR", Collections.emptyList())
+                        .stream()
+                        .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                        .collect(Collectors.toList());
             }
 
-            List<PartOfferDto> allOffers = offersBySupplier.values().stream()
-                    .flatMap(List::stream)
-                    .collect(Collectors.toList());
+            // ДОПОЛНИТЕЛЬНО: получаем оригиналы Forum-Auto
+            List<PartOfferDto> forumAutoOriginals = getForumAutoOriginals(cleanedArticle, cleanedBrand);
+            log.info("Forum-Auto originals: {} items", forumAutoOriginals.size());
 
-            // РАЗДЕЛЕНИЕ НА ТРИ КАТЕГОРИИ:
+            // ТОЧНЫЕ СОВПАДЕНИЯ - комбинируем
+            List<PartOfferDto> exactMatches = new ArrayList<>();
 
-            // 1. ТОЧНЫЕ СОВПАДЕНИЯ - выбранный бренд И точный артикул
-            List<PartOfferDto> exactMatches = allOffers.stream()
+            // 1. Точные совпадения из aggregationService (исключая Forum-Auto)
+            List<PartOfferDto> exactFromAggregation = allOffers.stream()
+                    .filter(offer -> !"Forum-Auto".equals(offer.getSupplierName()))
                     .filter(offer -> isExactBrandMatch(offer, cleanedBrand) &&
                             isExactArticleMatch(offer, cleanedArticle))
                     .sorted(Comparator.comparing(PartOfferDto::getPrice))
                     .collect(Collectors.toList());
 
-            // 2. АНАЛОГИ - все остальные товары (другие бренды) с новой сортировкой
-            List<PartOfferDto> analogueOffers = sortAnalogues(allOffers, cleanedBrand);
+            exactMatches.addAll(exactFromAggregation);
 
-            // 3. ОБРАБОТАННЫЕ АНАЛОГИ - можно добавить специальную логику
-            List<PartOfferDto> processedAnalogues = processAnalogues(analogueOffers, cleanedArticle, cleanedBrand);
+            // 2. Добавляем оригиналы Forum-Auto
+            exactMatches.addAll(forumAutoOriginals);
+
+            // 3. Сортируем по цене
+            exactMatches.sort(Comparator.comparing(PartOfferDto::getPrice));
+
+            log.info("Exact matches: {} items ({} from aggregation + {} Forum-Auto originals)",
+                    exactMatches.size(), exactFromAggregation.size(), forumAutoOriginals.size());
+
+            // Forum-Auto вкладка - аналоги из aggregationService (отсортированные)
+            List<PartOfferDto> forumAutoOffers = offersBySupplier.getOrDefault("Forum-Auto", Collections.emptyList())
+                    .stream()
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            List<PartOfferDto> favoritePartsOffers = offersBySupplier.getOrDefault("Favorite Parts", Collections.emptyList())
+                    .stream()
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            List<PartOfferDto> armtekOffers = offersBySupplier.getOrDefault("Armtek", Collections.emptyList())
+                    .stream()
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            // Обработанные аналоги
+            List<PartOfferDto> processedOffers = Collections.emptyList();
 
             // Логируем распределение
-            log.info("Distribution - Exact matches: {}, Analogues: {}, Processed: {}",
-                    exactMatches.size(), analogueOffers.size(), processedAnalogues.size());
+            log.info("=== FINAL DISTRIBUTION ===");
+            log.info("Exact matches: {}, Forum-Auto: {}, Favorite Parts: {}, Armtek: {}, TMTR: {}",
+                    exactMatches.size(), forumAutoOffers.size(),
+                    favoritePartsOffers.size(), armtekOffers.size(), tmtrOffers.size());
 
             List<String> supplierNames = supplierServices.stream()
                     .filter(SupplierService::isAvailable)
@@ -237,9 +293,15 @@ public class SearchController {
 
             model.addAttribute("article", cleanedArticle);
             model.addAttribute("brand", cleanedBrand);
+
+            // Данные для вкладок
             model.addAttribute("exactMatches", exactMatches);
-            model.addAttribute("analogueOffers", analogueOffers);
-            model.addAttribute("processedAnalogues", processedAnalogues);
+            model.addAttribute("forumAutoOffers", forumAutoOffers);
+            model.addAttribute("favoritePartsOffers", favoritePartsOffers);
+            model.addAttribute("armtekOffers", armtekOffers);
+            model.addAttribute("tmtrOffers", tmtrOffers);
+            model.addAttribute("processedOffers", processedOffers);
+
             model.addAttribute("supplierNames", supplierNames);
             model.addAttribute("totalOffersCount", allOffers.size());
             model.addAttribute("selectBrandMode", false);
@@ -248,17 +310,51 @@ public class SearchController {
             log.error("Ошибка при поиске: {}", e.getMessage(), e);
             model.addAttribute("error", "Ошибка при поиске: " + e.getMessage());
             model.addAttribute("exactMatches", List.of());
-            model.addAttribute("analogueOffers", List.of());
-            model.addAttribute("processedAnalogues", List.of());
+            model.addAttribute("forumAutoOffers", List.of());
+            model.addAttribute("favoritePartsOffers", List.of());
+            model.addAttribute("armtekOffers", List.of());
+            model.addAttribute("tmtrOffers", List.of());
+            model.addAttribute("processedOffers", List.of());
             model.addAttribute("supplierNames", List.of());
             model.addAttribute("totalOffersCount", 0);
             model.addAttribute("selectBrandMode", false);
         }
 
         model.addAttribute("deliveryUtils", deliveryUtils);
-
         return "search-results";
     }
+
+    private List<PartOfferDto> getForumAutoOriginals(String article, String brand) {
+        try {
+            SupplierService forumAutoService = supplierServices.stream()
+                    .filter(service -> "Forum-Auto".equals(service.getSupplierName()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (forumAutoService != null) {
+                List<PartOfferDto> originals = forumAutoService.searchParts(article, brand);
+                log.info("Forum-Auto searchParts returned {} originals", originals.size());
+
+                // Логируем детали оригиналов
+                if (!originals.isEmpty()) {
+                    log.info("Forum-Auto originals details:");
+                    originals.forEach(offer ->
+                            log.info(" - Brand='{}', Article='{}', Price={}",
+                                    offer.getBrand(), offer.getOriginalArticle(), offer.getPrice())
+                    );
+                }
+
+                return originals;
+            }
+        } catch (Exception e) {
+            log.error("Error getting Forum-Auto originals: {}", e.getMessage());
+        }
+        return Collections.emptyList();
+    }
+
+
+
+
 
     /**
      * Проверяет точное совпадение по бренду

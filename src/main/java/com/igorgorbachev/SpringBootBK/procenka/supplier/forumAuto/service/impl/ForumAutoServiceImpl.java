@@ -18,6 +18,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -389,29 +390,65 @@ public class ForumAutoServiceImpl implements ForumAutoService, SupplierService {
 
             log.info("ForumAuto analogues search completed: found {} total goods", allGoods.size());
 
-            // Фильтруем только аналоги (другие бренды) - ВСЕ товары кроме точных совпадений
-            List<PartOfferDto> result = allGoods.stream()
-                    .filter(good -> brand == null ||
-                            (good.getBrand() != null && !normalizeString(good.getBrand()).equals(normalizeString(brand))))
+            // УБИРАЕМ ФИЛЬТР ПО БРЕНДУ - берем ВСЕ товары (включая оригиналы)
+            List<PartOfferDto> allAnalogues = allGoods.stream()
+                    // УБРАН ФИЛЬТР: .filter(good -> brand == null || (good.getBrand() != null && !normalizeString(good.getBrand()).equals(normalizeString(brand))))
+                    // Фильтр по складам: только YAR или MSK
+                    .filter(good -> good.getWarehouse() != null &&
+                            ("YAR".equals(good.getWarehouse()) || "MSK".equals(good.getWarehouse())))
                     // Дополнительная фильтрация: убираем товары с нулевой ценой или количеством
                     .filter(good -> good.getPrice() != null && good.getPrice() > 0)
                     .filter(good -> good.getQuantity() != null && good.getQuantity() > 0)
                     .map(good -> new PartOfferDto(good))
                     .collect(Collectors.toList());
 
-            log.info("ForumAuto analogues filtered to {} DTOs (other brands)", result.size());
+            log.info("ForumAuto after warehouse filter (YAR/MSK): {} items", allAnalogues.size());
 
-            // Логируем все найденные аналоги для отладки
+            // Разделяем на группы согласно требованиям
+            List<PartOfferDto> inStockReturnable = allAnalogues.stream()
+                    .filter(offer -> offer.getQuantityAvailable() > 0)
+                    .filter(offer -> offer.getIsReturnable() != null && offer.getIsReturnable())
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            List<PartOfferDto> outOfStockReturnable = allAnalogues.stream()
+                    .filter(offer -> offer.getQuantityAvailable() == 0)
+                    .filter(offer -> offer.getIsReturnable() != null && offer.getIsReturnable())
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            List<PartOfferDto> outOfStockNonReturnable = allAnalogues.stream()
+                    .filter(offer -> offer.getQuantityAvailable() == 0)
+                    .filter(offer -> offer.getIsReturnable() == null || !offer.getIsReturnable())
+                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
+                    .collect(Collectors.toList());
+
+            // Объединяем в правильном порядке
+            List<PartOfferDto> result = new ArrayList<>();
+            result.addAll(inStockReturnable);
+            result.addAll(outOfStockReturnable);
+            result.addAll(outOfStockNonReturnable);
+
+            log.info("ForumAuto ALL goods distribution (YAR/MSK only): {} в наличии возвратные, {} не в наличии возвратные, {} не в наличии невозвратные",
+                    inStockReturnable.size(), outOfStockReturnable.size(), outOfStockNonReturnable.size());
+
+            log.info("ForumAuto ALL goods filtered to {} DTOs (YAR/MSK only)", result.size());
+
+            // Логируем все найденные товары для отладки
             if (!result.isEmpty()) {
-                log.info("ForumAuto analogues found (first 10):");
+                log.info("ForumAuto ALL goods found (YAR/MSK only, first 10):");
                 result.stream()
                         .limit(10)
-                        .forEach(dto ->
-                                log.info(" - Brand: '{}', Article: '{}', Price: {}, Quantity: {}",
-                                        dto.getBrand(), dto.getOriginalArticle(), dto.getPrice(), dto.getQuantityAvailable())
-                        );
+                        .forEach(dto -> {
+                            String stockStatus = dto.getQuantityAvailable() > 0 ? "В наличии" : "Нет в наличии";
+                            String returnStatus = dto.getIsReturnable() != null && dto.getIsReturnable() ? "Возвратный" : "Невозвратный";
+                            String originalMark = isExactBrandMatch(dto, brand) ? " [ОРИГИНАЛ]" : " [АНАЛОГ]";
+                            log.info(" - Brand: '{}', Article: '{}', Price: {}, {} {}, Qty: {}, Warehouse: {}{}",
+                                    dto.getBrand(), dto.getOriginalArticle(), dto.getPrice(),
+                                    stockStatus, returnStatus, dto.getQuantityAvailable(), dto.getWarehouse(), originalMark);
+                        });
                 if (result.size() > 10) {
-                    log.info("... and {} more analogues", result.size() - 10);
+                    log.info("... and {} more goods", result.size() - 10);
                 }
             }
 
@@ -422,6 +459,14 @@ public class ForumAutoServiceImpl implements ForumAutoService, SupplierService {
                     article, brand, e.getMessage(), e);
             return List.of();
         }
+    }
+
+    // Вспомогательный метод для проверки точного совпадения по бренду
+    private boolean isExactBrandMatch(PartOfferDto offer, String searchedBrand) {
+        if (searchedBrand == null || offer.getBrand() == null) {
+            return false;
+        }
+        return normalizeString(offer.getBrand()).equals(normalizeString(searchedBrand));
     }
 
     /**
@@ -565,6 +610,8 @@ public class ForumAutoServiceImpl implements ForumAutoService, SupplierService {
 
         return false;
     }
+
+
 
 
     @Override
