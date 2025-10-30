@@ -6,7 +6,7 @@ import com.igorgorbachev.SpringBootBK.procenka.service.SupplierService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.config.FavoritePartsConfig;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.ApiResponse;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.FavoritePartsGoods;
-import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.Warehouse;
+import com.igorgorbachev.SpringBootBK.procenka.dto.Warehouse;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.service.FavoriteService;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;

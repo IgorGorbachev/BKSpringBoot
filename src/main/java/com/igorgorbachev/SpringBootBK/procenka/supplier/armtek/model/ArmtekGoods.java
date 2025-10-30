@@ -63,7 +63,6 @@ public class ArmtekGoods {
     @JsonProperty("ANALOG")
     private String analog;
 
-    // Дополнительные поля из спецификации
     @JsonProperty("TYPEB")
     private String typeB;
 
@@ -98,9 +97,8 @@ public class ArmtekGoods {
     }
 
     public Integer getDeliveryDays() {
-        // Используем дату начала доставки для расчета дней
         if (deliveryDate == null || deliveryDate.trim().isEmpty()) {
-            return 1; // По умолчанию 1 день
+            return 1; // значение по умолчанию
         }
 
         try {
@@ -108,18 +106,19 @@ public class ArmtekGoods {
             LocalDateTime deliveryDateTime = LocalDateTime.parse(deliveryDate, formatter);
             LocalDateTime now = LocalDateTime.now();
 
-            long days = java.time.Duration.between(now, deliveryDateTime).toDays();
-            return (int) Math.max(1, days); // Минимум 1 день
+            // Вычисляем разницу в днях (округляем вверх)
+            long hours = java.time.Duration.between(now, deliveryDateTime).toHours();
+            long days = (hours + 23) / 24; // Округляем вверх до целых дней
+
+            return (int) Math.max(1, days); // минимум 1 день
         } catch (DateTimeParseException e) {
-            return 1; // По умолчанию 1 день при ошибке парсинга
+            log.debug("Failed to parse delivery date: {}", deliveryDate);
+            return 1; // значение по умолчанию при ошибке
         }
     }
 
-    /**
-     * Форматированная строка доставки в формате "13.10 - 15.10"
-     */
     public String getFormattedDelivery() {
-        // Если есть обе даты - формируем диапазон
+        // Если есть гарантированная дата доставки - показываем диапазон
         if (deliveryDate != null && !deliveryDate.trim().isEmpty() &&
                 guaranteedDeliveryDate != null && !guaranteedDeliveryDate.trim().isEmpty()) {
 
@@ -130,20 +129,22 @@ public class ArmtekGoods {
                 LocalDateTime startDate = LocalDateTime.parse(deliveryDate, inputFormatter);
                 LocalDateTime endDate = LocalDateTime.parse(guaranteedDeliveryDate, inputFormatter);
 
-                // Если даты разные - показываем диапазон
-                if (!startDate.toLocalDate().equals(endDate.toLocalDate())) {
-                    return startDate.format(outputFormatter) + " - " + endDate.format(outputFormatter);
+                // Если дата начала и окончания в одном месяце
+                if (startDate.getMonth() == endDate.getMonth()) {
+                    return startDate.format(DateTimeFormatter.ofPattern("dd")) + "-" +
+                            endDate.format(outputFormatter);
                 } else {
-                    // Если даты одинаковые - показываем одну дату
-                    return startDate.format(outputFormatter);
+                    // Если в разных месяцах - показываем полные даты
+                    return startDate.format(outputFormatter) + " - " +
+                            endDate.format(outputFormatter);
                 }
             } catch (DateTimeParseException e) {
-                log.warn("Failed to parse delivery date range: start={}, end={}", deliveryDate, guaranteedDeliveryDate);
+                log.debug("Failed to parse delivery date range: start={}, end={}", deliveryDate, guaranteedDeliveryDate);
                 // Продолжаем обработку ниже
             }
         }
 
-        // Если только одна дата или ошибка парсинга диапазона
+        // Если только дата начала доставки
         if (deliveryDate != null && !deliveryDate.trim().isEmpty()) {
             try {
                 DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -152,11 +153,13 @@ public class ArmtekGoods {
                 LocalDateTime deliveryDateTime = LocalDateTime.parse(deliveryDate, inputFormatter);
                 return deliveryDateTime.format(outputFormatter);
             } catch (DateTimeParseException e) {
-                log.warn("Failed to parse delivery date: {}", deliveryDate);
+                log.debug("Failed to parse delivery date: {}", deliveryDate);
             }
         }
 
-        return "1 дн."; // По умолчанию
+        // Fallback - показываем в днях
+        Integer days = getDeliveryDays();
+        return days + " дн.";
     }
 
     public Integer getParsedQuantity() {
@@ -167,22 +170,26 @@ public class ArmtekGoods {
         String quantityStr = quantity.trim();
 
         try {
-            // Обрабатываем значения типа ">100"
             if (quantityStr.startsWith(">")) {
                 String numStr = quantityStr.substring(1).trim();
                 return Integer.parseInt(numStr);
             }
-            // Обрабатываем значения типа "100+"
             if (quantityStr.endsWith("+")) {
                 String numStr = quantityStr.substring(0, quantityStr.length() - 1).trim();
                 return Integer.parseInt(numStr);
             }
-            // Пробуем распарсить как обычное число
             return Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
-            // Если не удалось распарсить, возвращаем 0
-            log.warn("Failed to parse quantity value: '{}', defaulting to 0", quantityStr);
+            log.debug("Failed to parse quantity value: '{}', defaulting to 0", quantityStr);
             return 0;
         }
+    }
+
+    public boolean hasValidPrice() {
+        return price != null && price > 0;
+    }
+
+    public boolean hasValidStock() {
+        return getParsedQuantity() > 0;
     }
 }

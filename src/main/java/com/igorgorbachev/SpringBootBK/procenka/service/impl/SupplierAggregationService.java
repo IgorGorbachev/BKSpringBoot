@@ -1,12 +1,13 @@
 package com.igorgorbachev.SpringBootBK.procenka.service.impl;
 
+import com.igorgorbachev.SpringBootBK.procenka.dto.BrandSupplier;
 import com.igorgorbachev.SpringBootBK.procenka.dto.PartOfferDto;
 import com.igorgorbachev.SpringBootBK.procenka.service.SupplierService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.service.impl.ForumAutoServiceImpl;
+import com.igorgorbachev.SpringBootBK.procenka.supplier.truckMotors.service.TmtrService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.truckMotors.service.impl.TmtrServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class SupplierAggregationService {
     private final List<SupplierService> supplierServices;
     private String lastTmtrRawResponse;
+
     public String getTmtrRawResponse() {
         return this.lastTmtrRawResponse;
     }
@@ -31,403 +33,124 @@ public class SupplierAggregationService {
         this.supplierServices = supplierServices;
         log.info("=== SUPPLIER AGGREGATION SERVICE INITIALIZED ===");
         log.info("Total suppliers found: {}", supplierServices.size());
-        log.info("Available suppliers:");
-        supplierServices.forEach(supplier -> {
-            boolean isTmtr = "TMTR".equals(supplier.getSupplierName());
-            log.info(" - {}: available={} {}",
-                    supplier.getSupplierName(),
-                    supplier.isAvailable(),
-                    isTmtr ? "<<< TMTR >>>" : "");
-        });
-
-        // Проверяем наличие TMTR
-        boolean hasTmtr = supplierServices.stream()
-                .anyMatch(supplier -> "TMTR".equals(supplier.getSupplierName()));
-        log.info("TMTR service present: {}", hasTmtr);
-    }
-
-    /**
-     * Нормализация артикула для сравнения
-     * Удаляет все не-алфавитно-цифровые символы (пробелы, дефисы, спецсимволы)
-     * и приводит к нижнему регистру
-     */
-    private String normalizeArticle(String article) {
-        if (article == null) {
-            return "";
-        }
-        return article.toLowerCase().replaceAll("[^a-z0-9]", "");
-    }
-
-    /**
-     * Генерация ключа для сравнения предложений
-     */
-    private String generateOfferKey(PartOfferDto offer) {
-        return String.format("%s|%s|%s",
-                normalizeArticle(offer.getBrand()),
-                normalizeArticle(offer.getOriginalArticle()),
-                normalizeArticle(offer.getPartName())
+        supplierServices.forEach(supplier ->
+                log.info(" - {}: available={}", supplier.getSupplierName(), supplier.isAvailable())
         );
     }
 
-    /**
-     * Поиск по всем поставщикам с объединением результатов
-     */
-//    public List<PartOfferDto> searchAllSuppliers(String article, String brand) {
-//        log.info("Starting search across {} suppliers: article={}, brand={}",
-//                supplierServices.size(), article, brand);
-//
-//        List<CompletableFuture<List<PartOfferDto>>> futures = supplierServices.stream()
-//                .filter(SupplierService::isAvailable)
-//                .map(supplier -> CompletableFuture.supplyAsync(() -> {
-//                            try {
-//                                log.debug("Searching in supplier: {}", supplier.getSupplierName());
-//                                List<PartOfferDto> results = supplier.searchParts(article, brand);
-//                                log.info("Supplier {} returned {} results",
-//                                        supplier.getSupplierName(), results.size());
-//
-//                                // Логируем результаты TMTR для диагностики
-//                                if ("TMTR".equals(supplier.getSupplierName()) && !results.isEmpty()) {
-//                                    log.info("TMTR results details:");
-//                                    results.forEach(offer ->
-//                                            log.info(" - Article: '{}', Price: {}, Brand: '{}'",
-//                                                    offer.getOriginalArticle(), offer.getPrice(), offer.getBrand())
-//                                    );
-//                                }
-//
-//                                return results;
-//                            } catch (Exception e) {
-//                                log.error("Error in supplier {}: {}",
-//                                        supplier.getSupplierName(), e.getMessage());
-//                                return List.<PartOfferDto>of();
-//                            }
-//                        })
-//                        .orTimeout(45, TimeUnit.SECONDS)
-//                        .exceptionally(ex -> {
-//                            log.warn("Supplier {} timed out: {}",
-//                                    supplier.getSupplierName(), ex.getMessage());
-//                            return List.<PartOfferDto>of();
-//                        }))
-//                .collect(Collectors.toList());
-//
-//        CompletableFuture<Void> allFutures = CompletableFuture.allOf(
-//                futures.toArray(new CompletableFuture[0])
-//        );
-//
-//        List<PartOfferDto> allResults = allFutures.thenApply(v ->
-//                futures.stream()
-//                        .map(future -> {
-//                            try {
-//                                return future.join();
-//                            } catch (Exception e) {
-//                                log.error("Error joining future: {}", e.getMessage());
-//                                return List.<PartOfferDto>of();
-//                            }
-//                        })
-//                        .flatMap(List::stream)
-//                        .collect(Collectors.toList())
-//        ).join();
-//
-//        // ДОБАВЛЯЕМ ПОДРОБНОЕ ЛОГИРОВАНИЕ ФИНАЛЬНЫХ РЕЗУЛЬТАТОВ
-//        log.info("=== FINAL RESULTS FROM ALL SUPPLIERS ===");
-//        log.info("Total results from all suppliers: {}", allResults.size());
-//
-//        // Группируем по поставщикам для наглядности
-//        Map<String, List<PartOfferDto>> groupedBySupplier = allResults.stream()
-//                .collect(Collectors.groupingBy(PartOfferDto::getSupplierName));
-//
-//        groupedBySupplier.forEach((supplier, offers) -> {
-//            log.info("{}: {} offers", supplier, offers.size());
-//            offers.forEach(offer ->
-//                    log.info(" - {}: Article='{}', Price={}, Brand='{}'",
-//                            supplier, offer.getOriginalArticle(), offer.getPrice(), offer.getBrand())
-//            );
-//        });
-//
-//        // Проверяем наличие TMTR в финальных результатах
-//        List<PartOfferDto> tmtrResults = allResults.stream()
-//                .filter(offer -> "TMTR".equals(offer.getSupplierName()))
-//                .collect(Collectors.toList());
-//
-//        log.info("TMTR in final results: {} offers", tmtrResults.size());
-//        if (!tmtrResults.isEmpty()) {
-//            log.info("TMTR final offers (sorted by price):");
-//            tmtrResults.stream()
-//                    .sorted(Comparator.comparing(PartOfferDto::getPrice))
-//                    .forEach(offer ->
-//                            log.info(" - Price: {}, Article: '{}', Brand: '{}'",
-//                                    offer.getPrice(), offer.getOriginalArticle(), offer.getBrand())
-//                    );
-//        }
-//
-//        return allResults;
-//    }
-//
     public List<PartOfferDto> searchAllSuppliers(String article, String brand) {
-        log.info("Starting search across all suppliers for article: '{}', brand: '{}'", article, brand);
-
-        // Сбрасываем предыдущий сырой ответ
+        log.info("Starting parallel search across all suppliers for article: '{}', brand: '{}'", article, brand);
         this.lastTmtrRawResponse = null;
 
         List<PartOfferDto> allOffers = Collections.synchronizedList(new ArrayList<>());
-        List<CompletableFuture<Void>> futures = new ArrayList<>();
+        List<CompletableFuture<Void>> futures = supplierServices.stream()
+                .filter(SupplierService::isAvailable)
+                .map(supplier -> searchSupplierAsync(supplier, article, brand, allOffers))
+                .collect(Collectors.toList());
 
-        for (SupplierService supplier : supplierServices) {
-            if (!supplier.isAvailable()) {
-                log.info("Supplier {} is not available, skipping", supplier.getSupplierName());
-                continue;
-            }
-
-            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-                try {
-                    log.info("Searching in supplier: {}", supplier.getSupplierName());
-
-                    List<PartOfferDto> supplierOffers;
-
-                    // ОСОБАЯ ЛОГИКА ДЛЯ FORUM AUTO - ИЩЕМ АНАЛОГИ
-                    if (supplier instanceof ForumAutoServiceImpl) {
-                        ForumAutoServiceImpl forumAutoService = (ForumAutoServiceImpl) supplier;
-                        supplierOffers = forumAutoService.searchAnalogues(article, brand);
-                        log.info("Forum Auto analogues search returned {} offers", supplierOffers.size());
-                    } else {
-                        // Для остальных поставщиков используем стандартный поиск
-                        supplierOffers = supplier.searchParts(article, brand);
-                    }
-
-                    // Сохраняем сырой ответ TMTR
-                    if (supplier instanceof TmtrServiceImpl) {
-                        TmtrServiceImpl tmtrService = (TmtrServiceImpl) supplier;
-                        String rawResponse = tmtrService.getLastRawResponse();
-                        if (rawResponse != null) {
-                            this.lastTmtrRawResponse = rawResponse;
-                            log.info("Saved TMTR raw response, length: {}", rawResponse.length());
-                        }
-                    }
-
-                    if (supplierOffers != null && !supplierOffers.isEmpty()) {
-                        allOffers.addAll(supplierOffers);
-                        log.info("Supplier {} returned {} offers", supplier.getSupplierName(), supplierOffers.size());
-                    } else {
-                        log.info("Supplier {} returned no offers", supplier.getSupplierName());
-                    }
-                } catch (Exception e) {
-                    log.error("Error searching in supplier {}: {}", supplier.getSupplierName(), e.getMessage());
-                }
-            });
-
-            futures.add(future);
-        }
-
-        try {
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(30, TimeUnit.SECONDS);
-        } catch (Exception e) {
-            log.error("Error waiting for search completion: {}", e.getMessage());
-        }
-
+        waitForCompletion(futures);
         log.info("Total offers from all suppliers: {}", allOffers.size());
         return allOffers;
     }
 
-//    public String getTmtrRawResponse() {
-//        return this.lastTmtrRawResponse;
-//    }
+    private CompletableFuture<Void> searchSupplierAsync(SupplierService supplier, String article, String brand, List<PartOfferDto> allOffers) {
+        return CompletableFuture.runAsync(() -> {
+            try {
+                log.info("Searching in supplier: {}", supplier.getSupplierName());
+                List<PartOfferDto> supplierOffers = performSupplierSearch(supplier, article, brand);
 
-
-//    public List<PartOfferDto> searchAllSuppliers(String article, String brand) {
-//        log.info("Starting search across all suppliers for article: '{}', brand: '{}'", article, brand);
-//
-//        // Сбрасываем предыдущий сырой ответ
-//        this.lastTmtrRawResponse = null;
-//
-//        List<PartOfferDto> allOffers = Collections.synchronizedList(new ArrayList<>());
-//        List<CompletableFuture<Void>> futures = new ArrayList<>();
-//
-//        for (SupplierService supplier : supplierServices) {
-//            if (!supplier.isAvailable()) {
-//                log.info("Supplier {} is not available, skipping", supplier.getSupplierName());
-//                continue;
-//            }
-//
-//            CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
-//                try {
-//                    log.info("Searching in supplier: {}", supplier.getSupplierName());
-//
-//                    List<PartOfferDto> supplierOffers;
-//
-//                    // ОСОБАЯ ЛОГИКА ДЛЯ FORUM AUTO - ИЩЕМ И ОРИГИНАЛЫ И АНАЛОГИ
-//                    if (supplier instanceof ForumAutoServiceImpl) {
-//                        ForumAutoServiceImpl forumAutoService = (ForumAutoServiceImpl) supplier;
-//
-//                        // Получаем оригиналы через searchParts
-//                        List<PartOfferDto> originals = forumAutoService.searchParts(article, brand);
-//                        log.info("Forum Auto originals search returned {} offers", originals.size());
-//
-//                        // Получаем аналоги через searchAnalogues
-//                        List<PartOfferDto> analogues = forumAutoService.searchAnalogues(article, brand);
-//                        log.info("Forum Auto analogues search returned {} offers", analogues.size());
-//
-//                        // Объединяем оригиналы и аналоги
-//                        supplierOffers = new ArrayList<>();
-//                        supplierOffers.addAll(originals);
-//                        supplierOffers.addAll(analogues);
-//
-//                        log.info("Forum Auto total offers: {} ({} originals + {} analogues)",
-//                                supplierOffers.size(), originals.size(), analogues.size());
-//
-//                    } else {
-//                        // Для остальных поставщиков используем стандартный поиск
-//                        supplierOffers = supplier.searchParts(article, brand);
-//                    }
-//
-//                    // Сохраняем сырой ответ TMTR
-//                    if (supplier instanceof TmtrServiceImpl) {
-//                        TmtrServiceImpl tmtrService = (TmtrServiceImpl) supplier;
-//                        String rawResponse = tmtrService.getLastRawResponse();
-//                        if (rawResponse != null) {
-//                            this.lastTmtrRawResponse = rawResponse;
-//                            log.info("Saved TMTR raw response, length: {}", rawResponse.length());
-//                        }
-//                    }
-//
-//                    if (supplierOffers != null && !supplierOffers.isEmpty()) {
-//                        allOffers.addAll(supplierOffers);
-//                        log.info("Supplier {} returned {} offers", supplier.getSupplierName(), supplierOffers.size());
-//                    } else {
-//                        log.info("Supplier {} returned no offers", supplier.getSupplierName());
-//                    }
-//                } catch (Exception e) {
-//                    log.error("Error searching in supplier {}: {}", supplier.getSupplierName(), e.getMessage());
-//                }
-//            });
-//
-//            futures.add(future);
-//        }
-//
-//        try {
-//            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).get(30, TimeUnit.SECONDS);
-//        } catch (Exception e) {
-//            log.error("Error waiting for search completion: {}", e.getMessage());
-//        }
-//
-//        log.info("Total offers from all suppliers: {}", allOffers.size());
-//        return allOffers;
-//    }
-
-    /**
-     * Поиск с фильтрацией дубликатов (оставляем самую низкую цену)
-     */
-    public List<PartOfferDto> searchWithDeduplication(String article, String brand) {
-        List<PartOfferDto> allOffers = searchAllSuppliers(article, brand);
-        return deduplicateOffers(allOffers);
+                if (supplierOffers != null && !supplierOffers.isEmpty()) {
+                    allOffers.addAll(supplierOffers);
+                    log.info("Supplier {} returned {} offers", supplier.getSupplierName(), supplierOffers.size());
+                } else {
+                    log.info("Supplier {} returned no offers", supplier.getSupplierName());
+                }
+            } catch (Exception e) {
+                log.error("Error searching in supplier {}: {}", supplier.getSupplierName(), e.getMessage());
+            }
+        });
     }
 
-    /**
-     * Удаление дубликатов - оставляем предложение с наименьшей ценой
-     */
-    public List<PartOfferDto> deduplicateOffers(List<PartOfferDto> offers) {
-        Map<String, PartOfferDto> bestOffers = new HashMap<>();
+    private List<PartOfferDto> performSupplierSearch(SupplierService supplier, String article, String brand) {
+        if (supplier instanceof ForumAutoServiceImpl) {
+            return ((ForumAutoServiceImpl) supplier).searchAnalogues(article, brand);
+        } else {
+            List<PartOfferDto> offers = supplier.searchParts(article, brand);
+            captureTmtrRawResponse(supplier);
+            return offers;
+        }
+    }
 
-        for (PartOfferDto offer : offers) {
-            String key = generateOfferKey(offer);
+    private void captureTmtrRawResponse(SupplierService supplier) {
+        if (supplier instanceof TmtrServiceImpl) {
+            String rawResponse = ((TmtrServiceImpl) supplier).getLastRawResponse();
+            if (rawResponse != null) {
+                this.lastTmtrRawResponse = rawResponse;
+                log.info("Saved TMTR raw response, length: {}", rawResponse.length());
+            }
+        }
+    }
 
-            if (!bestOffers.containsKey(key)) {
-                bestOffers.put(key, offer);
-            } else {
-                PartOfferDto existingOffer = bestOffers.get(key);
-                // Оставляем предложение с меньшей ценой
-                if (offer.getPrice() < existingOffer.getPrice()) {
-                    bestOffers.put(key, offer);
+    private void waitForCompletion(List<CompletableFuture<Void>> futures) {
+        try {
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                    .get(30, TimeUnit.SECONDS);
+        } catch (Exception e) {
+            log.error("Error waiting for search completion: {}", e.getMessage());
+        }
+    }
+
+    public List<BrandSupplier> findAvailableBrands(String article) {
+        Map<String, String> brandToSupplierMap = new HashMap<>();
+
+        for (SupplierService supplier : supplierServices) {
+            if (supplier.isAvailable()) {
+                try {
+                    log.info("Поиск брендов в поставщике: {}", supplier.getSupplierName());
+
+                    
+
+                    if (supplier instanceof TmtrService) {
+                        // ОСОБАЯ ЛОГИКА ДЛЯ TMTR - используем метод getBrands
+                        TmtrService tmtrService = (TmtrService) supplier;
+                        List<String> supplierBrands = tmtrService.getBrands(article);
+                        log.info("Поставщик TMTR вернул {} брендов", supplierBrands.size());
+
+                        for (String brand : supplierBrands) {
+                            if (brand != null && !brand.trim().isEmpty()) {
+                                String cleanBrand = brand.trim();
+                                brandToSupplierMap.put(cleanBrand, supplier.getSupplierName());
+                            }
+                        }
+                    } else {
+                        // Для других поставщиков используем стандартный метод
+                        List<PartOfferDto> offers = supplier.searchParts(article, null);
+                        List<String> supplierBrands = offers.stream()
+                                .map(PartOfferDto::getBrand)
+                                .filter(b -> b != null && !b.trim().isEmpty())
+                                .map(String::trim)
+                                .distinct()
+                                .collect(Collectors.toList());
+                        log.info("Поставщик {} вернул {} брендов", supplier.getSupplierName(), supplierBrands.size());
+
+                        for (String brand : supplierBrands) {
+                            brandToSupplierMap.put(brand, supplier.getSupplierName());
+                        }
+                    }
+                } catch (Exception e) {
+                    log.warn("Ошибка при поиске брендов в поставщике {}: {}",
+                            supplier.getSupplierName(), e.getMessage());
                 }
             }
         }
 
-        return new ArrayList<>(bestOffers.values());
-    }
-
-    /**
-     * Поиск с сортировкой по цене
-     */
-    public List<PartOfferDto> searchSortedByPrice(String article, String brand) {
-        List<PartOfferDto> offers = searchWithDeduplication(article, brand);
-        return offers.stream()
-                .sorted(Comparator.comparing(PartOfferDto::getPrice))
+        // Преобразуем Map в List объектов BrandSupplier
+        List<BrandSupplier> result = brandToSupplierMap.entrySet().stream()
+                .map(entry -> new BrandSupplier(entry.getKey(), entry.getValue()))
+                .sorted(Comparator.comparing(BrandSupplier::getBrand))
                 .collect(Collectors.toList());
+
+        log.info("Всего найдено брендов: {}", result.size());
+        return result;
     }
-
-    /**
-     * Поиск только в наличии
-     */
-    public List<PartOfferDto> searchInStockOnly(String article, String brand) {
-        List<PartOfferDto> offers = searchAllSuppliers(article, brand);
-        return offers.stream()
-                .filter(offer -> offer.getQuantityAvailable() > 0)
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Группировка по поставщикам
-     */
-    public Map<String, List<PartOfferDto>> searchGroupedBySupplier(String article, String brand) {
-        List<PartOfferDto> offers = searchAllSuppliers(article, brand);
-        return offers.stream()
-                .collect(Collectors.groupingBy(PartOfferDto::getSupplierName));
-    }
-
-    /**
-     * Поиск с приоритетом точных совпадений по артикулу
-     */
-    public List<PartOfferDto> searchWithExactMatchPriority(String article, String brand) {
-        List<PartOfferDto> allOffers = searchAllSuppliers(article, brand);
-        return sortWithExactMatchPriority(allOffers, article);
-    }
-
-    /**
-     * Сортировка с приоритетом точных совпадений по артикулу
-     */
-    public List<PartOfferDto> sortWithExactMatchPriority(List<PartOfferDto> offers, String searchedArticle) {
-        if (offers == null || offers.isEmpty()) {
-            return offers;
-        }
-
-        String normalizedSearched = normalizeArticle(searchedArticle);
-
-        return offers.stream()
-                .sorted((offer1, offer2) -> {
-                    String art1 = normalizeArticle(offer1.getOriginalArticle());
-                    String art2 = normalizeArticle(offer2.getOriginalArticle());
-
-                    boolean exactMatch1 = art1.equals(normalizedSearched);
-                    boolean exactMatch2 = art2.equals(normalizedSearched);
-
-                    // Точные совпадения идут первыми
-                    if (exactMatch1 && !exactMatch2) {
-                        return -1;
-                    } else if (!exactMatch1 && exactMatch2) {
-                        return 1;
-                    } else if (exactMatch1 && exactMatch2) {
-                        // Если оба точные совпадения - сортируем по цене (дешевые первые)
-                        return Double.compare(offer1.getPrice(), offer2.getPrice());
-                    } else {
-                        // Для не точных совпадений - сортируем по цене
-                        return Double.compare(offer1.getPrice(), offer2.getPrice());
-                    }
-                })
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Поиск только точных совпадений
-     */
-    public List<PartOfferDto> searchExactMatchesOnly(String article, String brand) {
-        List<PartOfferDto> allOffers = searchAllSuppliers(article, brand);
-        String normalizedSearched = normalizeArticle(article);
-
-        return allOffers.stream()
-                .filter(offer -> {
-                    String offerArticle = normalizeArticle(offer.getOriginalArticle());
-                    return offerArticle.equals(normalizedSearched);
-                })
-                .collect(Collectors.toList());
-    }
-
-
 }

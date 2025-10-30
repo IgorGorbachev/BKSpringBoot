@@ -14,4 +14,5 @@ public interface SupplierService {
     List<PartOfferDto> searchParts(String article, String brand);
 
     boolean isAvailable();
+
 }

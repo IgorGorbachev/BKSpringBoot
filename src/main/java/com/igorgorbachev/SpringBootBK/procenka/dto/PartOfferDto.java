@@ -3,7 +3,6 @@ package com.igorgorbachev.SpringBootBK.procenka.dto;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekGoods;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.etsp.model.EtspGoods;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.FavoritePartsGoods;
-import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.Warehouse;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.model.ForumAutoGoods;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.truckMotors.model.TmtrGoods;
 import lombok.AllArgsConstructor;

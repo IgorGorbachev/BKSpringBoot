@@ -1,6 +1,7 @@
 package com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.igorgorbachev.SpringBootBK.procenka.dto.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

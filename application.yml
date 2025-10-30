@@ -47,7 +47,6 @@ app:
     base-url: https://api.forum-auto.ru/v2
     login: 504402_gorbachyov_igor
     password: Pu0sv9cvc8SE
-    timeout: 30000
 
   armtek:
     base-url: http://ws.armtek.ru
@@ -55,7 +54,15 @@ app:
     password: ZRaBhez4
     vkorg: 4000
     kunnr-rg: 43286514
-    timeout: 30000
+    timeout-seconds: 30
+    max-retry-attempts: 3
+    retry-delay-seconds: 2
+    filter:
+      group-by-warehouses: true
+      max-warehouses-per-product: 2
+      only-in-stock: true
+      only-with-price: true
+      exclude-analogs: true
 
   tm:
     base-url: https://api.tmtr.ru
