@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Конфигурационные файлы приложения
+application.yml
+application.properties
+application-*.yml
+application-*.properties
