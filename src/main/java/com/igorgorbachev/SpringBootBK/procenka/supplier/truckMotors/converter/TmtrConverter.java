@@ -40,7 +40,6 @@ public class TmtrConverter {
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
 
-        log.info("Converted {} TMTR goods to {} offers", goods.size(), offers.size());
         return offers;
     }
 }

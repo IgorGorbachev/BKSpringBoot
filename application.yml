@@ -19,6 +19,10 @@ spring:
       cache:
         period: 0
 
+  cache:
+    type: simple
+    cache-names: tmtrBrands,forumAutoOffers,armtek_parts,armtek_detailed
+
 server:
   port: 8080
 
@@ -42,6 +46,7 @@ app:
     base-url: http://api.favorit-parts.ru/hs/hsprice/
     api-key: 9164CA78-B996-4DB6-9C8D-04BD521BE5A8
     timeout: 30000
+    max-attempts: 3
 
   forum-auto:
     base-url: https://api.forum-auto.ru/v2
@@ -70,6 +75,16 @@ app:
     password: "ZRaBhez437"
     timeout: 30000
 
+  tmtr:
+    filter:
+      only-os1: true
+      only-in-stock: true
+      only-with-price: true
+      strict-article-match: false
+      enable-delivery-probability-filter: false
+      min-delivery-probability: 80
+      max-results: 50
+      timeout-seconds: 30
   etsp:
     username: zap37rus
     password: "ЯКфИруя4"

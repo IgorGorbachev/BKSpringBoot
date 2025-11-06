@@ -6,11 +6,10 @@ import com.igorgorbachev.SpringBootBK.procenka.dto.PartOfferDto;
 import com.igorgorbachev.SpringBootBK.procenka.service.SupplierService;
 import com.igorgorbachev.SpringBootBK.procenka.service.impl.SearchOrchestrationService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.converter.ArmtekConverter;
-import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekGoods;
+import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekDetailedResult;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.service.ArmtekService;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.service.impl.ArmtekGroupingService;
 import com.igorgorbachev.SpringBootBK.procenka.util.DeliveryFormatter;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -52,7 +51,6 @@ public class SearchController {
             @RequestParam(required = false) String brand,
             @RequestParam(required = false, defaultValue = "false") boolean refresh,
             @RequestParam(required = false, defaultValue = "false") boolean selectBrand,
-            HttpSession session,
             Model model) {
 
         model.addAttribute("deliveryFormatter", deliveryFormatter);
@@ -64,7 +62,17 @@ public class SearchController {
             }
 
             SearchResult searchResult = searchOrchestrationService.search(article, brand, refresh);
-            populateModelWithResults(model, article, brand, searchResult);
+
+            // ОДИН вызов Armtek API вместо нескольких
+            ArmtekDetailedResult armtekResult = armtekService.searchPartsDetailed(article, brand);
+            List<PartOfferDto> armtekRawOffers = armtekConverter.toPartOfferDtos(armtekResult.getRawGoods());
+            List<PartOfferDto> groupedArmtekOffers = armtekGroupingService.groupArmtekOffers(armtekRawOffers);
+            List<PartOfferDto> exactMatchesArmtek = armtekGroupingService.filterExactMatches(armtekRawOffers, article, brand);
+
+            // Объединяем точные совпадения
+            List<PartOfferDto> allExactMatches = prepareExactMatches(searchResult, exactMatchesArmtek);
+
+            populateModelWithResults(model, article, brand, groupedArmtekOffers, allExactMatches, searchResult);
 
         } catch (Exception e) {
             log.error("Ошибка при поиске: {}", e.getMessage(), e);
@@ -82,45 +90,13 @@ public class SearchController {
         return "search-results";
     }
 
-    private void populateModelWithResults(Model model, String article, String brand, SearchResult searchResult) {
+
+    private void populateModelWithResults(Model model, String article, String brand,
+                                          List<PartOfferDto> armtekOffers,
+                                          List<PartOfferDto> exactMatches,
+                                          SearchResult searchResult) {
         model.addAttribute("article", article);
         model.addAttribute("brand", brand);
-
-        // Подготавливаем данные Armtek
-        List<PartOfferDto> armtekRawOffers = getArmtekRawOffers(article, brand);
-        List<PartOfferDto> groupedArmtekOffers = armtekGroupingService.groupArmtekOffers(armtekRawOffers);
-        List<PartOfferDto> exactMatchesArmtek = armtekGroupingService.filterExactMatches(armtekRawOffers, article, brand);
-
-        // Объединяем точные совпадения
-        List<PartOfferDto> allExactMatches = prepareExactMatches(searchResult, exactMatchesArmtek);
-
-        // Устанавливаем атрибуты модели
-        setModelAttributes(model, groupedArmtekOffers, allExactMatches, searchResult);
-    }
-
-    private List<PartOfferDto> prepareExactMatches(SearchResult searchResult, List<PartOfferDto> exactMatchesArmtek) {
-        List<PartOfferDto> otherExactMatches = searchResult.getExactMatches().stream()
-                .filter(offer -> !"Armtek".equals(offer.getSupplierName()))
-                .collect(Collectors.toList());
-
-        List<PartOfferDto> allExactMatches = new ArrayList<>();
-        allExactMatches.addAll(exactMatchesArmtek);
-        allExactMatches.addAll(otherExactMatches);
-
-        // Сортируем по цене и дате доставки - используем публичный метод из сервиса
-        allExactMatches.sort(Comparator
-                .comparing((PartOfferDto offer) ->
-                        offer.getPrice() != null ? offer.getPrice() : Double.MAX_VALUE)
-                .thenComparing(armtekGroupingService::getEarliestDeliveryDateFromOffer) // ссылка на метод
-        );
-
-        return allExactMatches;
-    }
-
-    private void setModelAttributes(Model model,
-                                    List<PartOfferDto> armtekOffers,
-                                    List<PartOfferDto> exactMatches,
-                                    SearchResult searchResult) {
         model.addAttribute("armtekOffers", armtekOffers);
         model.addAttribute("exactMatches", exactMatches);
         model.addAttribute("forumAutoOffers", searchResult.getForumAutoOffers());
@@ -132,22 +108,23 @@ public class SearchController {
         model.addAttribute("selectBrandMode", false);
     }
 
-    private List<PartOfferDto> getArmtekRawOffers(String article, String brand) {
-        try {
-            List<ArmtekGoods> rawGoods = armtekService.getLastRawGoods();
 
-            if (rawGoods.isEmpty()) {
-                var armtekResult = armtekService.searchPartsDetailed(article, brand);
-                rawGoods = armtekResult.getRawGoods();
-            }
+    private List<PartOfferDto> prepareExactMatches(SearchResult searchResult, List<PartOfferDto> exactMatchesArmtek) {
+        List<PartOfferDto> otherExactMatches = searchResult.getExactMatches().stream()
+                .filter(offer -> !"Armtek".equals(offer.getSupplierName()))
+                .collect(Collectors.toList());
 
-            log.info("Получено {} сырых товаров от Armtek", rawGoods.size());
-            return armtekConverter.toPartOfferDtos(rawGoods);
+        List<PartOfferDto> allExactMatches = new ArrayList<>();
+        allExactMatches.addAll(exactMatchesArmtek);
+        allExactMatches.addAll(otherExactMatches);
 
-        } catch (Exception e) {
-            log.error("Ошибка при получении сырых данных Armtek: {}", e.getMessage());
-            return List.of();
-        }
+        allExactMatches.sort(Comparator
+                .comparing((PartOfferDto offer) ->
+                        offer.getPrice() != null ? offer.getPrice() : Double.MAX_VALUE)
+                .thenComparing(armtekGroupingService::getEarliestDeliveryDateFromOffer)
+        );
+
+        return allExactMatches;
     }
 
     private List<String> getAvailableSupplierNames() {

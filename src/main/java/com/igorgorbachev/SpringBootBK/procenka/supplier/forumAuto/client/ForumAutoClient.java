@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.igorgorbachev.SpringBootBK.exception.ForumAutoException;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.config.ForumAutoConfig;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.model.ForumAutoGoods;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,8 +38,6 @@ public class ForumAutoClient {
 
     public List<ForumAutoGoods> fetchGoods(String article, String brand, Boolean cross) {
         try {
-            log.info("=== FORUM-AUTO RAW REQUEST ===");
-            log.info("Article: '{}', Brand: '{}', Cross: {}", article, brand, cross);
 
             String responseBody = webClient.get()
                     .uri(uriBuilder -> buildUri(uriBuilder, article, brand, cross))
@@ -48,11 +45,6 @@ public class ForumAutoClient {
                     .bodyToMono(String.class)
                     .timeout(Duration.ofSeconds(30))
                     .block();
-
-            // ЗАЛОГИРУЙ СЫРОЙ ОТВЕТ
-            log.info("=== FORUM-AUTO RAW RESPONSE ===");
-            log.info("Response length: {}", responseBody != null ? responseBody.length() : 0);
-            log.info("Response: {}", responseBody);
 
             return parseResponse(responseBody);
         } catch (Exception e) {
@@ -69,7 +61,6 @@ public class ForumAutoClient {
         try {
             // Пытаемся разобрать как массив
             ForumAutoGoods[] goodsArray = objectMapper.readValue(responseBody, ForumAutoGoods[].class);
-            log.info("Successfully parsed {} goods as array", goodsArray.length);
             return Arrays.asList(goodsArray);
         } catch (Exception e) {
             // Если не получилось как массив, пробуем как объект с полем goods
@@ -84,7 +75,6 @@ public class ForumAutoClient {
 
             if (goodsNode != null && goodsNode.isArray()) {
                 ForumAutoGoods[] goodsArray = objectMapper.treeToValue(goodsNode, ForumAutoGoods[].class);
-                log.info("Successfully parsed {} goods from 'goods' field", goodsArray.length);
                 return Arrays.asList(goodsArray);
             }
 

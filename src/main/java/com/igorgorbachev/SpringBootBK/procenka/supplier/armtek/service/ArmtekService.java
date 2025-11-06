@@ -11,7 +11,5 @@ public interface ArmtekService {
     ArmtekDetailedResult searchPartsDetailed(String article, String brand);
     List<ArmtekGoods> searchArmtekGoods(String article, String brand);
     Mono<ArmtekDetailedResult> searchPartsReactive(String article, String brand);
-
-    // Опционально: метод для получения последних сырых данных
     List<ArmtekGoods> getLastRawGoods();
 }

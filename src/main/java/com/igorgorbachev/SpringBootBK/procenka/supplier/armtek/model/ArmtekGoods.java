@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Slf4j
@@ -96,100 +93,4 @@ public class ArmtekGoods {
         return "X".equals(analog);
     }
 
-    public Integer getDeliveryDays() {
-        if (deliveryDate == null || deliveryDate.trim().isEmpty()) {
-            return 1; // значение по умолчанию
-        }
-
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-            LocalDateTime deliveryDateTime = LocalDateTime.parse(deliveryDate, formatter);
-            LocalDateTime now = LocalDateTime.now();
-
-            // Вычисляем разницу в днях (округляем вверх)
-            long hours = java.time.Duration.between(now, deliveryDateTime).toHours();
-            long days = (hours + 23) / 24; // Округляем вверх до целых дней
-
-            return (int) Math.max(1, days); // минимум 1 день
-        } catch (DateTimeParseException e) {
-            log.debug("Failed to parse delivery date: {}", deliveryDate);
-            return 1; // значение по умолчанию при ошибке
-        }
-    }
-
-    public String getFormattedDelivery() {
-        // Если есть гарантированная дата доставки - показываем диапазон
-        if (deliveryDate != null && !deliveryDate.trim().isEmpty() &&
-                guaranteedDeliveryDate != null && !guaranteedDeliveryDate.trim().isEmpty()) {
-
-            try {
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd.MM");
-
-                LocalDateTime startDate = LocalDateTime.parse(deliveryDate, inputFormatter);
-                LocalDateTime endDate = LocalDateTime.parse(guaranteedDeliveryDate, inputFormatter);
-
-                // Если дата начала и окончания в одном месяце
-                if (startDate.getMonth() == endDate.getMonth()) {
-                    return startDate.format(DateTimeFormatter.ofPattern("dd")) + "-" +
-                            endDate.format(outputFormatter);
-                } else {
-                    // Если в разных месяцах - показываем полные даты
-                    return startDate.format(outputFormatter) + " - " +
-                            endDate.format(outputFormatter);
-                }
-            } catch (DateTimeParseException e) {
-                log.debug("Failed to parse delivery date range: start={}, end={}", deliveryDate, guaranteedDeliveryDate);
-                // Продолжаем обработку ниже
-            }
-        }
-
-        // Если только дата начала доставки
-        if (deliveryDate != null && !deliveryDate.trim().isEmpty()) {
-            try {
-                DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-                DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd.MM");
-
-                LocalDateTime deliveryDateTime = LocalDateTime.parse(deliveryDate, inputFormatter);
-                return deliveryDateTime.format(outputFormatter);
-            } catch (DateTimeParseException e) {
-                log.debug("Failed to parse delivery date: {}", deliveryDate);
-            }
-        }
-
-        // Fallback - показываем в днях
-        Integer days = getDeliveryDays();
-        return days + " дн.";
-    }
-
-    public Integer getParsedQuantity() {
-        if (quantity == null || quantity.trim().isEmpty()) {
-            return 0;
-        }
-
-        String quantityStr = quantity.trim();
-
-        try {
-            if (quantityStr.startsWith(">")) {
-                String numStr = quantityStr.substring(1).trim();
-                return Integer.parseInt(numStr);
-            }
-            if (quantityStr.endsWith("+")) {
-                String numStr = quantityStr.substring(0, quantityStr.length() - 1).trim();
-                return Integer.parseInt(numStr);
-            }
-            return Integer.parseInt(quantityStr);
-        } catch (NumberFormatException e) {
-            log.debug("Failed to parse quantity value: '{}', defaulting to 0", quantityStr);
-            return 0;
-        }
-    }
-
-    public boolean hasValidPrice() {
-        return price != null && price > 0;
-    }
-
-    public boolean hasValidStock() {
-        return getParsedQuantity() > 0;
-    }
 }

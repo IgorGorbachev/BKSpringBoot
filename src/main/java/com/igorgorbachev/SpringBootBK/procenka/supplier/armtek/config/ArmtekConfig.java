@@ -9,7 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Base64;
 
-
 @Component
 @ConfigurationProperties(prefix = "app.armtek")
 @Setter
@@ -20,7 +19,7 @@ public class ArmtekConfig {
     private String password;
     private String vkorg;
     private String kunnrRg;
-    private int timeoutSeconds;
+    private int timeoutSeconds = 10;
     private int maxRetryAttempts = 3;
     private int retryDelaySeconds = 2;
 

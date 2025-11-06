@@ -20,7 +20,7 @@ import java.time.format.DateTimeParseException;
 public class TmtrGoods {
 
     @JsonProperty("OS")
-    private Integer os; // Тип поставки: 1-Склад ТракМоторс, 2-В пути, 3-Склад Партнерской сети
+    private Integer os;
 
     @JsonProperty("ShowedQuantity")
     private String showedQuantity;
@@ -43,13 +43,13 @@ public class TmtrGoods {
     @JsonProperty("Currency")
     private String currency;
 
-    @JsonProperty("Producer") // ИСПРАВЛЕНО: было "Brand"
+    @JsonProperty("Producer")
     private String brand;
 
-    @JsonProperty("Article") // ИСПРАВЛЕНО: было "Number"
+    @JsonProperty("Article")
     private String number;
 
-    @JsonProperty("Nomenclature") // ИСПРАВЛЕНО: было "Name"
+    @JsonProperty("Nomenclature")
     private String name;
 
     @JsonProperty("Warehouse")
@@ -59,12 +59,11 @@ public class TmtrGoods {
     private Integer deliveryPeriod;
 
     @JsonProperty("VerVsrok")
-    private Double deliveryProbability; // Вероятность поставки в срок
+    private Double deliveryProbability;
 
     @JsonProperty("IsReturn")
-    private Boolean isReturn; // Возвратность
+    private Boolean isReturn;
 
-    // Остальные поля без изменений
     @JsonProperty("DeadLine")
     private String deadLine;
 
@@ -83,7 +82,7 @@ public class TmtrGoods {
     @JsonProperty("HashCode")
     private Long hashCode;
 
-    // Дополнительные вычисляемые поля остаются без изменений
+    // Вычисляемые поля
     public Integer getParsedQuantity() {
         if (showedQuantity == null || showedQuantity.trim().isEmpty()) {
             return 0;
@@ -91,6 +90,8 @@ public class TmtrGoods {
 
         try {
             String quantityStr = showedQuantity.trim();
+
+            // Обработка специальных символов
             if (quantityStr.startsWith(">")) {
                 quantityStr = quantityStr.substring(1);
             }
@@ -98,8 +99,21 @@ public class TmtrGoods {
                 quantityStr = quantityStr.substring(0, quantityStr.length() - 1);
             }
 
+            // Обработка диапазонов
+            if (quantityStr.contains("-")) {
+                String[] parts = quantityStr.split("-");
+                if (parts.length == 2) {
+                    try {
+                        return Integer.parseInt(parts[0].trim()); // Берем минимальное значение
+                    } catch (NumberFormatException e) {
+                        // Продолжаем обработку
+                    }
+                }
+            }
+
             return Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
+            log.debug("Failed to parse quantity: '{}'", showedQuantity);
             return 0;
         }
     }
@@ -115,18 +129,44 @@ public class TmtrGoods {
             LocalDateTime date = LocalDateTime.parse(deliveryDate, formatter);
             return date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         } catch (DateTimeParseException e) {
+            log.debug("Failed to parse delivery date: '{}'", deliveryDate);
             return deliveryPeriod != null ? deliveryPeriod + " дн." : "Нет данных";
         }
     }
 
-    public String getWarehouseName() {
+    public String getWarehouseDisplayName() {
+        // Приоритет: StockName -> Warehouse -> OS-based name
+        if (stockName != null && !stockName.trim().isEmpty()) {
+            return stockName.trim();
+        }
+
+        if (warehouse != null && !warehouse.trim().isEmpty()) {
+            return warehouse.trim();
+        }
+
         if (os == null) return "TMTR";
 
         switch (os) {
-            case 1: return "Склад ТракМоторс";
+            case 1:
+                return "Склад ТМ";
+            case 2:
+                String period = deliveryPeriod != null ? " (" + deliveryPeriod + " дн.)" : "";
+                return "В пути" + period;
+            case 3:
+                return "Партнерский склад";
+            default:
+                return "TMTR";
+        }
+    }
+
+    public String getDeliveryStatus() {
+        if (os == null) return "Неизвестно";
+
+        switch (os) {
+            case 1: return "В наличии";
             case 2: return "В пути";
-            case 3: return "Склад ПС";
-            default: return "TMTR";
+            case 3: return "Под заказ";
+            default: return "Неизвестно";
         }
     }
 
@@ -134,4 +174,15 @@ public class TmtrGoods {
         return isReturn != null && isReturn;
     }
 
+    public boolean isFastDelivery() {
+        return os != null && os == 1;
+    }
+
+    public Double getEffectivePrice() {
+        return price != null && price > 0 ? price : null;
+    }
+
+    public boolean hasHighDeliveryProbability() {
+        return deliveryProbability != null && deliveryProbability >= 80.0;
+    }
 }

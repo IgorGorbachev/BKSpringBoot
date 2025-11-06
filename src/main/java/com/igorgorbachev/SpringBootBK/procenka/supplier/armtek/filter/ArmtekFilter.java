@@ -2,6 +2,7 @@ package com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.filter;
 
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.config.ArmtekFilterConfig;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekGoods;
+import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.service.ArmtekDataProcessor;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.strategy.ArticleMatchStrategy;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,10 +21,9 @@ public class ArmtekFilter {
 
     private final ArmtekFilterConfig filterConfig;
     private final ArticleMatchStrategy articleMatchStrategy;
+    private final ArmtekDataProcessor dataProcessor;
 
     public List<ArmtekGoods> filterOriginals(List<ArmtekGoods> allGoods, String article, String brand) {
-        log.info("=== ARMTEK FILTER STARTED ===");
-
         if (allGoods == null || allGoods.isEmpty()) {
             return Collections.emptyList();
         }
@@ -35,8 +35,6 @@ public class ArmtekFilter {
                 .filter(goods -> isArticleMatch(goods, article))
                 .collect(Collectors.toList());
 
-        log.info("Filtered {} goods to {} originals", allGoods.size(), filtered.size());
-
         return sortGoods(filtered);
     }
 
@@ -47,10 +45,10 @@ public class ArmtekFilter {
             valid = valid && !goods.isAnalog();
         }
         if (filterConfig.isOnlyWithPrice()) {
-            valid = valid && goods.hasValidPrice();
+            valid = valid && dataProcessor.hasValidPrice(goods);
         }
         if (filterConfig.isOnlyInStock()) {
-            valid = valid && goods.hasValidStock();
+            valid = valid && dataProcessor.hasValidStock(goods);
         }
 
         return valid && goods.getPin() != null && !goods.getPin().trim().isEmpty();
@@ -79,7 +77,7 @@ public class ArmtekFilter {
         return goods.stream()
                 .sorted(Comparator
                         .comparing((ArmtekGoods g) -> g.getPrice() != null ? g.getPrice() : Double.MAX_VALUE)
-                        .thenComparing(g -> g.getParsedQuantity(), Comparator.reverseOrder()))
+                        .thenComparing(g -> dataProcessor.parseQuantity(g), Comparator.reverseOrder()))
                 .collect(Collectors.toList());
     }
 }

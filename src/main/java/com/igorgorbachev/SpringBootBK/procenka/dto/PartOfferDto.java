@@ -1,6 +1,7 @@
 package com.igorgorbachev.SpringBootBK.procenka.dto;
 
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekGoods;
+import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.service.ArmtekDataProcessor;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.etsp.model.EtspGoods;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.favorite.model.FavoritePartsGoods;
 import com.igorgorbachev.SpringBootBK.procenka.supplier.forumAuto.model.ForumAutoGoods;
@@ -36,7 +37,7 @@ public class PartOfferDto {
     private String brand;
     private String warehouse;
     private List<Warehouse> warehouses;
-    private List<FavoritePartsGoods> analogues;
+    private List<PartOfferDto> analogues;
 
     // НОВОЕ ПОЛЕ: информация о возвратности
     private String returnInfo;
@@ -57,11 +58,10 @@ public class PartOfferDto {
         this.returnInfo = this.isReturnable ? "Возвратная" : "Без возврата";
     }
 
-    // Конструктор для Favorite Parts
+    // Конструктор для Favorite Parts - улучшенный
     public PartOfferDto(FavoritePartsGoods goods) {
-        log.info("Creating PartOfferDto from FavoritePartsGoods: brand={}, number={}, warehouses={}, analogues={}",
+        log.debug("Creating PartOfferDto from FavoritePartsGoods: brand={}, number={}, analogues={}",
                 goods.getBrand(), goods.getNumber(),
-                goods.getWarehouses() != null ? goods.getWarehouses().size() : 0,
                 goods.getAnalogues() != null ? goods.getAnalogues().size() : 0);
 
         this.supplierName = "Favorite Parts";
@@ -69,22 +69,64 @@ public class PartOfferDto {
         this.originalArticle = goods.getNumber();
         this.partName = goods.getName();
 
-        // Фильтруем только свои склады
+        // Обработка складов основного товара
+        processWarehouses(goods);
+
+        // Расчет дней доставки
+        this.deliveryDays = calculateDeliveryDays(goods.getWarehouses());
+
+        // ВАЖНО: Преобразуем аналоги в PartOfferDto
+        if (goods.getAnalogues() != null && !goods.getAnalogues().isEmpty()) {
+            this.analogues = goods.getAnalogues().stream()
+                    .map(analogue -> {
+                        PartOfferDto analogueDto = new PartOfferDto(analogue);
+                        // Указываем, что это аналог
+                        analogueDto.setSupplierName("Favorite Parts (Аналог)");
+                        return analogueDto;
+                    })
+                    .collect(Collectors.toList());
+        }
+
+        if (goods.getWarehouses() == null || goods.getWarehouses().isEmpty()) {
+            this.price = 0.0;
+            this.quantityAvailable = 0;
+            this.warehouses = List.of();
+            return;
+        }
+
         List<Warehouse> ownWarehouses = goods.getWarehouses().stream()
                 .filter(w -> Boolean.TRUE.equals(w.getOwn()))
                 .collect(Collectors.toList());
 
-        // Если есть свои склады - используем их, иначе все склады
-        List<Warehouse> warehousesForCalculation = !ownWarehouses.isEmpty() ? ownWarehouses : goods.getWarehouses();
+        // Информация о возвратности
+        this.isReturnable = !Boolean.TRUE.equals(goods.getNotRefund());
+        this.returnInfo = this.isReturnable ? "Возвратная" : "Без возврата";
+        this.warranty = this.isReturnable ? "14 дней" : "Без возврата";
+    }
 
-        // Берем минимальную цену
+    private void processWarehouses(FavoritePartsGoods goods) {
+        if (goods.getWarehouses() == null || goods.getWarehouses().isEmpty()) {
+            this.price = 0.0;
+            this.quantityAvailable = 0;
+            this.warehouses = List.of();
+            return;
+        }
+
+        // Фильтруем только свои склады для основного расчета
+        List<Warehouse> ownWarehouses = goods.getWarehouses().stream()
+                .filter(w -> Boolean.TRUE.equals(w.getOwn()))
+                .collect(Collectors.toList());
+
+        List<Warehouse> warehousesForCalculation = !ownWarehouses.isEmpty() ?
+                ownWarehouses : goods.getWarehouses();
+
+        // Рассчитываем цену и количество
         this.price = warehousesForCalculation.stream()
                 .map(Warehouse::getPrice)
                 .filter(Objects::nonNull)
                 .min(Double::compare)
                 .orElse(0.0);
 
-        // Суммируем количество
         this.quantityAvailable = warehousesForCalculation.stream()
                 .mapToInt(w -> w.getStock() != null ? w.getStock() : 0)
                 .sum();
@@ -94,24 +136,34 @@ public class PartOfferDto {
             this.quantityAvailable = 0;
         }
 
-        this.deliveryDays = calculateDeliveryDaysFromShipment(goods.getWarehouses());
         this.warehouses = goods.getWarehouses();
-        this.analogues = goods.getAnalogues();
+    }
 
-        // ИНФОРМАЦИЯ О ВОЗВРАТНОСТИ
-        this.isReturnable = true; // Favorite Parts обычно возвратные
-        this.returnInfo = "Возвратная";
+    private Integer calculateDeliveryDays(List<Warehouse> warehouses) {
+        if (warehouses == null || warehouses.isEmpty()) {
+            return 1; // значение по умолчанию
+        }
+
+        // Ищем минимальное количество дней доставки среди своих складов
+        return warehouses.stream()
+                .filter(w -> Boolean.TRUE.equals(w.getOwn()))
+                .map(Warehouse::getDeliveryDays)
+                .filter(Objects::nonNull)
+                .min(Integer::compareTo)
+                .orElse(1);
     }
 
 
     // Конструктор для Armtek - с поддержкой складов
-    public PartOfferDto(ArmtekGoods goods) {
+    public PartOfferDto(ArmtekGoods goods, ArmtekDataProcessor dataProcessor) {
         this.supplierName = "Armtek";
         this.partName = goods.getName();
         this.originalArticle = goods.getPin();
         this.price = goods.getPrice();
-        this.quantityAvailable = goods.getParsedQuantity();
-        this.deliveryDays = goods.getDeliveryDays();
+
+        // Используем ArmtekDataProcessor вместо методов в ArmtekGoods
+        this.quantityAvailable = dataProcessor.parseQuantity(goods);
+        this.deliveryDays = dataProcessor.parseDeliveryDays(goods);
         this.brand = goods.getBrand();
         this.warehouse = goods.getKeyzak() != null ? goods.getKeyzak() : "Armtek";
         this.warranty = goods.getReturnDays() != null ? goods.getReturnDays() + " дней" : "14 дней";
@@ -127,16 +179,15 @@ public class PartOfferDto {
                         Warehouse warehouse = new Warehouse();
                         warehouse.setCode(warehouseGoods.getKeyzak() != null ? warehouseGoods.getKeyzak() : "Armtek");
                         warehouse.setPrice(warehouseGoods.getPrice());
-                        warehouse.setStock(warehouseGoods.getParsedQuantity());
+                        warehouse.setStock(dataProcessor.parseQuantity(warehouseGoods));
                         warehouse.setOwn(true);
                         warehouse.setNotRefund(warehouseGoods.getReturnDays() == null || warehouseGoods.getReturnDays() <= 0);
 
                         // Устанавливаем shipmentDate для совместимости
                         warehouse.setShipmentDate(warehouseGoods.getDeliveryDate());
 
-                        // ВАЖНО: ЯВНО УСТАНАВЛИВАЕМ formattedDelivery из метода ArmtekGoods
-                        // который имеет доступ к обоим датам (DLVDT и WRNTDT)
-                        warehouse.setFormattedDelivery(warehouseGoods.getFormattedDelivery());
+                        // Используем ArmtekDataProcessor для форматирования
+                        warehouse.setFormattedDelivery(dataProcessor.formatDelivery(warehouseGoods));
 
                         return warehouse;
                     })
@@ -149,15 +200,15 @@ public class PartOfferDto {
             Warehouse armtekWarehouse = new Warehouse();
             armtekWarehouse.setCode(goods.getKeyzak() != null ? goods.getKeyzak() : "Armtek");
             armtekWarehouse.setPrice(goods.getPrice());
-            armtekWarehouse.setStock(goods.getParsedQuantity());
+            armtekWarehouse.setStock(dataProcessor.parseQuantity(goods));
             armtekWarehouse.setOwn(true);
             armtekWarehouse.setNotRefund(!this.isReturnable);
 
             // Устанавливаем shipmentDate
             armtekWarehouse.setShipmentDate(goods.getDeliveryDate());
 
-            // ВАЖНО: ЯВНО УСТАНАВЛИВАЕМ formattedDelivery
-            armtekWarehouse.setFormattedDelivery(goods.getFormattedDelivery());
+            // Используем ArmtekDataProcessor для форматирования
+            armtekWarehouse.setFormattedDelivery(dataProcessor.formatDelivery(goods));
 
             this.warehouses = List.of(armtekWarehouse);
 
@@ -167,6 +218,33 @@ public class PartOfferDto {
     }
 
     // Конструктор для TMTR
+//    public PartOfferDto(TmtrGoods goods) {
+//        this.supplierName = "TMTR";
+//        this.partName = goods.getName() != null ? goods.getName() : "Не указано";
+//        this.originalArticle = goods.getNumber() != null ? goods.getNumber() : "Не указан";
+//        this.price = goods.getPrice() != null ? goods.getPrice() : 0.0;
+//        this.quantityAvailable = goods.getParsedQuantity() != null ? goods.getParsedQuantity() : 0;
+//        this.deliveryDays = goods.getDeliveryPeriod() != null ? goods.getDeliveryPeriod() : 1;
+//        this.brand = goods.getBrand() != null ? goods.getBrand() : "Не указан";
+//
+//        // ОТОБРАЖАЕМ КОНКРЕТНОЕ НАЗВАНИЕ СКЛАДА ИЗ StockName
+//        if (goods.getStockName() != null && !goods.getStockName().trim().isEmpty()) {
+//            this.warehouse = goods.getStockName(); // "Владимир", "Москва" и т.д.
+//        } else if (goods.getWarehouse() != null && !goods.getWarehouse().trim().isEmpty()) {
+//            this.warehouse = goods.getWarehouse(); // fallback на Warehouse
+//        } else {
+//            this.warehouse = goods.getWarehouseName(); // последний fallback
+//        }
+//
+//        this.warranty = goods.isReturnable() ? "14 дней" : "Без возврата";
+//        this.isReturnable = true;
+//        this.returnInfo = this.isReturnable ? "Возвратная" : "Без возврата";
+//        this.warehouses = null;
+//
+//        log.debug("TMTR offer created: article={}, brand={}, stockName={}, warehouse={}",
+//                this.originalArticle, this.brand, goods.getStockName(), this.warehouse);
+//    }
+
     public PartOfferDto(TmtrGoods goods) {
         this.supplierName = "TMTR";
         this.partName = goods.getName() != null ? goods.getName() : "Не указано";
@@ -176,23 +254,24 @@ public class PartOfferDto {
         this.deliveryDays = goods.getDeliveryPeriod() != null ? goods.getDeliveryPeriod() : 1;
         this.brand = goods.getBrand() != null ? goods.getBrand() : "Не указан";
 
-        // ОТОБРАЖАЕМ КОНКРЕТНОЕ НАЗВАНИЕ СКЛАДА ИЗ StockName
+        // ИСПРАВЛЕНИЕ: используем getWarehouseDisplayName() вместо getWarehouseName()
         if (goods.getStockName() != null && !goods.getStockName().trim().isEmpty()) {
             this.warehouse = goods.getStockName(); // "Владимир", "Москва" и т.д.
         } else if (goods.getWarehouse() != null && !goods.getWarehouse().trim().isEmpty()) {
             this.warehouse = goods.getWarehouse(); // fallback на Warehouse
         } else {
-            this.warehouse = goods.getWarehouseName(); // последний fallback
+            this.warehouse = goods.getWarehouseDisplayName(); // ИСПРАВЛЕНО: последний fallback
         }
 
         this.warranty = goods.isReturnable() ? "14 дней" : "Без возврата";
-        this.isReturnable = true;
+        this.isReturnable = goods.isReturnable(); // ИСПРАВЛЕНО: используем реальное значение из goods
         this.returnInfo = this.isReturnable ? "Возвратная" : "Без возврата";
         this.warehouses = null;
 
-        log.debug("TMTR offer created: article={}, brand={}, stockName={}, warehouse={}",
-                this.originalArticle, this.brand, goods.getStockName(), this.warehouse);
+        log.debug("TMTR offer created: article={}, brand={}, stockName={}, warehouse={}, returnable={}",
+                this.originalArticle, this.brand, goods.getStockName(), this.warehouse, this.isReturnable);
     }
+
     // Конструктор для ETSP
     public PartOfferDto(EtspGoods goods) {
         this.supplierName = "ETSP";

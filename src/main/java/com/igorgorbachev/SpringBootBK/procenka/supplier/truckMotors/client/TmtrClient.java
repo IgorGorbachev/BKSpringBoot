@@ -106,11 +106,9 @@ public class TmtrClient {
                 TmtrBrand[] brandArray = objectMapper.treeToValue(root, TmtrBrand[].class);
                 List<TmtrBrand> brands = brandArray != null ? Arrays.asList(brandArray) : Collections.emptyList();
 
-                log.info("TMTR PreProboy found {} brands", brands.size());
                 return brands;
             }
 
-            log.info("TMTR PreProboy returned no brands");
             return Collections.emptyList();
 
         } catch (Exception e) {
@@ -132,11 +130,9 @@ public class TmtrClient {
                 TmtrGoods[] goodsArray = objectMapper.treeToValue(root, TmtrGoods[].class);
                 List<TmtrGoods> allGoods = goodsArray != null ? Arrays.asList(goodsArray) : Collections.emptyList();
 
-                log.info("TMTR Proboy found {} total items", allGoods.size());
                 return allGoods;
             }
 
-            log.info("TMTR Proboy returned no results");
             return Collections.emptyList();
 
         } catch (Exception e) {

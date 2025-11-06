@@ -25,18 +25,6 @@ public class ForumAutoFilter {
             return List.of();
         }
 
-        log.info("=== DIAGNOSTICS: Checking each goods ===");
-        goods.stream()
-                .filter(Objects::nonNull)
-                .forEach(good -> {
-                    boolean hasStock = hasValidStock(good);
-                    boolean hasPrice = hasValidPrice(good);
-                    boolean isOriginal = isOriginalGood(good, requestedArticle, requestedBrand);
-
-                    log.info("Goods: art='{}', brand='{}', stock={}, price={}, isOriginal={}, PASS_ALL={}",
-                            good.getArt(), good.getBrand(), hasStock, hasPrice, isOriginal,
-                            (hasStock && hasPrice && isOriginal));
-                });
 
         List<ForumAutoGoods> filtered = goods.stream()
                 .filter(Objects::nonNull)
@@ -47,14 +35,6 @@ public class ForumAutoFilter {
                 .limit(filterConfig.getMaxOriginals())
                 .collect(Collectors.toList());
 
-        logFilterResults("originals", goods.size(), filtered.size());
-
-        // Дополнительно логируем какие товары прошли фильтрацию
-        log.info("=== FILTERED GOODS ===");
-        filtered.forEach(good ->
-                log.info(" - art='{}', brand='{}'", good.getArt(), good.getBrand())
-        );
-
         return filtered;
     }
 
@@ -63,7 +43,6 @@ public class ForumAutoFilter {
             return List.of();
         }
 
-        log.info("Filtering analogues from {} total goods", goods.size());
 
         List<ForumAutoGoods> filtered = goods.stream()
                 .filter(Objects::nonNull)
@@ -73,7 +52,6 @@ public class ForumAutoFilter {
                 .sorted(Comparator.comparing(ForumAutoGoods::getPrice))
                 .collect(Collectors.toList());
 
-        logFilterResults("analogues", goods.size(), filtered.size());
         return filtered;
     }
 
@@ -106,8 +84,6 @@ public class ForumAutoFilter {
         result.addAll(outOfStockReturnable);
         result.addAll(outOfStockNonReturnable);
 
-        log.info("Analogues prioritized: {} in stock returnable, {} out of stock returnable, {} out of stock non-returnable",
-                inStockReturnable.size(), outOfStockReturnable.size(), outOfStockNonReturnable.size());
 
         return result;
     }
@@ -149,7 +125,4 @@ public class ForumAutoFilter {
                 filterConfig.getAllowedWarehouses().contains(good.getWarehouse());
     }
 
-    private void logFilterResults(String type, int total, int filtered) {
-        log.info("{} filtering: {} -> {} items", type, total, filtered);
-    }
 }

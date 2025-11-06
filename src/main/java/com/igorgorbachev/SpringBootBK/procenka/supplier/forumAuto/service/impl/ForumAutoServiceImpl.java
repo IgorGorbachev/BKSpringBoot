@@ -34,13 +34,13 @@ public class ForumAutoServiceImpl implements SupplierService {
     @Override
     public List<PartOfferDto> searchParts(String article, String brand) {
         try {
-            log.info("ForumAuto searching parts: article='{}', brand='{}'", article, brand);
+
 
             List<ForumAutoGoods> allGoods = forumAutoClient.fetchGoods(article, brand, false);
             List<ForumAutoGoods> originals = forumAutoFilter.filterOriginals(allGoods, article, brand);
             List<PartOfferDto> result = forumAutoConverter.toPartOfferDtos(originals);
 
-            log.info("ForumAuto parts search completed: {} originals found", result.size());
+
             return result;
 
         } catch (Exception e) {
@@ -52,14 +52,12 @@ public class ForumAutoServiceImpl implements SupplierService {
 
     public List<PartOfferDto> searchAnalogues(String article, String brand) {
         try {
-            log.info("ForumAuto searching analogues: article='{}', brand='{}'", article, brand);
 
             List<ForumAutoGoods> allGoods = forumAutoClient.fetchGoods(article, brand, true);
             List<ForumAutoGoods> filteredAnalogues = forumAutoFilter.filterAnalogues(allGoods);
             List<ForumAutoGoods> prioritizedAnalogues = forumAutoFilter.prioritizeAnalogues(filteredAnalogues);
             List<PartOfferDto> result = forumAutoConverter.toPartOfferDtos(prioritizedAnalogues);
 
-            log.info("ForumAuto analogues search completed: {} analogues found", result.size());
 
             return result;
 

@@ -7,12 +7,12 @@ import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.config.ArmtekConf
 import com.igorgorbachev.SpringBootBK.procenka.supplier.armtek.model.ArmtekGoods;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
 import java.time.Duration;
@@ -22,50 +22,45 @@ import java.util.List;
 
 @Slf4j
 @Component
-public class ArmtekClient {
 
+public class ReactiveArmtekClient {
 
     private final WebClient webClient;
     private final ArmtekConfig armtekConfig;
     private final ObjectMapper objectMapper;
     private final ArmtekRequestBuilder requestBuilder;
 
-    public ArmtekClient(@Qualifier("armtekWebClient") WebClient webClient,
-                        ArmtekConfig armtekConfig,
-                        ObjectMapper objectMapper,
-                        ArmtekRequestBuilder requestBuilder) {
+    public ReactiveArmtekClient(@Qualifier("armtekWebClient") WebClient webClient,
+                                ArmtekConfig armtekConfig,
+                                ObjectMapper objectMapper,
+                                ArmtekRequestBuilder requestBuilder) {
         this.webClient = webClient;
         this.armtekConfig = armtekConfig;
         this.objectMapper = objectMapper;
         this.requestBuilder = requestBuilder;
     }
 
-    public List<ArmtekGoods> fetchGoods(String article, String brand) {
-        try {
-            MultiValueMap<String, String> formData = requestBuilder.buildFormData(article, brand);
+    public Mono<List<ArmtekGoods>> fetchGoods(String article, String brand) {
+        MultiValueMap<String, String> formData = requestBuilder.buildFormData(article, brand);
 
-            log.info("Armtek API Request - Article: {}, Brand: {}", article, brand);
-
-            String responseBody = webClient.post()
-                    .uri("/api/ws_search/search?format=json")
-                    .bodyValue(formData)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .timeout(Duration.ofSeconds(armtekConfig.getTimeoutSeconds()))
-                    .retryWhen(Retry.fixedDelay(armtekConfig.getMaxRetryAttempts(),
-                            Duration.ofSeconds(armtekConfig.getRetryDelaySeconds())))
-                    .block();
-
-            return parseResponse(responseBody);
-
-        } catch (WebClientResponseException e) {
-            log.error("Armtek API Error - Status: {}, Response: {}",
-                    e.getStatusCode(), e.getResponseBodyAsString());
-            throw new ArmtekException("HTTP error " + e.getStatusCode().value() + ": " + e.getResponseBodyAsString());
-        } catch (Exception e) {
-            log.error("Armtek service error: {}", e.getMessage());
-            throw new ArmtekException("Service error: " + e.getMessage());
-        }
+        return webClient.post()
+                .uri("/api/ws_search/search?format=json")
+                .bodyValue(formData)
+                .retrieve()
+                .bodyToMono(String.class)
+                .timeout(Duration.ofSeconds(armtekConfig.getTimeoutSeconds()))
+                .retryWhen(Retry.fixedDelay(armtekConfig.getMaxRetryAttempts(),
+                        Duration.ofSeconds(armtekConfig.getRetryDelaySeconds())))
+                .map(this::parseResponse)
+                .onErrorResume(WebClientResponseException.class, e -> {
+                    log.error("Armtek API Error - Status: {}, Response: {}",
+                            e.getStatusCode(), e.getResponseBodyAsString());
+                    return Mono.error(new ArmtekException("HTTP error " + e.getStatusCode().value() + ": " + e.getResponseBodyAsString()));
+                })
+                .onErrorResume(Exception.class, e -> {
+                    log.error("Armtek service error: {}", e.getMessage());
+                    return Mono.error(new ArmtekException("Service error: " + e.getMessage()));
+                });
     }
 
     private List<ArmtekGoods> parseResponse(String responseBody) {
@@ -86,12 +81,10 @@ public class ArmtekClient {
             if (respNode != null && respNode.isArray() && respNode.size() > 0) {
                 JsonNode firstElement = respNode.get(0);
                 if (firstElement.has("MSG")) {
-                    log.info("Armtek search: {}", firstElement.get("MSG").asText());
                     return Collections.emptyList();
                 } else {
                     ArmtekGoods[] goodsArray = objectMapper.treeToValue(respNode, ArmtekGoods[].class);
                     List<ArmtekGoods> result = goodsArray != null ? Arrays.asList(goodsArray) : Collections.emptyList();
-                    log.info("Armtek found {} raw results", result.size());
                     return result;
                 }
             }
